@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -61,8 +61,8 @@
             this.fsFolderTree = new System.Windows.Forms.TreeView();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.fsFilesList = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.fsFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -79,8 +79,8 @@
             this.regSplitContainer = new System.Windows.Forms.SplitContainer();
             this.regFolderTree = new System.Windows.Forms.TreeView();
             this.regFilesList = new System.Windows.Forms.ListView();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -361,7 +361,7 @@
             this.tabFileSystem.Location = new System.Drawing.Point(4, 22);
             this.tabFileSystem.Name = "tabFileSystem";
             this.tabFileSystem.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFileSystem.Size = new System.Drawing.Size(551, 292);
+            this.tabFileSystem.Size = new System.Drawing.Size(719, 387);
             this.tabFileSystem.TabIndex = 1;
             this.tabFileSystem.Text = "Files";
             this.tabFileSystem.UseVisualStyleBackColor = true;
@@ -372,7 +372,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(3, 28);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(545, 261);
+            this.panel5.Size = new System.Drawing.Size(713, 356);
             this.panel5.TabIndex = 7;
             // 
             // splitContainer1
@@ -389,8 +389,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fsFilesList);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(545, 261);
-            this.splitContainer1.SplitterDistance = 154;
+            this.splitContainer1.Size = new System.Drawing.Size(713, 356);
+            this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 5;
             // 
             // fsFolderTree
@@ -401,7 +401,7 @@
             this.fsFolderTree.Location = new System.Drawing.Point(0, 0);
             this.fsFolderTree.Name = "fsFolderTree";
             this.fsFolderTree.SelectedImageIndex = 0;
-            this.fsFolderTree.Size = new System.Drawing.Size(154, 261);
+            this.fsFolderTree.Size = new System.Drawing.Size(201, 356);
             this.fsFolderTree.TabIndex = 3;
             // 
             // imageList
@@ -422,11 +422,11 @@
             this.columnHeader2});
             this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
-            this.fsFilesList.Size = new System.Drawing.Size(387, 236);
+            this.fsFilesList.Size = new System.Drawing.Size(508, 331);
             this.fsFilesList.TabIndex = 7;
             this.fsFilesList.UseCompatibleStateImageBehavior = false;
             this.fsFilesList.View = System.Windows.Forms.View.Details;
@@ -448,7 +448,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(387, 25);
+            this.panel2.Size = new System.Drawing.Size(508, 25);
             this.panel2.TabIndex = 6;
             // 
             // panel3
@@ -456,7 +456,7 @@
             this.panel3.Controls.Add(this.fsFolderInfoIsolationCombo);
             this.panel3.Controls.Add(this.fsFolderInfoIsolationLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(176, 0);
+            this.panel3.Location = new System.Drawing.Point(297, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(211, 25);
             this.panel3.TabIndex = 4;
@@ -497,7 +497,7 @@
             this.fsSaveFileAsBtn});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(545, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(713, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -606,8 +606,8 @@
             this.columnHeader4});
             this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
             this.regFilesList.Size = new System.Drawing.Size(508, 310);

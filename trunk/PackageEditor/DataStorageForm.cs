@@ -21,13 +21,16 @@ namespace PackageEditor
         {
             String oldValue = virtPackage.GetProperty("BaseDirName");
             String newValue;
-            propertyLocalStorageCustomDir.Text = oldValue;
+            propertyLocalStorageCustomDir.Text = "";
             if (oldValue == "")
                 propertyLocalStorageDefault.Checked = true;
             else if (oldValue == "%ExeDir%")
                 propertyLocalStorageExeDir.Checked = true;
             else
+            {
                 propertyLocalStorageCustom.Checked = true;
+                propertyLocalStorageCustomDir.Text = oldValue;
+            }
             if (ShowDialog() == DialogResult.OK)
             {
                 if (propertyLocalStorageDefault.Checked)

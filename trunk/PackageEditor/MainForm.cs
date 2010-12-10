@@ -356,6 +356,8 @@ namespace PackageEditor
             String baseDirName = virtPackage.GetProperty("BaseDirName");
             if (baseDirName == "")
                 propertyDataStorage.Text = "Use hard disk or USB drive (wherever application is launched from)";
+            else if (baseDirName == "%ExeDir%")
+                propertyDataStorage.Text = "Under the executable's directory";
             else
                 propertyDataStorage.Text = "Custom: " + baseDirName;
         }
