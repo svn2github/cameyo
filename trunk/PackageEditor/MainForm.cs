@@ -22,16 +22,26 @@ namespace PackageEditor
         private MRU mru;
         public bool dirty;
 
+        // jhack_creation of delegate
+        private delegate bool DelegatePackageOpen(String path);
+        DelegatePackageOpen Del_Open;
+
         public MainForm(string packageExeFile, bool notifyPackageBuilt)
         {
             InitializeComponent();
+
+            // jhack_delegate init
+            Del_Open = new DelegatePackageOpen(this.PackageOpen);
+
             tabControl.Visible = false;
             regLoaded = false;
             dirty = false;
             virtPackage = new VirtPackage();
             mru = new MRU("Software\\Cameyo\\Packager\\MRU");
+
+            // jhack_one more argoment for the add dir button
             fsEditor = new FileSystemEditor(virtPackage, fsFolderTree, fsFilesList,
-                fsFolderInfoFullName, fsFolderInfoIsolationCombo, fsAddBtn, fsRemoveBtn, fsAddEmptyDirBtn, fsSaveFileAsBtn);
+                fsFolderInfoFullName, fsFolderInfoIsolationCombo, fsAddBtn, fsRemoveBtn, fsAddEmptyDirBtn, fsSaveFileAsBtn, fsAddDirBtn);
             regEditor = new RegistryEditor(virtPackage, regFolderTree, regFilesList,
                 regFolderInfoFullName, regFolderInfoIsolationCombo, regRemoveBtn, regEditBtn);
 
@@ -431,6 +441,77 @@ namespace PackageEditor
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        // jhack_dragdrop functions_1
+        private void MainForm_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        // jhack_dragdrop functions_1
+        private void MainForm_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (files.Length > 1)
+            {
+                MessageBox.Show("You can drop only one file");
+                return;
+            }
+            if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
+                     + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
+            {
+                MessageBox.Show("You can only open files with .virtual.exe extension");
+                return;
+            }
+            // jhack_open in a new thread to avoid blocking of explorer in case of big files
+            this.BeginInvoke(Del_Open, new Object[] { files[0] });
+            this.Activate();
+        }
+
+        // jhack_dragdrop functions_2
+        private void Vfs_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        // jhack_dragdrop functions_2
+        private void Vfs_DragDrop(object sender, DragEventArgs e)
+        {
+            String[] paths = (String[])e.Data.GetData(DataFormats.FileDrop);
+
+            FolderTreeNode parentNode = (FolderTreeNode)fsFolderTree.SelectedNode;
+            if (parentNode == null)
+            {
+                MessageBox.Show("Please select a folder to add to");
+                return;
+            }
+            if (parentNode.deleted)
+            {
+                MessageBox.Show("Folder was deleted");
+                return;
+            }
+
+            //object[] parms = { fsFolderTree.SelectedNode };
+            foreach (String path in paths)
+            {
+                this.BeginInvoke(fsEditor.Del_AddFOrFR, new object[]{ parentNode, path });
+            }
         }
     }
 

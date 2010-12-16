@@ -34,16 +34,22 @@ namespace PackageEditor
         private Label fsFolderInfoFullName;
         private ComboBox fsFolderInfoIsolationCombo;
         private ToolStripButton fsAddBtn;
+        // jhack_add dir button
+        private ToolStripButton fsAddDirBtn;
         private ToolStripButton fsRemoveBtn;
         private ToolStripButton fsAddEmptyDirBtn;
         private ToolStripButton fsSaveFileAsBtn;
         private TreeHelper treeHelper;
         public bool dirty;
 
+        // jhack_creation of delegate
+        public delegate bool DelegateAddFileOrFolderRecursive(FolderTreeNode parentNode, String path);
+        public DelegateAddFileOrFolderRecursive Del_AddFOrFR;
+
         public FileSystemEditor(VirtPackage virtPackage, TreeView fsFolderTree, ListView fsFilesList, 
             Label fsFolderInfoFullName, ComboBox fsFolderInfoIsolationCombo,
             ToolStripButton fsAddBtn, ToolStripButton fsRemoveBtn, ToolStripButton fsAddEmptyDirBtn, 
-            ToolStripButton fsSaveFileAsBtn)
+            ToolStripButton fsSaveFileAsBtn, ToolStripButton fsAddDirBtn)
         {
             this.virtPackage = virtPackage;
             this.fsFolderTree = fsFolderTree;
@@ -54,6 +60,8 @@ namespace PackageEditor
             this.fsRemoveBtn = fsRemoveBtn;
             this.fsAddEmptyDirBtn = fsAddEmptyDirBtn;
             this.fsSaveFileAsBtn = fsSaveFileAsBtn;
+            // jhack_add dir button
+            this.fsAddDirBtn = fsAddDirBtn;
 
             fsFolderInfoFullName.Text = "";
             fsFolderInfoIsolationCombo.Text = "";
@@ -62,11 +70,16 @@ namespace PackageEditor
             fsFolderTree.AfterSelect += OnFolderTreeSelect;
             fsFolderInfoIsolationCombo.SelectionChangeCommitted += OnFolderSandboxChange;
             fsAddBtn.Click += OnAddBtnClick;
+            // jhack_handler for the new button
+            fsAddDirBtn.Click += OnAddDirBtnClick;
             fsRemoveBtn.Click += OnRemoveBtnClick;
             fsAddEmptyDirBtn.Click += OnAddEmptyDirBtnClick;
             fsSaveFileAsBtn.Click += OnSaveFileAsBtnClick;
             dirty = false;
             treeHelper = new TreeHelper(virtPackage);
+            
+            // jhack_delegate init
+            Del_AddFOrFR = new DelegateAddFileOrFolderRecursive(this.AddFileOrFolderRecursive);
         }
 
         public void OnPackageOpen()
@@ -294,6 +307,8 @@ namespace PackageEditor
             dirty = true;
         }
 
+        
+
         private void OnAddBtnClick(object sender, EventArgs e)
         {
             FolderTreeNode parentNode = (FolderTreeNode)fsFolderTree.SelectedNode;
@@ -314,19 +329,119 @@ namespace PackageEditor
             {
                 foreach (String srcFileName in openFileDialog.FileNames)
                 {
-                    VirtFsNode virtFsNode = new VirtFsNode();
-                    #pragma warning disable 1690
-                    virtFsNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(srcFileName));
-                    #pragma warning restore 1690
-                    virtFsNode.FileFlags = VirtPackage.VIRT_FILE_FLAGS_ISFILE;
-                    System.IO.FileInfo fi = new System.IO.FileInfo(srcFileName);
-                    virtFsNode.EndOfFile = (ulong)fi.Length;
-                    AddFileOrFolder(virtFsNode, srcFileName);       // Also sets dirty = true
+                    AddFileOrFolderRecursive(parentNode, srcFileName);
                 }
                 RefreshFolderNodeRecursively(parentNode, 0);
                 TreeViewEventArgs ev = new TreeViewEventArgs(parentNode);
                 OnFolderTreeSelect(sender, ev);
             }
+        }
+
+        // jhack_handler for the add dir button
+        private void OnAddDirBtnClick(object sender, EventArgs e)
+        {
+            FolderTreeNode parentNode = (FolderTreeNode)fsFolderTree.SelectedNode;
+            if (parentNode == null)
+            {
+                MessageBox.Show("Please select a folder to add to");
+                return;
+            }
+            if (parentNode.deleted)
+            {
+                MessageBox.Show("Folder was deleted");
+                return;
+            }
+
+            String selectedFolder = "";
+            FolderBrowserDialog selectFolder = new FolderBrowserDialog();
+            selectFolder.ShowNewFolderButton = false;
+            
+            if (selectFolder.ShowDialog() != DialogResult.OK)
+                return;
+
+            selectedFolder = selectFolder.SelectedPath;
+
+            AddFileOrFolderRecursive(parentNode, selectedFolder);
+            RefreshFolderNodeRecursively(parentNode, 0);
+            TreeViewEventArgs ev = new TreeViewEventArgs(parentNode);
+            OnFolderTreeSelect(sender, ev);
+        }
+
+        private bool AddFileOrFolderRecursive(FolderTreeNode parentNode, String path)
+        {
+            // if path is a file
+            if (File.Exists(path))
+            {
+                foreach (ListViewItem file in fsFilesList.Items)
+                {
+                    if (file.Text.Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        MessageBox.Show("File already exists");
+                        return false;
+                    }
+                }
+
+                VirtFsNode virtFsFileNode = new VirtFsNode();
+                #pragma warning disable 1690
+                virtFsFileNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(path));
+                #pragma warning restore 1690
+                virtFsFileNode.FileFlags = VirtPackage.VIRT_FILE_FLAGS_ISFILE;      //it's a file
+                System.IO.FileInfo fi = new System.IO.FileInfo(path);
+                virtFsFileNode.EndOfFile = (ulong)fi.Length;
+                AddFileOrFolder(virtFsFileNode, path);     // Also sets dirty = true
+
+                if (parentNode == fsFolderTree.SelectedNode)
+                {
+                    RefreshFolderNodeRecursively(parentNode, 0);
+                    TreeViewEventArgs ev = new TreeViewEventArgs(parentNode);
+                    OnFolderTreeSelect(null, ev);
+                }
+                return true;
+            }
+
+            if (!Directory.Exists(path))
+                return false;
+
+            //foreach (String subdir in subdirs)
+            {
+                foreach (FolderTreeNode childNode in parentNode.Nodes)
+                {
+                    if (childNode.Text.Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        MessageBox.Show("Folder already exists");
+                        return false;
+                    }
+                }
+            }
+
+            String[] lsFiles = Directory.GetFiles(path);
+            String[] lsDirs = Directory.GetDirectories(path);
+
+            // if path is a folder
+            VirtFsNode virtFsDirNode = new VirtFsNode();
+            #pragma warning disable 1690
+            virtFsDirNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(path));
+            #pragma warning restore 1690
+            virtFsDirNode.FileFlags = 0;                                       //it's a dir
+            FolderTreeNode subdirNode = AddFileOrFolder(virtFsDirNode, path);     // Also sets dirty = true
+
+            foreach (String file in lsFiles)
+            {
+                if (!AddFileOrFolderRecursive(subdirNode, file))
+                    return false;
+            }
+            foreach (String dir in lsDirs)
+            {
+                if (!AddFileOrFolderRecursive(subdirNode, dir))
+                    return false;
+            }
+            if (parentNode == fsFolderTree.SelectedNode)
+            {
+                RefreshFolderNodeRecursively(parentNode, 0);
+                TreeViewEventArgs ev = new TreeViewEventArgs(parentNode);
+                OnFolderTreeSelect(null, ev);
+            }
+            return true;
         }
 
         private void OnRemoveBtnClick(object sender, EventArgs e)
