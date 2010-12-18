@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -34,7 +35,6 @@ namespace PackageEditor
         private Label fsFolderInfoFullName;
         private ComboBox fsFolderInfoIsolationCombo;
         private ToolStripButton fsAddBtn;
-        // jhack_add dir button
         private ToolStripButton fsAddDirBtn;
         private ToolStripButton fsRemoveBtn;
         private ToolStripButton fsAddEmptyDirBtn;
@@ -42,7 +42,7 @@ namespace PackageEditor
         private TreeHelper treeHelper;
         public bool dirty;
 
-        // jhack_creation of delegate
+        // creation of delegate for AddFileOrFolderRecursive
         public delegate bool DelegateAddFileOrFolderRecursive(FolderTreeNode parentNode, String path);
         public DelegateAddFileOrFolderRecursive Del_AddFOrFR;
 
@@ -60,7 +60,6 @@ namespace PackageEditor
             this.fsRemoveBtn = fsRemoveBtn;
             this.fsAddEmptyDirBtn = fsAddEmptyDirBtn;
             this.fsSaveFileAsBtn = fsSaveFileAsBtn;
-            // jhack_add dir button
             this.fsAddDirBtn = fsAddDirBtn;
 
             fsFolderInfoFullName.Text = "";
@@ -70,15 +69,16 @@ namespace PackageEditor
             fsFolderTree.AfterSelect += OnFolderTreeSelect;
             fsFolderInfoIsolationCombo.SelectionChangeCommitted += OnFolderSandboxChange;
             fsAddBtn.Click += OnAddBtnClick;
-            // jhack_handler for the new button
             fsAddDirBtn.Click += OnAddDirBtnClick;
             fsRemoveBtn.Click += OnRemoveBtnClick;
             fsAddEmptyDirBtn.Click += OnAddEmptyDirBtnClick;
             fsSaveFileAsBtn.Click += OnSaveFileAsBtnClick;
+            fsFilesList.KeyDown += Vfs_KeyDown;
+            fsFolderTree.KeyDown += Vfs_KeyDown;
             dirty = false;
             treeHelper = new TreeHelper(virtPackage);
-            
-            // jhack_delegate init
+
+            // delegate for AddFileOrFolderRecursive init
             Del_AddFOrFR = new DelegateAddFileOrFolderRecursive(this.AddFileOrFolderRecursive);
         }
 
@@ -307,7 +307,36 @@ namespace PackageEditor
             dirty = true;
         }
 
-        
+
+        // handler for the key down in the virtual filesystem view
+        // it now handles CTRL+V and CANC
+        private void Vfs_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.V && Clipboard.ContainsFileDropList())
+            {
+                FolderTreeNode parentNode = (FolderTreeNode)fsFolderTree.SelectedNode;
+                if (parentNode == null)
+                {
+                    MessageBox.Show("Please select a folder to add files into");
+                    return;
+                }
+                if (parentNode.deleted)
+                {
+                    MessageBox.Show("Folder was deleted");
+                    return;
+                }
+
+                StringCollection paths = Clipboard.GetFileDropList();
+                foreach (String path in paths)
+                {
+                    AddFileOrFolderRecursive(parentNode, path);
+                }
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                OnRemoveBtnClick(fsRemoveBtn, null);
+            }
+        }
 
         private void OnAddBtnClick(object sender, EventArgs e)
         {
@@ -331,13 +360,10 @@ namespace PackageEditor
                 {
                     AddFileOrFolderRecursive(parentNode, srcFileName);
                 }
-                RefreshFolderNodeRecursively(parentNode, 0);
-                TreeViewEventArgs ev = new TreeViewEventArgs(parentNode);
-                OnFolderTreeSelect(sender, ev);
             }
         }
 
-        // jhack_handler for the add dir button
+        // handler for the add dir button
         private void OnAddDirBtnClick(object sender, EventArgs e)
         {
             FolderTreeNode parentNode = (FolderTreeNode)fsFolderTree.SelectedNode;
@@ -362,22 +388,23 @@ namespace PackageEditor
             selectedFolder = selectFolder.SelectedPath;
 
             AddFileOrFolderRecursive(parentNode, selectedFolder);
-            RefreshFolderNodeRecursively(parentNode, 0);
-            TreeViewEventArgs ev = new TreeViewEventArgs(parentNode);
-            OnFolderTreeSelect(sender, ev);
         }
 
+        // function to add files and folders recursively
         private bool AddFileOrFolderRecursive(FolderTreeNode parentNode, String path)
         {
             // if path is a file
             if (File.Exists(path))
             {
-                foreach (ListViewItem file in fsFilesList.Items)
+                if (parentNode.childFiles != null)
                 {
-                    if (file.Text.Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
+                    foreach (FileData file in parentNode.childFiles)
                     {
-                        MessageBox.Show("File already exists");
-                        return false;
+                        if (Path.GetFileName(file.virtFsNode.FileName).Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            MessageBox.Show("File already exists");
+                            return false;
+                        }
                     }
                 }
 
@@ -512,6 +539,19 @@ namespace PackageEditor
             }
             else
                 MessageBox.Show("Please select a folder/file to remove");
+            
+            /* TODO:
+             * it seems some file remain in the folder after it's been deleted (only on delete folder)
+             * Check and correct.
+             *
+            if (folderNode == fsFolderTree.SelectedNode && folderNode.childFiles.Count == 0)
+            {
+                foreach (ListViewItem item in fsFilesList.Items)
+                {
+                    item.Remove();
+                }
+            }
+             * */
         }
 
         private void OnAddEmptyDirBtnClick(object sender, EventArgs e)

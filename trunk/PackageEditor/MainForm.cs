@@ -21,16 +21,18 @@ namespace PackageEditor
         private Thread regLoadThread;
         private MRU mru;
         public bool dirty;
+        private bool dragging;
 
-        // jhack_creation of delegate
+        // creation of delegate for PackageOpen
         private delegate bool DelegatePackageOpen(String path);
         DelegatePackageOpen Del_Open;
 
         public MainForm(string packageExeFile, bool notifyPackageBuilt)
         {
             InitializeComponent();
+            dragging = false;
 
-            // jhack_delegate init
+            // delegate for PackageOpen init
             Del_Open = new DelegatePackageOpen(this.PackageOpen);
 
             tabControl.Visible = false;
@@ -39,7 +41,6 @@ namespace PackageEditor
             virtPackage = new VirtPackage();
             mru = new MRU("Software\\Cameyo\\Packager\\MRU");
 
-            // jhack_one more argoment for the add dir button
             fsEditor = new FileSystemEditor(virtPackage, fsFolderTree, fsFilesList,
                 fsFolderInfoFullName, fsFolderInfoIsolationCombo, fsAddBtn, fsRemoveBtn, fsAddEmptyDirBtn, fsSaveFileAsBtn, fsAddDirBtn);
             regEditor = new RegistryEditor(virtPackage, regFolderTree, regFilesList,
@@ -443,12 +444,13 @@ namespace PackageEditor
 
         }
 
-        // jhack_dragdrop functions_1
+        // dragdrop function (DragEnter) to open a new file dropping it in the main form
         private void MainForm_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Copy;
+                dragging = true;
             }
             else
             {
@@ -456,9 +458,10 @@ namespace PackageEditor
             }
         }
 
-        // jhack_dragdrop functions_1
+        // dragdrop function (DragDrop) to open a new file dropping it in the main form
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
+            dragging = false;
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
             if (files.Length > 1)
@@ -472,17 +475,21 @@ namespace PackageEditor
                 MessageBox.Show("You can only open files with .virtual.exe extension");
                 return;
             }
-            // jhack_open in a new thread to avoid blocking of explorer in case of big files
+            // open in a new thread to avoid blocking of explorer in case of big files
             this.BeginInvoke(Del_Open, new Object[] { files[0] });
             this.Activate();
         }
 
-        // jhack_dragdrop functions_2
+        // dragdrop function (DragEnter) to add file to the tree list and file list
         private void Vfs_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
+                ((Control)sender).Focus();
                 e.Effect = DragDropEffects.Copy;
+                dragging = false;
+                itemHoverTimer.Interval = 2000;
+                itemHoverTimer.Start();
             }
             else
             {
@@ -490,10 +497,12 @@ namespace PackageEditor
             }
         }
 
-        // jhack_dragdrop functions_2
+        // dragdrop function (DragDrop) to add file to the tree list and file list
         private void Vfs_DragDrop(object sender, DragEventArgs e)
         {
-            String[] paths = (String[])e.Data.GetData(DataFormats.FileDrop);
+            dragging = false;
+            if (itemHoverTimer.Enabled)
+                itemHoverTimer.Stop();
 
             FolderTreeNode parentNode = (FolderTreeNode)fsFolderTree.SelectedNode;
             if (parentNode == null)
@@ -507,10 +516,67 @@ namespace PackageEditor
                 return;
             }
 
-            //object[] parms = { fsFolderTree.SelectedNode };
+            String[] paths = (String[])e.Data.GetData(DataFormats.FileDrop);
             foreach (String path in paths)
             {
                 this.BeginInvoke(fsEditor.Del_AddFOrFR, new object[]{ parentNode, path });
+            }
+        }
+
+        // dragdrop function (DragOver) to add file to the tree list and file list
+        private void fsFolderTree_DragOver(object sender, DragEventArgs e)
+        {
+            Point pt = fsFolderTree.PointToClient(new Point(e.X, e.Y));
+            TreeNode nodeUnderCursor = fsFolderTree.GetNodeAt(pt);
+            if (nodeUnderCursor != null)
+            {
+                fsFolderTree.SelectedNode = nodeUnderCursor;
+            }
+        }
+
+        // dragdrop function to add file to the tree list and file list
+        // this function allows the nodes to close while navigating in the tree to drop files and folders
+        private void fsFolderTree_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if (dragging && e.Node.Level > 0)
+            {
+                TreeNode oldNode = fsFolderTree.SelectedNode;
+                TreeNode newNode = e.Node;
+                if (oldNode.IsExpanded && newNode.Level == oldNode.Level)
+                    oldNode.Collapse();
+                else
+                {
+                    while (newNode.Level <= oldNode.Level)
+                    {
+                        oldNode.Collapse();
+                        oldNode = oldNode.Parent;
+                    }
+                }
+            }
+        }
+
+        // dragdrop function to add file to the tree list and file list
+        // this function allows the nodes to open while navigating in the tree to drop files and folders
+        private void fsFolderTree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (dragging)
+            {
+                if (itemHoverTimer.Enabled)
+                    itemHoverTimer.Stop();
+                itemHoverTimer.Interval = 900;
+                itemHoverTimer.Start();
+            }
+        }
+
+        // timer to open the nodes
+        private void OnItemHover(object sender, EventArgs e)
+        {
+            itemHoverTimer.Stop();
+            if (fsFolderTree.SelectedNode != null)
+            {
+                if (!dragging)
+                    dragging = true;
+                fsFolderTree.SelectedNode.Expand();
             }
         }
     }
