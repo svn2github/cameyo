@@ -63,7 +63,8 @@ namespace PackageEditor
         {
             fsFolderTree.Nodes.Clear();
             TreeNode rootNode = fsFolderTree.Nodes.Add("Registry");
-            PopulateSubKeys(workKey, "", rootNode);
+            if (workKey != null)
+                PopulateSubKeys(workKey, "", rootNode);
             fsFolderTree.Nodes[0].Expand();     // Expand the "Registry" node
             fsFolderTree.SelectedNode = fsFolderTree.Nodes[0];
             dirty = false;
@@ -157,6 +158,8 @@ namespace PackageEditor
 
             // Fill fsFilesList
             fsFilesList.Items.Clear();
+            if (workKey == null)
+                return;
             RegistryKey regKey = workKey.OpenSubKey(fullName);
             if (regKey == null) 
                 return;
