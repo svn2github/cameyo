@@ -217,8 +217,7 @@ namespace PackageEditor
             RegistryKey regKey;
             try
             {
-                regKey = Registry.CurrentUser.OpenSubKey(
-                    "Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit", true);
+                regKey = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit");
                 regKey.SetValue("LastKey", "Computer\\" + workKey.Name);
                 regKey.Close();
             }
