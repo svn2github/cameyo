@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -50,6 +50,7 @@
             this.propertyDataStorage = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.propertyIsolationDataMode = new System.Windows.Forms.RadioButton();
             this.propertyIsolationIsolated = new System.Windows.Forms.RadioButton();
             this.propertyIsolationMerge = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
@@ -70,9 +71,11 @@
             this.fsFolderInfoFullName = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.fsAddBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsRemoveBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsAddEmptyDirBtn = new System.Windows.Forms.ToolStripButton();
             this.fsAddDirBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsRemoveBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.fsAddEmptyDirBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.fsSaveFileAsBtn = new System.Windows.Forms.ToolStripButton();
             this.tabRegistry = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -103,8 +106,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
             this.itemHoverTimer = new System.Windows.Forms.Timer(this.components);
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -167,7 +168,7 @@
             this.groupBox3.Controls.Add(this.propertyAppID);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(3, 161);
+            this.groupBox3.Location = new System.Drawing.Point(3, 174);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(713, 78);
             this.groupBox3.TabIndex = 1;
@@ -223,7 +224,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(713, 158);
+            this.groupBox1.Size = new System.Drawing.Size(713, 171);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basics";
@@ -232,7 +233,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 107);
+            this.label6.Location = new System.Drawing.Point(7, 120);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 23;
@@ -259,7 +260,7 @@
             // 
             // lnkChangeIcon
             // 
-            this.lnkChangeIcon.Location = new System.Drawing.Point(622, 108);
+            this.lnkChangeIcon.Location = new System.Drawing.Point(622, 121);
             this.lnkChangeIcon.Name = "lnkChangeIcon";
             this.lnkChangeIcon.Size = new System.Drawing.Size(83, 14);
             this.lnkChangeIcon.TabIndex = 4;
@@ -270,7 +271,7 @@
             // 
             // lnkChangeDataStorage
             // 
-            this.lnkChangeDataStorage.Location = new System.Drawing.Point(605, 91);
+            this.lnkChangeDataStorage.Location = new System.Drawing.Point(605, 104);
             this.lnkChangeDataStorage.Name = "lnkChangeDataStorage";
             this.lnkChangeDataStorage.Size = new System.Drawing.Size(100, 17);
             this.lnkChangeDataStorage.TabIndex = 3;
@@ -282,7 +283,7 @@
             // propertyDataStorage
             // 
             this.propertyDataStorage.AutoSize = true;
-            this.propertyDataStorage.Location = new System.Drawing.Point(97, 91);
+            this.propertyDataStorage.Location = new System.Drawing.Point(97, 104);
             this.propertyDataStorage.Name = "propertyDataStorage";
             this.propertyDataStorage.Size = new System.Drawing.Size(105, 13);
             this.propertyDataStorage.TabIndex = 15;
@@ -291,7 +292,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 91);
+            this.label5.Location = new System.Drawing.Point(7, 104);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 13);
             this.label5.TabIndex = 13;
@@ -299,18 +300,32 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.propertyIsolationDataMode);
             this.groupBox2.Controls.Add(this.propertyIsolationIsolated);
             this.groupBox2.Controls.Add(this.propertyIsolationMerge);
             this.groupBox2.Location = new System.Drawing.Point(100, 32);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(605, 56);
+            this.groupBox2.Size = new System.Drawing.Size(605, 69);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
+            // 
+            // propertyIsolationDataMode
+            // 
+            this.propertyIsolationDataMode.AutoSize = true;
+            this.propertyIsolationDataMode.Location = new System.Drawing.Point(6, 12);
+            this.propertyIsolationDataMode.Name = "propertyIsolationDataMode";
+            this.propertyIsolationDataMode.Size = new System.Drawing.Size(432, 17);
+            this.propertyIsolationDataMode.TabIndex = 3;
+            this.propertyIsolationDataMode.TabStop = true;
+            this.propertyIsolationDataMode.Text = "Data mode: application can only save files to Documents, Desktop and network driv" +
+                "es";
+            this.propertyIsolationDataMode.UseVisualStyleBackColor = true;
+            this.propertyIsolationDataMode.Click += new System.EventHandler(this.IsolationChanged);
             // 
             // propertyIsolationIsolated
             // 
             this.propertyIsolationIsolated.AutoSize = true;
-            this.propertyIsolationIsolated.Location = new System.Drawing.Point(9, 12);
+            this.propertyIsolationIsolated.Location = new System.Drawing.Point(6, 29);
             this.propertyIsolationIsolated.Name = "propertyIsolationIsolated";
             this.propertyIsolationIsolated.Size = new System.Drawing.Size(241, 17);
             this.propertyIsolationIsolated.TabIndex = 1;
@@ -322,7 +337,7 @@
             // propertyIsolationMerge
             // 
             this.propertyIsolationMerge.AutoSize = true;
-            this.propertyIsolationMerge.Location = new System.Drawing.Point(9, 33);
+            this.propertyIsolationMerge.Location = new System.Drawing.Point(6, 46);
             this.propertyIsolationMerge.Name = "propertyIsolationMerge";
             this.propertyIsolationMerge.Size = new System.Drawing.Size(327, 17);
             this.propertyIsolationMerge.TabIndex = 2;
@@ -342,7 +357,7 @@
             // 
             // propertyIcon
             // 
-            this.propertyIcon.Location = new System.Drawing.Point(100, 107);
+            this.propertyIcon.Location = new System.Drawing.Point(100, 120);
             this.propertyIcon.Name = "propertyIcon";
             this.propertyIcon.Size = new System.Drawing.Size(32, 32);
             this.propertyIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -433,8 +448,8 @@
             this.columnHeader2});
             this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
             this.fsFilesList.Size = new System.Drawing.Size(508, 331);
@@ -527,6 +542,16 @@
             this.fsAddBtn.Text = "Add";
             this.fsAddBtn.ToolTipText = "Add file";
             // 
+            // fsAddDirBtn
+            // 
+            this.fsAddDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddDirBtn.Image")));
+            this.fsAddDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fsAddDirBtn.Name = "fsAddDirBtn";
+            this.fsAddDirBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsAddDirBtn.Text = "toolStripButton1";
+            this.fsAddDirBtn.ToolTipText = "Add folder";
+            // 
             // fsRemoveBtn
             // 
             this.fsRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -536,6 +561,11 @@
             this.fsRemoveBtn.Size = new System.Drawing.Size(23, 22);
             this.fsRemoveBtn.Text = "Delete";
             this.fsRemoveBtn.ToolTipText = "Remove file or folder";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // fsAddEmptyDirBtn
             // 
@@ -547,15 +577,10 @@
             this.fsAddEmptyDirBtn.Text = "toolStripButton1";
             this.fsAddEmptyDirBtn.ToolTipText = "Add empty folder";
             // 
-            // fsAddDirBtn
+            // toolStripSeparator2
             // 
-            this.fsAddDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddDirBtn.Image")));
-            this.fsAddDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.fsAddDirBtn.Name = "fsAddDirBtn";
-            this.fsAddDirBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsAddDirBtn.Text = "toolStripButton1";
-            this.fsAddDirBtn.ToolTipText = "Add folder";
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // fsSaveFileAsBtn
             // 
@@ -632,8 +657,8 @@
             this.columnHeader4});
             this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
             this.regFilesList.Size = new System.Drawing.Size(508, 310);
@@ -763,7 +788,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(751, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -777,46 +802,46 @@
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(45, 23);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveasToolStripMenuItem
             // 
             this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveasToolStripMenuItem.Text = "Save &as";
             this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.closeToolStripMenuItem.Text = "&Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(144, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -827,16 +852,6 @@
             // itemHoverTimer
             // 
             this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 
@@ -969,6 +984,7 @@
         private System.Windows.Forms.Timer itemHoverTimer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.RadioButton propertyIsolationDataMode;
 
     }
 }
