@@ -36,6 +36,10 @@
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.managementGroup = new System.Windows.Forms.GroupBox();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.propertyFriendlyName = new System.Windows.Forms.TextBox();
@@ -95,6 +99,14 @@
             this.regToolStrip = new System.Windows.Forms.ToolStrip();
             this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
             this.regEditBtn = new System.Windows.Forms.ToolStripButton();
+            this.tabAdvanced = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,8 +118,10 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
             this.itemHoverTimer = new System.Windows.Forms.Timer(this.components);
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
+            this.managementGroup.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -130,6 +144,11 @@
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.regToolStrip.SuspendLayout();
+            this.tabAdvanced.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,6 +160,7 @@
             this.tabControl.Controls.Add(this.tabGeneral);
             this.tabControl.Controls.Add(this.tabFileSystem);
             this.tabControl.Controls.Add(this.tabRegistry);
+            this.tabControl.Controls.Add(this.tabAdvanced);
             this.tabControl.Location = new System.Drawing.Point(12, 25);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -150,6 +170,7 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.managementGroup);
             this.tabGeneral.Controls.Add(this.groupBox3);
             this.tabGeneral.Controls.Add(this.groupBox1);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
@@ -160,9 +181,61 @@
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
+            // managementGroup
+            // 
+            this.managementGroup.AutoSize = true;
+            this.managementGroup.Controls.Add(this.linkLabel7);
+            this.managementGroup.Controls.Add(this.linkLabel5);
+            this.managementGroup.Controls.Add(this.linkLabel6);
+            this.managementGroup.Dock = System.Windows.Forms.DockStyle.Top;
+            this.managementGroup.Location = new System.Drawing.Point(3, 244);
+            this.managementGroup.Name = "managementGroup";
+            this.managementGroup.Size = new System.Drawing.Size(713, 83);
+            this.managementGroup.TabIndex = 1;
+            this.managementGroup.TabStop = false;
+            this.managementGroup.Text = "Application control";
+            this.managementGroup.Visible = false;
+            this.managementGroup.Enter += new System.EventHandler(this.managementGroup_Enter);
+            // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.LinkArea = new System.Windows.Forms.LinkArea(0, 7);
+            this.linkLabel7.Location = new System.Drawing.Point(7, 16);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(244, 17);
+            this.linkLabel7.TabIndex = 43;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "Remove: remove application from this computer";
+            this.linkLabel7.UseCompatibleTextRendering = true;
+            // 
+            // linkLabel5
+            // 
+            this.linkLabel5.AutoSize = true;
+            this.linkLabel5.LinkArea = new System.Windows.Forms.LinkArea(0, 10);
+            this.linkLabel5.Location = new System.Drawing.Point(7, 50);
+            this.linkLabel5.Name = "linkLabel5";
+            this.linkLabel5.Size = new System.Drawing.Size(526, 17);
+            this.linkLabel5.TabIndex = 42;
+            this.linkLabel5.TabStop = true;
+            this.linkLabel5.Text = "Repackage: recollect the package with its current files and registry modification" +
+                "s into a single executable";
+            this.linkLabel5.UseCompatibleTextRendering = true;
+            // 
+            // linkLabel6
+            // 
+            this.linkLabel6.AutoSize = true;
+            this.linkLabel6.LinkArea = new System.Windows.Forms.LinkArea(0, 15);
+            this.linkLabel6.Location = new System.Drawing.Point(7, 33);
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.Size = new System.Drawing.Size(284, 17);
+            this.linkLabel6.TabIndex = 41;
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.Text = "Patch / update: apply a patch or updater to this package";
+            this.linkLabel6.UseCompatibleTextRendering = true;
+            // 
             // groupBox3
             // 
-            this.groupBox3.AutoSize = true;
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.propertyFriendlyName);
             this.groupBox3.Controls.Add(this.propertyAppID);
@@ -170,10 +243,11 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(3, 174);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(713, 78);
+            this.groupBox3.Size = new System.Drawing.Size(713, 70);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Extras";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // label2
             // 
@@ -389,9 +463,9 @@
             // 
             this.panel5.Controls.Add(this.splitContainer1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 28);
+            this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(713, 356);
+            this.panel5.Size = new System.Drawing.Size(713, 381);
             this.panel5.TabIndex = 7;
             // 
             // splitContainer1
@@ -408,7 +482,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fsFilesList);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(713, 356);
+            this.splitContainer1.Size = new System.Drawing.Size(713, 381);
             this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -421,7 +495,7 @@
             this.fsFolderTree.Location = new System.Drawing.Point(0, 0);
             this.fsFolderTree.Name = "fsFolderTree";
             this.fsFolderTree.SelectedImageIndex = 0;
-            this.fsFolderTree.Size = new System.Drawing.Size(201, 356);
+            this.fsFolderTree.Size = new System.Drawing.Size(201, 381);
             this.fsFolderTree.TabIndex = 3;
             this.fsFolderTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.fsFolderTree_BeforeSelect);
             this.fsFolderTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fsFolderTree_AfterSelect);
@@ -452,7 +526,7 @@
             listViewItem2});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
-            this.fsFilesList.Size = new System.Drawing.Size(508, 331);
+            this.fsFilesList.Size = new System.Drawing.Size(508, 356);
             this.fsFilesList.TabIndex = 7;
             this.fsFilesList.UseCompatibleStateImageBehavior = false;
             this.fsFilesList.View = System.Windows.Forms.View.Details;
@@ -531,6 +605,7 @@
             this.toolStrip1.Size = new System.Drawing.Size(713, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.Visible = false;
             // 
             // fsAddBtn
             // 
@@ -616,9 +691,9 @@
             // 
             this.panel1.Controls.Add(this.regSplitContainer);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 46);
+            this.panel1.Location = new System.Drawing.Point(0, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 335);
+            this.panel1.Size = new System.Drawing.Size(713, 360);
             this.panel1.TabIndex = 11;
             // 
             // regSplitContainer
@@ -635,7 +710,7 @@
             // 
             this.regSplitContainer.Panel2.Controls.Add(this.regFilesList);
             this.regSplitContainer.Panel2.Controls.Add(this.panel4);
-            this.regSplitContainer.Size = new System.Drawing.Size(713, 335);
+            this.regSplitContainer.Size = new System.Drawing.Size(713, 360);
             this.regSplitContainer.SplitterDistance = 201;
             this.regSplitContainer.TabIndex = 5;
             // 
@@ -647,7 +722,7 @@
             this.regFolderTree.Location = new System.Drawing.Point(0, 0);
             this.regFolderTree.Name = "regFolderTree";
             this.regFolderTree.SelectedImageIndex = 0;
-            this.regFolderTree.Size = new System.Drawing.Size(201, 335);
+            this.regFolderTree.Size = new System.Drawing.Size(201, 360);
             this.regFolderTree.TabIndex = 3;
             // 
             // regFilesList
@@ -661,7 +736,7 @@
             listViewItem4});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(508, 310);
+            this.regFilesList.Size = new System.Drawing.Size(508, 335);
             this.regFilesList.TabIndex = 7;
             this.regFilesList.UseCompatibleStateImageBehavior = false;
             this.regFilesList.View = System.Windows.Forms.View.Details;
@@ -732,13 +807,13 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(713, 46);
+            this.panel7.Size = new System.Drawing.Size(713, 21);
             this.panel7.TabIndex = 10;
             // 
             // regProgressBar
             // 
             this.regProgressBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.regProgressBar.Location = new System.Drawing.Point(0, 25);
+            this.regProgressBar.Location = new System.Drawing.Point(0, 0);
             this.regProgressBar.Name = "regProgressBar";
             this.regProgressBar.Size = new System.Drawing.Size(713, 21);
             this.regProgressBar.TabIndex = 14;
@@ -753,6 +828,7 @@
             this.regToolStrip.Size = new System.Drawing.Size(713, 25);
             this.regToolStrip.TabIndex = 12;
             this.regToolStrip.Text = "toolStrip2";
+            this.regToolStrip.Visible = false;
             // 
             // regRemoveBtn
             // 
@@ -772,6 +848,101 @@
             this.regEditBtn.Name = "regEditBtn";
             this.regEditBtn.Size = new System.Drawing.Size(23, 22);
             this.regEditBtn.ToolTipText = "Edit registry";
+            // 
+            // tabAdvanced
+            // 
+            this.tabAdvanced.Controls.Add(this.groupBox5);
+            this.tabAdvanced.Controls.Add(this.groupBox4);
+            this.tabAdvanced.Location = new System.Drawing.Point(4, 22);
+            this.tabAdvanced.Name = "tabAdvanced";
+            this.tabAdvanced.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAdvanced.Size = new System.Drawing.Size(719, 387);
+            this.tabAdvanced.TabIndex = 3;
+            this.tabAdvanced.Text = "Advanced";
+            this.tabAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.linkLabel1);
+            this.groupBox4.Controls.Add(this.pictureBox1);
+            this.groupBox4.Controls.Add(this.linkLabel4);
+            this.groupBox4.Controls.Add(this.linkLabel3);
+            this.groupBox4.Controls.Add(this.pictureBox4);
+            this.groupBox4.Controls.Add(this.pictureBox3);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(713, 75);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Toolbox";
+            this.groupBox4.Visible = false;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
+            this.linkLabel1.Location = new System.Drawing.Point(34, 50);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(296, 17);
+            this.linkLabel1.TabIndex = 42;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Execute: launch a command in the context of this package";
+            this.linkLabel1.UseCompatibleTextRendering = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 48);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 15);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 41;
+            this.pictureBox1.TabStop = false;
+            // 
+            // linkLabel4
+            // 
+            this.linkLabel4.AutoSize = true;
+            this.linkLabel4.LinkArea = new System.Windows.Forms.LinkArea(0, 4);
+            this.linkLabel4.Location = new System.Drawing.Point(34, 16);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(314, 17);
+            this.linkLabel4.TabIndex = 38;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Text = "Cmd: launch a command box from the context of this package";
+            this.linkLabel4.UseCompatibleTextRendering = true;
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
+            this.linkLabel3.Location = new System.Drawing.Point(34, 33);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(302, 17);
+            this.linkLabel3.TabIndex = 37;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "Regedit: explore the registry from the context of this packge";
+            this.linkLabel3.UseCompatibleTextRendering = true;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(12, 14);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox4.TabIndex = 34;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(12, 31);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox3.TabIndex = 33;
+            this.pictureBox3.TabStop = false;
             // 
             // imageList1
             // 
@@ -853,6 +1024,17 @@
             // 
             this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox5.Location = new System.Drawing.Point(3, 78);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(713, 100);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Advanced settings";
+            this.groupBox5.Visible = false;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -872,6 +1054,8 @@
             this.tabControl.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
             this.tabGeneral.PerformLayout();
+            this.managementGroup.ResumeLayout(false);
+            this.managementGroup.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -904,6 +1088,12 @@
             this.panel7.PerformLayout();
             this.regToolStrip.ResumeLayout(false);
             this.regToolStrip.PerformLayout();
+            this.tabAdvanced.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -985,6 +1175,19 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.RadioButton propertyIsolationDataMode;
+        private System.Windows.Forms.TabPage tabAdvanced;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.LinkLabel linkLabel4;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.GroupBox managementGroup;
+        private System.Windows.Forms.LinkLabel linkLabel7;
+        private System.Windows.Forms.LinkLabel linkLabel5;
+        private System.Windows.Forms.LinkLabel linkLabel6;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.GroupBox groupBox5;
 
     }
 }

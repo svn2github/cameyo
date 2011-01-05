@@ -591,6 +591,21 @@ namespace PackageEditor
                 fsFolderTree.SelectedNode.Expand();
             }
         }
+
+        private void managementGroup_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class MRU
