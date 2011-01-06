@@ -58,6 +58,22 @@ namespace PackageEditor
             }
             if (!virtPackage.opened)
                 openToolStripMenuItem_Click(this, null);
+
+            #if DropBox
+            if (!System.IO.File.Exists("AppLimit.CloudComputing.oAuth.dll")
+                || !System.IO.File.Exists("AppLimit.CloudComputing.SharpBox.dll")
+                || !System.IO.File.Exists("Newtonsoft.Json.Net20.dll"))
+            {
+                dropboxLabel.Hide();
+                dropboxButton.Hide();
+                resetCredLink.Hide();
+                MessageBox.Show("This version is compiled with DropBox funtionality, but one or more of the dlls needed are missing:\nAppLimit.CloudComputing.oAuth.dll\nAppLimit.CloudComputing.SharpBox.dll\nNewtonsoft.Json.Net20.dll\n\nThe button will be hidden", "Missing DLL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            #else
+            dropboxLabel.Hide();
+            dropboxButton.Hide();
+            resetCredLink.Hide();
+            #endif
         }
 
         private void ThreadedRegLoad()
@@ -198,7 +214,10 @@ namespace PackageEditor
             saveFileDialog.DefaultExt = "virtual.exe";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                PackageSave(saveFileDialog.FileName);
+                if (PackageSave(saveFileDialog.FileName))
+                    virtPackage.openedFile = saveFileDialog.FileName;
+                else
+                    MessageBox.Show("Cannot save file: " + saveFileDialog.FileName);
             }
         }
 
@@ -589,6 +608,34 @@ namespace PackageEditor
                 if (!dragging)
                     dragging = true;
                 fsFolderTree.SelectedNode.Expand();
+            }
+        }
+
+        private void dropboxButton_Click(object sender, EventArgs e)
+        {
+            #if DropBox
+            if (this.dirty || fsEditor.dirty || regEditor.dirty)
+            {
+                MessageBox.Show("You have to save the package first");
+                return;
+            }
+
+            DropboxLogin dropLogin = new DropboxLogin();
+            dropLogin.Publish(virtPackage.openedFile);
+            #endif
+        }
+
+        private void resetCredLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RegistryKey cameyoKey = Registry.CurrentUser.CreateSubKey(@"Software\Cameyo");
+            try
+            {
+                cameyoKey.DeleteValue("DropBoxTokenKey");
+                cameyoKey.DeleteValue("DropBoxTokenSecret");
+            }
+            catch
+            {
+                MessageBox.Show("Cannot delete login tokens, did you save them?");
             }
         }
 

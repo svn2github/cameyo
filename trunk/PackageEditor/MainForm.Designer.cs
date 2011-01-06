@@ -40,6 +40,9 @@
             this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+            this.resetCredLink = new System.Windows.Forms.LinkLabel();
+            this.dropboxLabel = new System.Windows.Forms.Label();
+            this.dropboxButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.propertyFriendlyName = new System.Windows.Forms.TextBox();
@@ -100,6 +103,7 @@
             this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
             this.regEditBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -118,7 +122,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
             this.itemHoverTimer = new System.Windows.Forms.Timer(this.components);
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.managementGroup.SuspendLayout();
@@ -164,19 +167,22 @@
             this.tabControl.Location = new System.Drawing.Point(12, 25);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(727, 413);
+            this.tabControl.Size = new System.Drawing.Size(727, 429);
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.resetCredLink);
+            this.tabGeneral.Controls.Add(this.dropboxLabel);
+            this.tabGeneral.Controls.Add(this.dropboxButton);
             this.tabGeneral.Controls.Add(this.managementGroup);
             this.tabGeneral.Controls.Add(this.groupBox3);
             this.tabGeneral.Controls.Add(this.groupBox1);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(719, 387);
+            this.tabGeneral.Size = new System.Drawing.Size(719, 403);
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -233,6 +239,37 @@
             this.linkLabel6.TabStop = true;
             this.linkLabel6.Text = "Patch / update: apply a patch or updater to this package";
             this.linkLabel6.UseCompatibleTextRendering = true;
+            // 
+            // resetCredLink
+            // 
+            this.resetCredLink.AutoSize = true;
+            this.resetCredLink.Location = new System.Drawing.Point(336, 381);
+            this.resetCredLink.Name = "resetCredLink";
+            this.resetCredLink.Size = new System.Drawing.Size(90, 13);
+            this.resetCredLink.TabIndex = 4;
+            this.resetCredLink.TabStop = true;
+            this.resetCredLink.Text = "Reset Credentials";
+            this.resetCredLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.resetCredLink_LinkClicked);
+            // 
+            // dropboxLabel
+            // 
+            this.dropboxLabel.AutoSize = true;
+            this.dropboxLabel.Location = new System.Drawing.Point(258, 347);
+            this.dropboxLabel.Name = "dropboxLabel";
+            this.dropboxLabel.Size = new System.Drawing.Size(53, 13);
+            this.dropboxLabel.TabIndex = 3;
+            this.dropboxLabel.Text = "Publish to";
+            // 
+            // dropboxButton
+            // 
+            this.dropboxButton.BackgroundImage = global::PackageEditor.Properties.Resources.dropbox_logo_home;
+            this.dropboxButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.dropboxButton.Location = new System.Drawing.Point(317, 333);
+            this.dropboxButton.Name = "dropboxButton";
+            this.dropboxButton.Size = new System.Drawing.Size(119, 41);
+            this.dropboxButton.TabIndex = 2;
+            this.dropboxButton.UseVisualStyleBackColor = true;
+            this.dropboxButton.Click += new System.EventHandler(this.dropboxButton_Click);
             // 
             // groupBox3
             // 
@@ -861,6 +898,17 @@
             this.tabAdvanced.Text = "Advanced";
             this.tabAdvanced.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox5.Location = new System.Drawing.Point(3, 78);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(713, 100);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Advanced settings";
+            this.groupBox5.Visible = false;
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.linkLabel1);
@@ -959,7 +1007,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(751, 27);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -973,46 +1021,46 @@
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(45, 23);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveasToolStripMenuItem
             // 
             this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
             this.saveasToolStripMenuItem.Text = "Save &as";
             this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
             this.closeToolStripMenuItem.Text = "&Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(144, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -1024,23 +1072,12 @@
             // 
             this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(3, 78);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(713, 100);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Advanced settings";
-            this.groupBox5.Visible = false;
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(751, 438);
+            this.ClientSize = new System.Drawing.Size(751, 454);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1174,6 +1211,9 @@
         private System.Windows.Forms.Timer itemHoverTimer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Label dropboxLabel;
+        private System.Windows.Forms.Button dropboxButton;
+        private System.Windows.Forms.LinkLabel resetCredLink;
         private System.Windows.Forms.RadioButton propertyIsolationDataMode;
         private System.Windows.Forms.TabPage tabAdvanced;
         private System.Windows.Forms.GroupBox groupBox4;

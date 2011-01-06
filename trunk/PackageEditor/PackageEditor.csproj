@@ -38,7 +38,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
@@ -55,6 +55,14 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AppLimit.CloudComputing.oAuth, Version=1.0.2.220, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\AppLimit.CloudComputing.oAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="AppLimit.CloudComputing.SharpBox, Version=1.0.2.220, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\AppLimit.CloudComputing.SharpBox.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -91,6 +99,15 @@
     <Compile Include="DataStorageForm.Designer.cs">
       <DependentUpon>DataStorageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DropBoxKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DropboxLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DropboxLogin.designer.cs">
+      <DependentUpon>DropboxLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileSystemEditor.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -122,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataStorageForm.resx">
       <DependentUpon>DataStorageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropboxLogin.resx">
+      <DependentUpon>DropboxLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -169,6 +189,7 @@
   <ItemGroup>
     <Content Include="Package.ico" />
     <Content Include="PkgEdit.ico" />
+    <None Include="Resources\dropbox_logo_home.png" />
     <None Include="Resources\folder_closed_16_h.png" />
   </ItemGroup>
   <ItemGroup>

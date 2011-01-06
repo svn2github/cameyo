@@ -67,6 +67,13 @@ namespace PackageEditor.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap dropbox_logo_home {
+            get {
+                object obj = ResourceManager.GetObject("dropbox_logo_home", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap folder_closed_16_h {
             get {
                 object obj = ResourceManager.GetObject("folder_closed_16_h", resourceCulture);
