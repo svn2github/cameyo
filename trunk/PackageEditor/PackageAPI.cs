@@ -21,31 +21,31 @@ namespace VirtPackageAPI
     };
     public class VirtPackage
     {
-        private const int APIRET_SUCCESS				= 0;
-        private const int APIRET_FAILURE                = 1;
-        private const int APIRET_VIRTFILES_DB_ERROR		= 2;
-        private const int APIRET_VIRTFILES_ZIP_ERROR	= 3;
-        private const int APIRET_NOT_FOUND				= 5;
-        private const int APIRET_INVALID_PARAMETER		= 6;
-        private const int APIRET_FILE_CREATE_ERROR		= 7;
-        private const int APIRET_PE_RESOURCE_ERROR		= 8;
-        private const int APIRET_MEMORY_ERROR			= 9;
-        private const int APIRET_COMMIT_ERROR			= 10;
-        private const int APIRET_VIRTREG_DEPLOY_ERROR	= 11;
-        private const int APIRET_OUTPUT_ERROR			= 12;
-        private const int APIRET_INSUFFICIENT_BUFFER    = 13;
+        private const int APIRET_SUCCESS = 0;
+        private const int APIRET_FAILURE = 1;
+        private const int APIRET_VIRTFILES_DB_ERROR = 2;
+        private const int APIRET_VIRTFILES_ZIP_ERROR = 3;
+        private const int APIRET_NOT_FOUND = 5;
+        private const int APIRET_INVALID_PARAMETER = 6;
+        private const int APIRET_FILE_CREATE_ERROR = 7;
+        private const int APIRET_PE_RESOURCE_ERROR = 8;
+        private const int APIRET_MEMORY_ERROR = 9;
+        private const int APIRET_COMMIT_ERROR = 10;
+        private const int APIRET_VIRTREG_DEPLOY_ERROR = 11;
+        private const int APIRET_OUTPUT_ERROR = 12;
+        private const int APIRET_INSUFFICIENT_BUFFER = 13;
 
-        public const int VIRT_FILE_FLAGS_ISFILE	        = 0x0001; 	// File or directory?
-        public const int VIRT_FILE_FLAGS_DELETED	    = 0x0002; 	// Deleted by virtual app (NOT_FOUND)
-        public const int VIRT_FILE_FLAGS_DEPLOYED	    = 0x0008; 	// Set upon first file opening
-        public const int VIRT_FILE_FLAGS_DISCONNECTED	= 0x0010; 	// Set when on-disk file is modified from DB
+        public const int VIRT_FILE_FLAGS_ISFILE = 0x0001; 	// File or directory?
+        public const int VIRT_FILE_FLAGS_DELETED = 0x0002; 	// Deleted by virtual app (NOT_FOUND)
+        public const int VIRT_FILE_FLAGS_DEPLOYED = 0x0008; 	// Set upon first file opening
+        public const int VIRT_FILE_FLAGS_DISCONNECTED = 0x0010; 	// Set when on-disk file is modified from DB
 
-        public const int SANDBOXFLAGS_MERGE				= 1;
-        public const int SANDBOXFLAGS_WRITE_COPY		= 2;
-        public const int SANDBOXFLAGS_FULL_ISOLATION	= 3;
+        public const int SANDBOXFLAGS_MERGE = 1;
+        public const int SANDBOXFLAGS_WRITE_COPY = 2;
+        public const int SANDBOXFLAGS_FULL_ISOLATION = 3;
 
-        private const String DLLNAME                    = "PackagerDll.dll";
-        private const int MAX_STRING                    = 64 * 1024;
+        private const String DLLNAME = "PackagerDll.dll";
+        private const int MAX_STRING = 64 * 1024;
 
         private IntPtr hPkg;
         public bool opened;
@@ -62,25 +62,25 @@ namespace VirtPackageAPI
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static void PackageClose(
             IntPtr hPkg);
-        
+
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int PackageSave(
             IntPtr hPkg,
             String OutFileName);
-        
+
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int PackageGetProperty(
             IntPtr hPkg,
-            String Name, 
+            String Name,
             StringBuilder Value,
             UInt32 ValueLen);
-        
+
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int PackageSetProperty(
             IntPtr hPkg,
             String Name,
             String Value);
-        
+
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int PackageSetIconFile(
             IntPtr hPkg,
@@ -108,19 +108,19 @@ namespace VirtPackageAPI
             IntPtr hPkg,
             String SrcFileName,
             String DestFileName,
-            bool bVariablizeName );
+            bool bVariablizeName);
 
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int VirtFsAddEmptyDir(
             IntPtr hPkg,
             String DirName,
-            bool bVariablizeName );
+            bool bVariablizeName);
 
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int VirtFsExtract(
             IntPtr hPkg,
             String FileName,
-            String TargetDir );
+            String TargetDir);
 
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int VirtFsDelete(
@@ -224,7 +224,7 @@ namespace VirtPackageAPI
             }
             else if (Ret == APIRET_NOT_FOUND)
                 return false;
-            else 
+            else
                 return false;
         }
 
@@ -320,6 +320,32 @@ namespace VirtPackageAPI
                 return true;
             else
                 return false;
+        }
+
+        public bool AddDir(
+            String SrcFolderName,
+            String DestFolderName,
+            bool bVariablizeName)
+        {
+            if (!System.IO.Directory.Exists(SrcFolderName))
+                return false;
+
+            AddEmptyDir(DestFolderName, bVariablizeName);
+
+            string[] files = System.IO.Directory.GetFiles(SrcFolderName);
+            foreach (string file in files)
+            {
+                if (!AddFile(file, DestFolderName + "\\" + System.IO.Path.GetFileName(file), bVariablizeName))
+                    return false;
+            }
+
+            string[] subDirs = System.IO.Directory.GetDirectories(SrcFolderName);
+            foreach (string dir in subDirs)
+            {
+                if (!AddDir(dir, DestFolderName + "\\" + System.IO.Path.GetFileName(dir), bVariablizeName))
+                    return false;
+            }
+            return true;
         }
 
         public bool ExtractFile(
