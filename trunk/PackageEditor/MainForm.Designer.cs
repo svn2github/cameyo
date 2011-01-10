@@ -29,20 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
-            this.managementGroup = new System.Windows.Forms.GroupBox();
-            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
             this.resetCredLink = new System.Windows.Forms.LinkLabel();
             this.dropboxLabel = new System.Windows.Forms.Label();
             this.dropboxButton = new System.Windows.Forms.Button();
+            this.managementGroup = new System.Windows.Forms.GroupBox();
+            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.propertyFriendlyName = new System.Windows.Forms.TextBox();
@@ -102,15 +103,6 @@
             this.regToolStrip = new System.Windows.Forms.ToolStrip();
             this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
             this.regEditBtn = new System.Windows.Forms.ToolStripButton();
-            this.tabAdvanced = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,6 +114,13 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
             this.itemHoverTimer = new System.Windows.Forms.Timer(this.components);
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.managementGroup.SuspendLayout();
@@ -147,12 +146,11 @@
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.regToolStrip.SuspendLayout();
-            this.tabAdvanced.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -163,45 +161,101 @@
             this.tabControl.Controls.Add(this.tabGeneral);
             this.tabControl.Controls.Add(this.tabFileSystem);
             this.tabControl.Controls.Add(this.tabRegistry);
-            this.tabControl.Controls.Add(this.tabAdvanced);
             this.tabControl.Location = new System.Drawing.Point(12, 25);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(727, 429);
+            this.tabControl.Size = new System.Drawing.Size(727, 481);
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabGeneral
             // 
-            this.tabGeneral.Controls.Add(this.resetCredLink);
             this.tabGeneral.Controls.Add(this.dropboxLabel);
-            this.tabGeneral.Controls.Add(this.dropboxButton);
+            this.tabGeneral.Controls.Add(this.groupBox4);
+            this.tabGeneral.Controls.Add(this.resetCredLink);
             this.tabGeneral.Controls.Add(this.managementGroup);
             this.tabGeneral.Controls.Add(this.groupBox3);
             this.tabGeneral.Controls.Add(this.groupBox1);
+            this.tabGeneral.Controls.Add(this.dropboxButton);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(719, 403);
+            this.tabGeneral.Size = new System.Drawing.Size(719, 455);
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
+            // resetCredLink
+            // 
+            this.resetCredLink.AutoSize = true;
+            this.resetCredLink.Location = new System.Drawing.Point(618, 294);
+            this.resetCredLink.Name = "resetCredLink";
+            this.resetCredLink.Size = new System.Drawing.Size(90, 13);
+            this.resetCredLink.TabIndex = 4;
+            this.resetCredLink.TabStop = true;
+            this.resetCredLink.Text = "Reset Credentials";
+            this.resetCredLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.resetCredLink_LinkClicked);
+            // 
+            // dropboxLabel
+            // 
+            this.dropboxLabel.AutoSize = true;
+            this.dropboxLabel.Location = new System.Drawing.Point(530, 250);
+            this.dropboxLabel.Name = "dropboxLabel";
+            this.dropboxLabel.Size = new System.Drawing.Size(53, 13);
+            this.dropboxLabel.TabIndex = 3;
+            this.dropboxLabel.Text = "Publish to";
+            // 
+            // dropboxButton
+            // 
+            this.dropboxButton.BackgroundImage = global::PackageEditor.Properties.Resources.dropbox_logo_home;
+            this.dropboxButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.dropboxButton.Location = new System.Drawing.Point(589, 250);
+            this.dropboxButton.Name = "dropboxButton";
+            this.dropboxButton.Size = new System.Drawing.Size(119, 41);
+            this.dropboxButton.TabIndex = 2;
+            this.dropboxButton.UseVisualStyleBackColor = true;
+            this.dropboxButton.Click += new System.EventHandler(this.dropboxButton_Click);
+            // 
             // managementGroup
             // 
-            this.managementGroup.AutoSize = true;
-            this.managementGroup.Controls.Add(this.linkLabel7);
             this.managementGroup.Controls.Add(this.linkLabel5);
+            this.managementGroup.Controls.Add(this.linkLabel2);
+            this.managementGroup.Controls.Add(this.linkLabel7);
             this.managementGroup.Controls.Add(this.linkLabel6);
-            this.managementGroup.Dock = System.Windows.Forms.DockStyle.Top;
-            this.managementGroup.Location = new System.Drawing.Point(3, 244);
+            this.managementGroup.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.managementGroup.Location = new System.Drawing.Point(3, 360);
             this.managementGroup.Name = "managementGroup";
-            this.managementGroup.Size = new System.Drawing.Size(713, 83);
+            this.managementGroup.Size = new System.Drawing.Size(713, 92);
             this.managementGroup.TabIndex = 1;
             this.managementGroup.TabStop = false;
             this.managementGroup.Text = "Application control";
             this.managementGroup.Visible = false;
             this.managementGroup.Enter += new System.EventHandler(this.managementGroup_Enter);
+            // 
+            // linkLabel5
+            // 
+            this.linkLabel5.AutoSize = true;
+            this.linkLabel5.LinkArea = new System.Windows.Forms.LinkArea(0, 15);
+            this.linkLabel5.Location = new System.Drawing.Point(7, 50);
+            this.linkLabel5.Name = "linkLabel5";
+            this.linkLabel5.Size = new System.Drawing.Size(284, 17);
+            this.linkLabel5.TabIndex = 45;
+            this.linkLabel5.TabStop = true;
+            this.linkLabel5.Text = "Patch / update: apply a patch or updater to this package";
+            this.linkLabel5.UseCompatibleTextRendering = true;
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.LinkArea = new System.Windows.Forms.LinkArea(0, 10);
+            this.linkLabel2.Location = new System.Drawing.Point(7, 67);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(526, 17);
+            this.linkLabel2.TabIndex = 44;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Repackage: recollect the package with its current files and registry modification" +
+                "s into a single executable";
+            this.linkLabel2.UseCompatibleTextRendering = true;
             // 
             // linkLabel7
             // 
@@ -215,61 +269,18 @@
             this.linkLabel7.Text = "Remove: remove application from this computer";
             this.linkLabel7.UseCompatibleTextRendering = true;
             // 
-            // linkLabel5
-            // 
-            this.linkLabel5.AutoSize = true;
-            this.linkLabel5.LinkArea = new System.Windows.Forms.LinkArea(0, 10);
-            this.linkLabel5.Location = new System.Drawing.Point(7, 50);
-            this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(526, 17);
-            this.linkLabel5.TabIndex = 42;
-            this.linkLabel5.TabStop = true;
-            this.linkLabel5.Text = "Repackage: recollect the package with its current files and registry modification" +
-                "s into a single executable";
-            this.linkLabel5.UseCompatibleTextRendering = true;
-            // 
             // linkLabel6
             // 
             this.linkLabel6.AutoSize = true;
-            this.linkLabel6.LinkArea = new System.Windows.Forms.LinkArea(0, 15);
+            this.linkLabel6.LinkArea = new System.Windows.Forms.LinkArea(0, 10);
             this.linkLabel6.Location = new System.Drawing.Point(7, 33);
             this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(284, 17);
+            this.linkLabel6.Size = new System.Drawing.Size(399, 17);
             this.linkLabel6.TabIndex = 41;
             this.linkLabel6.TabStop = true;
-            this.linkLabel6.Text = "Patch / update: apply a patch or updater to this package";
+            this.linkLabel6.Text = "Integrate: register application\'s shortcuts and file associations on this compute" +
+                "r";
             this.linkLabel6.UseCompatibleTextRendering = true;
-            // 
-            // resetCredLink
-            // 
-            this.resetCredLink.AutoSize = true;
-            this.resetCredLink.Location = new System.Drawing.Point(336, 381);
-            this.resetCredLink.Name = "resetCredLink";
-            this.resetCredLink.Size = new System.Drawing.Size(90, 13);
-            this.resetCredLink.TabIndex = 4;
-            this.resetCredLink.TabStop = true;
-            this.resetCredLink.Text = "Reset Credentials";
-            this.resetCredLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.resetCredLink_LinkClicked);
-            // 
-            // dropboxLabel
-            // 
-            this.dropboxLabel.AutoSize = true;
-            this.dropboxLabel.Location = new System.Drawing.Point(258, 347);
-            this.dropboxLabel.Name = "dropboxLabel";
-            this.dropboxLabel.Size = new System.Drawing.Size(53, 13);
-            this.dropboxLabel.TabIndex = 3;
-            this.dropboxLabel.Text = "Publish to";
-            // 
-            // dropboxButton
-            // 
-            this.dropboxButton.BackgroundImage = global::PackageEditor.Properties.Resources.dropbox_logo_home;
-            this.dropboxButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.dropboxButton.Location = new System.Drawing.Point(317, 333);
-            this.dropboxButton.Name = "dropboxButton";
-            this.dropboxButton.Size = new System.Drawing.Size(119, 41);
-            this.dropboxButton.TabIndex = 2;
-            this.dropboxButton.UseVisualStyleBackColor = true;
-            this.dropboxButton.Click += new System.EventHandler(this.dropboxButton_Click);
             // 
             // groupBox3
             // 
@@ -491,7 +502,7 @@
             this.tabFileSystem.Location = new System.Drawing.Point(4, 22);
             this.tabFileSystem.Name = "tabFileSystem";
             this.tabFileSystem.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFileSystem.Size = new System.Drawing.Size(719, 387);
+            this.tabFileSystem.Size = new System.Drawing.Size(719, 403);
             this.tabFileSystem.TabIndex = 1;
             this.tabFileSystem.Text = "Files";
             this.tabFileSystem.UseVisualStyleBackColor = true;
@@ -500,9 +511,9 @@
             // 
             this.panel5.Controls.Add(this.splitContainer1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 3);
+            this.panel5.Location = new System.Drawing.Point(3, 28);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(713, 381);
+            this.panel5.Size = new System.Drawing.Size(713, 372);
             this.panel5.TabIndex = 7;
             // 
             // splitContainer1
@@ -519,7 +530,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fsFilesList);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(713, 381);
+            this.splitContainer1.Size = new System.Drawing.Size(713, 372);
             this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -532,7 +543,7 @@
             this.fsFolderTree.Location = new System.Drawing.Point(0, 0);
             this.fsFolderTree.Name = "fsFolderTree";
             this.fsFolderTree.SelectedImageIndex = 0;
-            this.fsFolderTree.Size = new System.Drawing.Size(201, 381);
+            this.fsFolderTree.Size = new System.Drawing.Size(201, 372);
             this.fsFolderTree.TabIndex = 3;
             this.fsFolderTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.fsFolderTree_BeforeSelect);
             this.fsFolderTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fsFolderTree_AfterSelect);
@@ -559,11 +570,11 @@
             this.columnHeader2});
             this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem5,
+            listViewItem6});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
-            this.fsFilesList.Size = new System.Drawing.Size(508, 356);
+            this.fsFilesList.Size = new System.Drawing.Size(508, 347);
             this.fsFilesList.TabIndex = 7;
             this.fsFilesList.UseCompatibleStateImageBehavior = false;
             this.fsFilesList.View = System.Windows.Forms.View.Details;
@@ -642,7 +653,7 @@
             this.toolStrip1.Size = new System.Drawing.Size(713, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.Visible = false;
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // fsAddBtn
             // 
@@ -709,7 +720,7 @@
             this.tabRegistry.Location = new System.Drawing.Point(4, 22);
             this.tabRegistry.Name = "tabRegistry";
             this.tabRegistry.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegistry.Size = new System.Drawing.Size(719, 387);
+            this.tabRegistry.Size = new System.Drawing.Size(719, 403);
             this.tabRegistry.TabIndex = 2;
             this.tabRegistry.Text = "Registry";
             this.tabRegistry.UseVisualStyleBackColor = true;
@@ -721,7 +732,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(3, 3);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(713, 381);
+            this.panel8.Size = new System.Drawing.Size(713, 397);
             this.panel8.TabIndex = 10;
             // 
             // panel1
@@ -730,7 +741,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 360);
+            this.panel1.Size = new System.Drawing.Size(713, 376);
             this.panel1.TabIndex = 11;
             // 
             // regSplitContainer
@@ -747,7 +758,7 @@
             // 
             this.regSplitContainer.Panel2.Controls.Add(this.regFilesList);
             this.regSplitContainer.Panel2.Controls.Add(this.panel4);
-            this.regSplitContainer.Size = new System.Drawing.Size(713, 360);
+            this.regSplitContainer.Size = new System.Drawing.Size(713, 376);
             this.regSplitContainer.SplitterDistance = 201;
             this.regSplitContainer.TabIndex = 5;
             // 
@@ -759,7 +770,7 @@
             this.regFolderTree.Location = new System.Drawing.Point(0, 0);
             this.regFolderTree.Name = "regFolderTree";
             this.regFolderTree.SelectedImageIndex = 0;
-            this.regFolderTree.Size = new System.Drawing.Size(201, 360);
+            this.regFolderTree.Size = new System.Drawing.Size(201, 376);
             this.regFolderTree.TabIndex = 3;
             // 
             // regFilesList
@@ -769,11 +780,11 @@
             this.columnHeader4});
             this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem7,
+            listViewItem8});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(508, 335);
+            this.regFilesList.Size = new System.Drawing.Size(508, 351);
             this.regFilesList.TabIndex = 7;
             this.regFilesList.UseCompatibleStateImageBehavior = false;
             this.regFilesList.View = System.Windows.Forms.View.Details;
@@ -886,28 +897,85 @@
             this.regEditBtn.Size = new System.Drawing.Size(23, 22);
             this.regEditBtn.ToolTipText = "Edit registry";
             // 
-            // tabAdvanced
+            // imageList1
             // 
-            this.tabAdvanced.Controls.Add(this.groupBox5);
-            this.tabAdvanced.Controls.Add(this.groupBox4);
-            this.tabAdvanced.Location = new System.Drawing.Point(4, 22);
-            this.tabAdvanced.Name = "tabAdvanced";
-            this.tabAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdvanced.Size = new System.Drawing.Size(719, 387);
-            this.tabAdvanced.TabIndex = 3;
-            this.tabAdvanced.Text = "Advanced";
-            this.tabAdvanced.UseVisualStyleBackColor = true;
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "spanner_48.png");
+            this.imageList1.Images.SetKeyName(1, "folder_48.png");
+            this.imageList1.Images.SetKeyName(2, "database_48.png");
+            this.imageList1.Images.SetKeyName(3, "box_download_48.png");
             // 
-            // groupBox5
+            // menuStrip1
             // 
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(3, 78);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(713, 100);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Advanced settings";
-            this.groupBox5.Visible = false;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveasToolStripMenuItem,
+            this.closeToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveasToolStripMenuItem
+            // 
+            this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveasToolStripMenuItem.Text = "Save &as";
+            this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.closeToolStripMenuItem.Text = "&Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // regProgressTimer
+            // 
+            this.regProgressTimer.Tick += new System.EventHandler(this.regProgressTimer_Tick);
+            // 
+            // itemHoverTimer
+            // 
+            this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
             // 
             // groupBox4
             // 
@@ -917,11 +985,11 @@
             this.groupBox4.Controls.Add(this.linkLabel3);
             this.groupBox4.Controls.Add(this.pictureBox4);
             this.groupBox4.Controls.Add(this.pictureBox3);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox4.Location = new System.Drawing.Point(3, 285);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(713, 75);
-            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Toolbox";
             this.groupBox4.Visible = false;
@@ -992,92 +1060,12 @@
             this.pictureBox3.TabIndex = 33;
             this.pictureBox3.TabStop = false;
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "spanner_48.png");
-            this.imageList1.Images.SetKeyName(1, "folder_48.png");
-            this.imageList1.Images.SetKeyName(2, "database_48.png");
-            this.imageList1.Images.SetKeyName(3, "box_download_48.png");
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(751, 27);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.saveasToolStripMenuItem,
-            this.closeToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(45, 23);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
-            this.openToolStripMenuItem.Text = "&Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
-            this.saveToolStripMenuItem.Text = "&Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // saveasToolStripMenuItem
-            // 
-            this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
-            this.saveasToolStripMenuItem.Text = "Save &as";
-            this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
-            this.closeToolStripMenuItem.Text = "&Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(144, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // regProgressTimer
-            // 
-            this.regProgressTimer.Tick += new System.EventHandler(this.regProgressTimer_Tick);
-            // 
-            // itemHoverTimer
-            // 
-            this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(751, 454);
+            this.ClientSize = new System.Drawing.Size(751, 506);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1125,14 +1113,13 @@
             this.panel7.PerformLayout();
             this.regToolStrip.ResumeLayout(false);
             this.regToolStrip.PerformLayout();
-            this.tabAdvanced.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1215,19 +1202,18 @@
         private System.Windows.Forms.Button dropboxButton;
         private System.Windows.Forms.LinkLabel resetCredLink;
         private System.Windows.Forms.RadioButton propertyIsolationDataMode;
-        private System.Windows.Forms.TabPage tabAdvanced;
+        private System.Windows.Forms.GroupBox managementGroup;
+        private System.Windows.Forms.LinkLabel linkLabel7;
+        private System.Windows.Forms.LinkLabel linkLabel6;
+        private System.Windows.Forms.LinkLabel linkLabel5;
+        private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.LinkLabel linkLabel4;
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.GroupBox managementGroup;
-        private System.Windows.Forms.LinkLabel linkLabel7;
-        private System.Windows.Forms.LinkLabel linkLabel5;
-        private System.Windows.Forms.LinkLabel linkLabel6;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.GroupBox groupBox5;
 
     }
 }

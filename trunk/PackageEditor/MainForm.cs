@@ -653,6 +653,11 @@ namespace PackageEditor
         {
 
         }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 
     public class MRU
