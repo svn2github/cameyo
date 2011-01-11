@@ -29,16 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
-            this.resetCredLink = new System.Windows.Forms.LinkLabel();
             this.dropboxLabel = new System.Windows.Forms.Label();
-            this.dropboxButton = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.resetCredLink = new System.Windows.Forms.LinkLabel();
             this.managementGroup = new System.Windows.Forms.GroupBox();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -64,6 +70,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.propertyIcon = new System.Windows.Forms.PictureBox();
             this.lblAutoLaunch = new System.Windows.Forms.Label();
+            this.dropboxButton = new System.Windows.Forms.Button();
             this.tabFileSystem = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -114,15 +121,13 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
             this.itemHoverTimer = new System.Windows.Forms.Timer(this.components);
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.managementGroup.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -147,10 +152,6 @@
             this.panel7.SuspendLayout();
             this.regToolStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -170,6 +171,7 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.lnkCustomEvents);
             this.tabGeneral.Controls.Add(this.dropboxLabel);
             this.tabGeneral.Controls.Add(this.groupBox4);
             this.tabGeneral.Controls.Add(this.resetCredLink);
@@ -185,6 +187,98 @@
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
+            // dropboxLabel
+            // 
+            this.dropboxLabel.AutoSize = true;
+            this.dropboxLabel.Location = new System.Drawing.Point(530, 250);
+            this.dropboxLabel.Name = "dropboxLabel";
+            this.dropboxLabel.Size = new System.Drawing.Size(53, 13);
+            this.dropboxLabel.TabIndex = 3;
+            this.dropboxLabel.Text = "Publish to";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.linkLabel1);
+            this.groupBox4.Controls.Add(this.pictureBox1);
+            this.groupBox4.Controls.Add(this.linkLabel4);
+            this.groupBox4.Controls.Add(this.linkLabel3);
+            this.groupBox4.Controls.Add(this.pictureBox4);
+            this.groupBox4.Controls.Add(this.pictureBox3);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox4.Location = new System.Drawing.Point(3, 285);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(713, 75);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Toolbox";
+            this.groupBox4.Visible = false;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
+            this.linkLabel1.Location = new System.Drawing.Point(34, 50);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(296, 17);
+            this.linkLabel1.TabIndex = 42;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Execute: launch a command in the context of this package";
+            this.linkLabel1.UseCompatibleTextRendering = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 48);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 15);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 41;
+            this.pictureBox1.TabStop = false;
+            // 
+            // linkLabel4
+            // 
+            this.linkLabel4.AutoSize = true;
+            this.linkLabel4.LinkArea = new System.Windows.Forms.LinkArea(0, 4);
+            this.linkLabel4.Location = new System.Drawing.Point(34, 16);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(314, 17);
+            this.linkLabel4.TabIndex = 38;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Text = "Cmd: launch a command box from the context of this package";
+            this.linkLabel4.UseCompatibleTextRendering = true;
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
+            this.linkLabel3.Location = new System.Drawing.Point(34, 33);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(302, 17);
+            this.linkLabel3.TabIndex = 37;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "Regedit: explore the registry from the context of this packge";
+            this.linkLabel3.UseCompatibleTextRendering = true;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(12, 14);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox4.TabIndex = 34;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(12, 31);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox3.TabIndex = 33;
+            this.pictureBox3.TabStop = false;
+            // 
             // resetCredLink
             // 
             this.resetCredLink.AutoSize = true;
@@ -195,26 +289,6 @@
             this.resetCredLink.TabStop = true;
             this.resetCredLink.Text = "Reset Credentials";
             this.resetCredLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.resetCredLink_LinkClicked);
-            // 
-            // dropboxLabel
-            // 
-            this.dropboxLabel.AutoSize = true;
-            this.dropboxLabel.Location = new System.Drawing.Point(530, 250);
-            this.dropboxLabel.Name = "dropboxLabel";
-            this.dropboxLabel.Size = new System.Drawing.Size(53, 13);
-            this.dropboxLabel.TabIndex = 3;
-            this.dropboxLabel.Text = "Publish to";
-            // 
-            // dropboxButton
-            // 
-            this.dropboxButton.BackgroundImage = global::PackageEditor.Properties.Resources.dropbox_logo_home;
-            this.dropboxButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.dropboxButton.Location = new System.Drawing.Point(589, 250);
-            this.dropboxButton.Name = "dropboxButton";
-            this.dropboxButton.Size = new System.Drawing.Size(119, 41);
-            this.dropboxButton.TabIndex = 2;
-            this.dropboxButton.UseVisualStyleBackColor = true;
-            this.dropboxButton.Click += new System.EventHandler(this.dropboxButton_Click);
             // 
             // managementGroup
             // 
@@ -495,6 +569,17 @@
             this.lblAutoLaunch.TabIndex = 2;
             this.lblAutoLaunch.Text = "Startup:";
             // 
+            // dropboxButton
+            // 
+            this.dropboxButton.BackgroundImage = global::PackageEditor.Properties.Resources.dropbox_logo_home;
+            this.dropboxButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.dropboxButton.Location = new System.Drawing.Point(589, 250);
+            this.dropboxButton.Name = "dropboxButton";
+            this.dropboxButton.Size = new System.Drawing.Size(119, 41);
+            this.dropboxButton.TabIndex = 2;
+            this.dropboxButton.UseVisualStyleBackColor = true;
+            this.dropboxButton.Click += new System.EventHandler(this.dropboxButton_Click);
+            // 
             // tabFileSystem
             // 
             this.tabFileSystem.Controls.Add(this.panel5);
@@ -502,7 +587,7 @@
             this.tabFileSystem.Location = new System.Drawing.Point(4, 22);
             this.tabFileSystem.Name = "tabFileSystem";
             this.tabFileSystem.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFileSystem.Size = new System.Drawing.Size(719, 403);
+            this.tabFileSystem.Size = new System.Drawing.Size(719, 455);
             this.tabFileSystem.TabIndex = 1;
             this.tabFileSystem.Text = "Files";
             this.tabFileSystem.UseVisualStyleBackColor = true;
@@ -513,7 +598,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(3, 28);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(713, 372);
+            this.panel5.Size = new System.Drawing.Size(713, 424);
             this.panel5.TabIndex = 7;
             // 
             // splitContainer1
@@ -530,7 +615,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fsFilesList);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(713, 372);
+            this.splitContainer1.Size = new System.Drawing.Size(713, 424);
             this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -543,7 +628,7 @@
             this.fsFolderTree.Location = new System.Drawing.Point(0, 0);
             this.fsFolderTree.Name = "fsFolderTree";
             this.fsFolderTree.SelectedImageIndex = 0;
-            this.fsFolderTree.Size = new System.Drawing.Size(201, 372);
+            this.fsFolderTree.Size = new System.Drawing.Size(201, 424);
             this.fsFolderTree.TabIndex = 3;
             this.fsFolderTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.fsFolderTree_BeforeSelect);
             this.fsFolderTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fsFolderTree_AfterSelect);
@@ -570,11 +655,11 @@
             this.columnHeader2});
             this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
-            this.fsFilesList.Size = new System.Drawing.Size(508, 347);
+            this.fsFilesList.Size = new System.Drawing.Size(508, 399);
             this.fsFilesList.TabIndex = 7;
             this.fsFilesList.UseCompatibleStateImageBehavior = false;
             this.fsFilesList.View = System.Windows.Forms.View.Details;
@@ -720,7 +805,7 @@
             this.tabRegistry.Location = new System.Drawing.Point(4, 22);
             this.tabRegistry.Name = "tabRegistry";
             this.tabRegistry.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegistry.Size = new System.Drawing.Size(719, 403);
+            this.tabRegistry.Size = new System.Drawing.Size(719, 455);
             this.tabRegistry.TabIndex = 2;
             this.tabRegistry.Text = "Registry";
             this.tabRegistry.UseVisualStyleBackColor = true;
@@ -732,7 +817,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(3, 3);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(713, 397);
+            this.panel8.Size = new System.Drawing.Size(713, 449);
             this.panel8.TabIndex = 10;
             // 
             // panel1
@@ -741,7 +826,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 376);
+            this.panel1.Size = new System.Drawing.Size(713, 428);
             this.panel1.TabIndex = 11;
             // 
             // regSplitContainer
@@ -758,7 +843,7 @@
             // 
             this.regSplitContainer.Panel2.Controls.Add(this.regFilesList);
             this.regSplitContainer.Panel2.Controls.Add(this.panel4);
-            this.regSplitContainer.Size = new System.Drawing.Size(713, 376);
+            this.regSplitContainer.Size = new System.Drawing.Size(713, 428);
             this.regSplitContainer.SplitterDistance = 201;
             this.regSplitContainer.TabIndex = 5;
             // 
@@ -770,7 +855,7 @@
             this.regFolderTree.Location = new System.Drawing.Point(0, 0);
             this.regFolderTree.Name = "regFolderTree";
             this.regFolderTree.SelectedImageIndex = 0;
-            this.regFolderTree.Size = new System.Drawing.Size(201, 376);
+            this.regFolderTree.Size = new System.Drawing.Size(201, 428);
             this.regFolderTree.TabIndex = 3;
             // 
             // regFilesList
@@ -780,11 +865,11 @@
             this.columnHeader4});
             this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(508, 351);
+            this.regFilesList.Size = new System.Drawing.Size(508, 403);
             this.regFilesList.TabIndex = 7;
             this.regFilesList.UseCompatibleStateImageBehavior = false;
             this.regFilesList.View = System.Windows.Forms.View.Details;
@@ -977,88 +1062,16 @@
             // 
             this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
             // 
-            // groupBox4
+            // lnkCustomEvents
             // 
-            this.groupBox4.Controls.Add(this.linkLabel1);
-            this.groupBox4.Controls.Add(this.pictureBox1);
-            this.groupBox4.Controls.Add(this.linkLabel4);
-            this.groupBox4.Controls.Add(this.linkLabel3);
-            this.groupBox4.Controls.Add(this.pictureBox4);
-            this.groupBox4.Controls.Add(this.pictureBox3);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox4.Location = new System.Drawing.Point(3, 285);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(713, 75);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Toolbox";
-            this.groupBox4.Visible = false;
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
-            this.linkLabel1.Location = new System.Drawing.Point(34, 50);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(296, 17);
-            this.linkLabel1.TabIndex = 42;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Execute: launch a command in the context of this package";
-            this.linkLabel1.UseCompatibleTextRendering = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 48);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(16, 15);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 41;
-            this.pictureBox1.TabStop = false;
-            // 
-            // linkLabel4
-            // 
-            this.linkLabel4.AutoSize = true;
-            this.linkLabel4.LinkArea = new System.Windows.Forms.LinkArea(0, 4);
-            this.linkLabel4.Location = new System.Drawing.Point(34, 16);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(314, 17);
-            this.linkLabel4.TabIndex = 38;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "Cmd: launch a command box from the context of this package";
-            this.linkLabel4.UseCompatibleTextRendering = true;
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
-            this.linkLabel3.Location = new System.Drawing.Point(34, 33);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(302, 17);
-            this.linkLabel3.TabIndex = 37;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "Regedit: explore the registry from the context of this packge";
-            this.linkLabel3.UseCompatibleTextRendering = true;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(12, 14);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox4.TabIndex = 34;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(12, 31);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox3.TabIndex = 33;
-            this.pictureBox3.TabStop = false;
+            this.lnkCustomEvents.AutoSize = true;
+            this.lnkCustomEvents.Location = new System.Drawing.Point(13, 250);
+            this.lnkCustomEvents.Name = "lnkCustomEvents";
+            this.lnkCustomEvents.Size = new System.Drawing.Size(77, 13);
+            this.lnkCustomEvents.TabIndex = 5;
+            this.lnkCustomEvents.TabStop = true;
+            this.lnkCustomEvents.Text = "Custom events";
+            this.lnkCustomEvents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomEvents_LinkClicked);
             // 
             // MainForm
             // 
@@ -1079,6 +1092,11 @@
             this.tabControl.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
             this.tabGeneral.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.managementGroup.ResumeLayout(false);
             this.managementGroup.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1115,11 +1133,6 @@
             this.regToolStrip.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1214,6 +1227,7 @@
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.LinkLabel lnkCustomEvents;
 
     }
 }

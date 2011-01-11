@@ -67,6 +67,27 @@ namespace PackageEditor.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap delete_16_h {
+            get {
+                object obj = ResourceManager.GetObject("delete_16_h", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap delete_24 {
+            get {
+                object obj = ResourceManager.GetObject("delete_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap down {
+            get {
+                object obj = ResourceManager.GetObject("down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap dropbox_logo_home {
             get {
                 object obj = ResourceManager.GetObject("dropbox_logo_home", resourceCulture);
@@ -77,6 +98,13 @@ namespace PackageEditor.Properties {
         internal static System.Drawing.Bitmap folder_closed_16_h {
             get {
                 object obj = ResourceManager.GetObject("folder_closed_16_h", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap up {
+            get {
+                object obj = ResourceManager.GetObject("up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -658,6 +658,13 @@ namespace PackageEditor
         {
 
         }
+
+        private void lnkCustomEvents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CustomEventsForm customEventsForm = new CustomEventsForm(virtPackage);
+            customEventsForm.ShowDialog();
+            customEventsForm.Dispose();
+        }
     }
 
     public class MRU
