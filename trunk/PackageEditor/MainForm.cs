@@ -60,9 +60,9 @@ namespace PackageEditor
                 openToolStripMenuItem_Click(this, null);
 
             #if DropBox
-            if (!System.IO.File.Exists("AppLimit.CloudComputing.oAuth.dll")
-                || !System.IO.File.Exists("AppLimit.CloudComputing.SharpBox.dll")
-                || !System.IO.File.Exists("Newtonsoft.Json.Net20.dll"))
+            if (!System.IO.File.Exists(Application.StartupPath + "\\AppLimit.CloudComputing.oAuth.dll")
+                || !System.IO.File.Exists(Application.StartupPath + "\\AppLimit.CloudComputing.SharpBox.dll")
+                || !System.IO.File.Exists(Application.StartupPath + "\\Newtonsoft.Json.Net20.dll"))
             {
                 dropboxLabel.Hide();
                 dropboxButton.Hide();
@@ -216,8 +216,6 @@ namespace PackageEditor
             {
                 if (PackageSave(saveFileDialog.FileName))
                     virtPackage.openedFile = saveFileDialog.FileName;
-                else
-                    MessageBox.Show("Cannot save file: " + saveFileDialog.FileName);
             }
         }
 
@@ -619,9 +617,18 @@ namespace PackageEditor
                 MessageBox.Show("You have to save the package first");
                 return;
             }
-
-            DropboxLogin dropLogin = new DropboxLogin();
-            dropLogin.Publish(virtPackage.openedFile);
+            String opened = virtPackage.openedFile;
+            try
+            {
+                virtPackage.Close();
+                DropboxLogin dropLogin = new DropboxLogin();
+                dropLogin.Publish(opened);
+            }
+            finally
+            {
+                if (!virtPackage.opened)
+                    virtPackage.Open(opened);
+            }
             #endif
         }
 
