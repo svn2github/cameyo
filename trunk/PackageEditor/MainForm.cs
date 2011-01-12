@@ -270,6 +270,9 @@ namespace PackageEditor
             Icon ico = Icon.ExtractAssociatedIcon(virtPackage.openedFile);
             propertyIcon.Image = ico.ToBitmap();
 
+            // StopInheritance
+            propertyStopInheritance.Text = virtPackage.GetProperty("StopInheritance");
+
             dirty = false;
         }
 
@@ -285,6 +288,7 @@ namespace PackageEditor
             // AppID + AutoLaunch
             Ret &= virtPackage.SetProperty("AppID", propertyAppID.Text);
             Ret &= virtPackage.SetProperty("FriendlyName", propertyFriendlyName.Text);
+            Ret &= virtPackage.SetProperty("StopInheritance", propertyStopInheritance.Text);
 
             // AutoLaunch (and SaveAutoLaunchCmd + SaveAutoLaunchMenu) already set by AutoLaunchForm
 
@@ -318,6 +322,7 @@ namespace PackageEditor
             propertyFriendlyName.Text = "";
             propertyAutoLaunch.Text = "";
             propertyIcon.Image = null;
+            propertyStopInheritance.Text = "";
         }
 
         private bool DeleteFile(String FileName)
@@ -646,30 +651,11 @@ namespace PackageEditor
             }
         }
 
-        private void managementGroup_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void lnkCustomEvents_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CustomEventsForm customEventsForm = new CustomEventsForm(virtPackage);
             customEventsForm.ShowDialog();
+            dirty |= customEventsForm.dirty;
             customEventsForm.Dispose();
         }
     }

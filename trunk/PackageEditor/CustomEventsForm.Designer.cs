@@ -29,9 +29,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.listBox = new System.Windows.Forms.ListBox();
+            this.comboBox = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.boxWait = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnAddSave = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,33 +47,53 @@
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.btnErase = new System.Windows.Forms.Button();
-            this.comboBox = new System.Windows.Forms.ComboBox();
-            this.panel1.SuspendLayout();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.panel8.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.comboBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(669, 205);
+            this.panel1.Size = new System.Drawing.Size(669, 436);
             this.panel1.TabIndex = 0;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.panel2);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel8.Location = new System.Drawing.Point(0, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(669, 436);
+            this.panel8.TabIndex = 7;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.listBox);
+            this.panel2.Controls.Add(this.panel6);
+            this.panel2.Controls.Add(this.comboBox);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 21);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(669, 184);
-            this.panel2.TabIndex = 4;
+            this.panel2.Size = new System.Drawing.Size(669, 436);
+            this.panel2.TabIndex = 5;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.listBox);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(0, 21);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(310, 415);
+            this.panel6.TabIndex = 5;
             // 
             // listBox
             // 
@@ -77,12 +101,29 @@
             this.listBox.FormattingEnabled = true;
             this.listBox.Location = new System.Drawing.Point(0, 0);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(310, 184);
-            this.listBox.TabIndex = 2;
+            this.listBox.Size = new System.Drawing.Size(310, 415);
+            this.listBox.TabIndex = 9;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
+            // 
+            // comboBox
+            // 
+            this.comboBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox.FormattingEnabled = true;
+            this.comboBox.Items.AddRange(new object[] {
+            "On start (unvirtualized)",
+            "On start (virtualized)",
+            "On stop (virtualized)",
+            "On stop (unvirtualized)"});
+            this.comboBox.Location = new System.Drawing.Point(0, 0);
+            this.comboBox.Name = "comboBox";
+            this.comboBox.Size = new System.Drawing.Size(310, 21);
+            this.comboBox.TabIndex = 9;
+            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.boxWait);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.txtCmd);
@@ -93,14 +134,23 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(310, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(359, 184);
+            this.panel3.Size = new System.Drawing.Size(359, 436);
             this.panel3.TabIndex = 1;
+            // 
+            // boxWait
+            // 
+            this.boxWait.AutoSize = true;
+            this.boxWait.Location = new System.Drawing.Point(45, 91);
+            this.boxWait.Name = "boxWait";
+            this.boxWait.Size = new System.Drawing.Size(137, 17);
+            this.boxWait.TabIndex = 3;
+            this.boxWait.Text = "Wait until program ends";
+            this.boxWait.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.btnAddSave);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(36, 153);
+            this.panel4.Location = new System.Drawing.Point(36, 114);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(323, 31);
             this.panel4.TabIndex = 36;
@@ -110,7 +160,7 @@
             this.btnAddSave.Location = new System.Drawing.Point(234, 4);
             this.btnAddSave.Name = "btnAddSave";
             this.btnAddSave.Size = new System.Drawing.Size(75, 23);
-            this.btnAddSave.TabIndex = 36;
+            this.btnAddSave.TabIndex = 4;
             this.btnAddSave.Text = "&Add";
             this.btnAddSave.UseVisualStyleBackColor = true;
             this.btnAddSave.Click += new System.EventHandler(this.btnAddSave_Click);
@@ -129,7 +179,7 @@
             this.txtCmd.Location = new System.Drawing.Point(45, 26);
             this.txtCmd.Name = "txtCmd";
             this.txtCmd.Size = new System.Drawing.Size(273, 20);
-            this.txtCmd.TabIndex = 33;
+            this.txtCmd.TabIndex = 0;
             // 
             // label4
             // 
@@ -145,7 +195,7 @@
             this.txtArgs.Location = new System.Drawing.Point(45, 65);
             this.txtArgs.Name = "txtArgs";
             this.txtArgs.Size = new System.Drawing.Size(301, 20);
-            this.txtArgs.TabIndex = 31;
+            this.txtArgs.TabIndex = 2;
             // 
             // btnBrowse
             // 
@@ -153,7 +203,7 @@
             this.btnBrowse.Location = new System.Drawing.Point(321, 23);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(25, 25);
-            this.btnBrowse.TabIndex = 30;
+            this.btnBrowse.TabIndex = 1;
             this.btnBrowse.UseVisualStyleBackColor = true;
             // 
             // panel5
@@ -164,7 +214,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(36, 184);
+            this.panel5.Size = new System.Drawing.Size(36, 436);
             this.panel5.TabIndex = 0;
             // 
             // btnDown
@@ -173,7 +223,7 @@
             this.btnDown.Location = new System.Drawing.Point(0, 58);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(33, 32);
-            this.btnDown.TabIndex = 2;
+            this.btnDown.TabIndex = 7;
             this.btnDown.UseVisualStyleBackColor = true;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
@@ -183,7 +233,7 @@
             this.btnUp.Location = new System.Drawing.Point(0, 30);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(33, 32);
-            this.btnUp.TabIndex = 1;
+            this.btnUp.TabIndex = 6;
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
@@ -193,41 +243,49 @@
             this.btnErase.Location = new System.Drawing.Point(0, 0);
             this.btnErase.Name = "btnErase";
             this.btnErase.Size = new System.Drawing.Size(33, 32);
-            this.btnErase.TabIndex = 0;
+            this.btnErase.TabIndex = 5;
             this.btnErase.UseVisualStyleBackColor = true;
             this.btnErase.Click += new System.EventHandler(this.btnErase_Click);
             // 
-            // comboBox
+            // panel7
             // 
-            this.comboBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox.FormattingEnabled = true;
-            this.comboBox.Items.AddRange(new object[] {
-            "On startup (unvirtualized)",
-            "On startup (virtualized)",
-            "On exit (virtualized)",
-            "On exit (unvirtualized)"});
-            this.comboBox.Location = new System.Drawing.Point(0, 0);
-            this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(669, 21);
-            this.comboBox.TabIndex = 3;
+            this.panel7.Controls.Add(this.btnSave);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel7.Location = new System.Drawing.Point(0, 383);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(669, 53);
+            this.panel7.TabIndex = 42;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(580, 18);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 8;
+            this.btnSave.Text = "&Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // CustomEventsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 205);
+            this.ClientSize = new System.Drawing.Size(669, 436);
+            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel1);
             this.Name = "CustomEventsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CustomEventsForm";
+            this.Text = "Custom events";
             this.Load += new System.EventHandler(this.CustomEventsForm_Load);
-            this.panel1.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -235,10 +293,15 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox comboBox;
+        private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ListBox listBox;
+        private System.Windows.Forms.ComboBox comboBox;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.CheckBox boxWait;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btnAddSave;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCmd;
         private System.Windows.Forms.Label label4;
@@ -248,7 +311,7 @@
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnErase;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button btnAddSave;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Button btnSave;
     }
 }

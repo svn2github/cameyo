@@ -56,10 +56,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AppLimit.CloudComputing.oAuth">
-      <HintPath>..\SharpBox\fx35\AppLimit.CloudComputing.oAuth.dll</HintPath>
+      <HintPath>SharpBox\fx35\AppLimit.CloudComputing.oAuth.dll</HintPath>
     </Reference>
     <Reference Include="AppLimit.CloudComputing.SharpBox">
-      <HintPath>..\SharpBox\fx35\AppLimit.CloudComputing.SharpBox.dll</HintPath>
+      <HintPath>SharpBox\fx35\AppLimit.CloudComputing.SharpBox.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

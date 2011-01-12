@@ -13,27 +13,60 @@ namespace PackageEditor
     public partial class CustomEventsForm : Form
     {
         private VirtPackage virtPackage;
-        List<CustomEvent> onStartupUnvirtualized;
-        List<CustomEvent> onStartupVirtualized;
-        List<CustomEvent> onExitVirtualized;
-        List<CustomEvent> onExitUnvirtualized;
+        List<CustomEvent> onStartUnvirtualized;
+        List<CustomEvent> onStartVirtualized;
+        List<CustomEvent> onStopVirtualized;
+        List<CustomEvent> onStopUnvirtualized;
         List<CustomEvent> curCustomEvents;
+        public String oldPropertiesChecksum;
+        public bool dirty;
 
         public CustomEventsForm(VirtPackage virtPackage)
         {
             this.virtPackage = virtPackage;
-            onStartupUnvirtualized = new List<CustomEvent>();
-            onStartupVirtualized = new List<CustomEvent>();
-            onExitVirtualized = new List<CustomEvent>();
-            onExitUnvirtualized = new List<CustomEvent>();
+            onStartUnvirtualized = new List<CustomEvent>();
+            onStartVirtualized = new List<CustomEvent>();
+            onStopVirtualized = new List<CustomEvent>();
+            onStopUnvirtualized = new List<CustomEvent>();
             InitializeComponent();
         }
 
         private void CustomEventsForm_Load(object sender, EventArgs e)
         {
-            curCustomEvents = onStartupUnvirtualized;
+            dirty = false;
+            oldPropertiesChecksum = GetPropertiesChecksum();
+            PropertyToCustomEvents("OnStartUnVirtualized", onStartUnvirtualized);
+            PropertyToCustomEvents("OnStartVirtualized", onStartVirtualized);
+            PropertyToCustomEvents("OnStopVirtualized", onStopVirtualized);
+            PropertyToCustomEvents("OnStopUnvirtualized", onStopUnvirtualized);
+            curCustomEvents = onStartUnvirtualized;
             comboBox.SelectedIndex = 0;
             RefreshDisplay();
+        }
+
+        private String GetPropertiesChecksum()
+        {
+            String checksum = "";
+            String value;
+            value = ""; virtPackage.GetProperty("OnStartUnvirtualized", ref value);
+            checksum += value + ";";
+            value = ""; virtPackage.GetProperty("OnStartVirtualized", ref value);
+            checksum += value + ";";
+            value = ""; virtPackage.GetProperty("OnStopVirtualized", ref value);
+            checksum += value + ";";
+            value = ""; virtPackage.GetProperty("OnStopUnvirtualized", ref value);
+            checksum += value + ";";
+            return (checksum);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            CustomEventsToProperty(onStartUnvirtualized, "OnStartUnvirtualized");
+            CustomEventsToProperty(onStartVirtualized, "OnStartVirtualized");
+            CustomEventsToProperty(onStopVirtualized, "OnStopVirtualized");
+            CustomEventsToProperty(onStopUnvirtualized, "OnStopUnvirtualized");
+            dirty = (GetPropertiesChecksum() != oldPropertiesChecksum);
+            DialogResult = DialogResult.OK;
         }
 
         private void RefreshDisplay()
@@ -60,7 +93,8 @@ namespace PackageEditor
             int selectedIndex = listBox.SelectedIndex;
             if (listBox.SelectedIndex == -1)
             {
-                CustomEvent customEvent = new CustomEvent(txtCmd.Text, txtArgs.Text);
+                CustomEvent customEvent = new CustomEvent(
+                    txtCmd.Text, txtArgs.Text, boxWait.Checked);
                 curCustomEvents.Add(customEvent);
             }
             else
@@ -68,18 +102,27 @@ namespace PackageEditor
                 CustomEvent customEvent = curCustomEvents[listBox.SelectedIndex];
                 customEvent.cmd = txtCmd.Text;
                 customEvent.args = txtArgs.Text;
+                customEvent.execWait = boxWait.Checked;
             }
             RefreshDisplay();
-            listBox.SelectedIndex = selectedIndex;
+            listBox.SelectedIndex = -1;
         }
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox.SelectedIndex == -1)
+            {
+                btnAddSave.Text = "&Add";
+                txtCmd.Text = "";
+                txtArgs.Text = "";
+                boxWait.Checked = false;
                 return;
+            }
+            btnAddSave.Text = "&Apply";
             CustomEvent customEvent = curCustomEvents[listBox.SelectedIndex];
             txtCmd.Text = customEvent.cmd;
             txtArgs.Text = customEvent.args;
+            boxWait.Checked = customEvent.execWait;
         }
 
         private void btnErase_Click(object sender, EventArgs e)
@@ -115,12 +158,87 @@ namespace PackageEditor
             RefreshDisplay();
             listBox.SelectedIndex = selectedIndex + 1;
         }
+
+        private void CustomEventsToProperty(List<CustomEvent> inCustomEvents, String outPropertyName)
+        {
+            String outPropertyValue = "";
+            for (int i = 0; i < inCustomEvents.Count(); i++)
+            {
+                if (outPropertyValue != "")
+                    outPropertyValue += ";";
+                outPropertyValue += inCustomEvents[i].cmd;
+                outPropertyValue += ">" + inCustomEvents[i].args;
+                if (inCustomEvents[i].execWait)
+                    outPropertyValue += ">wait";
+            }
+
+            virtPackage.SetProperty(outPropertyName, outPropertyValue);
+        }
+
+        private void PropertyToCustomEvents(String inPropertyName, List<CustomEvent> outCustomEvents)
+        {
+            String inPropertyValue = "";
+            virtPackage.GetProperty(inPropertyName, ref inPropertyValue);
+
+            String[] values = inPropertyValue.Split(';');
+            foreach (String value in values)
+            {
+                if (value == "") continue;
+                CustomEvent newCustomEvent;
+                newCustomEvent = new CustomEvent("", "", false);
+                String[] eventElements = value.Split('>');
+
+                // cmd
+                if (eventElements.Count() > 0)
+                    newCustomEvent.cmd = eventElements[0];
+                // args
+                if (eventElements.Count() > 1)
+                    newCustomEvent.args = eventElements[1];
+                // flags
+                if (eventElements.Count() > 2)
+                {
+                    String[] flags = eventElements[2].Split(',');
+                    foreach (String flag in flags)
+                    {
+                        if (flag.ToLower() == "wait")
+                            newCustomEvent.execWait = true;
+                    }
+                }
+                outCustomEvents.Add(newCustomEvent);
+            }
+        }
+
+        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox.SelectedIndex)
+            {
+                case 0:
+                    curCustomEvents = onStartUnvirtualized;
+                    break;
+                case 1:
+                    curCustomEvents = onStartVirtualized;
+                    break;
+                case 2:
+                    curCustomEvents = onStopVirtualized;
+                    break;
+                case 3:
+                    curCustomEvents = onStopUnvirtualized;
+                    break;
+            }
+            RefreshDisplay();
+        }
     }
 
     public class CustomEvent
     {
-        public CustomEvent(String cmd, String args) { this.cmd = cmd; this.args = args; }
+        public CustomEvent(String cmd, String args, bool execWait)
+        { 
+            this.cmd = cmd;
+            this.args = args;
+            this.execWait = execWait;
+        }
         public String cmd;
         public String args;
+        public bool execWait;
     }
 }
