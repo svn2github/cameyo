@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.dropboxLabel = new System.Windows.Forms.Label();
@@ -111,7 +111,10 @@
             this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
             this.regEditBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
+            this.propertyStopInheritance = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,9 +126,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
             this.itemHoverTimer = new System.Windows.Forms.Timer(this.components);
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.propertyStopInheritance = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -156,8 +157,8 @@
             this.panel7.SuspendLayout();
             this.regToolStrip.SuspendLayout();
             this.tabAdvanced.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -659,8 +660,8 @@
             this.columnHeader2});
             this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
             this.fsFilesList.Size = new System.Drawing.Size(508, 399);
@@ -868,8 +869,8 @@
             this.columnHeader4});
             this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
             this.regFilesList.Size = new System.Drawing.Size(508, 403);
@@ -996,6 +997,29 @@
             this.tabAdvanced.Text = "Advanced";
             this.tabAdvanced.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Controls.Add(this.label7);
+            this.groupBox5.Controls.Add(this.lnkCustomEvents);
+            this.groupBox5.Controls.Add(this.propertyStopInheritance);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox5.Location = new System.Drawing.Point(3, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(713, 76);
+            this.groupBox5.TabIndex = 7;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Advanced";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 34);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(208, 13);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Exclude child processes from virtualization:";
+            // 
             // lnkCustomEvents
             // 
             this.lnkCustomEvents.AutoSize = true;
@@ -1006,6 +1030,13 @@
             this.lnkCustomEvents.TabStop = true;
             this.lnkCustomEvents.Text = "Custom events";
             this.lnkCustomEvents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomEvents_LinkClicked);
+            // 
+            // propertyStopInheritance
+            // 
+            this.propertyStopInheritance.Location = new System.Drawing.Point(275, 31);
+            this.propertyStopInheritance.Name = "propertyStopInheritance";
+            this.propertyStopInheritance.Size = new System.Drawing.Size(432, 20);
+            this.propertyStopInheritance.TabIndex = 6;
             // 
             // imageList1
             // 
@@ -1087,34 +1118,14 @@
             // 
             this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
             // 
-            // groupBox5
+            // label8
             // 
-            this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Controls.Add(this.lnkCustomEvents);
-            this.groupBox5.Controls.Add(this.propertyStopInheritance);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(3, 3);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(713, 59);
-            this.groupBox5.TabIndex = 7;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Extras";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 34);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(208, 13);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "Exclude child processes from virtualization:";
-            // 
-            // propertyStopInheritance
-            // 
-            this.propertyStopInheritance.Location = new System.Drawing.Point(275, 31);
-            this.propertyStopInheritance.Name = "propertyStopInheritance";
-            this.propertyStopInheritance.Size = new System.Drawing.Size(432, 20);
-            this.propertyStopInheritance.TabIndex = 6;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(272, 54);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(172, 13);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "example: \"iexplore.exe;myapp.exe\"";
             // 
             // MainForm
             // 
@@ -1175,10 +1186,10 @@
             this.regToolStrip.ResumeLayout(false);
             this.regToolStrip.PerformLayout();
             this.tabAdvanced.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1278,6 +1289,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox propertyStopInheritance;
+        private System.Windows.Forms.Label label8;
 
     }
 }

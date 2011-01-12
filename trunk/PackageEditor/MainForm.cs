@@ -273,6 +273,7 @@ namespace PackageEditor
             // StopInheritance
             propertyStopInheritance.Text = virtPackage.GetProperty("StopInheritance");
 
+            this.Text = "Package Editor" + " - " + virtPackage.openedFile;
             dirty = false;
         }
 
@@ -323,6 +324,7 @@ namespace PackageEditor
             propertyAutoLaunch.Text = "";
             propertyIcon.Image = null;
             propertyStopInheritance.Text = "";
+            this.Text = "Package Editor";
         }
 
         private bool DeleteFile(String FileName)
@@ -504,9 +506,9 @@ namespace PackageEditor
                 return;
             }
             if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
-                     + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
+                     + System.IO.Path.GetExtension(files[0]) != ".exe")
             {
-                MessageBox.Show("You can only open files with .virtual.exe extension");
+                MessageBox.Show("You can only open files with .exe extension");
                 return;
             }
             // open in a new thread to avoid blocking of explorer in case of big files
