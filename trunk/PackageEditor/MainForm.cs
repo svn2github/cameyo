@@ -273,6 +273,10 @@ namespace PackageEditor
             // StopInheritance
             propertyStopInheritance.Text = virtPackage.GetProperty("StopInheritance");
 
+            // CleanupOnExit
+            propertyCleanupOnExit.Checked = virtPackage.GetProperty("OnStopUnvirtualized").
+                Contains("%MyExe% -Remove");
+
             this.Text = "Package Editor" + " - " + virtPackage.openedFile;
             dirty = false;
         }
@@ -290,6 +294,18 @@ namespace PackageEditor
             Ret &= virtPackage.SetProperty("AppID", propertyAppID.Text);
             Ret &= virtPackage.SetProperty("FriendlyName", propertyFriendlyName.Text);
             Ret &= virtPackage.SetProperty("StopInheritance", propertyStopInheritance.Text);
+            if (propertyCleanupOnExit.Checked)
+            {
+                String str = virtPackage.GetProperty("OnStopUnvirtualized");
+                if (!str.Contains("%MyExe% -Remove"))
+                {
+                    if (str != "")
+                        str += ";";
+                    str += "%MyExe% -Remove";
+                    Ret &= virtPackage.SetProperty("OnStopUnvirtualized", str);
+                }
+            }
+
 
             // AutoLaunch (and SaveAutoLaunchCmd + SaveAutoLaunchMenu) already set by AutoLaunchForm
 
@@ -324,6 +340,7 @@ namespace PackageEditor
             propertyAutoLaunch.Text = "";
             propertyIcon.Image = null;
             propertyStopInheritance.Text = "";
+            propertyCleanupOnExit.Checked = false;
             this.Text = "Package Editor";
         }
 
@@ -505,8 +522,9 @@ namespace PackageEditor
                 MessageBox.Show("You can drop only one file");
                 return;
             }
-            if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
-                     + System.IO.Path.GetExtension(files[0]) != ".exe")
+            //if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
+            //         + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
+            if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0])) != ".exe")
             {
                 MessageBox.Show("You can only open files with .exe extension");
                 return;

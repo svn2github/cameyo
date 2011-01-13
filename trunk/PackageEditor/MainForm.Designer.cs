@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.dropboxLabel = new System.Windows.Forms.Label();
@@ -112,6 +112,8 @@
             this.regEditBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.propertyCleanupOnExit = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
             this.propertyStopInheritance = new System.Windows.Forms.TextBox();
@@ -126,7 +128,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
             this.itemHoverTimer = new System.Windows.Forms.Timer(this.components);
-            this.label8 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -660,8 +661,8 @@
             this.columnHeader2});
             this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem5,
+            listViewItem6});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
             this.fsFilesList.Size = new System.Drawing.Size(508, 399);
@@ -869,8 +870,8 @@
             this.columnHeader4});
             this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem7,
+            listViewItem8});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
             this.regFilesList.Size = new System.Drawing.Size(508, 403);
@@ -999,6 +1000,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.propertyCleanupOnExit);
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Controls.Add(this.label7);
             this.groupBox5.Controls.Add(this.lnkCustomEvents);
@@ -1006,10 +1008,29 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox5.Location = new System.Drawing.Point(3, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(713, 76);
+            this.groupBox5.Size = new System.Drawing.Size(713, 89);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Advanced";
+            // 
+            // propertyCleanupOnExit
+            // 
+            this.propertyCleanupOnExit.AutoSize = true;
+            this.propertyCleanupOnExit.Location = new System.Drawing.Point(10, 64);
+            this.propertyCleanupOnExit.Name = "propertyCleanupOnExit";
+            this.propertyCleanupOnExit.Size = new System.Drawing.Size(153, 17);
+            this.propertyCleanupOnExit.TabIndex = 26;
+            this.propertyCleanupOnExit.Text = "Remove program upon exit";
+            this.propertyCleanupOnExit.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(272, 54);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(172, 13);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "example: \"iexplore.exe;myapp.exe\"";
             // 
             // label7
             // 
@@ -1117,15 +1138,6 @@
             // itemHoverTimer
             // 
             this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(272, 54);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(172, 13);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "example: \"iexplore.exe;myapp.exe\"";
             // 
             // MainForm
             // 
@@ -1290,6 +1302,7 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox propertyStopInheritance;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox propertyCleanupOnExit;
 
     }
 }
