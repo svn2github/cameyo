@@ -275,7 +275,7 @@ namespace PackageEditor
 
             // CleanupOnExit
             propertyCleanupOnExit.Checked = virtPackage.GetProperty("OnStopUnvirtualized").
-                Contains("%MyExe% -Remove");
+                Contains("%MyExe%>-Quiet -Remove");
 
             this.Text = "Package Editor" + " - " + virtPackage.openedFile;
             dirty = false;
@@ -297,11 +297,11 @@ namespace PackageEditor
             if (propertyCleanupOnExit.Checked)
             {
                 String str = virtPackage.GetProperty("OnStopUnvirtualized");
-                if (!str.Contains("%MyExe% -Remove"))
+                if (!str.Contains("%MyExe%>-Quiet -Remove"))
                 {
                     if (str != "")
                         str += ";";
-                    str += "%MyExe% -Remove";
+                    str += "%MyExe%>-Quiet -Remove";
                     Ret &= virtPackage.SetProperty("OnStopUnvirtualized", str);
                 }
             }
@@ -524,7 +524,7 @@ namespace PackageEditor
             }
             //if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
             //         + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
-            if (System.IO.Path.GetExtension(files[0]) != ".exe")
+            if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
             {
                 MessageBox.Show("You can only open files with .exe extension");
                 return;
