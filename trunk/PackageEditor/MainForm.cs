@@ -524,7 +524,7 @@ namespace PackageEditor
             }
             //if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
             //         + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
-            if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0])) != ".exe")
+            if (System.IO.Path.GetExtension(files[0]) != ".exe")
             {
                 MessageBox.Show("You can only open files with .exe extension");
                 return;
