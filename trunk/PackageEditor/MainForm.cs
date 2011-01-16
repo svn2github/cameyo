@@ -275,7 +275,7 @@ namespace PackageEditor
 
             // CleanupOnExit
             propertyCleanupOnExit.Checked = virtPackage.GetProperty("OnStopUnvirtualized").
-                Contains("%MyExe%>-Quiet -Remove");
+                Contains("%MyExe%>-Quiet -Confirm -Remove");
 
             this.Text = "Package Editor" + " - " + virtPackage.openedFile;
             dirty = false;
@@ -297,11 +297,11 @@ namespace PackageEditor
             if (propertyCleanupOnExit.Checked)
             {
                 String str = virtPackage.GetProperty("OnStopUnvirtualized");
-                if (!str.Contains("%MyExe%>-Quiet -Remove"))
+                if (!str.Contains("%MyExe%>-Quiet -Confirm -Remove"))
                 {
                     if (str != "")
                         str += ";";
-                    str += "%MyExe%>-Quiet -Remove";
+                    str += "%MyExe%>-Quiet -Confirm -Remove";
                     Ret &= virtPackage.SetProperty("OnStopUnvirtualized", str);
                 }
             }
