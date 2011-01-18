@@ -102,6 +102,34 @@ namespace PackageEditor.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap PackedgeEditorBG {
+            get {
+                object obj = ResourceManager.GetObject("PackedgeEditorBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap PackedgeEditorBG_BottomClient {
+            get {
+                object obj = ResourceManager.GetObject("PackedgeEditorBG_BottomClient", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap PackedgeEditorBG_BottomRight {
+            get {
+                object obj = ResourceManager.GetObject("PackedgeEditorBG_BottomRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap PackedgeEditorBG_Client {
+            get {
+                object obj = ResourceManager.GetObject("PackedgeEditorBG_Client", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap up {
             get {
                 object obj = ResourceManager.GetObject("up", resourceCulture);

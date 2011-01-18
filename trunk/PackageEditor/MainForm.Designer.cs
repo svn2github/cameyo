@@ -30,10 +30,22 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
+            this.itemHoverTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.dropboxLabel = new System.Windows.Forms.Label();
@@ -75,7 +87,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.fsFolderTree = new System.Windows.Forms.TreeView();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.fsFilesList = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -117,17 +128,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
             this.propertyStopInheritance = new System.Windows.Forms.TextBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
-            this.itemHoverTimer = new System.Windows.Forms.Timer(this.components);
+            this.miniToolStrip = new System.Windows.Forms.ToolStrip();
+            this.cameyoBkgrnd1 = new PackageEditor.CameyoBkgrnd();
+            this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -159,8 +162,98 @@
             this.regToolStrip.SuspendLayout();
             this.tabAdvanced.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // imageList
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Red;
+            this.imageList.Images.SetKeyName(0, "folder_closed_16.ico");
+            this.imageList.Images.SetKeyName(1, "folder_closed_16_WriteCopy.ico");
+            this.imageList.Images.SetKeyName(2, "open_document_16.ico");
+            this.imageList.Images.SetKeyName(3, "new_document_16.ico");
+            this.imageList.Images.SetKeyName(4, "add.png");
+            this.imageList.Images.SetKeyName(5, "remove.png");
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "spanner_48.png");
+            this.imageList1.Images.SetKeyName(1, "folder_48.png");
+            this.imageList1.Images.SetKeyName(2, "database_48.png");
+            this.imageList1.Images.SetKeyName(3, "box_download_48.png");
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveasToolStripMenuItem,
+            this.closeToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveasToolStripMenuItem
+            // 
+            this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveasToolStripMenuItem.Text = "Save &as";
+            this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.closeToolStripMenuItem.Text = "&Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // regProgressTimer
+            // 
+            this.regProgressTimer.Tick += new System.EventHandler(this.regProgressTimer_Tick);
+            // 
+            // itemHoverTimer
+            // 
+            this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
             // 
             // tabControl
             // 
@@ -171,10 +264,10 @@
             this.tabControl.Controls.Add(this.tabFileSystem);
             this.tabControl.Controls.Add(this.tabRegistry);
             this.tabControl.Controls.Add(this.tabAdvanced);
-            this.tabControl.Location = new System.Drawing.Point(12, 25);
+            this.tabControl.Location = new System.Drawing.Point(12, 37);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(727, 481);
+            this.tabControl.Size = new System.Drawing.Size(727, 412);
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -190,7 +283,7 @@
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(719, 455);
+            this.tabGeneral.Size = new System.Drawing.Size(719, 386);
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -212,8 +305,8 @@
             this.groupBox4.Controls.Add(this.linkLabel3);
             this.groupBox4.Controls.Add(this.pictureBox4);
             this.groupBox4.Controls.Add(this.pictureBox3);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox4.Location = new System.Drawing.Point(3, 285);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(3, 336);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(713, 75);
             this.groupBox4.TabIndex = 3;
@@ -304,8 +397,8 @@
             this.managementGroup.Controls.Add(this.linkLabel2);
             this.managementGroup.Controls.Add(this.linkLabel7);
             this.managementGroup.Controls.Add(this.linkLabel6);
-            this.managementGroup.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.managementGroup.Location = new System.Drawing.Point(3, 360);
+            this.managementGroup.Dock = System.Windows.Forms.DockStyle.Top;
+            this.managementGroup.Location = new System.Drawing.Point(3, 244);
             this.managementGroup.Name = "managementGroup";
             this.managementGroup.Size = new System.Drawing.Size(713, 92);
             this.managementGroup.TabIndex = 1;
@@ -593,7 +686,7 @@
             this.tabFileSystem.Location = new System.Drawing.Point(4, 22);
             this.tabFileSystem.Name = "tabFileSystem";
             this.tabFileSystem.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFileSystem.Size = new System.Drawing.Size(719, 455);
+            this.tabFileSystem.Size = new System.Drawing.Size(719, 429);
             this.tabFileSystem.TabIndex = 1;
             this.tabFileSystem.Text = "Files";
             this.tabFileSystem.UseVisualStyleBackColor = true;
@@ -604,7 +697,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(3, 28);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(713, 424);
+            this.panel5.Size = new System.Drawing.Size(713, 398);
             this.panel5.TabIndex = 7;
             // 
             // splitContainer1
@@ -621,7 +714,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fsFilesList);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(713, 424);
+            this.splitContainer1.Size = new System.Drawing.Size(713, 398);
             this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -634,24 +727,13 @@
             this.fsFolderTree.Location = new System.Drawing.Point(0, 0);
             this.fsFolderTree.Name = "fsFolderTree";
             this.fsFolderTree.SelectedImageIndex = 0;
-            this.fsFolderTree.Size = new System.Drawing.Size(201, 424);
+            this.fsFolderTree.Size = new System.Drawing.Size(201, 398);
             this.fsFolderTree.TabIndex = 3;
             this.fsFolderTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.fsFolderTree_BeforeSelect);
             this.fsFolderTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fsFolderTree_AfterSelect);
             this.fsFolderTree.DragDrop += new System.Windows.Forms.DragEventHandler(this.Vfs_DragDrop);
             this.fsFolderTree.DragEnter += new System.Windows.Forms.DragEventHandler(this.Vfs_DragEnter);
             this.fsFolderTree.DragOver += new System.Windows.Forms.DragEventHandler(this.fsFolderTree_DragOver);
-            // 
-            // imageList
-            // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.Red;
-            this.imageList.Images.SetKeyName(0, "folder_closed_16.ico");
-            this.imageList.Images.SetKeyName(1, "folder_closed_16_WriteCopy.ico");
-            this.imageList.Images.SetKeyName(2, "open_document_16.ico");
-            this.imageList.Images.SetKeyName(3, "new_document_16.ico");
-            this.imageList.Images.SetKeyName(4, "add.png");
-            this.imageList.Images.SetKeyName(5, "remove.png");
             // 
             // fsFilesList
             // 
@@ -661,11 +743,11 @@
             this.columnHeader2});
             this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
-            this.fsFilesList.Size = new System.Drawing.Size(508, 399);
+            this.fsFilesList.Size = new System.Drawing.Size(508, 373);
             this.fsFilesList.TabIndex = 7;
             this.fsFilesList.UseCompatibleStateImageBehavior = false;
             this.fsFilesList.View = System.Windows.Forms.View.Details;
@@ -810,7 +892,7 @@
             this.tabRegistry.Location = new System.Drawing.Point(4, 22);
             this.tabRegistry.Name = "tabRegistry";
             this.tabRegistry.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegistry.Size = new System.Drawing.Size(719, 455);
+            this.tabRegistry.Size = new System.Drawing.Size(719, 429);
             this.tabRegistry.TabIndex = 2;
             this.tabRegistry.Text = "Registry";
             this.tabRegistry.UseVisualStyleBackColor = true;
@@ -822,7 +904,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(3, 3);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(713, 449);
+            this.panel8.Size = new System.Drawing.Size(713, 423);
             this.panel8.TabIndex = 10;
             // 
             // panel1
@@ -831,7 +913,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 428);
+            this.panel1.Size = new System.Drawing.Size(713, 402);
             this.panel1.TabIndex = 11;
             // 
             // regSplitContainer
@@ -848,7 +930,7 @@
             // 
             this.regSplitContainer.Panel2.Controls.Add(this.regFilesList);
             this.regSplitContainer.Panel2.Controls.Add(this.panel4);
-            this.regSplitContainer.Size = new System.Drawing.Size(713, 428);
+            this.regSplitContainer.Size = new System.Drawing.Size(713, 402);
             this.regSplitContainer.SplitterDistance = 201;
             this.regSplitContainer.TabIndex = 5;
             // 
@@ -860,7 +942,7 @@
             this.regFolderTree.Location = new System.Drawing.Point(0, 0);
             this.regFolderTree.Name = "regFolderTree";
             this.regFolderTree.SelectedImageIndex = 0;
-            this.regFolderTree.Size = new System.Drawing.Size(201, 428);
+            this.regFolderTree.Size = new System.Drawing.Size(201, 402);
             this.regFolderTree.TabIndex = 3;
             // 
             // regFilesList
@@ -870,11 +952,11 @@
             this.columnHeader4});
             this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(508, 403);
+            this.regFilesList.Size = new System.Drawing.Size(508, 377);
             this.regFilesList.TabIndex = 7;
             this.regFilesList.UseCompatibleStateImageBehavior = false;
             this.regFilesList.View = System.Windows.Forms.View.Details;
@@ -993,7 +1075,7 @@
             this.tabAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tabAdvanced.Name = "tabAdvanced";
             this.tabAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdvanced.Size = new System.Drawing.Size(719, 455);
+            this.tabAdvanced.Size = new System.Drawing.Size(719, 429);
             this.tabAdvanced.TabIndex = 3;
             this.tabAdvanced.Text = "Advanced";
             this.tabAdvanced.UseVisualStyleBackColor = true;
@@ -1016,7 +1098,7 @@
             // propertyCleanupOnExit
             // 
             this.propertyCleanupOnExit.AutoSize = true;
-            this.propertyCleanupOnExit.Location = new System.Drawing.Point(10, 64);
+            this.propertyCleanupOnExit.Location = new System.Drawing.Point(10, 32);
             this.propertyCleanupOnExit.Name = "propertyCleanupOnExit";
             this.propertyCleanupOnExit.Size = new System.Drawing.Size(153, 17);
             this.propertyCleanupOnExit.TabIndex = 26;
@@ -1025,8 +1107,9 @@
             // 
             // label8
             // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(272, 54);
+            this.label8.Location = new System.Drawing.Point(535, 71);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(172, 13);
             this.label8.TabIndex = 25;
@@ -1035,7 +1118,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 34);
+            this.label7.Location = new System.Drawing.Point(7, 51);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(208, 13);
             this.label7.TabIndex = 24;
@@ -1054,99 +1137,42 @@
             // 
             // propertyStopInheritance
             // 
-            this.propertyStopInheritance.Location = new System.Drawing.Point(275, 31);
+            this.propertyStopInheritance.Location = new System.Drawing.Point(272, 48);
             this.propertyStopInheritance.Name = "propertyStopInheritance";
-            this.propertyStopInheritance.Size = new System.Drawing.Size(432, 20);
+            this.propertyStopInheritance.Size = new System.Drawing.Size(435, 20);
             this.propertyStopInheritance.TabIndex = 6;
             // 
-            // imageList1
+            // miniToolStrip
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "spanner_48.png");
-            this.imageList1.Images.SetKeyName(1, "folder_48.png");
-            this.imageList1.Images.SetKeyName(2, "database_48.png");
-            this.imageList1.Images.SetKeyName(3, "box_download_48.png");
+            this.miniToolStrip.AutoSize = false;
+            this.miniToolStrip.CanOverflow = false;
+            this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.miniToolStrip.Location = new System.Drawing.Point(136, 3);
+            this.miniToolStrip.Name = "miniToolStrip";
+            this.miniToolStrip.Size = new System.Drawing.Size(713, 25);
+            this.miniToolStrip.TabIndex = 6;
             // 
-            // menuStrip1
+            // cameyoBkgrnd1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.saveasToolStripMenuItem,
-            this.closeToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.openToolStripMenuItem.Text = "&Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.saveToolStripMenuItem.Text = "&Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // saveasToolStripMenuItem
-            // 
-            this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.saveasToolStripMenuItem.Text = "Save &as";
-            this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.closeToolStripMenuItem.Text = "&Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // regProgressTimer
-            // 
-            this.regProgressTimer.Tick += new System.EventHandler(this.regProgressTimer_Tick);
-            // 
-            // itemHoverTimer
-            // 
-            this.itemHoverTimer.Tick += new System.EventHandler(this.OnItemHover);
+            this.cameyoBkgrnd1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cameyoBkgrnd1.Location = new System.Drawing.Point(0, 0);
+            this.cameyoBkgrnd1.Name = "cameyoBkgrnd1";
+            this.cameyoBkgrnd1.Size = new System.Drawing.Size(751, 506);
+            this.cameyoBkgrnd1.TabIndex = 5;
             // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(751, 506);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.cameyoBkgrnd1);
+            this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.ShowIcon = false;
@@ -1155,6 +1181,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
             this.tabGeneral.PerformLayout();
@@ -1200,8 +1228,6 @@
             this.tabAdvanced.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1209,14 +1235,56 @@
 
         #endregion
 
+        private System.Windows.Forms.ImageList imageList;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Timer regProgressTimer;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Timer itemHoverTimer;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabGeneral;
-        private System.Windows.Forms.TabPage tabFileSystem;
-        private System.Windows.Forms.TabPage tabRegistry;
+        private System.Windows.Forms.Label dropboxLabel;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.LinkLabel linkLabel4;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.LinkLabel resetCredLink;
+        private System.Windows.Forms.GroupBox managementGroup;
+        private System.Windows.Forms.LinkLabel linkLabel5;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabel7;
+        private System.Windows.Forms.LinkLabel linkLabel6;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox propertyFriendlyName;
+        private System.Windows.Forms.TextBox propertyAppID;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lblAutoLaunch;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.LinkLabel lnkAutoLaunch;
+        private System.Windows.Forms.Label propertyAutoLaunch;
+        private System.Windows.Forms.LinkLabel lnkChangeIcon;
+        private System.Windows.Forms.LinkLabel lnkChangeDataStorage;
+        private System.Windows.Forms.Label propertyDataStorage;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton propertyIsolationDataMode;
+        private System.Windows.Forms.RadioButton propertyIsolationIsolated;
+        private System.Windows.Forms.RadioButton propertyIsolationMerge;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox propertyIcon;
-        private System.Windows.Forms.ImageList imageList;
+        private System.Windows.Forms.Label lblAutoLaunch;
+        private System.Windows.Forms.Button dropboxButton;
+        private System.Windows.Forms.TabPage tabFileSystem;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView fsFolderTree;
@@ -1229,36 +1297,14 @@
         private System.Windows.Forms.Label fsFolderInfoIsolationLbl;
         private System.Windows.Forms.Label fsFolderInfoFullName;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton fsRemoveBtn;
         private System.Windows.Forms.ToolStripButton fsAddBtn;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Timer regProgressTimer;
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton propertyIsolationIsolated;
-        private System.Windows.Forms.RadioButton propertyIsolationMerge;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label propertyDataStorage;
-        private System.Windows.Forms.LinkLabel lnkChangeDataStorage;
-        private System.Windows.Forms.LinkLabel lnkChangeIcon;
-        private System.Windows.Forms.LinkLabel lnkAutoLaunch;
-        private System.Windows.Forms.Label propertyAutoLaunch;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox propertyFriendlyName;
-        private System.Windows.Forms.TextBox propertyAppID;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripButton fsAddDirBtn;
+        private System.Windows.Forms.ToolStripButton fsRemoveBtn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton fsAddEmptyDirBtn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton fsSaveFileAsBtn;
+        private System.Windows.Forms.TabPage tabRegistry;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.SplitContainer regSplitContainer;
@@ -1272,37 +1318,19 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label regFolderInfoFullName;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.ProgressBar regProgressBar;
         private System.Windows.Forms.ToolStrip regToolStrip;
         private System.Windows.Forms.ToolStripButton regRemoveBtn;
         private System.Windows.Forms.ToolStripButton regEditBtn;
-        private System.Windows.Forms.ProgressBar regProgressBar;
-        private System.Windows.Forms.ToolStripButton fsAddDirBtn;
-        private System.Windows.Forms.Timer itemHoverTimer;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.Label dropboxLabel;
-        private System.Windows.Forms.Button dropboxButton;
-        private System.Windows.Forms.LinkLabel resetCredLink;
-        private System.Windows.Forms.RadioButton propertyIsolationDataMode;
-        private System.Windows.Forms.GroupBox managementGroup;
-        private System.Windows.Forms.LinkLabel linkLabel7;
-        private System.Windows.Forms.LinkLabel linkLabel6;
-        private System.Windows.Forms.LinkLabel linkLabel5;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.LinkLabel linkLabel4;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.TabPage tabAdvanced;
-        private System.Windows.Forms.LinkLabel lnkCustomEvents;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox propertyStopInheritance;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox propertyCleanupOnExit;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.LinkLabel lnkCustomEvents;
+        private System.Windows.Forms.TextBox propertyStopInheritance;
+        private System.Windows.Forms.ToolStrip miniToolStrip;
+        private CameyoBkgrnd cameyoBkgrnd1;
 
     }
 }

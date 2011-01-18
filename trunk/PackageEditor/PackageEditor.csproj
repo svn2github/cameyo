@@ -91,6 +91,12 @@
     <Compile Include="AutoLaunchForm.Designer.cs">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CameyoBkgrnd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CameyoBkgrnd.Designer.cs">
+      <DependentUpon>CameyoBkgrnd.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomEventsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchForm.resx">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CameyoBkgrnd.resx">
+      <DependentUpon>CameyoBkgrnd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomEventsForm.resx">
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
@@ -196,6 +205,10 @@
   <ItemGroup>
     <Content Include="Package.ico" />
     <Content Include="PkgEdit.ico" />
+    <None Include="Resources\PackedgeEditorBG_BottomClient.png" />
+    <None Include="Resources\PackedgeEditorBG_BottomRight.png" />
+    <None Include="Resources\PackedgeEditorBG_Client.png" />
+    <None Include="Resources\PackedgeEditorBG.png" />
     <None Include="Resources\down.png" />
     <None Include="Resources\up.png" />
     <None Include="Resources\delete_16_h.png" />
