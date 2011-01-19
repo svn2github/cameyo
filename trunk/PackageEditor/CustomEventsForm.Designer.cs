@@ -29,17 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cameyoBkgrnd1 = new PackageEditor.CameyoBkgrnd();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.listBox = new System.Windows.Forms.ListBox();
             this.comboBox = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnOk = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCmd = new System.Windows.Forms.TextBox();
@@ -54,33 +49,31 @@
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.btnErase = new System.Windows.Forms.Button();
+            this.bottomPanel = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.bkPanel = new System.Windows.Forms.Panel();
+            this.listBox = new System.Windows.Forms.ListBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.bottomPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.cameyoBkgrnd1);
+            this.panel1.Controls.Add(this.bottomPanel);
+            this.panel1.Controls.Add(this.bkPanel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(580, 442);
+            this.panel1.Size = new System.Drawing.Size(580, 423);
             this.panel1.TabIndex = 0;
-            // 
-            // cameyoBkgrnd1
-            // 
-            this.cameyoBkgrnd1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cameyoBkgrnd1.Location = new System.Drawing.Point(0, 0);
-            this.cameyoBkgrnd1.Name = "cameyoBkgrnd1";
-            this.cameyoBkgrnd1.Size = new System.Drawing.Size(580, 442);
-            this.cameyoBkgrnd1.TabIndex = 0;
             // 
             // panel8
             // 
@@ -88,46 +81,30 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.btnOk);
+            this.panel8.Controls.Add(this.btnCancel);
             this.panel8.Controls.Add(this.panel2);
             this.panel8.Location = new System.Drawing.Point(12, 12);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(556, 374);
+            this.panel8.Size = new System.Drawing.Size(556, 354);
             this.panel8.TabIndex = 7;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.panel6);
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.btnDown);
+            this.panel2.Controls.Add(this.listBox);
             this.panel2.Controls.Add(this.comboBox);
+            this.panel2.Controls.Add(this.btnUp);
+            this.panel2.Controls.Add(this.btnErase);
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(554, 372);
+            this.panel2.Size = new System.Drawing.Size(554, 306);
             this.panel2.TabIndex = 5;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.listBox);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(0, 21);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(195, 351);
-            this.panel6.TabIndex = 5;
-            // 
-            // listBox
-            // 
-            this.listBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.listBox.FormattingEnabled = true;
-            this.listBox.Location = new System.Drawing.Point(0, 0);
-            this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(310, 355);
-            this.listBox.TabIndex = 9;
-            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
             // comboBox
             // 
-            this.comboBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox.FormattingEnabled = true;
             this.comboBox.Items.AddRange(new object[] {
@@ -135,22 +112,21 @@
             "On start (virtualized)",
             "On stop (virtualized)",
             "On stop (unvirtualized)"});
-            this.comboBox.Location = new System.Drawing.Point(0, 0);
+            this.comboBox.Location = new System.Drawing.Point(12, 7);
             this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(195, 21);
+            this.comboBox.Size = new System.Drawing.Size(171, 21);
             this.comboBox.TabIndex = 9;
             this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.panel7);
             this.panel3.Controls.Add(this.groupBox1);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(195, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(359, 372);
+            this.panel3.Size = new System.Drawing.Size(359, 306);
             this.panel3.TabIndex = 1;
             // 
             // label2
@@ -161,44 +137,24 @@
             this.label2.Size = new System.Drawing.Size(2, 337);
             this.label2.TabIndex = 43;
             // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.btnCancel);
-            this.panel7.Controls.Add(this.label3);
-            this.panel7.Controls.Add(this.btnOk);
-            this.panel7.Location = new System.Drawing.Point(0, 338);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(359, 34);
-            this.panel7.TabIndex = 42;
-            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(278, 6);
+            this.btnCancel.Location = new System.Drawing.Point(473, 312);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(75, 35);
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label3
-            // 
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(359, 2);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "label3";
-            // 
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(197, 6);
+            this.btnOk.Location = new System.Drawing.Point(392, 312);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(75, 35);
             this.btnOk.TabIndex = 8;
             this.btnOk.Text = "&OK";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -291,9 +247,6 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.btnDown);
-            this.panel5.Controls.Add(this.btnUp);
-            this.panel5.Controls.Add(this.btnErase);
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(36, 335);
@@ -301,9 +254,8 @@
             // 
             // btnDown
             // 
-            this.btnDown.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnDown.Image = global::PackageEditor.Properties.Resources.down;
-            this.btnDown.Location = new System.Drawing.Point(0, 64);
+            this.btnDown.Location = new System.Drawing.Point(96, 265);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(36, 32);
             this.btnDown.TabIndex = 7;
@@ -312,9 +264,8 @@
             // 
             // btnUp
             // 
-            this.btnUp.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnUp.Image = global::PackageEditor.Properties.Resources.up;
-            this.btnUp.Location = new System.Drawing.Point(0, 32);
+            this.btnUp.Location = new System.Drawing.Point(54, 265);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(36, 32);
             this.btnUp.TabIndex = 6;
@@ -323,14 +274,71 @@
             // 
             // btnErase
             // 
-            this.btnErase.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnErase.Image = global::PackageEditor.Properties.Resources.delete_16_h;
-            this.btnErase.Location = new System.Drawing.Point(0, 0);
+            this.btnErase.Location = new System.Drawing.Point(12, 265);
             this.btnErase.Name = "btnErase";
             this.btnErase.Size = new System.Drawing.Size(36, 32);
             this.btnErase.TabIndex = 5;
             this.btnErase.UseVisualStyleBackColor = true;
             this.btnErase.Click += new System.EventHandler(this.btnErase_Click);
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Controls.Add(this.panel12);
+            this.bottomPanel.Controls.Add(this.panel11);
+            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 376);
+            this.bottomPanel.Name = "bottomPanel";
+            this.bottomPanel.Size = new System.Drawing.Size(580, 47);
+            this.bottomPanel.TabIndex = 22;
+            // 
+            // panel12
+            // 
+            this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(424, 47);
+            this.panel12.TabIndex = 1;
+            // 
+            // panel11
+            // 
+            this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel11.Location = new System.Drawing.Point(424, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(156, 47);
+            this.panel11.TabIndex = 0;
+            // 
+            // bkPanel
+            // 
+            this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
+            this.bkPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bkPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bkPanel.Location = new System.Drawing.Point(0, 0);
+            this.bkPanel.Name = "bkPanel";
+            this.bkPanel.Size = new System.Drawing.Size(580, 423);
+            this.bkPanel.TabIndex = 23;
+            // 
+            // listBox
+            // 
+            this.listBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBox.FormattingEnabled = true;
+            this.listBox.Location = new System.Drawing.Point(12, 34);
+            this.listBox.Name = "listBox";
+            this.listBox.Size = new System.Drawing.Size(171, 225);
+            this.listBox.TabIndex = 9;
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 305);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(556, 1);
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
             // 
             // CustomEventsForm
             // 
@@ -338,7 +346,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(580, 442);
+            this.ClientSize = new System.Drawing.Size(580, 423);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -351,13 +359,12 @@
             this.panel1.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
+            this.bottomPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -367,8 +374,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.ComboBox comboBox;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.CheckBox boxWait;
@@ -383,12 +388,15 @@
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnErase;
-        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private CameyoBkgrnd cameyoBkgrnd1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel bottomPanel;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel bkPanel;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ListBox listBox;
     }
 }

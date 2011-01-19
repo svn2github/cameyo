@@ -28,43 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnOk = new System.Windows.Forms.Button();
+            this.bottomPanel = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.bkPanel = new System.Windows.Forms.Panel();
             this.propertyCmdRadio = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnVirtFilesBrowse = new System.Windows.Forms.Button();
-            this.propertyCmdText = new System.Windows.Forms.ComboBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnModify = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.propertyMenuLV = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.propertyMenuRadio = new System.Windows.Forms.RadioButton();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.propertyMenuLV = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnModify = new System.Windows.Forms.Button();
+            this.propertyCmdText = new System.Windows.Forms.ComboBox();
+            this.btnVirtFilesBrowse = new System.Windows.Forms.Button();
             this.propertyCmdArgs = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.bottomPanel.SuspendLayout();
+            this.bkPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnOk
+            // bottomPanel
             // 
-            this.btnOk.Location = new System.Drawing.Point(32, 6);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 1;
-            this.btnOk.Text = "OK";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            this.bottomPanel.Controls.Add(this.panel12);
+            this.bottomPanel.Controls.Add(this.panel11);
+            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 355);
+            this.bottomPanel.Name = "bottomPanel";
+            this.bottomPanel.Size = new System.Drawing.Size(558, 47);
+            this.bottomPanel.TabIndex = 20;
+            // 
+            // panel12
+            // 
+            this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(402, 47);
+            this.panel12.TabIndex = 1;
+            // 
+            // panel11
+            // 
+            this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel11.Location = new System.Drawing.Point(402, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(156, 47);
+            this.panel11.TabIndex = 0;
+            // 
+            // bkPanel
+            // 
+            this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
+            this.bkPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bkPanel.Controls.Add(this.panel1);
+            this.bkPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bkPanel.Location = new System.Drawing.Point(0, 0);
+            this.bkPanel.Name = "bkPanel";
+            this.bkPanel.Size = new System.Drawing.Size(558, 402);
+            this.bkPanel.TabIndex = 21;
             // 
             // propertyCmdRadio
             // 
@@ -77,84 +106,37 @@
             this.propertyCmdRadio.Text = "Specific command:";
             this.propertyCmdRadio.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // propertyMenuRadio
             // 
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.propertyCmdArgs);
-            this.groupBox1.Controls.Add(this.btnVirtFilesBrowse);
-            this.groupBox1.Controls.Add(this.propertyCmdText);
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.propertyMenuRadio);
-            this.groupBox1.Controls.Add(this.propertyCmdRadio);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(543, 302);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            // 
-            // btnVirtFilesBrowse
-            // 
-            this.btnVirtFilesBrowse.Image = global::PackageEditor.Properties.Resources.folder_closed_16_h;
-            this.btnVirtFilesBrowse.Location = new System.Drawing.Point(500, 34);
-            this.btnVirtFilesBrowse.Name = "btnVirtFilesBrowse";
-            this.btnVirtFilesBrowse.Size = new System.Drawing.Size(25, 24);
-            this.btnVirtFilesBrowse.TabIndex = 26;
-            this.btnVirtFilesBrowse.UseVisualStyleBackColor = true;
-            this.btnVirtFilesBrowse.Click += new System.EventHandler(this.btnVirtFilesBrowse_Click);
-            // 
-            // propertyCmdText
-            // 
-            this.propertyCmdText.FormattingEnabled = true;
-            this.propertyCmdText.Location = new System.Drawing.Point(39, 34);
-            this.propertyCmdText.Name = "propertyCmdText";
-            this.propertyCmdText.Size = new System.Drawing.Size(455, 21);
-            this.propertyCmdText.TabIndex = 25;
+            this.propertyMenuRadio.AutoSize = true;
+            this.propertyMenuRadio.Location = new System.Drawing.Point(12, 90);
+            this.propertyMenuRadio.Name = "propertyMenuRadio";
+            this.propertyMenuRadio.Size = new System.Drawing.Size(164, 17);
+            this.propertyMenuRadio.TabIndex = 17;
+            this.propertyMenuRadio.TabStop = true;
+            this.propertyMenuRadio.Text = "Display menu to choose from:";
+            this.propertyMenuRadio.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.btnModify);
             this.groupBox2.Controls.Add(this.btnRemove);
             this.groupBox2.Controls.Add(this.btnAdd);
             this.groupBox2.Controls.Add(this.propertyMenuLV);
             this.groupBox2.Location = new System.Drawing.Point(31, 106);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(500, 196);
+            this.groupBox2.Size = new System.Drawing.Size(497, 183);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             // 
-            // btnModify
-            // 
-            this.btnModify.Location = new System.Drawing.Point(411, 159);
-            this.btnModify.Name = "btnModify";
-            this.btnModify.Size = new System.Drawing.Size(83, 23);
-            this.btnModify.TabIndex = 27;
-            this.btnModify.Text = "&Modify";
-            this.btnModify.UseVisualStyleBackColor = true;
-            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Location = new System.Drawing.Point(322, 159);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(83, 23);
-            this.btnRemove.TabIndex = 26;
-            this.btnRemove.Text = "&Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(233, 159);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(83, 23);
-            this.btnAdd.TabIndex = 25;
-            this.btnAdd.Text = "&Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
             // propertyMenuLV
             // 
+            this.propertyMenuLV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.propertyMenuLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -164,7 +146,7 @@
             this.propertyMenuLV.Location = new System.Drawing.Point(8, 11);
             this.propertyMenuLV.MultiSelect = false;
             this.propertyMenuLV.Name = "propertyMenuLV";
-            this.propertyMenuLV.Size = new System.Drawing.Size(486, 142);
+            this.propertyMenuLV.Size = new System.Drawing.Size(483, 136);
             this.propertyMenuLV.TabIndex = 24;
             this.propertyMenuLV.UseCompatibleStateImageBehavior = false;
             this.propertyMenuLV.View = System.Windows.Forms.View.Details;
@@ -184,59 +166,60 @@
             this.columnHeader3.Text = "Description";
             this.columnHeader3.Width = 180;
             // 
-            // propertyMenuRadio
-            // 
-            this.propertyMenuRadio.AutoSize = true;
-            this.propertyMenuRadio.Location = new System.Drawing.Point(12, 90);
-            this.propertyMenuRadio.Name = "propertyMenuRadio";
-            this.propertyMenuRadio.Size = new System.Drawing.Size(164, 17);
-            this.propertyMenuRadio.TabIndex = 17;
-            this.propertyMenuRadio.TabStop = true;
-            this.propertyMenuRadio.Text = "Display menu to choose from:";
-            this.propertyMenuRadio.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.groupBox1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(543, 302);
-            this.panel3.TabIndex = 19;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 302);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(543, 35);
-            this.panel1.TabIndex = 18;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.btnOk);
-            this.panel2.Controls.Add(this.btnCancel);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(343, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 35);
-            this.panel2.TabIndex = 0;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(113, 6);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Arguments";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAdd.Location = new System.Drawing.Point(8, 153);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(83, 23);
+            this.btnAdd.TabIndex = 25;
+            this.btnAdd.Text = "&Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemove.Location = new System.Drawing.Point(97, 153);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(83, 23);
+            this.btnRemove.TabIndex = 26;
+            this.btnRemove.Text = "&Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnModify
+            // 
+            this.btnModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnModify.Location = new System.Drawing.Point(186, 153);
+            this.btnModify.Name = "btnModify";
+            this.btnModify.Size = new System.Drawing.Size(83, 23);
+            this.btnModify.TabIndex = 27;
+            this.btnModify.Text = "&Modify";
+            this.btnModify.UseVisualStyleBackColor = true;
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
+            // 
+            // propertyCmdText
+            // 
+            this.propertyCmdText.FormattingEnabled = true;
+            this.propertyCmdText.Location = new System.Drawing.Point(39, 34);
+            this.propertyCmdText.Name = "propertyCmdText";
+            this.propertyCmdText.Size = new System.Drawing.Size(455, 21);
+            this.propertyCmdText.TabIndex = 25;
+            // 
+            // btnVirtFilesBrowse
+            // 
+            this.btnVirtFilesBrowse.Image = global::PackageEditor.Properties.Resources.folder_closed_16_h;
+            this.btnVirtFilesBrowse.Location = new System.Drawing.Point(500, 34);
+            this.btnVirtFilesBrowse.Name = "btnVirtFilesBrowse";
+            this.btnVirtFilesBrowse.Size = new System.Drawing.Size(25, 24);
+            this.btnVirtFilesBrowse.TabIndex = 26;
+            this.btnVirtFilesBrowse.UseVisualStyleBackColor = true;
+            this.btnVirtFilesBrowse.Click += new System.EventHandler(this.btnVirtFilesBrowse_Click);
             // 
             // propertyCmdArgs
             // 
@@ -254,41 +237,87 @@
             this.label4.TabIndex = 28;
             this.label4.Text = "Arguments (optional):";
             // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.Location = new System.Drawing.Point(369, 295);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 30);
+            this.btnOk.TabIndex = 1;
+            this.btnOk.Text = "OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(450, 295);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 30);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnCancel);
+            this.panel1.Controls.Add(this.propertyCmdRadio);
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.btnVirtFilesBrowse);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.btnOk);
+            this.panel1.Controls.Add(this.propertyCmdArgs);
+            this.panel1.Controls.Add(this.propertyCmdText);
+            this.panel1.Controls.Add(this.propertyMenuRadio);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(533, 331);
+            this.panel1.TabIndex = 28;
+            // 
             // AutoLaunchForm
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(543, 337);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(558, 402);
+            this.Controls.Add(this.bottomPanel);
+            this.Controls.Add(this.bkPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AutoLaunchForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Auto launch";
             this.Load += new System.EventHandler(this.AutoLaunchForm_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.bottomPanel.ResumeLayout(false);
+            this.bkPanel.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.RadioButton propertyCmdRadio;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton propertyMenuRadio;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel bottomPanel;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel bkPanel;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.RadioButton propertyCmdRadio;
+        private System.Windows.Forms.Button btnVirtFilesBrowse;
+        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.ComboBox propertyCmdText;
+        private System.Windows.Forms.RadioButton propertyMenuRadio;
+        private System.Windows.Forms.TextBox propertyCmdArgs;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnModify;
         private System.Windows.Forms.Button btnRemove;
@@ -297,10 +326,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ComboBox propertyCmdText;
-        private System.Windows.Forms.Button btnVirtFilesBrowse;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.TextBox propertyCmdArgs;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel1;
     }
 }

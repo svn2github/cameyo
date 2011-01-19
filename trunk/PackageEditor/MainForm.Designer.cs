@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -51,11 +51,8 @@
             this.dropboxLabel = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.resetCredLink = new System.Windows.Forms.LinkLabel();
             this.managementGroup = new System.Windows.Forms.GroupBox();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
@@ -80,9 +77,7 @@
             this.propertyIsolationIsolated = new System.Windows.Forms.RadioButton();
             this.propertyIsolationMerge = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
-            this.propertyIcon = new System.Windows.Forms.PictureBox();
             this.lblAutoLaunch = new System.Windows.Forms.Label();
-            this.dropboxButton = new System.Windows.Forms.Button();
             this.tabFileSystem = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -96,13 +91,8 @@
             this.fsFolderInfoIsolationLbl = new System.Windows.Forms.Label();
             this.fsFolderInfoFullName = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.fsAddBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsAddDirBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsRemoveBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.fsAddEmptyDirBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.fsSaveFileAsBtn = new System.Windows.Forms.ToolStripButton();
             this.tabRegistry = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -119,8 +109,6 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.regProgressBar = new System.Windows.Forms.ProgressBar();
             this.regToolStrip = new System.Windows.Forms.ToolStrip();
-            this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
-            this.regEditBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.propertyCleanupOnExit = new System.Windows.Forms.CheckBox();
@@ -129,19 +117,30 @@
             this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
             this.propertyStopInheritance = new System.Windows.Forms.TextBox();
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.cameyoBkgrnd1 = new PackageEditor.CameyoBkgrnd();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.propertyIcon = new System.Windows.Forms.PictureBox();
+            this.dropboxButton = new System.Windows.Forms.Button();
+            this.fsAddBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsAddDirBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsRemoveBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsAddEmptyDirBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsSaveFileAsBtn = new System.Windows.Forms.ToolStripButton();
+            this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
+            this.regEditBtn = new System.Windows.Forms.ToolStripButton();
+            this.bkPanel = new System.Windows.Forms.Panel();
+            this.bottomPanel = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.managementGroup.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.propertyIcon)).BeginInit();
             this.tabFileSystem.SuspendLayout();
             this.panel5.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -162,6 +161,11 @@
             this.regToolStrip.SuspendLayout();
             this.tabAdvanced.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.propertyIcon)).BeginInit();
+            this.bottomPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList
@@ -326,16 +330,6 @@
             this.linkLabel1.Text = "Execute: launch a command in the context of this package";
             this.linkLabel1.UseCompatibleTextRendering = true;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 48);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(16, 15);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 41;
-            this.pictureBox1.TabStop = false;
-            // 
             // linkLabel4
             // 
             this.linkLabel4.AutoSize = true;
@@ -359,26 +353,6 @@
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "Regedit: explore the registry from the context of this packge";
             this.linkLabel3.UseCompatibleTextRendering = true;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(12, 14);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox4.TabIndex = 34;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(12, 31);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox3.TabIndex = 33;
-            this.pictureBox3.TabStop = false;
             // 
             // resetCredLink
             // 
@@ -650,15 +624,6 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Isolation mode:";
             // 
-            // propertyIcon
-            // 
-            this.propertyIcon.Location = new System.Drawing.Point(100, 120);
-            this.propertyIcon.Name = "propertyIcon";
-            this.propertyIcon.Size = new System.Drawing.Size(32, 32);
-            this.propertyIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.propertyIcon.TabIndex = 4;
-            this.propertyIcon.TabStop = false;
-            // 
             // lblAutoLaunch
             // 
             this.lblAutoLaunch.AutoSize = true;
@@ -667,17 +632,6 @@
             this.lblAutoLaunch.Size = new System.Drawing.Size(44, 13);
             this.lblAutoLaunch.TabIndex = 2;
             this.lblAutoLaunch.Text = "Startup:";
-            // 
-            // dropboxButton
-            // 
-            this.dropboxButton.BackgroundImage = global::PackageEditor.Properties.Resources.dropbox_logo_home;
-            this.dropboxButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.dropboxButton.Location = new System.Drawing.Point(589, 250);
-            this.dropboxButton.Name = "dropboxButton";
-            this.dropboxButton.Size = new System.Drawing.Size(119, 41);
-            this.dropboxButton.TabIndex = 2;
-            this.dropboxButton.UseVisualStyleBackColor = true;
-            this.dropboxButton.Click += new System.EventHandler(this.dropboxButton_Click);
             // 
             // tabFileSystem
             // 
@@ -743,8 +697,8 @@
             this.columnHeader2});
             this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem5,
+            listViewItem6});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
             this.fsFilesList.Size = new System.Drawing.Size(508, 330);
@@ -827,64 +781,15 @@
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // fsAddBtn
-            // 
-            this.fsAddBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddBtn.Image")));
-            this.fsAddBtn.ImageTransparentColor = System.Drawing.Color.Olive;
-            this.fsAddBtn.Name = "fsAddBtn";
-            this.fsAddBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsAddBtn.Text = "Add";
-            this.fsAddBtn.ToolTipText = "Add file";
-            // 
-            // fsAddDirBtn
-            // 
-            this.fsAddDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddDirBtn.Image")));
-            this.fsAddDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.fsAddDirBtn.Name = "fsAddDirBtn";
-            this.fsAddDirBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsAddDirBtn.Text = "toolStripButton1";
-            this.fsAddDirBtn.ToolTipText = "Add folder";
-            // 
-            // fsRemoveBtn
-            // 
-            this.fsRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsRemoveBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsRemoveBtn.Image")));
-            this.fsRemoveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.fsRemoveBtn.Name = "fsRemoveBtn";
-            this.fsRemoveBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsRemoveBtn.Text = "Delete";
-            this.fsRemoveBtn.ToolTipText = "Remove file or folder";
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // fsAddEmptyDirBtn
-            // 
-            this.fsAddEmptyDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddEmptyDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddEmptyDirBtn.Image")));
-            this.fsAddEmptyDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.fsAddEmptyDirBtn.Name = "fsAddEmptyDirBtn";
-            this.fsAddEmptyDirBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsAddEmptyDirBtn.Text = "toolStripButton1";
-            this.fsAddEmptyDirBtn.ToolTipText = "Add empty folder";
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // fsSaveFileAsBtn
-            // 
-            this.fsSaveFileAsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsSaveFileAsBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsSaveFileAsBtn.Image")));
-            this.fsSaveFileAsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.fsSaveFileAsBtn.Name = "fsSaveFileAsBtn";
-            this.fsSaveFileAsBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsSaveFileAsBtn.ToolTipText = "Save file as";
             // 
             // tabRegistry
             // 
@@ -952,8 +857,8 @@
             this.columnHeader4});
             this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem7,
+            listViewItem8});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
             this.regFilesList.Size = new System.Drawing.Size(508, 334);
@@ -1050,25 +955,6 @@
             this.regToolStrip.Text = "toolStrip2";
             this.regToolStrip.Visible = false;
             // 
-            // regRemoveBtn
-            // 
-            this.regRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.regRemoveBtn.Image = ((System.Drawing.Image)(resources.GetObject("regRemoveBtn.Image")));
-            this.regRemoveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.regRemoveBtn.Name = "regRemoveBtn";
-            this.regRemoveBtn.Size = new System.Drawing.Size(23, 22);
-            this.regRemoveBtn.Text = "Delete";
-            this.regRemoveBtn.ToolTipText = "Remove key";
-            // 
-            // regEditBtn
-            // 
-            this.regEditBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.regEditBtn.Image = ((System.Drawing.Image)(resources.GetObject("regEditBtn.Image")));
-            this.regEditBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.regEditBtn.Name = "regEditBtn";
-            this.regEditBtn.Size = new System.Drawing.Size(23, 22);
-            this.regEditBtn.ToolTipText = "Edit registry";
-            // 
             // tabAdvanced
             // 
             this.tabAdvanced.Controls.Add(this.groupBox5);
@@ -1153,25 +1039,173 @@
             this.miniToolStrip.Size = new System.Drawing.Size(713, 25);
             this.miniToolStrip.TabIndex = 6;
             // 
-            // cameyoBkgrnd1
+            // pictureBox1
             // 
-            this.cameyoBkgrnd1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cameyoBkgrnd1.Location = new System.Drawing.Point(0, 0);
-            this.cameyoBkgrnd1.Name = "cameyoBkgrnd1";
-            this.cameyoBkgrnd1.Size = new System.Drawing.Size(751, 506);
-            this.cameyoBkgrnd1.TabIndex = 5;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 48);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 15);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 41;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(12, 14);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox4.TabIndex = 34;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(12, 31);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox3.TabIndex = 33;
+            this.pictureBox3.TabStop = false;
+            // 
+            // propertyIcon
+            // 
+            this.propertyIcon.Location = new System.Drawing.Point(100, 120);
+            this.propertyIcon.Name = "propertyIcon";
+            this.propertyIcon.Size = new System.Drawing.Size(32, 32);
+            this.propertyIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.propertyIcon.TabIndex = 4;
+            this.propertyIcon.TabStop = false;
+            // 
+            // dropboxButton
+            // 
+            this.dropboxButton.BackgroundImage = global::PackageEditor.Properties.Resources.dropbox_logo_home;
+            this.dropboxButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.dropboxButton.Location = new System.Drawing.Point(589, 250);
+            this.dropboxButton.Name = "dropboxButton";
+            this.dropboxButton.Size = new System.Drawing.Size(119, 41);
+            this.dropboxButton.TabIndex = 2;
+            this.dropboxButton.UseVisualStyleBackColor = true;
+            this.dropboxButton.Click += new System.EventHandler(this.dropboxButton_Click);
+            // 
+            // fsAddBtn
+            // 
+            this.fsAddBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddBtn.Image")));
+            this.fsAddBtn.ImageTransparentColor = System.Drawing.Color.Olive;
+            this.fsAddBtn.Name = "fsAddBtn";
+            this.fsAddBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsAddBtn.Text = "Add";
+            this.fsAddBtn.ToolTipText = "Add file";
+            // 
+            // fsAddDirBtn
+            // 
+            this.fsAddDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddDirBtn.Image")));
+            this.fsAddDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fsAddDirBtn.Name = "fsAddDirBtn";
+            this.fsAddDirBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsAddDirBtn.Text = "toolStripButton1";
+            this.fsAddDirBtn.ToolTipText = "Add folder";
+            // 
+            // fsRemoveBtn
+            // 
+            this.fsRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsRemoveBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsRemoveBtn.Image")));
+            this.fsRemoveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fsRemoveBtn.Name = "fsRemoveBtn";
+            this.fsRemoveBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsRemoveBtn.Text = "Delete";
+            this.fsRemoveBtn.ToolTipText = "Remove file or folder";
+            // 
+            // fsAddEmptyDirBtn
+            // 
+            this.fsAddEmptyDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddEmptyDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddEmptyDirBtn.Image")));
+            this.fsAddEmptyDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fsAddEmptyDirBtn.Name = "fsAddEmptyDirBtn";
+            this.fsAddEmptyDirBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsAddEmptyDirBtn.Text = "toolStripButton1";
+            this.fsAddEmptyDirBtn.ToolTipText = "Add empty folder";
+            // 
+            // fsSaveFileAsBtn
+            // 
+            this.fsSaveFileAsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsSaveFileAsBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsSaveFileAsBtn.Image")));
+            this.fsSaveFileAsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fsSaveFileAsBtn.Name = "fsSaveFileAsBtn";
+            this.fsSaveFileAsBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsSaveFileAsBtn.ToolTipText = "Save file as";
+            // 
+            // regRemoveBtn
+            // 
+            this.regRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.regRemoveBtn.Image = ((System.Drawing.Image)(resources.GetObject("regRemoveBtn.Image")));
+            this.regRemoveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.regRemoveBtn.Name = "regRemoveBtn";
+            this.regRemoveBtn.Size = new System.Drawing.Size(23, 22);
+            this.regRemoveBtn.Text = "Delete";
+            this.regRemoveBtn.ToolTipText = "Remove key";
+            // 
+            // regEditBtn
+            // 
+            this.regEditBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.regEditBtn.Image = ((System.Drawing.Image)(resources.GetObject("regEditBtn.Image")));
+            this.regEditBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.regEditBtn.Name = "regEditBtn";
+            this.regEditBtn.Size = new System.Drawing.Size(23, 22);
+            this.regEditBtn.ToolTipText = "Edit registry";
+            // 
+            // bkPanel
+            // 
+            this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
+            this.bkPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bkPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bkPanel.Location = new System.Drawing.Point(0, 0);
+            this.bkPanel.Name = "bkPanel";
+            this.bkPanel.Size = new System.Drawing.Size(751, 506);
+            this.bkPanel.TabIndex = 9;
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Controls.Add(this.panel12);
+            this.bottomPanel.Controls.Add(this.panel11);
+            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 459);
+            this.bottomPanel.Name = "bottomPanel";
+            this.bottomPanel.Size = new System.Drawing.Size(751, 47);
+            this.bottomPanel.TabIndex = 8;
+            // 
+            // panel12
+            // 
+            this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(595, 47);
+            this.panel12.TabIndex = 1;
+            // 
+            // panel11
+            // 
+            this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel11.Location = new System.Drawing.Point(595, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(156, 47);
+            this.panel11.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(751, 506);
+            this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.cameyoBkgrnd1);
+            this.Controls.Add(this.bkPanel);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -1188,9 +1222,6 @@
             this.tabGeneral.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.managementGroup.ResumeLayout(false);
             this.managementGroup.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1199,7 +1230,6 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.propertyIcon)).EndInit();
             this.tabFileSystem.ResumeLayout(false);
             this.tabFileSystem.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -1228,6 +1258,11 @@
             this.tabAdvanced.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.propertyIcon)).EndInit();
+            this.bottomPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1330,7 +1365,10 @@
         private System.Windows.Forms.LinkLabel lnkCustomEvents;
         private System.Windows.Forms.TextBox propertyStopInheritance;
         private System.Windows.Forms.ToolStrip miniToolStrip;
-        private CameyoBkgrnd cameyoBkgrnd1;
+        private System.Windows.Forms.Panel bkPanel;
+        private System.Windows.Forms.Panel bottomPanel;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel11;
 
     }
 }

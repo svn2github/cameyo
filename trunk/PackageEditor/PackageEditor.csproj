@@ -91,12 +91,6 @@
     <Compile Include="AutoLaunchForm.Designer.cs">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CameyoBkgrnd.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CameyoBkgrnd.Designer.cs">
-      <DependentUpon>CameyoBkgrnd.cs</DependentUpon>
-    </Compile>
     <Compile Include="CustomEventsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,9 +140,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchForm.resx">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CameyoBkgrnd.resx">
-      <DependentUpon>CameyoBkgrnd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomEventsForm.resx">
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
