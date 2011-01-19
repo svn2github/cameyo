@@ -686,7 +686,7 @@
             this.tabFileSystem.Location = new System.Drawing.Point(4, 22);
             this.tabFileSystem.Name = "tabFileSystem";
             this.tabFileSystem.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFileSystem.Size = new System.Drawing.Size(719, 429);
+            this.tabFileSystem.Size = new System.Drawing.Size(719, 386);
             this.tabFileSystem.TabIndex = 1;
             this.tabFileSystem.Text = "Files";
             this.tabFileSystem.UseVisualStyleBackColor = true;
@@ -697,7 +697,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(3, 28);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(713, 398);
+            this.panel5.Size = new System.Drawing.Size(713, 355);
             this.panel5.TabIndex = 7;
             // 
             // splitContainer1
@@ -714,7 +714,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fsFilesList);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(713, 398);
+            this.splitContainer1.Size = new System.Drawing.Size(713, 355);
             this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -727,7 +727,7 @@
             this.fsFolderTree.Location = new System.Drawing.Point(0, 0);
             this.fsFolderTree.Name = "fsFolderTree";
             this.fsFolderTree.SelectedImageIndex = 0;
-            this.fsFolderTree.Size = new System.Drawing.Size(201, 398);
+            this.fsFolderTree.Size = new System.Drawing.Size(201, 355);
             this.fsFolderTree.TabIndex = 3;
             this.fsFolderTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.fsFolderTree_BeforeSelect);
             this.fsFolderTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fsFolderTree_AfterSelect);
@@ -747,7 +747,7 @@
             listViewItem2});
             this.fsFilesList.Location = new System.Drawing.Point(0, 25);
             this.fsFilesList.Name = "fsFilesList";
-            this.fsFilesList.Size = new System.Drawing.Size(508, 373);
+            this.fsFilesList.Size = new System.Drawing.Size(508, 330);
             this.fsFilesList.TabIndex = 7;
             this.fsFilesList.UseCompatibleStateImageBehavior = false;
             this.fsFilesList.View = System.Windows.Forms.View.Details;
@@ -892,7 +892,7 @@
             this.tabRegistry.Location = new System.Drawing.Point(4, 22);
             this.tabRegistry.Name = "tabRegistry";
             this.tabRegistry.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegistry.Size = new System.Drawing.Size(719, 429);
+            this.tabRegistry.Size = new System.Drawing.Size(719, 386);
             this.tabRegistry.TabIndex = 2;
             this.tabRegistry.Text = "Registry";
             this.tabRegistry.UseVisualStyleBackColor = true;
@@ -904,7 +904,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(3, 3);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(713, 423);
+            this.panel8.Size = new System.Drawing.Size(713, 380);
             this.panel8.TabIndex = 10;
             // 
             // panel1
@@ -913,7 +913,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 402);
+            this.panel1.Size = new System.Drawing.Size(713, 359);
             this.panel1.TabIndex = 11;
             // 
             // regSplitContainer
@@ -930,7 +930,7 @@
             // 
             this.regSplitContainer.Panel2.Controls.Add(this.regFilesList);
             this.regSplitContainer.Panel2.Controls.Add(this.panel4);
-            this.regSplitContainer.Size = new System.Drawing.Size(713, 402);
+            this.regSplitContainer.Size = new System.Drawing.Size(713, 359);
             this.regSplitContainer.SplitterDistance = 201;
             this.regSplitContainer.TabIndex = 5;
             // 
@@ -942,7 +942,7 @@
             this.regFolderTree.Location = new System.Drawing.Point(0, 0);
             this.regFolderTree.Name = "regFolderTree";
             this.regFolderTree.SelectedImageIndex = 0;
-            this.regFolderTree.Size = new System.Drawing.Size(201, 402);
+            this.regFolderTree.Size = new System.Drawing.Size(201, 359);
             this.regFolderTree.TabIndex = 3;
             // 
             // regFilesList
@@ -956,7 +956,7 @@
             listViewItem4});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(508, 377);
+            this.regFilesList.Size = new System.Drawing.Size(508, 334);
             this.regFilesList.TabIndex = 7;
             this.regFilesList.UseCompatibleStateImageBehavior = false;
             this.regFilesList.View = System.Windows.Forms.View.Details;
@@ -1075,7 +1075,7 @@
             this.tabAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tabAdvanced.Name = "tabAdvanced";
             this.tabAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdvanced.Size = new System.Drawing.Size(719, 429);
+            this.tabAdvanced.Size = new System.Drawing.Size(719, 386);
             this.tabAdvanced.TabIndex = 3;
             this.tabAdvanced.Text = "Advanced";
             this.tabAdvanced.UseVisualStyleBackColor = true;

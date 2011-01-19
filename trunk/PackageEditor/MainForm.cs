@@ -22,6 +22,7 @@ namespace PackageEditor
         private MRU mru;
         public bool dirty;
         private bool dragging;
+        private string CleanupOnExitCmd = "%MyExe%>-Quiet -Confirm -Remove";
 
         // creation of delegate for PackageOpen
         private delegate bool DelegatePackageOpen(String path);
@@ -274,8 +275,7 @@ namespace PackageEditor
             propertyStopInheritance.Text = virtPackage.GetProperty("StopInheritance");
 
             // CleanupOnExit
-            propertyCleanupOnExit.Checked = virtPackage.GetProperty("OnStopUnvirtualized").
-                Contains("%MyExe%>-Quiet -Confirm -Remove");
+            propertyCleanupOnExit.Checked = virtPackage.GetProperty("OnStopUnvirtualized").Contains(CleanupOnExitCmd);
 
             this.Text = "Package Editor" + " - " + virtPackage.openedFile;
             dirty = false;
@@ -294,18 +294,29 @@ namespace PackageEditor
             Ret &= virtPackage.SetProperty("AppID", propertyAppID.Text);
             Ret &= virtPackage.SetProperty("FriendlyName", propertyFriendlyName.Text);
             Ret &= virtPackage.SetProperty("StopInheritance", propertyStopInheritance.Text);
+
+            // propertyCleanupOnExit
+            String str = virtPackage.GetProperty("OnStopUnvirtualized");
             if (propertyCleanupOnExit.Checked)
             {
-                String str = virtPackage.GetProperty("OnStopUnvirtualized");
-                if (!str.Contains("%MyExe%>-Quiet -Confirm -Remove"))
+                if (!str.Contains(CleanupOnExitCmd))
                 {
                     if (str != "")
                         str += ";";
-                    str += "%MyExe%>-Quiet -Confirm -Remove";
+                    str += CleanupOnExitCmd;
                     Ret &= virtPackage.SetProperty("OnStopUnvirtualized", str);
                 }
             }
-
+            else
+            {
+                if (str.Contains(CleanupOnExitCmd))
+                {
+                    str = str.Replace(CleanupOnExitCmd, "");
+                    str = str.Replace(";;", ";");
+                    str = str.Trim(';');
+                    Ret &= virtPackage.SetProperty("OnStopUnvirtualized", str);
+                }
+            }
 
             // AutoLaunch (and SaveAutoLaunchCmd + SaveAutoLaunchMenu) already set by AutoLaunchForm
 
@@ -321,11 +332,25 @@ namespace PackageEditor
             {
                 virtPackage.SetFileSandbox("", sandboxMode);
                 virtPackage.SetRegistrySandbox("", sandboxMode);
-                if (propertyIsolationDataMode.Checked)
-                    sandboxMode = VirtPackage.SANDBOXFLAGS_MERGE;
-                virtPackage.SetFileSandbox("%Personal%", sandboxMode);
-                virtPackage.SetFileSandbox("%Desktop%", sandboxMode);
-                virtPackage.SetFileSandbox("%Network%", sandboxMode);
+            }
+
+            // Do / undo special folders newly / previously set by Data Isolation mode
+            if (propertyIsolationDataMode.Checked)
+            {
+                virtPackage.SetProperty("DataMode", "TRUE");
+                virtPackage.SetFileSandbox("%Personal%", VirtPackage.SANDBOXFLAGS_MERGE);
+                virtPackage.SetFileSandbox("%Desktop%", VirtPackage.SANDBOXFLAGS_MERGE);
+                virtPackage.SetFileSandbox("%Network%", VirtPackage.SANDBOXFLAGS_MERGE);
+            }
+            else
+            {
+                if (virtPackage.GetProperty("DataMode") == "TRUE")     // Need to undo special dirs changed by Data Isolation mode (as opposed to set by user)
+                {
+                    virtPackage.SetProperty("DataMode", "FALSE");
+                    virtPackage.SetFileSandbox("%Personal%", sandboxMode);
+                    virtPackage.SetFileSandbox("%Desktop%", sandboxMode);
+                    virtPackage.SetFileSandbox("%Network%", sandboxMode);
+                }
             }
 
             // SetIcon already set when icon button is pressed
