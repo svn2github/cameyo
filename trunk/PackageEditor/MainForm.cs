@@ -340,7 +340,7 @@ namespace PackageEditor
                 virtPackage.SetProperty("DataMode", "TRUE");
                 virtPackage.SetFileSandbox("%Personal%", VirtPackage.SANDBOXFLAGS_MERGE);
                 virtPackage.SetFileSandbox("%Desktop%", VirtPackage.SANDBOXFLAGS_MERGE);
-                virtPackage.SetFileSandbox("%Network%", VirtPackage.SANDBOXFLAGS_MERGE);
+                virtPackage.SetFileSandbox("UNC", VirtPackage.SANDBOXFLAGS_MERGE);
             }
             else
             {
@@ -349,7 +349,7 @@ namespace PackageEditor
                     virtPackage.SetProperty("DataMode", "FALSE");
                     virtPackage.SetFileSandbox("%Personal%", sandboxMode);
                     virtPackage.SetFileSandbox("%Desktop%", sandboxMode);
-                    virtPackage.SetFileSandbox("%Network%", sandboxMode);
+                    virtPackage.SetFileSandbox("UNC", sandboxMode);
                 }
             }
 
@@ -489,7 +489,7 @@ namespace PackageEditor
                 virtPackage.GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
                 virtPackage.GetFileSandbox("%Personal%") == VirtPackage.SANDBOXFLAGS_MERGE &&
                 virtPackage.GetFileSandbox("%Desktop%") == VirtPackage.SANDBOXFLAGS_MERGE &&
-                virtPackage.GetFileSandbox("%Network%") == VirtPackage.SANDBOXFLAGS_MERGE)
+                virtPackage.GetFileSandbox("UNC") == VirtPackage.SANDBOXFLAGS_MERGE)
                 propertyIsolationDataMode.Checked = true;
             else if (virtPackage.GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
                 virtPackage.GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY)
