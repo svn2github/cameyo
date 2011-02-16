@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
 using Microsoft.Win32;
 using VirtPackageAPI;
 
@@ -536,6 +537,31 @@ namespace PackageEditor
             }
         }
 
+        static public bool ExecProg(String fileName, String args, bool wait, ref int exitCode)
+        {
+            try
+            {
+                System.Diagnostics.ProcessStartInfo procStartInfo =
+                    new System.Diagnostics.ProcessStartInfo(fileName, args);
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                procStartInfo.CreateNoWindow = true;
+                procStartInfo.UseShellExecute = false;
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+                if (wait)
+                {
+                    proc.WaitForExit();
+                    exitCode = proc.ExitCode;
+                }
+                return true;
+            }
+            catch
+            {
+            }
+            return false;
+        }
+
         // dragdrop function (DragDrop) to open a new file dropping it in the main form
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
@@ -549,7 +575,25 @@ namespace PackageEditor
             }
             //if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
             //         + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
-            if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
+            if (System.IO.Path.GetFileName(files[0]).IndexOf("AppVirtDll.", StringComparison.InvariantCultureIgnoreCase) != -1)
+            {
+                String openedFile = "";
+                CloseAndReopen_Before(ref openedFile);
+                try
+                {
+                    // Syntax: myPath\Packager.exe -ChangeEngine AppName.virtual.exe AppVirtDll.dll
+                    string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                    int exitCode = 0;
+                    if (!ExecProg(openedFile, "-ChangeEngine \"" + files[0] + "\"", true, ref exitCode))
+                        MessageBox.Show("Could not execute: " + Path.Combine(myPath, "Packager.exe"));
+                }
+                finally
+                {
+                    CloseAndReopn_After(openedFile);
+                }
+                return;
+            }
+            else if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
             {
                 MessageBox.Show("You can only open files with .exe extension");
                 return;
@@ -659,25 +703,36 @@ namespace PackageEditor
             }
         }
 
-        private void dropboxButton_Click(object sender, EventArgs e)
+        private void CloseAndReopen_Before(ref String openedFile)
         {
-            #if DropBox
             if (this.dirty || fsEditor.dirty || regEditor.dirty)
             {
                 MessageBox.Show("You have to save the package first");
                 return;
             }
-            String opened = virtPackage.openedFile;
+            openedFile = virtPackage.openedFile;
+            virtPackage.Close();
+        }
+
+        private void CloseAndReopn_After(String openedFile)
+        {
+            if (!virtPackage.opened)
+                virtPackage.Open(openedFile);
+        }
+
+        private void dropboxButton_Click(object sender, EventArgs e)
+        {
+            #if DropBox
+            String openedFile = "";
+            CloseAndReopen_Before(ref openedFile);
             try
             {
-                virtPackage.Close();
                 DropboxLogin dropLogin = new DropboxLogin();
-                dropLogin.Publish(opened);
+                dropLogin.Publish(openedFile);
             }
             finally
             {
-                if (!virtPackage.opened)
-                    virtPackage.Open(opened);
+                CloseAndReopn_After(openedFile);
             }
             #endif
         }
