@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using VirtPackageAPI;
+using System.Collections;
 
 namespace PackageEditor
 {
@@ -20,6 +21,20 @@ namespace PackageEditor
         private TreeHelper treeHelper;
         private RegistryKey workKey;
         public bool dirty;
+        private string masterkey;
+        private ArrayList currentkey;
+
+        public string Masterkey
+        {
+            get { return masterkey; }
+            set { masterkey = value; }
+        }
+
+        public ArrayList Currentkey
+        {
+            get { return currentkey; }
+            set { currentkey = value; }
+        }   
 
         public RegistryEditor(VirtPackage virtPackage, TreeView fsFolderTree, ListView fsFilesList, 
             Label fsFolderInfoFullName, ComboBox fsFolderInfoIsolationCombo,
@@ -164,10 +179,17 @@ namespace PackageEditor
             if (regKey == null) 
                 return;
             String[] values = regKey.GetValueNames();
+            currentkey = new ArrayList();
+            masterkey = "";
+            currentkey.Clear();
             for (int i = 0; i < values.Length; i++)
             {
                 ListViewItem newItem = new ListViewItem();
                 newItem.Text = values[i];
+                masterkey = regKey.ToString(); ;
+                currentkey.Add(newItem.Text);
+                newItem.SubItems.Add((string)regKey.GetValue(values[i]).ToString());
+                newItem.SubItems.Add((string)regKey.GetValueKind(values[i]).ToString());
                 //newItem.SubItems.Add(ToDo: read value);
                 fsFilesList.Items.Add(newItem);
             }

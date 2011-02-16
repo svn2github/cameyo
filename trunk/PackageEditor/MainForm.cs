@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using System.IO;
 using Microsoft.Win32;
 using VirtPackageAPI;
+using System.IO;
+using System.Collections;
+using System.Diagnostics;
 
 namespace PackageEditor
 {
@@ -24,6 +26,7 @@ namespace PackageEditor
         public bool dirty;
         private bool dragging;
         private string CleanupOnExitCmd = "%MyExe%>-Quiet -Confirm -Remove";
+        private Control[] Editors;
 
         // creation of delegate for PackageOpen
         private delegate bool DelegatePackageOpen(String path);
@@ -47,6 +50,9 @@ namespace PackageEditor
                 fsFolderInfoFullName, fsFolderInfoIsolationCombo, fsAddBtn, fsRemoveBtn, fsAddEmptyDirBtn, fsSaveFileAsBtn, fsAddDirBtn);
             regEditor = new RegistryEditor(virtPackage, regFolderTree, regFilesList,
                 regFolderInfoFullName, regFolderInfoIsolationCombo, regRemoveBtn, regEditBtn);
+
+            regFilesList.DoubleClickActivation = true;
+            Editors = new Control[] { tbFile, tbValue, tbType, tbSize };
 
             EnableDisablePackageControls(false);       // No package opened yet; disable Save menu etc
             if (packageExeFile != "")
@@ -537,6 +543,33 @@ namespace PackageEditor
             }
         }
 
+<<<<<<< .mine
+         static public bool ExecProg(String fileName, String args, bool wait, ref int exitCode)
+	        {
+	            try
+	            {
+	                System.Diagnostics.ProcessStartInfo procStartInfo =
+	                    new System.Diagnostics.ProcessStartInfo(fileName, args);
+	                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+	                procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+	                procStartInfo.CreateNoWindow = true;
+	                procStartInfo.UseShellExecute = false;
+	                proc.StartInfo = procStartInfo;
+	                proc.Start();
+	                if (wait)
+	                {
+	                    proc.WaitForExit();
+	                    exitCode = proc.ExitCode;
+	                }
+	                return true;
+	            }
+	            catch
+	            {
+	            }
+	            return false;
+	        }
+
+=======
         static public bool ExecProg(String fileName, String args, bool wait, ref int exitCode)
         {
             try
@@ -562,6 +595,7 @@ namespace PackageEditor
             return false;
         }
 
+>>>>>>> .r39
         // dragdrop function (DragDrop) to open a new file dropping it in the main form
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
@@ -575,7 +609,29 @@ namespace PackageEditor
             }
             //if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
             //         + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
+<<<<<<< .mine
+             if (System.IO.Path.GetFileName(files[0]).IndexOf("AppVirtDll.", StringComparison.InvariantCultureIgnoreCase) != -1)
+	            {
+	                String openedFile = "";
+	                CloseAndReopen_Before(ref openedFile);
+                    try
+	                {
+	                    // Syntax: myPath\Packager.exe -ChangeEngine AppName.virtual.exe AppVirtDll.dll
+	                    string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+	                    int exitCode = 0;
+	                    if (!ExecProg(openedFile, "-ChangeEngine \"" + files[0] + "\"", true, ref exitCode))
+	                        MessageBox.Show("Could not execute: " + Path.Combine(myPath, "Packager.exe"));
+	                }
+	                finally
+	                {
+	                    CloseAndReopn_After(openedFile);
+	                }
+	                return;
+	            }
+	            else if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
+=======
             if (System.IO.Path.GetFileName(files[0]).IndexOf("AppVirtDll.", StringComparison.InvariantCultureIgnoreCase) != -1)
+>>>>>>> .r39
             {
                 String openedFile = "";
                 CloseAndReopen_Before(ref openedFile);
@@ -737,6 +793,7 @@ namespace PackageEditor
             #endif
         }
 
+
         private void resetCredLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             RegistryKey cameyoKey = Registry.CurrentUser.CreateSubKey(@"Software\Cameyo");
@@ -757,6 +814,21 @@ namespace PackageEditor
             customEventsForm.ShowDialog();
             dirty |= customEventsForm.dirty;
             customEventsForm.Dispose();
+        }
+
+        private void regFilesList_SubItemClicked(object sender, SubItemEventArgs e)
+        {
+            regFilesList.StartEditing(Editors[e.SubItem], e.Item, e.SubItem);
+        }
+
+        private void regFilesList_SubItemEndEditing(object sender, SubItemEndEditingEventArgs e)
+        {
+            Registry.SetValue(regEditor.Masterkey, regEditor.Currentkey[regFilesList.Items.IndexOf(e.Item)].ToString(), e.DisplayText);  
+        }
+
+        private void tbFile_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
