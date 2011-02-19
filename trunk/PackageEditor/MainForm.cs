@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -543,7 +543,6 @@ namespace PackageEditor
             }
         }
 
-<<<<<<< .mine
          static public bool ExecProg(String fileName, String args, bool wait, ref int exitCode)
 	        {
 	            try
@@ -569,33 +568,6 @@ namespace PackageEditor
 	            return false;
 	        }
 
-=======
-        static public bool ExecProg(String fileName, String args, bool wait, ref int exitCode)
-        {
-            try
-            {
-                System.Diagnostics.ProcessStartInfo procStartInfo =
-                    new System.Diagnostics.ProcessStartInfo(fileName, args);
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                procStartInfo.CreateNoWindow = true;
-                procStartInfo.UseShellExecute = false;
-                proc.StartInfo = procStartInfo;
-                proc.Start();
-                if (wait)
-                {
-                    proc.WaitForExit();
-                    exitCode = proc.ExitCode;
-                }
-                return true;
-            }
-            catch
-            {
-            }
-            return false;
-        }
-
->>>>>>> .r39
         // dragdrop function (DragDrop) to open a new file dropping it in the main form
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
@@ -609,7 +581,6 @@ namespace PackageEditor
             }
             //if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
             //         + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
-<<<<<<< .mine
              if (System.IO.Path.GetFileName(files[0]).IndexOf("AppVirtDll.", StringComparison.InvariantCultureIgnoreCase) != -1)
 	            {
 	                String openedFile = "";
@@ -629,27 +600,6 @@ namespace PackageEditor
 	                return;
 	            }
 	            else if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
-=======
-            if (System.IO.Path.GetFileName(files[0]).IndexOf("AppVirtDll.", StringComparison.InvariantCultureIgnoreCase) != -1)
->>>>>>> .r39
-            {
-                String openedFile = "";
-                CloseAndReopen_Before(ref openedFile);
-                try
-                {
-                    // Syntax: myPath\Packager.exe -ChangeEngine AppName.virtual.exe AppVirtDll.dll
-                    string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-                    int exitCode = 0;
-                    if (!ExecProg(openedFile, "-ChangeEngine \"" + files[0] + "\"", true, ref exitCode))
-                        MessageBox.Show("Could not execute: " + Path.Combine(myPath, "Packager.exe"));
-                }
-                finally
-                {
-                    CloseAndReopn_After(openedFile);
-                }
-                return;
-            }
-            else if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
             {
                 MessageBox.Show("You can only open files with .exe extension");
                 return;

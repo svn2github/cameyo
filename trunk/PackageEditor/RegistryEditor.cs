@@ -186,7 +186,7 @@ namespace PackageEditor
             {
                 ListViewItem newItem = new ListViewItem();
                 newItem.Text = values[i];
-                masterkey = regKey.ToString(); ;
+                masterkey = regKey.ToString();
                 currentkey.Add(newItem.Text);
                 newItem.SubItems.Add((string)regKey.GetValue(values[i]).ToString());
                 newItem.SubItems.Add((string)regKey.GetValueKind(values[i]).ToString());
