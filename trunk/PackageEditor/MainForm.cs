@@ -768,7 +768,7 @@ namespace PackageEditor
 
         private void regFilesList_SubItemClicked(object sender, SubItemEventArgs e)
         {
-            regFilesList.StartEditing(Editors[e.SubItem], e.Item, e.SubItem);
+            //Mario:ToDo Bugfixes:regFilesList.StartEditing(Editors[e.SubItem], e.Item, e.SubItem);
         }
 
         private void regFilesList_SubItemEndEditing(object sender, SubItemEndEditingEventArgs e)

@@ -116,7 +116,6 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -303,7 +302,7 @@
             this.dropboxLabel.AutoSize = true;
             this.dropboxLabel.Location = new System.Drawing.Point(530, 250);
             this.dropboxLabel.Name = "dropboxLabel";
-            this.dropboxLabel.Size = new System.Drawing.Size(59, 13);
+            this.dropboxLabel.Size = new System.Drawing.Size(53, 13);
             this.dropboxLabel.TabIndex = 3;
             this.dropboxLabel.Text = "Publish to";
             // 
@@ -316,7 +315,7 @@
             this.groupBox4.Controls.Add(this.pictureBox4);
             this.groupBox4.Controls.Add(this.pictureBox3);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox4.Location = new System.Drawing.Point(3, 338);
+            this.groupBox4.Location = new System.Drawing.Point(3, 336);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(713, 75);
             this.groupBox4.TabIndex = 3;
@@ -330,7 +329,7 @@
             this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
             this.linkLabel1.Location = new System.Drawing.Point(34, 50);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(294, 20);
+            this.linkLabel1.Size = new System.Drawing.Size(296, 17);
             this.linkLabel1.TabIndex = 42;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Execute: launch a command in the context of this package";
@@ -352,7 +351,7 @@
             this.linkLabel4.LinkArea = new System.Windows.Forms.LinkArea(0, 4);
             this.linkLabel4.Location = new System.Drawing.Point(34, 16);
             this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(315, 20);
+            this.linkLabel4.Size = new System.Drawing.Size(314, 17);
             this.linkLabel4.TabIndex = 38;
             this.linkLabel4.TabStop = true;
             this.linkLabel4.Text = "Cmd: launch a command box from the context of this package";
@@ -364,7 +363,7 @@
             this.linkLabel3.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
             this.linkLabel3.Location = new System.Drawing.Point(34, 33);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(305, 20);
+            this.linkLabel3.Size = new System.Drawing.Size(302, 17);
             this.linkLabel3.TabIndex = 37;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "Regedit: explore the registry from the context of this packge";
@@ -395,7 +394,7 @@
             this.resetCredLink.AutoSize = true;
             this.resetCredLink.Location = new System.Drawing.Point(618, 294);
             this.resetCredLink.Name = "resetCredLink";
-            this.resetCredLink.Size = new System.Drawing.Size(96, 13);
+            this.resetCredLink.Size = new System.Drawing.Size(90, 13);
             this.resetCredLink.TabIndex = 4;
             this.resetCredLink.TabStop = true;
             this.resetCredLink.Text = "Reset Credentials";
@@ -408,7 +407,7 @@
             this.managementGroup.Controls.Add(this.linkLabel7);
             this.managementGroup.Controls.Add(this.linkLabel6);
             this.managementGroup.Dock = System.Windows.Forms.DockStyle.Top;
-            this.managementGroup.Location = new System.Drawing.Point(3, 246);
+            this.managementGroup.Location = new System.Drawing.Point(3, 244);
             this.managementGroup.Name = "managementGroup";
             this.managementGroup.Size = new System.Drawing.Size(713, 92);
             this.managementGroup.TabIndex = 1;
@@ -422,7 +421,7 @@
             this.linkLabel5.LinkArea = new System.Windows.Forms.LinkArea(0, 15);
             this.linkLabel5.Location = new System.Drawing.Point(7, 50);
             this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(286, 20);
+            this.linkLabel5.Size = new System.Drawing.Size(284, 17);
             this.linkLabel5.TabIndex = 45;
             this.linkLabel5.TabStop = true;
             this.linkLabel5.Text = "Patch / update: apply a patch or updater to this package";
@@ -434,7 +433,7 @@
             this.linkLabel2.LinkArea = new System.Windows.Forms.LinkArea(0, 10);
             this.linkLabel2.Location = new System.Drawing.Point(7, 67);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(525, 20);
+            this.linkLabel2.Size = new System.Drawing.Size(526, 17);
             this.linkLabel2.TabIndex = 44;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Repackage: recollect the package with its current files and registry modification" +
@@ -447,7 +446,7 @@
             this.linkLabel7.LinkArea = new System.Windows.Forms.LinkArea(0, 7);
             this.linkLabel7.Location = new System.Drawing.Point(7, 16);
             this.linkLabel7.Name = "linkLabel7";
-            this.linkLabel7.Size = new System.Drawing.Size(245, 20);
+            this.linkLabel7.Size = new System.Drawing.Size(244, 17);
             this.linkLabel7.TabIndex = 43;
             this.linkLabel7.TabStop = true;
             this.linkLabel7.Text = "Remove: remove application from this computer";
@@ -459,7 +458,7 @@
             this.linkLabel6.LinkArea = new System.Windows.Forms.LinkArea(0, 10);
             this.linkLabel6.Location = new System.Drawing.Point(7, 33);
             this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(399, 20);
+            this.linkLabel6.Size = new System.Drawing.Size(399, 17);
             this.linkLabel6.TabIndex = 41;
             this.linkLabel6.TabStop = true;
             this.linkLabel6.Text = "Integrate: register application\'s shortcuts and file associations on this compute" +
@@ -473,7 +472,7 @@
             this.groupBox3.Controls.Add(this.propertyAppID);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(3, 176);
+            this.groupBox3.Location = new System.Drawing.Point(3, 174);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(713, 70);
             this.groupBox3.TabIndex = 1;
@@ -485,7 +484,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(7, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 24;
             this.label2.Text = "Description:";
             // 
@@ -493,14 +492,14 @@
             // 
             this.propertyFriendlyName.Location = new System.Drawing.Point(100, 39);
             this.propertyFriendlyName.Name = "propertyFriendlyName";
-            this.propertyFriendlyName.Size = new System.Drawing.Size(605, 22);
+            this.propertyFriendlyName.Size = new System.Drawing.Size(605, 20);
             this.propertyFriendlyName.TabIndex = 6;
             // 
             // propertyAppID
             // 
             this.propertyAppID.Location = new System.Drawing.Point(100, 13);
             this.propertyAppID.Name = "propertyAppID";
-            this.propertyAppID.Size = new System.Drawing.Size(605, 22);
+            this.propertyAppID.Size = new System.Drawing.Size(605, 20);
             this.propertyAppID.TabIndex = 5;
             // 
             // label1
@@ -508,7 +507,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(7, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 13);
+            this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 21;
             this.label1.Text = "Application ID:";
             // 
@@ -529,7 +528,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(713, 173);
+            this.groupBox1.Size = new System.Drawing.Size(713, 171);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basics";
@@ -540,7 +539,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(7, 120);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 23;
             this.label6.Text = "Icon:";
             // 
@@ -590,7 +589,7 @@
             this.propertyDataStorage.AutoSize = true;
             this.propertyDataStorage.Location = new System.Drawing.Point(97, 104);
             this.propertyDataStorage.Name = "propertyDataStorage";
-            this.propertyDataStorage.Size = new System.Drawing.Size(115, 13);
+            this.propertyDataStorage.Size = new System.Drawing.Size(105, 13);
             this.propertyDataStorage.TabIndex = 15;
             this.propertyDataStorage.Text = "propertyDataStorage";
             // 
@@ -599,7 +598,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(7, 104);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 13);
+            this.label5.Size = new System.Drawing.Size(71, 13);
             this.label5.TabIndex = 13;
             this.label5.Text = "Data storage:";
             // 
@@ -619,7 +618,7 @@
             this.propertyIsolationDataMode.AutoSize = true;
             this.propertyIsolationDataMode.Location = new System.Drawing.Point(6, 12);
             this.propertyIsolationDataMode.Name = "propertyIsolationDataMode";
-            this.propertyIsolationDataMode.Size = new System.Drawing.Size(466, 17);
+            this.propertyIsolationDataMode.Size = new System.Drawing.Size(432, 17);
             this.propertyIsolationDataMode.TabIndex = 3;
             this.propertyIsolationDataMode.TabStop = true;
             this.propertyIsolationDataMode.Text = "Data mode: application can only save files to Documents, Desktop and network driv" +
@@ -632,7 +631,7 @@
             this.propertyIsolationIsolated.AutoSize = true;
             this.propertyIsolationIsolated.Location = new System.Drawing.Point(6, 29);
             this.propertyIsolationIsolated.Name = "propertyIsolationIsolated";
-            this.propertyIsolationIsolated.Size = new System.Drawing.Size(264, 17);
+            this.propertyIsolationIsolated.Size = new System.Drawing.Size(241, 17);
             this.propertyIsolationIsolated.TabIndex = 1;
             this.propertyIsolationIsolated.TabStop = true;
             this.propertyIsolationIsolated.Text = "Isolated: application cannot modify the system";
@@ -644,7 +643,7 @@
             this.propertyIsolationMerge.AutoSize = true;
             this.propertyIsolationMerge.Location = new System.Drawing.Point(6, 46);
             this.propertyIsolationMerge.Name = "propertyIsolationMerge";
-            this.propertyIsolationMerge.Size = new System.Drawing.Size(355, 17);
+            this.propertyIsolationMerge.Size = new System.Drawing.Size(327, 17);
             this.propertyIsolationMerge.TabIndex = 2;
             this.propertyIsolationMerge.TabStop = true;
             this.propertyIsolationMerge.Text = "Full access: application can modify the system\'s files and registry";
@@ -656,7 +655,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(7, 46);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Isolation mode:";
             // 
@@ -674,7 +673,7 @@
             this.lblAutoLaunch.AutoSize = true;
             this.lblAutoLaunch.Location = new System.Drawing.Point(7, 16);
             this.lblAutoLaunch.Name = "lblAutoLaunch";
-            this.lblAutoLaunch.Size = new System.Drawing.Size(48, 13);
+            this.lblAutoLaunch.Size = new System.Drawing.Size(44, 13);
             this.lblAutoLaunch.TabIndex = 2;
             this.lblAutoLaunch.Text = "Startup:";
             // 
@@ -817,7 +816,7 @@
             this.fsFolderInfoFullName.AutoSize = true;
             this.fsFolderInfoFullName.Location = new System.Drawing.Point(3, 6);
             this.fsFolderInfoFullName.Name = "fsFolderInfoFullName";
-            this.fsFolderInfoFullName.Size = new System.Drawing.Size(118, 13);
+            this.fsFolderInfoFullName.Size = new System.Drawing.Size(106, 13);
             this.fsFolderInfoFullName.TabIndex = 0;
             this.fsFolderInfoFullName.Text = "fsFolderInfoFullName";
             // 
@@ -965,7 +964,7 @@
             this.tbType.Location = new System.Drawing.Point(6, 106);
             this.tbType.Name = "tbType";
             this.tbType.ReadOnly = true;
-            this.tbType.Size = new System.Drawing.Size(100, 22);
+            this.tbType.Size = new System.Drawing.Size(100, 20);
             this.tbType.TabIndex = 11;
             this.tbType.Visible = false;
             // 
@@ -973,7 +972,7 @@
             // 
             this.tbValue.Location = new System.Drawing.Point(6, 79);
             this.tbValue.Name = "tbValue";
-            this.tbValue.Size = new System.Drawing.Size(100, 22);
+            this.tbValue.Size = new System.Drawing.Size(100, 20);
             this.tbValue.TabIndex = 10;
             this.tbValue.Visible = false;
             // 
@@ -983,7 +982,7 @@
             this.tbSize.Location = new System.Drawing.Point(6, 134);
             this.tbSize.Name = "tbSize";
             this.tbSize.ReadOnly = true;
-            this.tbSize.Size = new System.Drawing.Size(100, 22);
+            this.tbSize.Size = new System.Drawing.Size(100, 20);
             this.tbSize.TabIndex = 9;
             this.tbSize.Visible = false;
             // 
@@ -993,7 +992,7 @@
             this.tbFile.Location = new System.Drawing.Point(6, 51);
             this.tbFile.Name = "tbFile";
             this.tbFile.ReadOnly = true;
-            this.tbFile.Size = new System.Drawing.Size(100, 22);
+            this.tbFile.Size = new System.Drawing.Size(100, 20);
             this.tbFile.TabIndex = 8;
             this.tbFile.Visible = false;
             this.tbFile.TextChanged += new System.EventHandler(this.tbFile_TextChanged);
@@ -1004,8 +1003,7 @@
             this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
+            this.columnHeader5});
             this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regFilesList.DoubleClickActivation = false;
             this.regFilesList.FullRowSelect = true;
@@ -1035,11 +1033,6 @@
             // 
             this.columnHeader5.Text = "Type";
             this.columnHeader5.Width = 99;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Size";
-            this.columnHeader6.Width = 56;
             // 
             // panel4
             // 
@@ -1084,7 +1077,7 @@
             this.regFolderInfoFullName.AutoSize = true;
             this.regFolderInfoFullName.Location = new System.Drawing.Point(3, 6);
             this.regFolderInfoFullName.Name = "regFolderInfoFullName";
-            this.regFolderInfoFullName.Size = new System.Drawing.Size(126, 13);
+            this.regFolderInfoFullName.Size = new System.Drawing.Size(113, 13);
             this.regFolderInfoFullName.TabIndex = 0;
             this.regFolderInfoFullName.Text = "regFolderInfoFullName";
             // 
@@ -1170,7 +1163,7 @@
             this.propertyCleanupOnExit.AutoSize = true;
             this.propertyCleanupOnExit.Location = new System.Drawing.Point(10, 32);
             this.propertyCleanupOnExit.Name = "propertyCleanupOnExit";
-            this.propertyCleanupOnExit.Size = new System.Drawing.Size(165, 17);
+            this.propertyCleanupOnExit.Size = new System.Drawing.Size(153, 17);
             this.propertyCleanupOnExit.TabIndex = 26;
             this.propertyCleanupOnExit.Text = "Remove program upon exit";
             this.propertyCleanupOnExit.UseVisualStyleBackColor = true;
@@ -1181,7 +1174,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(535, 71);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(181, 13);
+            this.label8.Size = new System.Drawing.Size(172, 13);
             this.label8.TabIndex = 25;
             this.label8.Text = "example: \"iexplore.exe;myapp.exe\"";
             // 
@@ -1190,7 +1183,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(7, 51);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(227, 13);
+            this.label7.Size = new System.Drawing.Size(208, 13);
             this.label7.TabIndex = 24;
             this.label7.Text = "Exclude child processes from virtualization:";
             // 
@@ -1199,7 +1192,7 @@
             this.lnkCustomEvents.AutoSize = true;
             this.lnkCustomEvents.Location = new System.Drawing.Point(7, 16);
             this.lnkCustomEvents.Name = "lnkCustomEvents";
-            this.lnkCustomEvents.Size = new System.Drawing.Size(82, 13);
+            this.lnkCustomEvents.Size = new System.Drawing.Size(77, 13);
             this.lnkCustomEvents.TabIndex = 6;
             this.lnkCustomEvents.TabStop = true;
             this.lnkCustomEvents.Text = "Custom events";
@@ -1209,7 +1202,7 @@
             // 
             this.propertyStopInheritance.Location = new System.Drawing.Point(272, 48);
             this.propertyStopInheritance.Name = "propertyStopInheritance";
-            this.propertyStopInheritance.Size = new System.Drawing.Size(435, 22);
+            this.propertyStopInheritance.Size = new System.Drawing.Size(435, 20);
             this.propertyStopInheritance.TabIndex = 6;
             // 
             // miniToolStrip
@@ -1440,7 +1433,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.TextBox tbType;
 
     }
