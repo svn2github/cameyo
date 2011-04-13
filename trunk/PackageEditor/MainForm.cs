@@ -284,6 +284,11 @@ namespace PackageEditor
             // CleanupOnExit
             propertyCleanupOnExit.Checked = virtPackage.GetProperty("OnStopUnvirtualized").Contains(CleanupOnExitCmd);
 
+            // Expiration
+            String expiration = virtPackage.GetProperty("Expiration");
+            propertyExpiration.Checked = !String.IsNullOrEmpty(expiration);
+            propertyExpirationDatePicker.
+
             this.Text = "Package Editor" + " - " + virtPackage.openedFile;
             dirty = false;
         }

@@ -138,6 +138,9 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.propertyExpirationDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.propertyExpiration = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -171,6 +174,7 @@
             this.tabAdvanced.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.bottomPanel.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList
@@ -199,7 +203,8 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1001, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -213,46 +218,46 @@
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveasToolStripMenuItem
             // 
             this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.saveasToolStripMenuItem.Text = "Save &as";
             this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.closeToolStripMenuItem.Text = "&Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -266,17 +271,18 @@
             // 
             // tabControl
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabGeneral);
             this.tabControl.Controls.Add(this.tabFileSystem);
             this.tabControl.Controls.Add(this.tabRegistry);
             this.tabControl.Controls.Add(this.tabAdvanced);
-            this.tabControl.Location = new System.Drawing.Point(12, 37);
+            this.tabControl.Location = new System.Drawing.Point(16, 46);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(727, 412);
+            this.tabControl.Size = new System.Drawing.Size(969, 507);
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -289,10 +295,11 @@
             this.tabGeneral.Controls.Add(this.groupBox3);
             this.tabGeneral.Controls.Add(this.groupBox1);
             this.tabGeneral.Controls.Add(this.dropboxButton);
-            this.tabGeneral.Location = new System.Drawing.Point(4, 22);
+            this.tabGeneral.Location = new System.Drawing.Point(4, 25);
+            this.tabGeneral.Margin = new System.Windows.Forms.Padding(4);
             this.tabGeneral.Name = "tabGeneral";
-            this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(719, 386);
+            this.tabGeneral.Padding = new System.Windows.Forms.Padding(4);
+            this.tabGeneral.Size = new System.Drawing.Size(961, 478);
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -300,9 +307,10 @@
             // dropboxLabel
             // 
             this.dropboxLabel.AutoSize = true;
-            this.dropboxLabel.Location = new System.Drawing.Point(530, 250);
+            this.dropboxLabel.Location = new System.Drawing.Point(707, 308);
+            this.dropboxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.dropboxLabel.Name = "dropboxLabel";
-            this.dropboxLabel.Size = new System.Drawing.Size(53, 13);
+            this.dropboxLabel.Size = new System.Drawing.Size(70, 17);
             this.dropboxLabel.TabIndex = 3;
             this.dropboxLabel.Text = "Publish to";
             // 
@@ -315,9 +323,11 @@
             this.groupBox4.Controls.Add(this.pictureBox4);
             this.groupBox4.Controls.Add(this.pictureBox3);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox4.Location = new System.Drawing.Point(3, 336);
+            this.groupBox4.Location = new System.Drawing.Point(4, 413);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(713, 75);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Size = new System.Drawing.Size(953, 92);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Toolbox";
@@ -327,9 +337,10 @@
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
-            this.linkLabel1.Location = new System.Drawing.Point(34, 50);
+            this.linkLabel1.Location = new System.Drawing.Point(45, 62);
+            this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(296, 17);
+            this.linkLabel1.Size = new System.Drawing.Size(350, 20);
             this.linkLabel1.TabIndex = 42;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Execute: launch a command in the context of this package";
@@ -338,7 +349,8 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 48);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 59);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(16, 15);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -349,9 +361,10 @@
             // 
             this.linkLabel4.AutoSize = true;
             this.linkLabel4.LinkArea = new System.Windows.Forms.LinkArea(0, 4);
-            this.linkLabel4.Location = new System.Drawing.Point(34, 16);
+            this.linkLabel4.Location = new System.Drawing.Point(45, 20);
+            this.linkLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(314, 17);
+            this.linkLabel4.Size = new System.Drawing.Size(371, 20);
             this.linkLabel4.TabIndex = 38;
             this.linkLabel4.TabStop = true;
             this.linkLabel4.Text = "Cmd: launch a command box from the context of this package";
@@ -361,9 +374,10 @@
             // 
             this.linkLabel3.AutoSize = true;
             this.linkLabel3.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
-            this.linkLabel3.Location = new System.Drawing.Point(34, 33);
+            this.linkLabel3.Location = new System.Drawing.Point(45, 41);
+            this.linkLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(302, 17);
+            this.linkLabel3.Size = new System.Drawing.Size(357, 20);
             this.linkLabel3.TabIndex = 37;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "Regedit: explore the registry from the context of this packge";
@@ -372,7 +386,8 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(12, 14);
+            this.pictureBox4.Location = new System.Drawing.Point(16, 17);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(16, 16);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -382,7 +397,8 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(12, 31);
+            this.pictureBox3.Location = new System.Drawing.Point(16, 38);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(16, 16);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -392,9 +408,10 @@
             // resetCredLink
             // 
             this.resetCredLink.AutoSize = true;
-            this.resetCredLink.Location = new System.Drawing.Point(618, 294);
+            this.resetCredLink.Location = new System.Drawing.Point(824, 362);
+            this.resetCredLink.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.resetCredLink.Name = "resetCredLink";
-            this.resetCredLink.Size = new System.Drawing.Size(90, 13);
+            this.resetCredLink.Size = new System.Drawing.Size(120, 17);
             this.resetCredLink.TabIndex = 4;
             this.resetCredLink.TabStop = true;
             this.resetCredLink.Text = "Reset Credentials";
@@ -407,9 +424,11 @@
             this.managementGroup.Controls.Add(this.linkLabel7);
             this.managementGroup.Controls.Add(this.linkLabel6);
             this.managementGroup.Dock = System.Windows.Forms.DockStyle.Top;
-            this.managementGroup.Location = new System.Drawing.Point(3, 244);
+            this.managementGroup.Location = new System.Drawing.Point(4, 300);
+            this.managementGroup.Margin = new System.Windows.Forms.Padding(4);
             this.managementGroup.Name = "managementGroup";
-            this.managementGroup.Size = new System.Drawing.Size(713, 92);
+            this.managementGroup.Padding = new System.Windows.Forms.Padding(4);
+            this.managementGroup.Size = new System.Drawing.Size(953, 113);
             this.managementGroup.TabIndex = 1;
             this.managementGroup.TabStop = false;
             this.managementGroup.Text = "Application control";
@@ -419,9 +438,10 @@
             // 
             this.linkLabel5.AutoSize = true;
             this.linkLabel5.LinkArea = new System.Windows.Forms.LinkArea(0, 15);
-            this.linkLabel5.Location = new System.Drawing.Point(7, 50);
+            this.linkLabel5.Location = new System.Drawing.Point(9, 62);
+            this.linkLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(284, 17);
+            this.linkLabel5.Size = new System.Drawing.Size(335, 20);
             this.linkLabel5.TabIndex = 45;
             this.linkLabel5.TabStop = true;
             this.linkLabel5.Text = "Patch / update: apply a patch or updater to this package";
@@ -431,22 +451,24 @@
             // 
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.LinkArea = new System.Windows.Forms.LinkArea(0, 10);
-            this.linkLabel2.Location = new System.Drawing.Point(7, 67);
+            this.linkLabel2.Location = new System.Drawing.Point(9, 82);
+            this.linkLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(526, 17);
+            this.linkLabel2.Size = new System.Drawing.Size(622, 20);
             this.linkLabel2.TabIndex = 44;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "Repackage: recollect the package with its current files and registry modification" +
-                "s into a single executable";
+    "s into a single executable";
             this.linkLabel2.UseCompatibleTextRendering = true;
             // 
             // linkLabel7
             // 
             this.linkLabel7.AutoSize = true;
             this.linkLabel7.LinkArea = new System.Windows.Forms.LinkArea(0, 7);
-            this.linkLabel7.Location = new System.Drawing.Point(7, 16);
+            this.linkLabel7.Location = new System.Drawing.Point(9, 20);
+            this.linkLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel7.Name = "linkLabel7";
-            this.linkLabel7.Size = new System.Drawing.Size(244, 17);
+            this.linkLabel7.Size = new System.Drawing.Size(289, 20);
             this.linkLabel7.TabIndex = 43;
             this.linkLabel7.TabStop = true;
             this.linkLabel7.Text = "Remove: remove application from this computer";
@@ -456,13 +478,14 @@
             // 
             this.linkLabel6.AutoSize = true;
             this.linkLabel6.LinkArea = new System.Windows.Forms.LinkArea(0, 10);
-            this.linkLabel6.Location = new System.Drawing.Point(7, 33);
+            this.linkLabel6.Location = new System.Drawing.Point(9, 41);
+            this.linkLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(399, 17);
+            this.linkLabel6.Size = new System.Drawing.Size(471, 20);
             this.linkLabel6.TabIndex = 41;
             this.linkLabel6.TabStop = true;
             this.linkLabel6.Text = "Integrate: register application\'s shortcuts and file associations on this compute" +
-                "r";
+    "r";
             this.linkLabel6.UseCompatibleTextRendering = true;
             // 
             // groupBox3
@@ -472,9 +495,11 @@
             this.groupBox3.Controls.Add(this.propertyAppID);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(3, 174);
+            this.groupBox3.Location = new System.Drawing.Point(4, 214);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(713, 70);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(953, 86);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Extras";
@@ -482,32 +507,36 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 42);
+            this.label2.Location = new System.Drawing.Point(9, 52);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.Size = new System.Drawing.Size(83, 17);
             this.label2.TabIndex = 24;
             this.label2.Text = "Description:";
             // 
             // propertyFriendlyName
             // 
-            this.propertyFriendlyName.Location = new System.Drawing.Point(100, 39);
+            this.propertyFriendlyName.Location = new System.Drawing.Point(133, 48);
+            this.propertyFriendlyName.Margin = new System.Windows.Forms.Padding(4);
             this.propertyFriendlyName.Name = "propertyFriendlyName";
-            this.propertyFriendlyName.Size = new System.Drawing.Size(605, 20);
+            this.propertyFriendlyName.Size = new System.Drawing.Size(805, 22);
             this.propertyFriendlyName.TabIndex = 6;
             // 
             // propertyAppID
             // 
-            this.propertyAppID.Location = new System.Drawing.Point(100, 13);
+            this.propertyAppID.Location = new System.Drawing.Point(133, 16);
+            this.propertyAppID.Margin = new System.Windows.Forms.Padding(4);
             this.propertyAppID.Name = "propertyAppID";
-            this.propertyAppID.Size = new System.Drawing.Size(605, 20);
+            this.propertyAppID.Size = new System.Drawing.Size(805, 22);
             this.propertyAppID.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 16);
+            this.label1.Location = new System.Drawing.Point(9, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.Size = new System.Drawing.Size(98, 17);
             this.label1.TabIndex = 21;
             this.label1.Text = "Application ID:";
             // 
@@ -526,9 +555,11 @@
             this.groupBox1.Controls.Add(this.propertyIcon);
             this.groupBox1.Controls.Add(this.lblAutoLaunch);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(713, 171);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(953, 210);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basics";
@@ -537,17 +568,19 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 120);
+            this.label6.Location = new System.Drawing.Point(9, 148);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.Size = new System.Drawing.Size(38, 17);
             this.label6.TabIndex = 23;
             this.label6.Text = "Icon:";
             // 
             // lnkAutoLaunch
             // 
-            this.lnkAutoLaunch.Location = new System.Drawing.Point(605, 16);
+            this.lnkAutoLaunch.Location = new System.Drawing.Point(807, 20);
+            this.lnkAutoLaunch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkAutoLaunch.Name = "lnkAutoLaunch";
-            this.lnkAutoLaunch.Size = new System.Drawing.Size(100, 17);
+            this.lnkAutoLaunch.Size = new System.Drawing.Size(133, 21);
             this.lnkAutoLaunch.TabIndex = 0;
             this.lnkAutoLaunch.TabStop = true;
             this.lnkAutoLaunch.Text = "Change";
@@ -556,17 +589,19 @@
             // 
             // propertyAutoLaunch
             // 
-            this.propertyAutoLaunch.Location = new System.Drawing.Point(97, 16);
+            this.propertyAutoLaunch.Location = new System.Drawing.Point(129, 20);
+            this.propertyAutoLaunch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.propertyAutoLaunch.Name = "propertyAutoLaunch";
-            this.propertyAutoLaunch.Size = new System.Drawing.Size(516, 13);
+            this.propertyAutoLaunch.Size = new System.Drawing.Size(688, 16);
             this.propertyAutoLaunch.TabIndex = 21;
             this.propertyAutoLaunch.Text = "propertyAutoLaunch";
             // 
             // lnkChangeIcon
             // 
-            this.lnkChangeIcon.Location = new System.Drawing.Point(622, 121);
+            this.lnkChangeIcon.Location = new System.Drawing.Point(829, 149);
+            this.lnkChangeIcon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkChangeIcon.Name = "lnkChangeIcon";
-            this.lnkChangeIcon.Size = new System.Drawing.Size(83, 14);
+            this.lnkChangeIcon.Size = new System.Drawing.Size(111, 17);
             this.lnkChangeIcon.TabIndex = 4;
             this.lnkChangeIcon.TabStop = true;
             this.lnkChangeIcon.Text = "Change icon";
@@ -575,9 +610,10 @@
             // 
             // lnkChangeDataStorage
             // 
-            this.lnkChangeDataStorage.Location = new System.Drawing.Point(605, 104);
+            this.lnkChangeDataStorage.Location = new System.Drawing.Point(807, 128);
+            this.lnkChangeDataStorage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkChangeDataStorage.Name = "lnkChangeDataStorage";
-            this.lnkChangeDataStorage.Size = new System.Drawing.Size(100, 17);
+            this.lnkChangeDataStorage.Size = new System.Drawing.Size(133, 21);
             this.lnkChangeDataStorage.TabIndex = 3;
             this.lnkChangeDataStorage.TabStop = true;
             this.lnkChangeDataStorage.Text = "Change";
@@ -587,18 +623,20 @@
             // propertyDataStorage
             // 
             this.propertyDataStorage.AutoSize = true;
-            this.propertyDataStorage.Location = new System.Drawing.Point(97, 104);
+            this.propertyDataStorage.Location = new System.Drawing.Point(129, 128);
+            this.propertyDataStorage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.propertyDataStorage.Name = "propertyDataStorage";
-            this.propertyDataStorage.Size = new System.Drawing.Size(105, 13);
+            this.propertyDataStorage.Size = new System.Drawing.Size(141, 17);
             this.propertyDataStorage.TabIndex = 15;
             this.propertyDataStorage.Text = "propertyDataStorage";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 104);
+            this.label5.Location = new System.Drawing.Point(9, 128);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.Size = new System.Drawing.Size(94, 17);
             this.label5.TabIndex = 13;
             this.label5.Text = "Data storage:";
             // 
@@ -607,31 +645,35 @@
             this.groupBox2.Controls.Add(this.propertyIsolationDataMode);
             this.groupBox2.Controls.Add(this.propertyIsolationIsolated);
             this.groupBox2.Controls.Add(this.propertyIsolationMerge);
-            this.groupBox2.Location = new System.Drawing.Point(100, 32);
+            this.groupBox2.Location = new System.Drawing.Point(133, 39);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(605, 69);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(807, 85);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             // 
             // propertyIsolationDataMode
             // 
             this.propertyIsolationDataMode.AutoSize = true;
-            this.propertyIsolationDataMode.Location = new System.Drawing.Point(6, 12);
+            this.propertyIsolationDataMode.Location = new System.Drawing.Point(8, 15);
+            this.propertyIsolationDataMode.Margin = new System.Windows.Forms.Padding(4);
             this.propertyIsolationDataMode.Name = "propertyIsolationDataMode";
-            this.propertyIsolationDataMode.Size = new System.Drawing.Size(432, 17);
+            this.propertyIsolationDataMode.Size = new System.Drawing.Size(568, 21);
             this.propertyIsolationDataMode.TabIndex = 3;
             this.propertyIsolationDataMode.TabStop = true;
             this.propertyIsolationDataMode.Text = "Data mode: application can only save files to Documents, Desktop and network driv" +
-                "es";
+    "es";
             this.propertyIsolationDataMode.UseVisualStyleBackColor = true;
             this.propertyIsolationDataMode.Click += new System.EventHandler(this.IsolationChanged);
             // 
             // propertyIsolationIsolated
             // 
             this.propertyIsolationIsolated.AutoSize = true;
-            this.propertyIsolationIsolated.Location = new System.Drawing.Point(6, 29);
+            this.propertyIsolationIsolated.Location = new System.Drawing.Point(8, 36);
+            this.propertyIsolationIsolated.Margin = new System.Windows.Forms.Padding(4);
             this.propertyIsolationIsolated.Name = "propertyIsolationIsolated";
-            this.propertyIsolationIsolated.Size = new System.Drawing.Size(241, 17);
+            this.propertyIsolationIsolated.Size = new System.Drawing.Size(318, 21);
             this.propertyIsolationIsolated.TabIndex = 1;
             this.propertyIsolationIsolated.TabStop = true;
             this.propertyIsolationIsolated.Text = "Isolated: application cannot modify the system";
@@ -641,9 +683,10 @@
             // propertyIsolationMerge
             // 
             this.propertyIsolationMerge.AutoSize = true;
-            this.propertyIsolationMerge.Location = new System.Drawing.Point(6, 46);
+            this.propertyIsolationMerge.Location = new System.Drawing.Point(8, 57);
+            this.propertyIsolationMerge.Margin = new System.Windows.Forms.Padding(4);
             this.propertyIsolationMerge.Name = "propertyIsolationMerge";
-            this.propertyIsolationMerge.Size = new System.Drawing.Size(327, 17);
+            this.propertyIsolationMerge.Size = new System.Drawing.Size(437, 21);
             this.propertyIsolationMerge.TabIndex = 2;
             this.propertyIsolationMerge.TabStop = true;
             this.propertyIsolationMerge.Text = "Full access: application can modify the system\'s files and registry";
@@ -653,17 +696,19 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 46);
+            this.label4.Location = new System.Drawing.Point(9, 57);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.Size = new System.Drawing.Size(103, 17);
             this.label4.TabIndex = 10;
             this.label4.Text = "Isolation mode:";
             // 
             // propertyIcon
             // 
-            this.propertyIcon.Location = new System.Drawing.Point(100, 120);
+            this.propertyIcon.Location = new System.Drawing.Point(133, 148);
+            this.propertyIcon.Margin = new System.Windows.Forms.Padding(4);
             this.propertyIcon.Name = "propertyIcon";
-            this.propertyIcon.Size = new System.Drawing.Size(32, 32);
+            this.propertyIcon.Size = new System.Drawing.Size(43, 39);
             this.propertyIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.propertyIcon.TabIndex = 4;
             this.propertyIcon.TabStop = false;
@@ -671,9 +716,10 @@
             // lblAutoLaunch
             // 
             this.lblAutoLaunch.AutoSize = true;
-            this.lblAutoLaunch.Location = new System.Drawing.Point(7, 16);
+            this.lblAutoLaunch.Location = new System.Drawing.Point(9, 20);
+            this.lblAutoLaunch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAutoLaunch.Name = "lblAutoLaunch";
-            this.lblAutoLaunch.Size = new System.Drawing.Size(44, 13);
+            this.lblAutoLaunch.Size = new System.Drawing.Size(58, 17);
             this.lblAutoLaunch.TabIndex = 2;
             this.lblAutoLaunch.Text = "Startup:";
             // 
@@ -681,9 +727,10 @@
             // 
             this.dropboxButton.BackgroundImage = global::PackageEditor.Properties.Resources.dropbox_logo_home;
             this.dropboxButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.dropboxButton.Location = new System.Drawing.Point(589, 250);
+            this.dropboxButton.Location = new System.Drawing.Point(785, 308);
+            this.dropboxButton.Margin = new System.Windows.Forms.Padding(4);
             this.dropboxButton.Name = "dropboxButton";
-            this.dropboxButton.Size = new System.Drawing.Size(119, 41);
+            this.dropboxButton.Size = new System.Drawing.Size(159, 50);
             this.dropboxButton.TabIndex = 2;
             this.dropboxButton.UseVisualStyleBackColor = true;
             this.dropboxButton.Click += new System.EventHandler(this.dropboxButton_Click);
@@ -692,10 +739,11 @@
             // 
             this.tabFileSystem.Controls.Add(this.panel5);
             this.tabFileSystem.Controls.Add(this.toolStrip1);
-            this.tabFileSystem.Location = new System.Drawing.Point(4, 22);
+            this.tabFileSystem.Location = new System.Drawing.Point(4, 25);
+            this.tabFileSystem.Margin = new System.Windows.Forms.Padding(4);
             this.tabFileSystem.Name = "tabFileSystem";
-            this.tabFileSystem.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFileSystem.Size = new System.Drawing.Size(719, 386);
+            this.tabFileSystem.Padding = new System.Windows.Forms.Padding(4);
+            this.tabFileSystem.Size = new System.Drawing.Size(961, 478);
             this.tabFileSystem.TabIndex = 1;
             this.tabFileSystem.Text = "Files";
             this.tabFileSystem.UseVisualStyleBackColor = true;
@@ -704,15 +752,17 @@
             // 
             this.panel5.Controls.Add(this.splitContainer1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 28);
+            this.panel5.Location = new System.Drawing.Point(4, 29);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(713, 355);
+            this.panel5.Size = new System.Drawing.Size(953, 445);
             this.panel5.TabIndex = 7;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -723,8 +773,9 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.fsFilesList);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(713, 355);
-            this.splitContainer1.SplitterDistance = 201;
+            this.splitContainer1.Size = new System.Drawing.Size(953, 445);
+            this.splitContainer1.SplitterDistance = 268;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 5;
             // 
             // fsFolderTree
@@ -734,9 +785,10 @@
             this.fsFolderTree.ImageIndex = 0;
             this.fsFolderTree.ImageList = this.imageList;
             this.fsFolderTree.Location = new System.Drawing.Point(0, 0);
+            this.fsFolderTree.Margin = new System.Windows.Forms.Padding(4);
             this.fsFolderTree.Name = "fsFolderTree";
             this.fsFolderTree.SelectedImageIndex = 0;
-            this.fsFolderTree.Size = new System.Drawing.Size(201, 355);
+            this.fsFolderTree.Size = new System.Drawing.Size(268, 445);
             this.fsFolderTree.TabIndex = 3;
             this.fsFolderTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.fsFolderTree_BeforeSelect);
             this.fsFolderTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fsFolderTree_AfterSelect);
@@ -754,9 +806,10 @@
             this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2});
-            this.fsFilesList.Location = new System.Drawing.Point(0, 25);
+            this.fsFilesList.Location = new System.Drawing.Point(0, 31);
+            this.fsFilesList.Margin = new System.Windows.Forms.Padding(4);
             this.fsFilesList.Name = "fsFilesList";
-            this.fsFilesList.Size = new System.Drawing.Size(508, 330);
+            this.fsFilesList.Size = new System.Drawing.Size(680, 414);
             this.fsFilesList.TabIndex = 7;
             this.fsFilesList.UseCompatibleStateImageBehavior = false;
             this.fsFilesList.View = System.Windows.Forms.View.Details;
@@ -779,8 +832,9 @@
             this.panel2.Controls.Add(this.fsFolderInfoFullName);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(508, 25);
+            this.panel2.Size = new System.Drawing.Size(680, 31);
             this.panel2.TabIndex = 6;
             // 
             // panel3
@@ -788,25 +842,28 @@
             this.panel3.Controls.Add(this.fsFolderInfoIsolationCombo);
             this.panel3.Controls.Add(this.fsFolderInfoIsolationLbl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(297, 0);
+            this.panel3.Location = new System.Drawing.Point(399, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(211, 25);
+            this.panel3.Size = new System.Drawing.Size(281, 31);
             this.panel3.TabIndex = 4;
             // 
             // fsFolderInfoIsolationCombo
             // 
             this.fsFolderInfoIsolationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fsFolderInfoIsolationCombo.FormattingEnabled = true;
-            this.fsFolderInfoIsolationCombo.Location = new System.Drawing.Point(90, 1);
+            this.fsFolderInfoIsolationCombo.Location = new System.Drawing.Point(120, 1);
+            this.fsFolderInfoIsolationCombo.Margin = new System.Windows.Forms.Padding(4);
             this.fsFolderInfoIsolationCombo.Name = "fsFolderInfoIsolationCombo";
-            this.fsFolderInfoIsolationCombo.Size = new System.Drawing.Size(121, 21);
+            this.fsFolderInfoIsolationCombo.Size = new System.Drawing.Size(160, 24);
             this.fsFolderInfoIsolationCombo.TabIndex = 5;
             // 
             // fsFolderInfoIsolationLbl
             // 
-            this.fsFolderInfoIsolationLbl.Location = new System.Drawing.Point(6, 5);
+            this.fsFolderInfoIsolationLbl.Location = new System.Drawing.Point(8, 6);
+            this.fsFolderInfoIsolationLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.fsFolderInfoIsolationLbl.Name = "fsFolderInfoIsolationLbl";
-            this.fsFolderInfoIsolationLbl.Size = new System.Drawing.Size(78, 17);
+            this.fsFolderInfoIsolationLbl.Size = new System.Drawing.Size(104, 21);
             this.fsFolderInfoIsolationLbl.TabIndex = 4;
             this.fsFolderInfoIsolationLbl.Text = "Isolation:";
             this.fsFolderInfoIsolationLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -814,9 +871,10 @@
             // fsFolderInfoFullName
             // 
             this.fsFolderInfoFullName.AutoSize = true;
-            this.fsFolderInfoFullName.Location = new System.Drawing.Point(3, 6);
+            this.fsFolderInfoFullName.Location = new System.Drawing.Point(4, 7);
+            this.fsFolderInfoFullName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.fsFolderInfoFullName.Name = "fsFolderInfoFullName";
-            this.fsFolderInfoFullName.Size = new System.Drawing.Size(106, 13);
+            this.fsFolderInfoFullName.Size = new System.Drawing.Size(141, 17);
             this.fsFolderInfoFullName.TabIndex = 0;
             this.fsFolderInfoFullName.Text = "fsFolderInfoFullName";
             // 
@@ -830,9 +888,9 @@
             this.fsAddEmptyDirBtn,
             this.toolStripSeparator2,
             this.fsSaveFileAsBtn});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip1.Location = new System.Drawing.Point(4, 4);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(713, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(953, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -898,10 +956,11 @@
             // tabRegistry
             // 
             this.tabRegistry.Controls.Add(this.panel8);
-            this.tabRegistry.Location = new System.Drawing.Point(4, 22);
+            this.tabRegistry.Location = new System.Drawing.Point(4, 25);
+            this.tabRegistry.Margin = new System.Windows.Forms.Padding(4);
             this.tabRegistry.Name = "tabRegistry";
-            this.tabRegistry.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRegistry.Size = new System.Drawing.Size(719, 386);
+            this.tabRegistry.Padding = new System.Windows.Forms.Padding(4);
+            this.tabRegistry.Size = new System.Drawing.Size(961, 478);
             this.tabRegistry.TabIndex = 2;
             this.tabRegistry.Text = "Registry";
             this.tabRegistry.UseVisualStyleBackColor = true;
@@ -911,24 +970,27 @@
             this.panel8.Controls.Add(this.panel1);
             this.panel8.Controls.Add(this.panel7);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(3, 3);
+            this.panel8.Location = new System.Drawing.Point(4, 4);
+            this.panel8.Margin = new System.Windows.Forms.Padding(4);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(713, 380);
+            this.panel8.Size = new System.Drawing.Size(953, 470);
             this.panel8.TabIndex = 10;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.regSplitContainer);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 21);
+            this.panel1.Location = new System.Drawing.Point(0, 26);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 359);
+            this.panel1.Size = new System.Drawing.Size(953, 444);
             this.panel1.TabIndex = 11;
             // 
             // regSplitContainer
             // 
             this.regSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regSplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.regSplitContainer.Margin = new System.Windows.Forms.Padding(4);
             this.regSplitContainer.Name = "regSplitContainer";
             // 
             // regSplitContainer.Panel1
@@ -943,8 +1005,9 @@
             this.regSplitContainer.Panel2.Controls.Add(this.tbFile);
             this.regSplitContainer.Panel2.Controls.Add(this.regFilesList);
             this.regSplitContainer.Panel2.Controls.Add(this.panel4);
-            this.regSplitContainer.Size = new System.Drawing.Size(713, 359);
-            this.regSplitContainer.SplitterDistance = 201;
+            this.regSplitContainer.Size = new System.Drawing.Size(953, 444);
+            this.regSplitContainer.SplitterDistance = 268;
+            this.regSplitContainer.SplitterWidth = 5;
             this.regSplitContainer.TabIndex = 5;
             // 
             // regFolderTree
@@ -953,46 +1016,51 @@
             this.regFolderTree.ImageIndex = 0;
             this.regFolderTree.ImageList = this.imageList;
             this.regFolderTree.Location = new System.Drawing.Point(0, 0);
+            this.regFolderTree.Margin = new System.Windows.Forms.Padding(4);
             this.regFolderTree.Name = "regFolderTree";
             this.regFolderTree.SelectedImageIndex = 0;
-            this.regFolderTree.Size = new System.Drawing.Size(201, 359);
+            this.regFolderTree.Size = new System.Drawing.Size(268, 444);
             this.regFolderTree.TabIndex = 3;
             // 
             // tbType
             // 
             this.tbType.BackColor = System.Drawing.SystemColors.Window;
-            this.tbType.Location = new System.Drawing.Point(6, 106);
+            this.tbType.Location = new System.Drawing.Point(8, 130);
+            this.tbType.Margin = new System.Windows.Forms.Padding(4);
             this.tbType.Name = "tbType";
             this.tbType.ReadOnly = true;
-            this.tbType.Size = new System.Drawing.Size(100, 20);
+            this.tbType.Size = new System.Drawing.Size(132, 22);
             this.tbType.TabIndex = 11;
             this.tbType.Visible = false;
             // 
             // tbValue
             // 
-            this.tbValue.Location = new System.Drawing.Point(6, 79);
+            this.tbValue.Location = new System.Drawing.Point(8, 97);
+            this.tbValue.Margin = new System.Windows.Forms.Padding(4);
             this.tbValue.Name = "tbValue";
-            this.tbValue.Size = new System.Drawing.Size(100, 20);
+            this.tbValue.Size = new System.Drawing.Size(132, 22);
             this.tbValue.TabIndex = 10;
             this.tbValue.Visible = false;
             // 
             // tbSize
             // 
             this.tbSize.BackColor = System.Drawing.SystemColors.Window;
-            this.tbSize.Location = new System.Drawing.Point(6, 134);
+            this.tbSize.Location = new System.Drawing.Point(8, 165);
+            this.tbSize.Margin = new System.Windows.Forms.Padding(4);
             this.tbSize.Name = "tbSize";
             this.tbSize.ReadOnly = true;
-            this.tbSize.Size = new System.Drawing.Size(100, 20);
+            this.tbSize.Size = new System.Drawing.Size(132, 22);
             this.tbSize.TabIndex = 9;
             this.tbSize.Visible = false;
             // 
             // tbFile
             // 
             this.tbFile.BackColor = System.Drawing.SystemColors.Window;
-            this.tbFile.Location = new System.Drawing.Point(6, 51);
+            this.tbFile.Location = new System.Drawing.Point(8, 63);
+            this.tbFile.Margin = new System.Windows.Forms.Padding(4);
             this.tbFile.Name = "tbFile";
             this.tbFile.ReadOnly = true;
-            this.tbFile.Size = new System.Drawing.Size(100, 20);
+            this.tbFile.Size = new System.Drawing.Size(132, 22);
             this.tbFile.TabIndex = 8;
             this.tbFile.Visible = false;
             this.tbFile.TextChanged += new System.EventHandler(this.tbFile_TextChanged);
@@ -1010,9 +1078,10 @@
             this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem3,
             listViewItem4});
-            this.regFilesList.Location = new System.Drawing.Point(0, 25);
+            this.regFilesList.Location = new System.Drawing.Point(0, 31);
+            this.regFilesList.Margin = new System.Windows.Forms.Padding(4);
             this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(508, 334);
+            this.regFilesList.Size = new System.Drawing.Size(680, 413);
             this.regFilesList.TabIndex = 7;
             this.regFilesList.UseCompatibleStateImageBehavior = false;
             this.regFilesList.View = System.Windows.Forms.View.Details;
@@ -1040,8 +1109,9 @@
             this.panel4.Controls.Add(this.regFolderInfoFullName);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(508, 25);
+            this.panel4.Size = new System.Drawing.Size(680, 31);
             this.panel4.TabIndex = 6;
             // 
             // panel6
@@ -1049,25 +1119,28 @@
             this.panel6.Controls.Add(this.regFolderInfoIsolationCombo);
             this.panel6.Controls.Add(this.label3);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(297, 0);
+            this.panel6.Location = new System.Drawing.Point(399, 0);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(211, 25);
+            this.panel6.Size = new System.Drawing.Size(281, 31);
             this.panel6.TabIndex = 4;
             // 
             // regFolderInfoIsolationCombo
             // 
             this.regFolderInfoIsolationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.regFolderInfoIsolationCombo.FormattingEnabled = true;
-            this.regFolderInfoIsolationCombo.Location = new System.Drawing.Point(90, 1);
+            this.regFolderInfoIsolationCombo.Location = new System.Drawing.Point(120, 1);
+            this.regFolderInfoIsolationCombo.Margin = new System.Windows.Forms.Padding(4);
             this.regFolderInfoIsolationCombo.Name = "regFolderInfoIsolationCombo";
-            this.regFolderInfoIsolationCombo.Size = new System.Drawing.Size(121, 21);
+            this.regFolderInfoIsolationCombo.Size = new System.Drawing.Size(160, 24);
             this.regFolderInfoIsolationCombo.TabIndex = 5;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(6, 5);
+            this.label3.Location = new System.Drawing.Point(8, 6);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 17);
+            this.label3.Size = new System.Drawing.Size(104, 21);
             this.label3.TabIndex = 4;
             this.label3.Text = "Isolation:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1075,9 +1148,10 @@
             // regFolderInfoFullName
             // 
             this.regFolderInfoFullName.AutoSize = true;
-            this.regFolderInfoFullName.Location = new System.Drawing.Point(3, 6);
+            this.regFolderInfoFullName.Location = new System.Drawing.Point(4, 7);
+            this.regFolderInfoFullName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.regFolderInfoFullName.Name = "regFolderInfoFullName";
-            this.regFolderInfoFullName.Size = new System.Drawing.Size(113, 13);
+            this.regFolderInfoFullName.Size = new System.Drawing.Size(151, 17);
             this.regFolderInfoFullName.TabIndex = 0;
             this.regFolderInfoFullName.Text = "regFolderInfoFullName";
             // 
@@ -1089,16 +1163,18 @@
             this.panel7.Controls.Add(this.regToolStrip);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(713, 21);
+            this.panel7.Size = new System.Drawing.Size(953, 26);
             this.panel7.TabIndex = 10;
             // 
             // regProgressBar
             // 
             this.regProgressBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.regProgressBar.Location = new System.Drawing.Point(0, 0);
+            this.regProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.regProgressBar.Name = "regProgressBar";
-            this.regProgressBar.Size = new System.Drawing.Size(713, 21);
+            this.regProgressBar.Size = new System.Drawing.Size(953, 26);
             this.regProgressBar.TabIndex = 14;
             // 
             // regToolStrip
@@ -1108,7 +1184,7 @@
             this.regEditBtn});
             this.regToolStrip.Location = new System.Drawing.Point(0, 0);
             this.regToolStrip.Name = "regToolStrip";
-            this.regToolStrip.Size = new System.Drawing.Size(713, 25);
+            this.regToolStrip.Size = new System.Drawing.Size(951, 31);
             this.regToolStrip.TabIndex = 12;
             this.regToolStrip.Text = "toolStrip2";
             this.regToolStrip.Visible = false;
@@ -1119,7 +1195,7 @@
             this.regRemoveBtn.Image = ((System.Drawing.Image)(resources.GetObject("regRemoveBtn.Image")));
             this.regRemoveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.regRemoveBtn.Name = "regRemoveBtn";
-            this.regRemoveBtn.Size = new System.Drawing.Size(23, 22);
+            this.regRemoveBtn.Size = new System.Drawing.Size(23, 28);
             this.regRemoveBtn.Text = "Delete";
             this.regRemoveBtn.ToolTipText = "Remove key";
             // 
@@ -1129,16 +1205,18 @@
             this.regEditBtn.Image = ((System.Drawing.Image)(resources.GetObject("regEditBtn.Image")));
             this.regEditBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.regEditBtn.Name = "regEditBtn";
-            this.regEditBtn.Size = new System.Drawing.Size(23, 22);
+            this.regEditBtn.Size = new System.Drawing.Size(23, 28);
             this.regEditBtn.ToolTipText = "Edit registry";
             // 
             // tabAdvanced
             // 
+            this.tabAdvanced.Controls.Add(this.groupBox6);
             this.tabAdvanced.Controls.Add(this.groupBox5);
-            this.tabAdvanced.Location = new System.Drawing.Point(4, 22);
+            this.tabAdvanced.Location = new System.Drawing.Point(4, 25);
+            this.tabAdvanced.Margin = new System.Windows.Forms.Padding(4);
             this.tabAdvanced.Name = "tabAdvanced";
-            this.tabAdvanced.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdvanced.Size = new System.Drawing.Size(719, 386);
+            this.tabAdvanced.Padding = new System.Windows.Forms.Padding(4);
+            this.tabAdvanced.Size = new System.Drawing.Size(961, 478);
             this.tabAdvanced.TabIndex = 3;
             this.tabAdvanced.Text = "Advanced";
             this.tabAdvanced.UseVisualStyleBackColor = true;
@@ -1151,9 +1229,11 @@
             this.groupBox5.Controls.Add(this.lnkCustomEvents);
             this.groupBox5.Controls.Add(this.propertyStopInheritance);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(3, 3);
+            this.groupBox5.Location = new System.Drawing.Point(4, 4);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(713, 89);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox5.Size = new System.Drawing.Size(953, 110);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Advanced";
@@ -1161,9 +1241,10 @@
             // propertyCleanupOnExit
             // 
             this.propertyCleanupOnExit.AutoSize = true;
-            this.propertyCleanupOnExit.Location = new System.Drawing.Point(10, 32);
+            this.propertyCleanupOnExit.Location = new System.Drawing.Point(13, 39);
+            this.propertyCleanupOnExit.Margin = new System.Windows.Forms.Padding(4);
             this.propertyCleanupOnExit.Name = "propertyCleanupOnExit";
-            this.propertyCleanupOnExit.Size = new System.Drawing.Size(153, 17);
+            this.propertyCleanupOnExit.Size = new System.Drawing.Size(200, 21);
             this.propertyCleanupOnExit.TabIndex = 26;
             this.propertyCleanupOnExit.Text = "Remove program upon exit";
             this.propertyCleanupOnExit.UseVisualStyleBackColor = true;
@@ -1172,27 +1253,30 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(535, 71);
+            this.label8.Location = new System.Drawing.Point(715, 87);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(172, 13);
+            this.label8.Size = new System.Drawing.Size(225, 17);
             this.label8.TabIndex = 25;
             this.label8.Text = "example: \"iexplore.exe;myapp.exe\"";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 51);
+            this.label7.Location = new System.Drawing.Point(9, 63);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(208, 13);
+            this.label7.Size = new System.Drawing.Size(278, 17);
             this.label7.TabIndex = 24;
             this.label7.Text = "Exclude child processes from virtualization:";
             // 
             // lnkCustomEvents
             // 
             this.lnkCustomEvents.AutoSize = true;
-            this.lnkCustomEvents.Location = new System.Drawing.Point(7, 16);
+            this.lnkCustomEvents.Location = new System.Drawing.Point(9, 20);
+            this.lnkCustomEvents.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkCustomEvents.Name = "lnkCustomEvents";
-            this.lnkCustomEvents.Size = new System.Drawing.Size(77, 13);
+            this.lnkCustomEvents.Size = new System.Drawing.Size(101, 17);
             this.lnkCustomEvents.TabIndex = 6;
             this.lnkCustomEvents.TabStop = true;
             this.lnkCustomEvents.Text = "Custom events";
@@ -1200,9 +1284,10 @@
             // 
             // propertyStopInheritance
             // 
-            this.propertyStopInheritance.Location = new System.Drawing.Point(272, 48);
+            this.propertyStopInheritance.Location = new System.Drawing.Point(363, 59);
+            this.propertyStopInheritance.Margin = new System.Windows.Forms.Padding(4);
             this.propertyStopInheritance.Name = "propertyStopInheritance";
-            this.propertyStopInheritance.Size = new System.Drawing.Size(435, 20);
+            this.propertyStopInheritance.Size = new System.Drawing.Size(579, 22);
             this.propertyStopInheritance.TabIndex = 6;
             // 
             // miniToolStrip
@@ -1222,8 +1307,9 @@
             this.bkPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bkPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bkPanel.Location = new System.Drawing.Point(0, 0);
+            this.bkPanel.Margin = new System.Windows.Forms.Padding(4);
             this.bkPanel.Name = "bkPanel";
-            this.bkPanel.Size = new System.Drawing.Size(751, 506);
+            this.bkPanel.Size = new System.Drawing.Size(1001, 623);
             this.bkPanel.TabIndex = 9;
             // 
             // bottomPanel
@@ -1231,9 +1317,10 @@
             this.bottomPanel.Controls.Add(this.panel12);
             this.bottomPanel.Controls.Add(this.panel11);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 459);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 565);
+            this.bottomPanel.Margin = new System.Windows.Forms.Padding(4);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(751, 47);
+            this.bottomPanel.Size = new System.Drawing.Size(1001, 58);
             this.bottomPanel.TabIndex = 8;
             // 
             // panel12
@@ -1241,32 +1328,64 @@
             this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Margin = new System.Windows.Forms.Padding(4);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(595, 47);
+            this.panel12.Size = new System.Drawing.Size(793, 58);
             this.panel12.TabIndex = 1;
             // 
             // panel11
             // 
             this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
             this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel11.Location = new System.Drawing.Point(595, 0);
+            this.panel11.Location = new System.Drawing.Point(793, 0);
+            this.panel11.Margin = new System.Windows.Forms.Padding(4);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(156, 47);
+            this.panel11.Size = new System.Drawing.Size(208, 58);
             this.panel11.TabIndex = 0;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.propertyExpiration);
+            this.groupBox6.Controls.Add(this.propertyExpirationDatePicker);
+            this.groupBox6.Location = new System.Drawing.Point(8, 121);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(949, 101);
+            this.groupBox6.TabIndex = 8;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Expiration";
+            // 
+            // propertyExpirationDatePicker
+            // 
+            this.propertyExpirationDatePicker.Location = new System.Drawing.Point(359, 21);
+            this.propertyExpirationDatePicker.Name = "propertyExpirationDatePicker";
+            this.propertyExpirationDatePicker.Size = new System.Drawing.Size(577, 22);
+            this.propertyExpirationDatePicker.TabIndex = 1;
+            // 
+            // propertyExpiration
+            // 
+            this.propertyExpiration.AutoSize = true;
+            this.propertyExpiration.Location = new System.Drawing.Point(9, 21);
+            this.propertyExpiration.Margin = new System.Windows.Forms.Padding(4);
+            this.propertyExpiration.Name = "propertyExpiration";
+            this.propertyExpiration.Size = new System.Drawing.Size(128, 21);
+            this.propertyExpiration.TabIndex = 27;
+            this.propertyExpiration.Text = "Expiration date:";
+            this.propertyExpiration.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(751, 506);
+            this.ClientSize = new System.Drawing.Size(1001, 623);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.bkPanel);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1323,6 +1442,8 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.bottomPanel.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1434,6 +1555,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.TextBox tbType;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.DateTimePicker propertyExpirationDatePicker;
+        private System.Windows.Forms.CheckBox propertyExpiration;
 
     }
 }
