@@ -287,7 +287,19 @@ namespace PackageEditor
             // Expiration
             String expiration = virtPackage.GetProperty("Expiration");
             propertyExpiration.Checked = !String.IsNullOrEmpty(expiration);
-            propertyExpirationDatePicker.
+            propertyExpirationDatePicker.Value = DateTime.Now;
+            if (propertyExpiration.Checked)
+            {
+                String[] expirationItems = expiration.Split('/');
+                if (expirationItems.Count() == 3)
+                {
+                    int day = Convert.ToInt32(expirationItems[0]);
+                    int month = Convert.ToInt32(expirationItems[1]);
+                    int year = Convert.ToInt32(expirationItems[2]);
+                    DateTime dt = new DateTime(year, month, day);
+                    propertyExpirationDatePicker.Value = dt;
+                }
+            }
 
             this.Text = "Package Editor" + " - " + virtPackage.openedFile;
             dirty = false;
@@ -306,6 +318,10 @@ namespace PackageEditor
             Ret &= virtPackage.SetProperty("AppID", propertyAppID.Text);
             Ret &= virtPackage.SetProperty("FriendlyName", propertyFriendlyName.Text);
             Ret &= virtPackage.SetProperty("StopInheritance", propertyStopInheritance.Text);
+            if (propertyExpiration.Checked)
+                Ret &= virtPackage.SetProperty("Expiration", propertyExpirationDatePicker.Value.ToString("dd/MM/yyyy"));
+            else
+                Ret &= virtPackage.SetProperty("Expiration", "");
 
             // propertyCleanupOnExit
             String str = virtPackage.GetProperty("OnStopUnvirtualized");
