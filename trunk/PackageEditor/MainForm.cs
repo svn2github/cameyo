@@ -272,7 +272,10 @@ namespace PackageEditor
             DisplayBaseDirName();
 
             // Isolation
-            DisplayIsolation();
+            int isolationType = virtPackage.GetIsolationMode();
+            propertyIsolationDataMode.Checked = (isolationType == VirtPackage.ISOLATIONMODE_DATA);
+            propertyIsolationIsolated.Checked = (isolationType == VirtPackage.ISOLATIONMODE_ISOLATED);
+            propertyIsolationMerge.Checked = (isolationType == VirtPackage.ISOLATIONMODE_FULL_ACCESS);
 
             // Icon
             Icon ico = Icon.ExtractAssociatedIcon(virtPackage.openedFile);
@@ -351,35 +354,11 @@ namespace PackageEditor
             // BaseDirName already set by SetProperty
 
             // Isolation. Note: it is allowed to have no checkbox selected at all.
-            uint sandboxMode = 0;
-            if (propertyIsolationIsolated.Checked || propertyIsolationDataMode.Checked)
-                sandboxMode = VirtPackage.SANDBOXFLAGS_WRITE_COPY;
-            else if (propertyIsolationMerge.Checked)
-                sandboxMode = VirtPackage.SANDBOXFLAGS_MERGE;
-            if (sandboxMode != 0)
-            {
-                virtPackage.SetFileSandbox("", sandboxMode);
-                virtPackage.SetRegistrySandbox("", sandboxMode);
-            }
-
-            // Do / undo special folders newly / previously set by Data Isolation mode
-            if (propertyIsolationDataMode.Checked)
-            {
-                virtPackage.SetProperty("DataMode", "TRUE");
-                virtPackage.SetFileSandbox("%Personal%", VirtPackage.SANDBOXFLAGS_MERGE);
-                virtPackage.SetFileSandbox("%Desktop%", VirtPackage.SANDBOXFLAGS_MERGE);
-                virtPackage.SetFileSandbox("UNC", VirtPackage.SANDBOXFLAGS_MERGE);
-            }
-            else
-            {
-                if (virtPackage.GetProperty("DataMode") == "TRUE")     // Need to undo special dirs changed by Data Isolation mode (as opposed to set by user)
-                {
-                    virtPackage.SetProperty("DataMode", "FALSE");
-                    virtPackage.SetFileSandbox("%Personal%", sandboxMode);
-                    virtPackage.SetFileSandbox("%Desktop%", sandboxMode);
-                    virtPackage.SetFileSandbox("UNC", sandboxMode);
-                }
-            }
+            virtPackage.SetIsolationMode(
+                propertyIsolationIsolated.Checked ? VirtPackage.ISOLATIONMODE_ISOLATED :
+                propertyIsolationMerge.Checked ? VirtPackage.ISOLATIONMODE_FULL_ACCESS :
+                propertyIsolationDataMode.Checked ? VirtPackage.ISOLATIONMODE_DATA :
+                VirtPackage.ISOLATIONMODE_CUSTOM);
 
             // SetIcon already set when icon button is pressed
 
@@ -505,26 +484,6 @@ namespace PackageEditor
                 else
                     MessageBox.Show("Error: file not found");
             }
-        }
-
-        private void DisplayIsolation()
-        {
-            // Isolation. Note: it is allowed to have no checkbox selected at all.
-            propertyIsolationDataMode.Checked = false;
-            propertyIsolationIsolated.Checked = false;
-            propertyIsolationMerge.Checked = false;
-            if (virtPackage.GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
-                virtPackage.GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
-                virtPackage.GetFileSandbox("%Personal%") == VirtPackage.SANDBOXFLAGS_MERGE &&
-                virtPackage.GetFileSandbox("%Desktop%") == VirtPackage.SANDBOXFLAGS_MERGE &&
-                virtPackage.GetFileSandbox("UNC") == VirtPackage.SANDBOXFLAGS_MERGE)
-                propertyIsolationDataMode.Checked = true;
-            else if (virtPackage.GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
-                virtPackage.GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY)
-                propertyIsolationIsolated.Checked = true;
-            else if (virtPackage.GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_MERGE &&
-                virtPackage.GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_MERGE)
-                propertyIsolationMerge.Checked = true;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

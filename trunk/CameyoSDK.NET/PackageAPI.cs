@@ -44,6 +44,12 @@ namespace VirtPackageAPI
         public const int SANDBOXFLAGS_WRITE_COPY = 2;
         public const int SANDBOXFLAGS_FULL_ISOLATION = 3;
 
+        // UI isolation constants:
+        public const int ISOLATIONMODE_CUSTOM = 0;
+        public const int ISOLATIONMODE_ISOLATED = 1;
+        public const int ISOLATIONMODE_FULL_ACCESS = 2;
+        public const int ISOLATIONMODE_DATA = 3;
+
         private const String DLLNAME = "PackagerDll.dll";
         private const int MAX_STRING = 64 * 1024;
 
@@ -173,6 +179,7 @@ namespace VirtPackageAPI
         {
             opened = false;
             openedFile = "";
+            //private const String DLLNAME = "PackagerDll.dll";
         }
 
         ~VirtPackage()
@@ -432,12 +439,65 @@ namespace VirtPackageAPI
         }
         public void SetFileSandbox(String Path, UInt32 SandboxFlags) { SetFileSandbox(Path, SandboxFlags, false); }   // Overload
 
-        public String FriendlyShortcutName(String rawShortcutName)
+        static public String FriendlyShortcutName(String rawShortcutName)
         {
             String friendly = System.IO.Path.GetFileName(rawShortcutName);
             if (friendly.EndsWith(".lnk", StringComparison.InvariantCultureIgnoreCase))
                 friendly = friendly.Substring(0, friendly.Length - 4);
             return (friendly);
         }
+
+        public int GetIsolationMode()
+        {
+            // Isolation. Note: it is allowed to have no checkbox selected at all.
+            if (GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
+                GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
+                GetFileSandbox("%Personal%") == VirtPackage.SANDBOXFLAGS_MERGE &&
+                GetFileSandbox("%Desktop%") == VirtPackage.SANDBOXFLAGS_MERGE &&
+                GetFileSandbox("UNC") == VirtPackage.SANDBOXFLAGS_MERGE)
+                return ISOLATIONMODE_DATA;
+            else if (GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
+                GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY)
+                return ISOLATIONMODE_ISOLATED;
+            else if (GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_MERGE &&
+                GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_MERGE)
+                return ISOLATIONMODE_FULL_ACCESS;
+            else
+                return ISOLATIONMODE_CUSTOM;
+        }
+
+        public void SetIsolationMode(int IsolationMode)
+        {
+            uint sandboxMode = 0;
+            if (IsolationMode == ISOLATIONMODE_ISOLATED || IsolationMode == ISOLATIONMODE_DATA)
+                sandboxMode = VirtPackage.SANDBOXFLAGS_WRITE_COPY;
+            else if (IsolationMode == ISOLATIONMODE_FULL_ACCESS)
+                sandboxMode = VirtPackage.SANDBOXFLAGS_MERGE;
+            if (sandboxMode != 0)
+            {
+                SetFileSandbox("", sandboxMode);
+                SetRegistrySandbox("", sandboxMode);
+            }
+
+            // Do / undo special folders newly / previously set by Data Isolation mode
+            if (IsolationMode == ISOLATIONMODE_DATA)
+            {
+                SetProperty("DataMode", "TRUE");
+                SetFileSandbox("%Personal%", VirtPackage.SANDBOXFLAGS_MERGE);
+                SetFileSandbox("%Desktop%", VirtPackage.SANDBOXFLAGS_MERGE);
+                SetFileSandbox("UNC", VirtPackage.SANDBOXFLAGS_MERGE);
+            }
+            else
+            {
+                if (GetProperty("DataMode") == "TRUE")     // Need to undo special dirs changed by Data Isolation mode (as opposed to set by user)
+                {
+                    SetProperty("DataMode", "FALSE");
+                    SetFileSandbox("%Personal%", sandboxMode);
+                    SetFileSandbox("%Desktop%", sandboxMode);
+                    SetFileSandbox("UNC", sandboxMode);
+                }
+            }
+        }
+
     }
 }
