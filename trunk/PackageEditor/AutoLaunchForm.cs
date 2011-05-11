@@ -29,7 +29,7 @@ namespace PackageEditor
 
                 // Col 0: name
                 if (values.Count() >= 3)
-                    lvItem.Text = virtPackage.FriendlyShortcutName(values[2]);
+                    lvItem.Text = VirtPackage.FriendlyShortcutName(values[2]);
 
                 // Col 1: target
                 if (values.Count() >= 1)

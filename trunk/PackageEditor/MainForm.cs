@@ -240,7 +240,7 @@ namespace PackageEditor
                     if (items.Count() < 3) continue;     // No Name
                     if (propertyAutoLaunch.Text != "")
                         propertyAutoLaunch.Text += ", ";
-                    propertyAutoLaunch.Text += virtPackage.FriendlyShortcutName(items[2]);
+                    propertyAutoLaunch.Text += VirtPackage.FriendlyShortcutName(items[2]);
                 }
                 propertyAutoLaunch.Text = "Display menu: " + propertyAutoLaunch.Text;
             }
@@ -248,7 +248,7 @@ namespace PackageEditor
             {
                 String[] items = virtPackage.GetProperty("AutoLaunch").Split('>');
                 if (items.Count() >= 3)
-                    propertyAutoLaunch.Text = items[0] + " (" + virtPackage.FriendlyShortcutName(items[2]) + ")";
+                    propertyAutoLaunch.Text = items[0] + " (" + VirtPackage.FriendlyShortcutName(items[2]) + ")";
                 else
                     propertyAutoLaunch.Text = items[0];
             }
