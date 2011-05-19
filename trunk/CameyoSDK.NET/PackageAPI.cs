@@ -21,19 +21,19 @@ namespace VirtPackageAPI
     };
     public class VirtPackage
     {
-        private const int APIRET_SUCCESS = 0;
-        private const int APIRET_FAILURE = 1;
-        private const int APIRET_VIRTFILES_DB_ERROR = 2;
-        private const int APIRET_VIRTFILES_ZIP_ERROR = 3;
-        private const int APIRET_NOT_FOUND = 5;
-        private const int APIRET_INVALID_PARAMETER = 6;
-        private const int APIRET_FILE_CREATE_ERROR = 7;
-        private const int APIRET_PE_RESOURCE_ERROR = 8;
-        private const int APIRET_MEMORY_ERROR = 9;
-        private const int APIRET_COMMIT_ERROR = 10;
-        private const int APIRET_VIRTREG_DEPLOY_ERROR = 11;
-        private const int APIRET_OUTPUT_ERROR = 12;
-        private const int APIRET_INSUFFICIENT_BUFFER = 13;
+        public const int APIRET_SUCCESS = 0;
+        public const int APIRET_FAILURE = 1;
+        public const int APIRET_VIRTFILES_DB_ERROR = 2;
+        public const int APIRET_VIRTFILES_ZIP_ERROR = 3;
+        public const int APIRET_NOT_FOUND = 5;
+        public const int APIRET_INVALID_PARAMETER = 6;
+        public const int APIRET_FILE_CREATE_ERROR = 7;
+        public const int APIRET_PE_RESOURCE_ERROR = 8;
+        public const int APIRET_MEMORY_ERROR = 9;
+        public const int APIRET_COMMIT_ERROR = 10;
+        public const int APIRET_VIRTREG_DEPLOY_ERROR = 11;
+        public const int APIRET_OUTPUT_ERROR = 12;
+        public const int APIRET_INSUFFICIENT_BUFFER = 13;
 
         public const int VIRT_FILE_FLAGS_ISFILE = 0x0001; 	// File or directory?
         public const int VIRT_FILE_FLAGS_DELETED = 0x0002; 	// Deleted by virtual app (NOT_FOUND)
