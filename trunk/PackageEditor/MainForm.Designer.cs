@@ -112,6 +112,10 @@
             this.tbValue = new System.Windows.Forms.TextBox();
             this.tbSize = new System.Windows.Forms.TextBox();
             this.tbFile = new System.Windows.Forms.TextBox();
+            this.regFilesList = new PackageEditor.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -137,10 +141,6 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.regFilesList = new PackageEditor.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -203,7 +203,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(751, 27);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -217,46 +217,46 @@
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(41, 23);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveasToolStripMenuItem
             // 
             this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
             this.saveasToolStripMenuItem.Text = "Save &as";
             this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
             this.closeToolStripMenuItem.Text = "&Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(120, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -295,7 +295,7 @@
             this.tabGeneral.Controls.Add(this.dropboxButton);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
-            this.tabGeneral.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
             this.tabGeneral.Size = new System.Drawing.Size(719, 386);
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
@@ -307,7 +307,7 @@
             this.dropboxLabel.AutoSize = true;
             this.dropboxLabel.Location = new System.Drawing.Point(530, 250);
             this.dropboxLabel.Name = "dropboxLabel";
-            this.dropboxLabel.Size = new System.Drawing.Size(53, 13);
+            this.dropboxLabel.Size = new System.Drawing.Size(61, 15);
             this.dropboxLabel.TabIndex = 3;
             this.dropboxLabel.Text = "Publish to";
             // 
@@ -400,7 +400,7 @@
             this.resetCredLink.AutoSize = true;
             this.resetCredLink.Location = new System.Drawing.Point(618, 294);
             this.resetCredLink.Name = "resetCredLink";
-            this.resetCredLink.Size = new System.Drawing.Size(90, 13);
+            this.resetCredLink.Size = new System.Drawing.Size(104, 15);
             this.resetCredLink.TabIndex = 4;
             this.resetCredLink.TabStop = true;
             this.resetCredLink.Text = "Reset Credentials";
@@ -490,7 +490,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(7, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.Size = new System.Drawing.Size(72, 15);
             this.label2.TabIndex = 24;
             this.label2.Text = "Description:";
             // 
@@ -517,7 +517,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(7, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.Size = new System.Drawing.Size(85, 15);
             this.label1.TabIndex = 21;
             this.label1.Text = "Application ID:";
             // 
@@ -549,7 +549,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(7, 120);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.Size = new System.Drawing.Size(33, 15);
             this.label6.TabIndex = 23;
             this.label6.Text = "Icon:";
             // 
@@ -602,7 +602,7 @@
             this.propertyDataStorage.AutoSize = true;
             this.propertyDataStorage.Location = new System.Drawing.Point(97, 104);
             this.propertyDataStorage.Name = "propertyDataStorage";
-            this.propertyDataStorage.Size = new System.Drawing.Size(105, 13);
+            this.propertyDataStorage.Size = new System.Drawing.Size(120, 15);
             this.propertyDataStorage.TabIndex = 15;
             this.propertyDataStorage.Text = "propertyDataStorage";
             // 
@@ -611,7 +611,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(7, 104);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.Size = new System.Drawing.Size(80, 15);
             this.label5.TabIndex = 13;
             this.label5.Text = "Data storage:";
             // 
@@ -633,7 +633,7 @@
             this.propertyIsolationDataMode.AutoSize = true;
             this.propertyIsolationDataMode.Location = new System.Drawing.Point(6, 12);
             this.propertyIsolationDataMode.Name = "propertyIsolationDataMode";
-            this.propertyIsolationDataMode.Size = new System.Drawing.Size(432, 17);
+            this.propertyIsolationDataMode.Size = new System.Drawing.Size(488, 19);
             this.propertyIsolationDataMode.TabIndex = 3;
             this.propertyIsolationDataMode.TabStop = true;
             this.propertyIsolationDataMode.Text = "Data mode: application can only save files to Documents, Desktop and network driv" +
@@ -646,7 +646,7 @@
             this.propertyIsolationIsolated.AutoSize = true;
             this.propertyIsolationIsolated.Location = new System.Drawing.Point(6, 29);
             this.propertyIsolationIsolated.Name = "propertyIsolationIsolated";
-            this.propertyIsolationIsolated.Size = new System.Drawing.Size(241, 17);
+            this.propertyIsolationIsolated.Size = new System.Drawing.Size(274, 19);
             this.propertyIsolationIsolated.TabIndex = 1;
             this.propertyIsolationIsolated.TabStop = true;
             this.propertyIsolationIsolated.Text = "Isolated: application cannot modify the system";
@@ -658,7 +658,7 @@
             this.propertyIsolationMerge.AutoSize = true;
             this.propertyIsolationMerge.Location = new System.Drawing.Point(6, 46);
             this.propertyIsolationMerge.Name = "propertyIsolationMerge";
-            this.propertyIsolationMerge.Size = new System.Drawing.Size(327, 17);
+            this.propertyIsolationMerge.Size = new System.Drawing.Size(375, 19);
             this.propertyIsolationMerge.TabIndex = 2;
             this.propertyIsolationMerge.TabStop = true;
             this.propertyIsolationMerge.Text = "Full access: application can modify the system\'s files and registry";
@@ -670,7 +670,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(7, 46);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.Size = new System.Drawing.Size(91, 15);
             this.label4.TabIndex = 10;
             this.label4.Text = "Isolation mode:";
             // 
@@ -688,7 +688,7 @@
             this.lblAutoLaunch.AutoSize = true;
             this.lblAutoLaunch.Location = new System.Drawing.Point(7, 16);
             this.lblAutoLaunch.Name = "lblAutoLaunch";
-            this.lblAutoLaunch.Size = new System.Drawing.Size(44, 13);
+            this.lblAutoLaunch.Size = new System.Drawing.Size(49, 15);
             this.lblAutoLaunch.TabIndex = 2;
             this.lblAutoLaunch.Text = "Startup:";
             // 
@@ -710,7 +710,7 @@
             this.tabFileSystem.Controls.Add(this.toolStrip1);
             this.tabFileSystem.Location = new System.Drawing.Point(4, 22);
             this.tabFileSystem.Name = "tabFileSystem";
-            this.tabFileSystem.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabFileSystem.Padding = new System.Windows.Forms.Padding(3);
             this.tabFileSystem.Size = new System.Drawing.Size(719, 386);
             this.tabFileSystem.TabIndex = 1;
             this.tabFileSystem.Text = "Files";
@@ -832,7 +832,7 @@
             this.fsFolderInfoFullName.AutoSize = true;
             this.fsFolderInfoFullName.Location = new System.Drawing.Point(3, 6);
             this.fsFolderInfoFullName.Name = "fsFolderInfoFullName";
-            this.fsFolderInfoFullName.Size = new System.Drawing.Size(106, 13);
+            this.fsFolderInfoFullName.Size = new System.Drawing.Size(125, 15);
             this.fsFolderInfoFullName.TabIndex = 0;
             this.fsFolderInfoFullName.Text = "fsFolderInfoFullName";
             // 
@@ -916,7 +916,7 @@
             this.tabRegistry.Controls.Add(this.panel8);
             this.tabRegistry.Location = new System.Drawing.Point(4, 22);
             this.tabRegistry.Name = "tabRegistry";
-            this.tabRegistry.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabRegistry.Padding = new System.Windows.Forms.Padding(3);
             this.tabRegistry.Size = new System.Drawing.Size(719, 386);
             this.tabRegistry.TabIndex = 2;
             this.tabRegistry.Text = "Registry";
@@ -1013,6 +1013,43 @@
             this.tbFile.Visible = false;
             this.tbFile.TextChanged += new System.EventHandler(this.tbFile_TextChanged);
             // 
+            // regFilesList
+            // 
+            this.regFilesList.AllowColumnReorder = true;
+            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.regFilesList.DoubleClickActivation = false;
+            this.regFilesList.FullRowSelect = true;
+            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+            this.regFilesList.Location = new System.Drawing.Point(0, 25);
+            this.regFilesList.Name = "regFilesList";
+            this.regFilesList.Size = new System.Drawing.Size(509, 334);
+            this.regFilesList.TabIndex = 7;
+            this.regFilesList.UseCompatibleStateImageBehavior = false;
+            this.regFilesList.View = System.Windows.Forms.View.Details;
+            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "File";
+            this.columnHeader3.Width = 87;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Value";
+            this.columnHeader4.Width = 259;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Type";
+            this.columnHeader5.Width = 99;
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.panel6);
@@ -1056,7 +1093,7 @@
             this.regFolderInfoFullName.AutoSize = true;
             this.regFolderInfoFullName.Location = new System.Drawing.Point(3, 6);
             this.regFolderInfoFullName.Name = "regFolderInfoFullName";
-            this.regFolderInfoFullName.Size = new System.Drawing.Size(113, 13);
+            this.regFolderInfoFullName.Size = new System.Drawing.Size(134, 15);
             this.regFolderInfoFullName.TabIndex = 0;
             this.regFolderInfoFullName.Text = "regFolderInfoFullName";
             // 
@@ -1117,7 +1154,7 @@
             this.tabAdvanced.Controls.Add(this.groupBox5);
             this.tabAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tabAdvanced.Name = "tabAdvanced";
-            this.tabAdvanced.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabAdvanced.Padding = new System.Windows.Forms.Padding(3);
             this.tabAdvanced.Size = new System.Drawing.Size(719, 386);
             this.tabAdvanced.TabIndex = 3;
             this.tabAdvanced.Text = "Advanced";
@@ -1128,9 +1165,9 @@
             this.groupBox6.Controls.Add(this.propertyExpiration);
             this.groupBox6.Controls.Add(this.propertyExpirationDatePicker);
             this.groupBox6.Location = new System.Drawing.Point(6, 98);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox6.Size = new System.Drawing.Size(712, 82);
             this.groupBox6.TabIndex = 8;
             this.groupBox6.TabStop = false;
@@ -1141,7 +1178,7 @@
             this.propertyExpiration.AutoSize = true;
             this.propertyExpiration.Location = new System.Drawing.Point(7, 17);
             this.propertyExpiration.Name = "propertyExpiration";
-            this.propertyExpiration.Size = new System.Drawing.Size(99, 17);
+            this.propertyExpiration.Size = new System.Drawing.Size(111, 19);
             this.propertyExpiration.TabIndex = 27;
             this.propertyExpiration.Text = "Expiration date:";
             this.propertyExpiration.UseVisualStyleBackColor = true;
@@ -1149,7 +1186,7 @@
             // propertyExpirationDatePicker
             // 
             this.propertyExpirationDatePicker.Location = new System.Drawing.Point(269, 17);
-            this.propertyExpirationDatePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.propertyExpirationDatePicker.Margin = new System.Windows.Forms.Padding(2);
             this.propertyExpirationDatePicker.Name = "propertyExpirationDatePicker";
             this.propertyExpirationDatePicker.Size = new System.Drawing.Size(434, 20);
             this.propertyExpirationDatePicker.TabIndex = 1;
@@ -1174,7 +1211,7 @@
             this.propertyCleanupOnExit.AutoSize = true;
             this.propertyCleanupOnExit.Location = new System.Drawing.Point(10, 32);
             this.propertyCleanupOnExit.Name = "propertyCleanupOnExit";
-            this.propertyCleanupOnExit.Size = new System.Drawing.Size(153, 17);
+            this.propertyCleanupOnExit.Size = new System.Drawing.Size(175, 19);
             this.propertyCleanupOnExit.TabIndex = 26;
             this.propertyCleanupOnExit.Text = "Remove program upon exit";
             this.propertyCleanupOnExit.UseVisualStyleBackColor = true;
@@ -1183,9 +1220,9 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(534, 71);
+            this.label8.Location = new System.Drawing.Point(507, 71);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(172, 13);
+            this.label8.Size = new System.Drawing.Size(199, 15);
             this.label8.TabIndex = 25;
             this.label8.Text = "example: \"iexplore.exe;myapp.exe\"";
             // 
@@ -1194,7 +1231,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(7, 51);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(208, 13);
+            this.label7.Size = new System.Drawing.Size(241, 15);
             this.label7.TabIndex = 24;
             this.label7.Text = "Exclude child processes from virtualization:";
             // 
@@ -1203,7 +1240,7 @@
             this.lnkCustomEvents.AutoSize = true;
             this.lnkCustomEvents.Location = new System.Drawing.Point(7, 16);
             this.lnkCustomEvents.Name = "lnkCustomEvents";
-            this.lnkCustomEvents.Size = new System.Drawing.Size(77, 13);
+            this.lnkCustomEvents.Size = new System.Drawing.Size(87, 15);
             this.lnkCustomEvents.TabIndex = 6;
             this.lnkCustomEvents.TabStop = true;
             this.lnkCustomEvents.Text = "Custom events";
@@ -1264,43 +1301,6 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(156, 47);
             this.panel11.TabIndex = 0;
-            // 
-            // regFilesList
-            // 
-            this.regFilesList.AllowColumnReorder = true;
-            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.regFilesList.DoubleClickActivation = false;
-            this.regFilesList.FullRowSelect = true;
-            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.regFilesList.Location = new System.Drawing.Point(0, 25);
-            this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(509, 334);
-            this.regFilesList.TabIndex = 7;
-            this.regFilesList.UseCompatibleStateImageBehavior = false;
-            this.regFilesList.View = System.Windows.Forms.View.Details;
-            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "File";
-            this.columnHeader3.Width = 87;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Value";
-            this.columnHeader4.Width = 259;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Type";
-            this.columnHeader5.Width = 99;
             // 
             // MainForm
             // 
