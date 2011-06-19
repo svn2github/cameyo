@@ -60,8 +60,12 @@ namespace PackageEditor
                 if (PackageOpen(packageExeFile) && notifyPackageBuilt)
                 {
                     PackageBuiltNotify packageBuiltNotify = new PackageBuiltNotify();
+                    String friendlyPath = packageExeFile;
+                    int pos = friendlyPath.ToUpper().IndexOf("\\DOCUMENTS\\");
+                    if (pos == -1) pos = friendlyPath.ToUpper().IndexOf("\\MY DOCUMENTS\\");
+                    if (pos != -1) friendlyPath = friendlyPath.Substring(pos + 1);
                     packageBuiltNotify.Do("Package successfully created in:",
-                        packageExeFile, "PackageBuiltNotify");
+                        friendlyPath, "PackageBuiltNotify");
                 }
             }
             if (!virtPackage.opened)
