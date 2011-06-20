@@ -233,7 +233,7 @@ namespace PackageEditor
             String friendlyKeyName = System.IO.Path.GetFileName(System.IO.Path.GetDirectoryName(workKey.Name));
             packageBuiltNotify.Do("Registry editor will now open. Please edit entries under the key '" +
                 friendlyKeyName + "'. Once you close the registry editor, your changes will be applied.", 
-                "", "RegeditExplain");
+                "", "", "RegeditExplain");
 
             // Set LastKey to the work key
             RegistryKey regKey;

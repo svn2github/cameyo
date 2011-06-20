@@ -12,7 +12,8 @@ namespace PackageEditor
 {
     public partial class PackageBuiltNotify : Form
     {
-        public String linkPath;
+        String realPath;
+        String friendlyPath;
         String regAlwaysValueName;
 
         public PackageBuiltNotify()
@@ -20,18 +21,19 @@ namespace PackageEditor
             InitializeComponent();
         }
 
-        public void Do(String txt, String linkPath, String regAlwaysValueName)
+        public void Do(String txt, String realPath, String friendlyPath, String regAlwaysValueName)
         {
             // Prepare
             RegistryKey regKey = null;
             try
             {
                 label1.Text = txt;
-                this.linkPath = linkPath;
+                this.realPath = realPath;
+                this.friendlyPath = friendlyPath;
                 this.regAlwaysValueName = regAlwaysValueName;
 
-                if (linkPath != "")
-                    lblLink.Text = System.IO.Path.GetDirectoryName(linkPath);
+                if (friendlyPath != "")
+                    lblLink.Text = System.IO.Path.GetDirectoryName(friendlyPath);
                 else
                     lblLink.Text = "";
 
@@ -66,7 +68,7 @@ namespace PackageEditor
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.ProcessStartInfo procStartInfo =
-                new System.Diagnostics.ProcessStartInfo(System.IO.Path.GetDirectoryName(linkPath));
+                new System.Diagnostics.ProcessStartInfo(System.IO.Path.GetDirectoryName(realPath));
             System.Diagnostics.Process proc = new System.Diagnostics.Process();
             //procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             proc.StartInfo = procStartInfo;
