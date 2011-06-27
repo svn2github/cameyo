@@ -305,7 +305,7 @@
             // 
             this.dropboxLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dropboxLabel.AutoSize = true;
-            this.dropboxLabel.Location = new System.Drawing.Point(530, 250);
+            this.dropboxLabel.Location = new System.Drawing.Point(528, 250);
             this.dropboxLabel.Name = "dropboxLabel";
             this.dropboxLabel.Size = new System.Drawing.Size(61, 15);
             this.dropboxLabel.TabIndex = 3;
