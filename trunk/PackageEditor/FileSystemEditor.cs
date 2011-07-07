@@ -92,6 +92,8 @@ namespace PackageEditor
             FolderTreeNode newNode = new FolderTreeNode();
             newNode.Text = "FileSystem";
             newNode.virtFsNode = new VirtFsNode();
+            treeHelper.SetFolderNodeImage(newNode, 
+                false, virtPackage.GetFileSandbox("", false));
             fsFolderTree.Nodes.Add(newNode);
 
             foreach (VirtFsNode virtFsNode in virtFsNodes)
