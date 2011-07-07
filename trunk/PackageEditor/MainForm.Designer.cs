@@ -35,7 +35,6 @@
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,21 +180,12 @@
             // 
             this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Red;
-            this.imageList.Images.SetKeyName(0, "folder_closed_16.ico");
-            this.imageList.Images.SetKeyName(1, "folder_closed_16_WriteCopy.ico");
-            this.imageList.Images.SetKeyName(2, "open_document_16.ico");
-            this.imageList.Images.SetKeyName(3, "new_document_16.ico");
-            this.imageList.Images.SetKeyName(4, "add.png");
-            this.imageList.Images.SetKeyName(5, "remove.png");
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "spanner_48.png");
-            this.imageList1.Images.SetKeyName(1, "folder_48.png");
-            this.imageList1.Images.SetKeyName(2, "database_48.png");
-            this.imageList1.Images.SetKeyName(3, "box_download_48.png");
+            this.imageList.Images.SetKeyName(0, "folder_closed_merged");
+            this.imageList.Images.SetKeyName(1, "folder_closed_isolated");
+            this.imageList.Images.SetKeyName(2, "folder_opened");
+            this.imageList.Images.SetKeyName(3, "new_document");
+            this.imageList.Images.SetKeyName(4, "add");
+            this.imageList.Images.SetKeyName(5, "remove");
             // 
             // menuStrip1
             // 
@@ -203,7 +193,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(751, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -217,46 +207,46 @@
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(41, 23);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveasToolStripMenuItem
             // 
             this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveasToolStripMenuItem.Text = "Save &as";
             this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.closeToolStripMenuItem.Text = "&Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(120, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -307,7 +297,7 @@
             this.dropboxLabel.AutoSize = true;
             this.dropboxLabel.Location = new System.Drawing.Point(528, 250);
             this.dropboxLabel.Name = "dropboxLabel";
-            this.dropboxLabel.Size = new System.Drawing.Size(61, 15);
+            this.dropboxLabel.Size = new System.Drawing.Size(53, 13);
             this.dropboxLabel.TabIndex = 3;
             this.dropboxLabel.Text = "Publish to";
             // 
@@ -400,7 +390,7 @@
             this.resetCredLink.AutoSize = true;
             this.resetCredLink.Location = new System.Drawing.Point(618, 294);
             this.resetCredLink.Name = "resetCredLink";
-            this.resetCredLink.Size = new System.Drawing.Size(104, 15);
+            this.resetCredLink.Size = new System.Drawing.Size(90, 13);
             this.resetCredLink.TabIndex = 4;
             this.resetCredLink.TabStop = true;
             this.resetCredLink.Text = "Reset Credentials";
@@ -490,7 +480,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(7, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 15);
+            this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 24;
             this.label2.Text = "Description:";
             // 
@@ -517,7 +507,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(7, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 15);
+            this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 21;
             this.label1.Text = "Application ID:";
             // 
@@ -549,7 +539,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(7, 120);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(33, 15);
+            this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 23;
             this.label6.Text = "Icon:";
             // 
@@ -602,7 +592,7 @@
             this.propertyDataStorage.AutoSize = true;
             this.propertyDataStorage.Location = new System.Drawing.Point(97, 104);
             this.propertyDataStorage.Name = "propertyDataStorage";
-            this.propertyDataStorage.Size = new System.Drawing.Size(120, 15);
+            this.propertyDataStorage.Size = new System.Drawing.Size(105, 13);
             this.propertyDataStorage.TabIndex = 15;
             this.propertyDataStorage.Text = "propertyDataStorage";
             // 
@@ -611,7 +601,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(7, 104);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 15);
+            this.label5.Size = new System.Drawing.Size(71, 13);
             this.label5.TabIndex = 13;
             this.label5.Text = "Data storage:";
             // 
@@ -633,7 +623,7 @@
             this.propertyIsolationDataMode.AutoSize = true;
             this.propertyIsolationDataMode.Location = new System.Drawing.Point(6, 12);
             this.propertyIsolationDataMode.Name = "propertyIsolationDataMode";
-            this.propertyIsolationDataMode.Size = new System.Drawing.Size(488, 19);
+            this.propertyIsolationDataMode.Size = new System.Drawing.Size(432, 17);
             this.propertyIsolationDataMode.TabIndex = 3;
             this.propertyIsolationDataMode.TabStop = true;
             this.propertyIsolationDataMode.Text = "Data mode: application can only save files to Documents, Desktop and network driv" +
@@ -646,7 +636,7 @@
             this.propertyIsolationIsolated.AutoSize = true;
             this.propertyIsolationIsolated.Location = new System.Drawing.Point(6, 29);
             this.propertyIsolationIsolated.Name = "propertyIsolationIsolated";
-            this.propertyIsolationIsolated.Size = new System.Drawing.Size(274, 19);
+            this.propertyIsolationIsolated.Size = new System.Drawing.Size(241, 17);
             this.propertyIsolationIsolated.TabIndex = 1;
             this.propertyIsolationIsolated.TabStop = true;
             this.propertyIsolationIsolated.Text = "Isolated: application cannot modify the system";
@@ -658,7 +648,7 @@
             this.propertyIsolationMerge.AutoSize = true;
             this.propertyIsolationMerge.Location = new System.Drawing.Point(6, 46);
             this.propertyIsolationMerge.Name = "propertyIsolationMerge";
-            this.propertyIsolationMerge.Size = new System.Drawing.Size(375, 19);
+            this.propertyIsolationMerge.Size = new System.Drawing.Size(327, 17);
             this.propertyIsolationMerge.TabIndex = 2;
             this.propertyIsolationMerge.TabStop = true;
             this.propertyIsolationMerge.Text = "Full access: application can modify the system\'s files and registry";
@@ -670,7 +660,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(7, 46);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 15);
+            this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Isolation mode:";
             // 
@@ -688,7 +678,7 @@
             this.lblAutoLaunch.AutoSize = true;
             this.lblAutoLaunch.Location = new System.Drawing.Point(7, 16);
             this.lblAutoLaunch.Name = "lblAutoLaunch";
-            this.lblAutoLaunch.Size = new System.Drawing.Size(49, 15);
+            this.lblAutoLaunch.Size = new System.Drawing.Size(44, 13);
             this.lblAutoLaunch.TabIndex = 2;
             this.lblAutoLaunch.Text = "Startup:";
             // 
@@ -832,7 +822,7 @@
             this.fsFolderInfoFullName.AutoSize = true;
             this.fsFolderInfoFullName.Location = new System.Drawing.Point(3, 6);
             this.fsFolderInfoFullName.Name = "fsFolderInfoFullName";
-            this.fsFolderInfoFullName.Size = new System.Drawing.Size(125, 15);
+            this.fsFolderInfoFullName.Size = new System.Drawing.Size(106, 13);
             this.fsFolderInfoFullName.TabIndex = 0;
             this.fsFolderInfoFullName.Text = "fsFolderInfoFullName";
             // 
@@ -1093,7 +1083,7 @@
             this.regFolderInfoFullName.AutoSize = true;
             this.regFolderInfoFullName.Location = new System.Drawing.Point(3, 6);
             this.regFolderInfoFullName.Name = "regFolderInfoFullName";
-            this.regFolderInfoFullName.Size = new System.Drawing.Size(134, 15);
+            this.regFolderInfoFullName.Size = new System.Drawing.Size(113, 13);
             this.regFolderInfoFullName.TabIndex = 0;
             this.regFolderInfoFullName.Text = "regFolderInfoFullName";
             // 
@@ -1178,7 +1168,7 @@
             this.propertyExpiration.AutoSize = true;
             this.propertyExpiration.Location = new System.Drawing.Point(7, 17);
             this.propertyExpiration.Name = "propertyExpiration";
-            this.propertyExpiration.Size = new System.Drawing.Size(111, 19);
+            this.propertyExpiration.Size = new System.Drawing.Size(99, 17);
             this.propertyExpiration.TabIndex = 27;
             this.propertyExpiration.Text = "Expiration date:";
             this.propertyExpiration.UseVisualStyleBackColor = true;
@@ -1211,7 +1201,7 @@
             this.propertyCleanupOnExit.AutoSize = true;
             this.propertyCleanupOnExit.Location = new System.Drawing.Point(10, 32);
             this.propertyCleanupOnExit.Name = "propertyCleanupOnExit";
-            this.propertyCleanupOnExit.Size = new System.Drawing.Size(175, 19);
+            this.propertyCleanupOnExit.Size = new System.Drawing.Size(153, 17);
             this.propertyCleanupOnExit.TabIndex = 26;
             this.propertyCleanupOnExit.Text = "Remove program upon exit";
             this.propertyCleanupOnExit.UseVisualStyleBackColor = true;
@@ -1222,7 +1212,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(507, 71);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(199, 15);
+            this.label8.Size = new System.Drawing.Size(172, 13);
             this.label8.TabIndex = 25;
             this.label8.Text = "example: \"iexplore.exe;myapp.exe\"";
             // 
@@ -1231,7 +1221,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(7, 51);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(241, 15);
+            this.label7.Size = new System.Drawing.Size(208, 13);
             this.label7.TabIndex = 24;
             this.label7.Text = "Exclude child processes from virtualization:";
             // 
@@ -1240,7 +1230,7 @@
             this.lnkCustomEvents.AutoSize = true;
             this.lnkCustomEvents.Location = new System.Drawing.Point(7, 16);
             this.lnkCustomEvents.Name = "lnkCustomEvents";
-            this.lnkCustomEvents.Size = new System.Drawing.Size(87, 15);
+            this.lnkCustomEvents.Size = new System.Drawing.Size(77, 13);
             this.lnkCustomEvents.TabIndex = 6;
             this.lnkCustomEvents.TabStop = true;
             this.lnkCustomEvents.Text = "Custom events";
@@ -1390,7 +1380,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Timer regProgressTimer;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Timer itemHoverTimer;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabGeneral;

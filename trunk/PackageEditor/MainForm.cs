@@ -55,7 +55,7 @@ namespace PackageEditor
             Editors = new Control[] { tbFile, tbValue, tbType, tbSize };
 
             EnableDisablePackageControls(false);       // No package opened yet; disable Save menu etc
-            if (packageExeFile != "")
+            if (packageExeFile != "" && !packageExeFile.Equals("/OPEN", StringComparison.InvariantCultureIgnoreCase))
             {
                 if (PackageOpen(packageExeFile) && notifyPackageBuilt)
                 {
@@ -227,33 +227,35 @@ namespace PackageEditor
             if (virtPackage.opened && !PackageClose())      // User doesn't want to discard changes
                 return false;
             PleaseWaitBegin("Opening package", "Opening " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
-            if (virtPackage.Open(packageExeFile))
             {
-                regLoaded = false;
-                dirty = false;
-                this.OnPackageOpen();
-                fsEditor.OnPackageOpen();
+                if (virtPackage.Open(packageExeFile))
+                {
+                    regLoaded = false;
+                    dirty = false;
+                    this.OnPackageOpen();
+                    fsEditor.OnPackageOpen();
 
-                // regEditor (threaded)
-                regProgressBar.Visible = true;
-                regToolStrip.Visible = false;
-                regSplitContainer.Visible = false;
-                regProgressTimer.Enabled = true;
-                if (regLoadThread != null)
-                    regLoadThread.Abort();
-                regLoadThread = new Thread(ThreadedRegLoad);
-                regLoadThread.Start();
+                    // regEditor (threaded)
+                    regProgressBar.Visible = true;
+                    regToolStrip.Visible = false;
+                    regSplitContainer.Visible = false;
+                    regProgressTimer.Enabled = true;
+                    if (regLoadThread != null)
+                        regLoadThread.Abort();
+                    regLoadThread = new Thread(ThreadedRegLoad);
+                    regLoadThread.Start();
 
-                tabControl.SelectedIndex = 0;
-                EnableDisablePackageControls(true);
-                mru.AddFile(packageExeFile);
+                    tabControl.SelectedIndex = 0;
+                    EnableDisablePackageControls(true);
+                    mru.AddFile(packageExeFile);
 
-                ret = true;
+                    ret = true;
+                }
+                else
+                    ret = false;
             }
-            else
-                ret = false;
-
             PleaseWaitEnd();
+
             return ret;
         }
 
