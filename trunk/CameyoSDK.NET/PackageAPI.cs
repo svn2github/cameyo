@@ -66,6 +66,13 @@ namespace VirtPackageAPI
             ref IntPtr hPkg);
 
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageCreate(
+            String AppID,
+            String AppVirtDll,
+            String LoaderExe,
+            ref IntPtr hPkg);
+
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static void PackageClose(
             IntPtr hPkg);
 
@@ -214,6 +221,19 @@ namespace VirtPackageAPI
             {
                 opened = true;
                 openedFile = PackageExeFile;
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool Create(String AppID, String AppVirtDll, String LoaderExe)
+        {
+            int Ret = PackageCreate(AppID, AppVirtDll, LoaderExe, ref hPkg);
+            if (Ret == APIRET_SUCCESS)
+            {
+                opened = true;
+                // Note: openedFile remains empty
                 return true;
             }
             else
