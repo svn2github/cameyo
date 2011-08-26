@@ -141,10 +141,10 @@
             this.propertyLocalStorageDefault.AutoSize = true;
             this.propertyLocalStorageDefault.Location = new System.Drawing.Point(12, 19);
             this.propertyLocalStorageDefault.Name = "propertyLocalStorageDefault";
-            this.propertyLocalStorageDefault.Size = new System.Drawing.Size(374, 17);
+            this.propertyLocalStorageDefault.Size = new System.Drawing.Size(362, 17);
             this.propertyLocalStorageDefault.TabIndex = 0;
             this.propertyLocalStorageDefault.TabStop = true;
-            this.propertyLocalStorageDefault.Text = "Default: hard disk / Dropbox / USB (depednding on executable\'s location)";
+            this.propertyLocalStorageDefault.Text = "Default: hard disk / Dropbox / USB (according to executable\'s location)";
             this.propertyLocalStorageDefault.UseVisualStyleBackColor = true;
             // 
             // DataStorageForm
