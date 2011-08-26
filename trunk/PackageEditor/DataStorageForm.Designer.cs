@@ -34,10 +34,10 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.propertyLocalStorageExeDir = new System.Windows.Forms.RadioButton();
             this.propertyLocalStorageCustomDir = new System.Windows.Forms.TextBox();
             this.propertyLocalStorageCustom = new System.Windows.Forms.RadioButton();
             this.propertyLocalStorageDefault = new System.Windows.Forms.RadioButton();
-            this.propertyLocalStorageExeDir = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -107,6 +107,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Where should Cameyo store its local data for this application:";
             // 
+            // propertyLocalStorageExeDir
+            // 
+            this.propertyLocalStorageExeDir.AutoSize = true;
+            this.propertyLocalStorageExeDir.Location = new System.Drawing.Point(12, 42);
+            this.propertyLocalStorageExeDir.Name = "propertyLocalStorageExeDir";
+            this.propertyLocalStorageExeDir.Size = new System.Drawing.Size(177, 17);
+            this.propertyLocalStorageExeDir.TabIndex = 1;
+            this.propertyLocalStorageExeDir.TabStop = true;
+            this.propertyLocalStorageExeDir.Text = "Under the executable\'s directory";
+            this.propertyLocalStorageExeDir.UseVisualStyleBackColor = true;
+            // 
             // propertyLocalStorageCustomDir
             // 
             this.propertyLocalStorageCustomDir.Location = new System.Drawing.Point(39, 88);
@@ -130,22 +141,11 @@
             this.propertyLocalStorageDefault.AutoSize = true;
             this.propertyLocalStorageDefault.Location = new System.Drawing.Point(12, 19);
             this.propertyLocalStorageDefault.Name = "propertyLocalStorageDefault";
-            this.propertyLocalStorageDefault.Size = new System.Drawing.Size(403, 17);
+            this.propertyLocalStorageDefault.Size = new System.Drawing.Size(374, 17);
             this.propertyLocalStorageDefault.TabIndex = 0;
             this.propertyLocalStorageDefault.TabStop = true;
-            this.propertyLocalStorageDefault.Text = "Use either hard disk or USB key, wherever application is launched from (Default)";
+            this.propertyLocalStorageDefault.Text = "Default: hard disk / Dropbox / USB (depednding on executable\'s location)";
             this.propertyLocalStorageDefault.UseVisualStyleBackColor = true;
-            // 
-            // propertyLocalStorageExeDir
-            // 
-            this.propertyLocalStorageExeDir.AutoSize = true;
-            this.propertyLocalStorageExeDir.Location = new System.Drawing.Point(12, 42);
-            this.propertyLocalStorageExeDir.Name = "propertyLocalStorageExeDir";
-            this.propertyLocalStorageExeDir.Size = new System.Drawing.Size(177, 17);
-            this.propertyLocalStorageExeDir.TabIndex = 1;
-            this.propertyLocalStorageExeDir.TabStop = true;
-            this.propertyLocalStorageExeDir.Text = "Under the executable\'s directory";
-            this.propertyLocalStorageExeDir.UseVisualStyleBackColor = true;
             // 
             // DataStorageForm
             // 
