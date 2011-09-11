@@ -313,16 +313,18 @@ namespace PackageEditor
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory =
-                System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo Packages";
-            openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "Virtual packages (*.virtual.exe)|*.virtual.exe|All files (*.*)|*.*";
-            //openFileDialog.DefaultExt = "virtual.exe";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+          OpenFileDialog openFileDialog = new OpenFileDialog();
+          //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo Packages";
+          openFileDialog.Multiselect = false;
+          openFileDialog.Filter = "Virtual packages (*.virtual.exe)|*.virtual.exe|All files (*.*)|*.*";
+          //openFileDialog.DefaultExt = "virtual.exe";
+          if (openFileDialog.ShowDialog() == DialogResult.OK)
+          {
+            if (!PackageOpen(openFileDialog.FileName))
             {
-                PackageOpen(openFileDialog.FileName);
+              MessageBox.Show("Failed to open package.");
             }
+          }
         }
 
         private void saveasToolStripMenuItem_Click(object sender, EventArgs e)

@@ -227,5 +227,37 @@ namespace PackageEditor
                 propertyCmdText.Text = path;
             }
         }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+          if (propertyMenuLV.SelectedItems.Count == 1)
+          {
+            int selecteditem = propertyMenuLV.SelectedItems[0].Index;
+            if (selecteditem > 0)
+            {
+              ListViewItem lvi = propertyMenuLV.Items[selecteditem];
+              propertyMenuLV.Items.RemoveAt(selecteditem);
+              propertyMenuLV.Items.Insert(selecteditem - 1, lvi);
+              lvi.Selected = true;
+              //lvi.Focused = true;
+              //propertyMenuLV.Focus();
+            }
+          }
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+          if (propertyMenuLV.SelectedItems.Count == 1)
+          {
+            int selecteditem = propertyMenuLV.SelectedItems[0].Index;
+            if (selecteditem < propertyMenuLV.Items.Count - 1)
+            {
+              ListViewItem lvi = propertyMenuLV.Items[selecteditem];
+              propertyMenuLV.Items.RemoveAt(selecteditem);
+              propertyMenuLV.Items.Insert(selecteditem + 1, lvi);
+              lvi.Selected = true;
+            }
+          }
+        }
     }
 }

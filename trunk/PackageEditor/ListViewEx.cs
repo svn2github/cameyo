@@ -73,6 +73,8 @@ namespace PackageEditor
 	public class ListViewEx	: System.Windows.Forms.ListView
 	{
 		#region Interop structs, imports and constants
+
+#pragma warning disable 649 // Disable compiler message "Field X is never assigned to"
 		/// <summary>
 		/// MessageHeader for WM_NOTIFY
 		/// </summary>
@@ -82,6 +84,7 @@ namespace PackageEditor
 			public Int32  idFrom;
 			public Int32  code; 
 		}
+#pragma warning restore 649
 
 
 		[DllImport("user32.dll")]

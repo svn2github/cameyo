@@ -109,6 +109,7 @@
             this.Controls.Add(this.fsFolderTree);
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(200, 100);
             this.Name = "VirtFilesBrowse";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
