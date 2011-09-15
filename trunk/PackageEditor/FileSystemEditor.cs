@@ -274,9 +274,10 @@ namespace PackageEditor
                 for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
                 {
                     FileData childFile = folderNode.childFiles[i];
-                    ListViewItem newItem = new ListViewItem();
+                    FileListViewItem newItem = new FileListViewItem();
                     newItem.Text = Path.GetFileName(childFile.virtFsNode.FileName);
                     newItem.SubItems.Add(StrFormatByteSize64(childFile.virtFsNode.EndOfFile));
+                    newItem.fileSize = childFile.virtFsNode.EndOfFile;
                     if (childFile.addedFrom != "")
                     {
                         if (folderNode.deleted)

@@ -69,7 +69,9 @@ namespace PackageEditor
                 }
             }
             if (!virtPackage.opened)
-                openToolStripMenuItem_Click(this, null);
+            {
+              openToolStripMenuItem_Click(this, null);
+            }
 
             #if DropBox
             if (!System.IO.File.Exists(Application.StartupPath + "\\AppLimit.CloudComputing.oAuth.dll")
@@ -265,8 +267,8 @@ namespace PackageEditor
                 return true;
             if (this.dirty || fsEditor.dirty || regEditor.dirty)
             {
-                if (MessageBox.Show("Your changes will be lost. Discard changes?", "Confirm", 
-                    MessageBoxButtons.YesNoCancel) != DialogResult.Yes)
+                if (MessageBox.Show("Your changes will be lost. Discard changes?", "Confirm",
+                    MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return false;
                 }            
@@ -875,6 +877,92 @@ namespace PackageEditor
         {
 
         }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+          this.BringToFront();
+        }
+
+        ListViewSorter fsFilesListSorter = new FileListViewSorter();
+        private void fsFilesList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+          fsFilesListSorter.Sort(fsFilesList, e.Column);
+        }
+
+        ListViewSorter regFilesListSorter = new RegListViewSorter();
+        private void regFilesList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+          regFilesListSorter.Sort(regFilesList, e.Column);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+          bool OK = PackageClose();
+          e.Cancel = !OK;
+        }
+    }
+  
+    class RegListViewSorter : ListViewSorter
+    {
+      protected override int CompareItems(ListViewItem x, ListViewItem y)
+      {
+        return String.Compare(x.SubItems[currentcolumn].Text, y.SubItems[currentcolumn].Text);
+      }
+    }
+
+    public class FileListViewItem : ListViewItem
+    {
+      public ulong fileSize = 0;
+    }
+
+    class FileListViewSorter : ListViewSorter
+    {
+      bool isFileSizeColumn = false;
+      public override void Sort(ListView List, int ColumnNumber)
+      {
+        isFileSizeColumn = List.Columns[ColumnNumber].Text == "Size";
+        base.Sort(List, ColumnNumber);
+      }
+      protected override int CompareItems(ListViewItem x, ListViewItem y)
+      {
+        int res;
+        if (isFileSizeColumn)
+          res = ((FileListViewItem)x).fileSize.CompareTo(((FileListViewItem)y).fileSize);
+        else
+          res = String.Compare(x.SubItems[currentcolumn].Text, y.SubItems[currentcolumn].Text);
+        return res;
+      }
+    }
+
+    abstract class ListViewSorter : IComparer
+    {
+      protected int currentcolumn = -1;
+      bool currentAsc = true;
+      public virtual void Sort(ListView List, int ColumnNumber)
+      {
+        if (currentcolumn == ColumnNumber)
+        {
+          currentAsc = !currentAsc;
+        }
+        else
+          currentAsc = true;
+        currentcolumn = ColumnNumber;
+        List.ListViewItemSorter = this;
+        List.Sort();
+      }
+      public int Compare(object x, object y)
+      {
+        int res = CompareItems((ListViewItem)x, (ListViewItem)y);
+        if (!currentAsc)
+          res = -res;
+        return res;
+      }
+      abstract protected int CompareItems(ListViewItem x, ListViewItem y);
     }
 
     public class MRU

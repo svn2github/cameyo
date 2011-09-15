@@ -223,6 +223,7 @@
             this.columnHeader3,
             this.columnHeader4});
           this.propertyMenuLV.FullRowSelect = true;
+          this.propertyMenuLV.HideSelection = false;
           this.propertyMenuLV.Location = new System.Drawing.Point(8, 11);
           this.propertyMenuLV.MultiSelect = false;
           this.propertyMenuLV.Name = "propertyMenuLV";
