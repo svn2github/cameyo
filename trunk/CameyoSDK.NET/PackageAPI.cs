@@ -215,8 +215,14 @@ namespace VirtPackageAPI
 
         public bool Open(String PackageExeFile)
         {
-            int Ret = PackageOpen(PackageExeFile, 0, ref hPkg);
-            if (Ret == APIRET_SUCCESS)
+          int apiRet;
+          return Open(PackageExeFile, out apiRet);
+        }
+
+        public bool Open(String PackageExeFile, out int apiRet)
+        {
+          apiRet = PackageOpen(PackageExeFile, 0, ref hPkg);
+          if (apiRet == APIRET_SUCCESS)
             {
                 opened = true;
                 openedFile = PackageExeFile;

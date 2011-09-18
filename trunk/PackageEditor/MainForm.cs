@@ -190,7 +190,7 @@ namespace PackageEditor
                 msg.Text = pleaseWaitMsg.msg;
                 dialog.Show(null);
                 EventWaitHandle pleaseWaitDialogEvent = AutoResetEvent.OpenExisting("pleaseWaitDialogEvent");
-                while (!pleaseWaitDialogEvent.WaitOne(10))
+                while (!pleaseWaitDialogEvent.WaitOne(10, false))
                     Application.DoEvents();
             }
         }
@@ -221,12 +221,19 @@ namespace PackageEditor
 
         private bool PackageOpen(String packageExeFile)
         {
+          int apiRet;
+          return PackageOpen(packageExeFile, out apiRet);
+        }
+
+        private bool PackageOpen(String packageExeFile, out int apiRet)
+        {
             bool ret;
+            apiRet = 0;
             if (virtPackage.opened && !PackageClose())      // User doesn't want to discard changes
                 return false;
             PleaseWaitBegin("Opening package", "Opening " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
-            {
-                if (virtPackage.Open(packageExeFile))
+            {                
+                if (virtPackage.Open(packageExeFile, out apiRet))
                 {
                     regLoaded = false;
                     dirty = false;
@@ -318,9 +325,10 @@ namespace PackageEditor
           //openFileDialog.DefaultExt = "virtual.exe";
           if (openFileDialog.ShowDialog() == DialogResult.OK)
           {
-            if (!PackageOpen(openFileDialog.FileName))
+            int apiRet;
+            if (!PackageOpen(openFileDialog.FileName, out apiRet))
             {
-              MessageBox.Show("Failed to open package.");
+              MessageBox.Show(String.Format("Failed to open package. API error:{0}" , apiRet));
             }
           }
         }
