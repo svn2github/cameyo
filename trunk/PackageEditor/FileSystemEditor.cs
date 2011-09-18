@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
@@ -40,6 +40,7 @@ namespace PackageEditor
         private ToolStripButton fsAddEmptyDirBtn;
         private ToolStripButton fsSaveFileAsBtn;
         private TreeHelper treeHelper;
+        private String fileSaveTargetDir;
         public bool dirty;
 
         // creation of delegate for AddFileOrFolderRecursive
@@ -270,10 +271,10 @@ namespace PackageEditor
             fsFilesList.Items.Clear();
             if (folderNode.childFiles != null)
             {
-                //foreach (FileData childFile in folderNode.childFiles)
-                for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
+                foreach (FileData childFile in folderNode.childFiles)
+                //for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
                 {
-                    FileData childFile = folderNode.childFiles[i];
+                    //FileData childFile = folderNode.childFiles[i];
                     FileListViewItem newItem = new FileListViewItem();
                     newItem.Text = Path.GetFileName(childFile.virtFsNode.FileName);
                     newItem.SubItems.Add(StrFormatByteSize64(childFile.virtFsNode.EndOfFile));
@@ -573,7 +574,7 @@ namespace PackageEditor
             String newFolderName = "";
             if (TreeHelper.InputBox("Add empty folder", "Folder name:", ref newFolderName) != DialogResult.OK)
                 return;
-            if (newFolderName.Contains('\\'))
+            if (newFolderName.Contains("\\"))
             {
                 MessageBox.Show("Folder must not contain '\\'. Please specify one folder at a time.");
                 return;
@@ -609,46 +610,74 @@ namespace PackageEditor
 
         private void OnSaveFileAsBtnClick(object sender, EventArgs e)
         {
-            FolderTreeNode node = (FolderTreeNode)fsFolderTree.SelectedNode;
-            if (node == null)
-            {
-                MessageBox.Show("Please select a file to save");
-                return;
-            }
+          FolderTreeNode folderNode = (FolderTreeNode)fsFolderTree.SelectedNode;
+          if (folderNode == null)
+          {
+            MessageBox.Show("Please select a file to save");
+            return;
+          }
 
-            ListView.SelectedListViewItemCollection fileItems = fsFilesList.SelectedItems;
-            if (fileItems.Count == 0)    // In this case, folderNode is always selected too
-            {
-                MessageBox.Show("Please select a file, not a folder");
-                return;
-            }
+          if (fileSaveTargetDir == null || !Directory.Exists(fileSaveTargetDir))
+            fileSaveTargetDir = Path.GetDirectoryName(virtPackage.openedFile);
 
-            String targetDir = "";
-            if (TreeHelper.InputBox("Save file", "Destination path on your hard disk:", ref targetDir) != DialogResult.OK)
-                return;
+          ListView.SelectedListViewItemCollection fileItems = fsFilesList.SelectedItems;
+          if (fileItems.Count == 0)    // In this case, folderNode is always selected too
+          {
+            if (TreeHelper.InputFolderBrowserDialog("Select the destination path on your hard disk to save the files.", ref fileSaveTargetDir) != DialogResult.OK)
+              return;
+            SaveFolderContent(folderNode, fileSaveTargetDir);
+            //MessageBox.Show("Please select a file, not a folder");
+            return;
+          }
 
-            // Save files
-            FolderTreeNode folderNode = (FolderTreeNode)fsFolderTree.SelectedNode;
-            foreach (ListViewItem item in fileItems)
+          if (TreeHelper.InputFolderBrowserDialog("Select the destination path on your hard disk to save the file.", ref fileSaveTargetDir) != DialogResult.OK)
+            return;
+
+          // Save files
+          if (folderNode.childFiles.Count == 0)
+            return;     // Should never happen
+
+          foreach (ListViewItem item in fileItems)
+          {
+            FileData fileData;
+            for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
             {
-                if (folderNode.childFiles.Count == 0) continue;     // Should never happen
-                FileData fileData;
-                for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
-                {
-                    fileData = folderNode.childFiles[i];
-                    if (Path.GetFileName(fileData.virtFsNode.FileName) == item.Text)
-                    {
-                        if (fileData.addedFrom != "")   // Just added
-                            MessageBox.Show("Cannot save a file that was just added: " + fileData.virtFsNode.FileName);
-                        else
-                        {
-                            if (!virtPackage.ExtractFile(fileData.virtFsNode.FileName, targetDir))
-                                MessageBox.Show("Cannot save file: " + fileData.virtFsNode.FileName + " to " + targetDir);
-                        }
-                        break;
-                    }
-                }
+              fileData = folderNode.childFiles[i];
+              if (Path.GetFileName(fileData.virtFsNode.FileName) == item.Text)
+              {
+                SaveFile(fileData, fileSaveTargetDir);
+                break;
+              }
             }
+          }
+        }
+
+        private void SaveFile(FileData fileData, string fileSaveTargetDir)
+        {
+          if (fileData.addedFrom != "")   // Just added
+            MessageBox.Show("Cannot save a file that was just added: " + fileData.virtFsNode.FileName);
+          else
+          {
+            if (!virtPackage.ExtractFile(fileData.virtFsNode.FileName, fileSaveTargetDir))
+              MessageBox.Show("Cannot save file: " + fileData.virtFsNode.FileName + " to " + fileSaveTargetDir);
+          }
+        }
+
+        private void SaveFolderContent(FolderTreeNode node, string fileSaveTargetDir)
+        {
+          if (node.childFiles != null)
+          {
+            foreach (FileData f in node.childFiles)
+            {
+              SaveFile(f, fileSaveTargetDir);
+            }
+          }
+          foreach (FolderTreeNode f in node.Nodes)
+          {
+            String subFolder = fileSaveTargetDir + '\\' + f.Text;
+            Directory.CreateDirectory(subFolder);
+            SaveFolderContent(f, subFolder);
+          }
         }
 
         // Misc internal functions
@@ -771,6 +800,17 @@ namespace PackageEditor
                 return dir + file;
             else
                 return dir + "\\" + file;
+        }
+
+
+        public static DialogResult InputFolderBrowserDialog(string promptText, ref string value)
+        {          
+          FolderBrowserDialog fbd = new FolderBrowserDialog();
+          fbd.Description = promptText;
+          fbd.SelectedPath = value;
+          DialogResult dialogResult = fbd.ShowDialog();          
+          value = fbd.SelectedPath;
+          return dialogResult;
         }
 
         public static DialogResult InputBox(string title, string promptText, ref string value)

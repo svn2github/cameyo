@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using VirtPackageAPI;
@@ -77,7 +77,7 @@ namespace PackageEditor
         private void RefreshDisplay()
         {
             listBox.Items.Clear();
-            for (int i = 0; i < curCustomEvents.Count(); i++)
+            for (int i = 0; i < curCustomEvents.Count; i++)
             {
                 String cmdDisplay = curCustomEvents[i].cmd;
                 if (curCustomEvents[i].args != "")
@@ -167,7 +167,7 @@ namespace PackageEditor
         private void CustomEventsToProperty(List<CustomEvent> inCustomEvents, String outPropertyName)
         {
             String outPropertyValue = "";
-            for (int i = 0; i < inCustomEvents.Count(); i++)
+            for (int i = 0; i < inCustomEvents.Count; i++)
             {
                 if (outPropertyValue != "")
                     outPropertyValue += ";";
@@ -194,13 +194,13 @@ namespace PackageEditor
                 String[] eventElements = value.Split('>');
 
                 // cmd
-                if (eventElements.Count() > 0)
+                if (eventElements.Length > 0)
                     newCustomEvent.cmd = eventElements[0];
                 // args
-                if (eventElements.Count() > 1)
+                if (eventElements.Length > 1)
                     newCustomEvent.args = eventElements[1];
                 // flags
-                if (eventElements.Count() > 2)
+                if (eventElements.Length > 2)
                 {
                     String[] flags = eventElements[2].Split(',');
                     foreach (String flag in flags)

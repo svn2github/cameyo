@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
@@ -67,10 +67,6 @@ namespace PackageEditor
                     packageBuiltNotify.Do("Package successfully created in:",
                         packageExeFile, friendlyPath, "PackageBuiltNotify");
                 }
-            }
-            if (!virtPackage.opened)
-            {
-              openToolStripMenuItem_Click(this, null);
             }
 
             #if DropBox
@@ -333,7 +329,9 @@ namespace PackageEditor
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.AddExtension = true;
+            saveFileDialog.Filter = "Virtual packages (*.virtual.exe)|*.virtual.exe";
             saveFileDialog.DefaultExt = "virtual.exe";
+
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 if (PackageSave(saveFileDialog.FileName))
@@ -346,15 +344,15 @@ namespace PackageEditor
 
         private void DisplayAutoLaunch()
         {
-            if (virtPackage.GetProperty("AutoLaunch").Contains(';'))
+            if (virtPackage.GetProperty("AutoLaunch").Contains(";"))
             {
                 String[] autoLaunches = virtPackage.GetProperty("AutoLaunch").Split(';');
                 propertyAutoLaunch.Text = "";
                 propertyAutoLaunch.AutoEllipsis = true;
-                for (int i = 0; i < autoLaunches.Count(); i++)
+                for (int i = 0; i < autoLaunches.Length; i++)
                 {
                     String[] items = autoLaunches[i].Split('>');
-                    if (items.Count() < 3) continue;     // No Name
+                    if (items.Length < 3) continue;     // No Name
                     if (propertyAutoLaunch.Text != "")
                         propertyAutoLaunch.Text += ", ";
                     propertyAutoLaunch.Text += VirtPackage.FriendlyShortcutName(items[2]);
@@ -364,7 +362,7 @@ namespace PackageEditor
             else
             {
                 String[] items = virtPackage.GetProperty("AutoLaunch").Split('>');
-                if (items.Count() >= 3)
+                if (items.Length >= 3)
                     propertyAutoLaunch.Text = items[0] + " (" + VirtPackage.FriendlyShortcutName(items[2]) + ")";
                 else
                     propertyAutoLaunch.Text = items[0];
@@ -411,7 +409,7 @@ namespace PackageEditor
             if (propertyExpiration.Checked)
             {
                 String[] expirationItems = expiration.Split('/');
-                if (expirationItems.Count() == 3)
+                if (expirationItems.Length == 3)
                 {
                     int day = Convert.ToInt32(expirationItems[0]);
                     int month = Convert.ToInt32(expirationItems[1]);
@@ -873,16 +871,6 @@ namespace PackageEditor
             Registry.SetValue(regEditor.Masterkey, regEditor.Currentkey[regFilesList.Items.IndexOf(e.Item)].ToString(), e.DisplayText);  
         }
 
-        private void tbFile_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
-          this.BringToFront();
-        }
-
         ListViewSorter fsFilesListSorter = new FileListViewSorter();
         private void fsFilesList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -895,15 +883,22 @@ namespace PackageEditor
           regFilesListSorter.Sort(regFilesList, e.Column);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
           bool OK = PackageClose();
           e.Cancel = !OK;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+          if (!virtPackage.opened)
+          {
+            openToolStripMenuItem_Click(this, null);
+          }
         }
     }
   
@@ -1031,7 +1026,7 @@ namespace PackageEditor
         {
             // First browse through MRU items, deleting those that already contain this fileName
             String[] items = regKey.GetValueNames();
-            for (int i = 0; i < items.Count(); i++)
+            for (int i = 0; i < items.Length; i++)
             {
                 String fileNameValue = (String)regKey.GetValue(items[i]);
                 if (fileNameValue == null)

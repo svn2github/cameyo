@@ -111,10 +111,6 @@
           this.tbValue = new System.Windows.Forms.TextBox();
           this.tbSize = new System.Windows.Forms.TextBox();
           this.tbFile = new System.Windows.Forms.TextBox();
-          this.regFilesList = new PackageEditor.ListViewEx();
-          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
           this.panel4 = new System.Windows.Forms.Panel();
           this.panel6 = new System.Windows.Forms.Panel();
           this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -137,9 +133,13 @@
           this.propertyStopInheritance = new System.Windows.Forms.TextBox();
           this.miniToolStrip = new System.Windows.Forms.ToolStrip();
           this.bkPanel = new System.Windows.Forms.Panel();
+          this.panel11 = new System.Windows.Forms.PictureBox();
+          this.panel12 = new System.Windows.Forms.PictureBox();
           this.bottomPanel = new System.Windows.Forms.Panel();
-          this.panel12 = new System.Windows.Forms.Panel();
-          this.panel11 = new System.Windows.Forms.Panel();
+          this.regFilesList = new PackageEditor.ListViewEx();
+          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
           this.menuStrip1.SuspendLayout();
           this.tabControl.SuspendLayout();
           this.tabGeneral.SuspendLayout();
@@ -173,6 +173,8 @@
           this.tabAdvanced.SuspendLayout();
           this.groupBox6.SuspendLayout();
           this.groupBox5.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.panel11)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.panel12)).BeginInit();
           this.bottomPanel.SuspendLayout();
           this.SuspendLayout();
           // 
@@ -213,40 +215,40 @@
           // openToolStripMenuItem
           // 
           this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-          this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
           this.openToolStripMenuItem.Text = "&Open";
           this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
           // 
           // saveToolStripMenuItem
           // 
           this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-          this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
           this.saveToolStripMenuItem.Text = "&Save";
           this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
           // 
           // saveasToolStripMenuItem
           // 
           this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-          this.saveasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.saveasToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
           this.saveasToolStripMenuItem.Text = "Save &as";
           this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
           // 
           // closeToolStripMenuItem
           // 
           this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-          this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.closeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
           this.closeToolStripMenuItem.Text = "&Close";
           this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
           // 
           // toolStripMenuItem1
           // 
           this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-          this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+          this.toolStripMenuItem1.Size = new System.Drawing.Size(120, 6);
           // 
           // exitToolStripMenuItem
           // 
           this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-          this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+          this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
           this.exitToolStripMenuItem.Text = "E&xit";
           this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
           // 
@@ -1002,45 +1004,6 @@
           this.tbFile.Size = new System.Drawing.Size(100, 20);
           this.tbFile.TabIndex = 8;
           this.tbFile.Visible = false;
-          this.tbFile.TextChanged += new System.EventHandler(this.tbFile_TextChanged);
-          // 
-          // regFilesList
-          // 
-          this.regFilesList.AllowColumnReorder = true;
-          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.regFilesList.DoubleClickActivation = false;
-          this.regFilesList.FullRowSelect = true;
-          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-          this.regFilesList.Location = new System.Drawing.Point(0, 25);
-          this.regFilesList.Name = "regFilesList";
-          this.regFilesList.Size = new System.Drawing.Size(509, 334);
-          this.regFilesList.TabIndex = 7;
-          this.regFilesList.UseCompatibleStateImageBehavior = false;
-          this.regFilesList.View = System.Windows.Forms.View.Details;
-          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-          // 
-          // columnHeader3
-          // 
-          this.columnHeader3.Text = "File";
-          this.columnHeader3.Width = 144;
-          // 
-          // columnHeader4
-          // 
-          this.columnHeader4.Text = "Value";
-          this.columnHeader4.Width = 263;
-          // 
-          // columnHeader5
-          // 
-          this.columnHeader5.Text = "Type";
-          this.columnHeader5.Width = 98;
           // 
           // panel4
           // 
@@ -1266,6 +1229,26 @@
           this.bkPanel.Size = new System.Drawing.Size(751, 506);
           this.bkPanel.TabIndex = 9;
           // 
+          // panel11
+          // 
+          this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
+          this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
+          this.panel11.Location = new System.Drawing.Point(595, 0);
+          this.panel11.Name = "panel11";
+          this.panel11.Size = new System.Drawing.Size(156, 47);
+          this.panel11.TabIndex = 0;
+          this.panel11.TabStop = false;
+          // 
+          // panel12
+          // 
+          this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
+          this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.panel12.Location = new System.Drawing.Point(0, 0);
+          this.panel12.Name = "panel12";
+          this.panel12.Size = new System.Drawing.Size(595, 47);
+          this.panel12.TabIndex = 1;
+          this.panel12.TabStop = false;
+          // 
           // bottomPanel
           // 
           this.bottomPanel.Controls.Add(this.panel12);
@@ -1276,23 +1259,43 @@
           this.bottomPanel.Size = new System.Drawing.Size(751, 47);
           this.bottomPanel.TabIndex = 8;
           // 
-          // panel12
+          // regFilesList
           // 
-          this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
-          this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.panel12.Location = new System.Drawing.Point(0, 0);
-          this.panel12.Name = "panel12";
-          this.panel12.Size = new System.Drawing.Size(595, 47);
-          this.panel12.TabIndex = 1;
+          this.regFilesList.AllowColumnReorder = true;
+          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.regFilesList.DoubleClickActivation = false;
+          this.regFilesList.FullRowSelect = true;
+          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+          this.regFilesList.Location = new System.Drawing.Point(0, 25);
+          this.regFilesList.Name = "regFilesList";
+          this.regFilesList.Size = new System.Drawing.Size(509, 334);
+          this.regFilesList.TabIndex = 7;
+          this.regFilesList.UseCompatibleStateImageBehavior = false;
+          this.regFilesList.View = System.Windows.Forms.View.Details;
+          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
           // 
-          // panel11
+          // columnHeader3
           // 
-          this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
-          this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
-          this.panel11.Location = new System.Drawing.Point(595, 0);
-          this.panel11.Name = "panel11";
-          this.panel11.Size = new System.Drawing.Size(156, 47);
-          this.panel11.TabIndex = 0;
+          this.columnHeader3.Text = "File";
+          this.columnHeader3.Width = 144;
+          // 
+          // columnHeader4
+          // 
+          this.columnHeader4.Text = "Value";
+          this.columnHeader4.Width = 263;
+          // 
+          // columnHeader5
+          // 
+          this.columnHeader5.Text = "Type";
+          this.columnHeader5.Width = 98;
           // 
           // MainForm
           // 
@@ -1309,7 +1312,6 @@
           this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
           this.MainMenuStrip = this.menuStrip1;
           this.Name = "MainForm";
-          this.ShowIcon = false;
           this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
           this.Text = "Package Editor";
           this.Load += new System.EventHandler(this.MainForm_Load);
@@ -1368,6 +1370,8 @@
           this.groupBox6.PerformLayout();
           this.groupBox5.ResumeLayout(false);
           this.groupBox5.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.panel11)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.panel12)).EndInit();
           this.bottomPanel.ResumeLayout(false);
           this.ResumeLayout(false);
           this.PerformLayout();
@@ -1468,9 +1472,6 @@
         private System.Windows.Forms.TextBox propertyStopInheritance;
         private System.Windows.Forms.ToolStrip miniToolStrip;
         private System.Windows.Forms.Panel bkPanel;
-        private System.Windows.Forms.Panel bottomPanel;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Panel panel11;
         private ListViewEx regFilesList;
         private System.Windows.Forms.TextBox tbValue;
         private System.Windows.Forms.TextBox tbSize;
@@ -1482,6 +1483,9 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.DateTimePicker propertyExpirationDatePicker;
         private System.Windows.Forms.CheckBox propertyExpiration;
+        private System.Windows.Forms.PictureBox panel11;
+        private System.Windows.Forms.PictureBox panel12;
+        private System.Windows.Forms.Panel bottomPanel;
 
     }
 }

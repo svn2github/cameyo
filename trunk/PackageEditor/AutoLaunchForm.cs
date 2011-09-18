@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using VirtPackageAPI;
@@ -21,30 +21,30 @@ namespace PackageEditor
             // propertyAutoLaunchMenuLV (from autoLaunchMenu)
             propertyMenuLV.Items.Clear();
             String[] items = autoLaunchMenu.Split(';');
-            for (int i = 0; i < items.Count(); i++)
+            for (int i = 0; i < items.Length; i++)
             {
                 String[] values = items[i].Split('>');
-                if (values.Count() < 2) continue;     // Not allowed
+                if (values.Length < 2) continue;     // Not allowed
                 ListViewItem lvItem = new ListViewItem();
 
                 // Col 0: name
-                if (values.Count() >= 3)
+                if (values.Length >= 3)
                     lvItem.Text = VirtPackage.FriendlyShortcutName(values[2]);
 
                 // Col 1: target
-                if (values.Count() >= 1)
+                if (values.Length >= 1)
                     lvItem.SubItems.Add(values[0]);
                 else
                     lvItem.SubItems.Add("");
 
                 // Col 2: description
-                if (values.Count() >= 4)
+                if (values.Length >= 4)
                     lvItem.SubItems.Add(values[3]);
                 else
                     lvItem.SubItems.Add("");
 
                 // Col 3: args
-                if (values.Count() >= 2)
+                if (values.Length >= 2)
                     lvItem.SubItems.Add(values[1]);
                 else
                     lvItem.SubItems.Add("");
@@ -90,7 +90,7 @@ namespace PackageEditor
                     // [2] = Name
                     // [3] = Description
                     String[] items = shortcutDetail.Split('>');
-                    if (items.Count() >= 2)
+                    if (items.Length >= 2)
                     {
                         comboBox.Items.Add(items[0]);
                         //System.IO.Path.GetFileNameWithoutExtension(items[0]) + 
@@ -105,7 +105,7 @@ namespace PackageEditor
             String property = virtPackage.GetProperty("AutoLaunch");
 
             // Select Menu
-            if (property.Contains(';'))
+            if (property.Contains(";"))
             {
                 propertyMenuRadio.Checked = true;
                 autoLaunchCmd = virtPackage.GetProperty("SavedAutoLaunchCmd");
@@ -121,7 +121,7 @@ namespace PackageEditor
             PropertyToLv(autoLaunchMenu);
             String[] cmd = autoLaunchCmd.Split('>');
             propertyCmdText.Text = cmd[0];
-            if (cmd.Count() > 1)
+            if (cmd.Length > 1)
                 propertyCmdArgs.Text = cmd[1];
             //propertyCmdText.Text = autoLaunchCmd;
             FillAutoLaunchCombo(propertyCmdText);

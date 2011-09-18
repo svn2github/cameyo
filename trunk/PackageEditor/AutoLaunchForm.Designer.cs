@@ -52,7 +52,7 @@
           this.propertyCmdArgs = new System.Windows.Forms.TextBox();
           this.propertyCmdText = new System.Windows.Forms.ComboBox();
           this.propertyMenuRadio = new System.Windows.Forms.RadioButton();
-          this.bottomPanel.SuspendLayout();
+          //this.bottomPanel.SuspendLayout();
           this.bkPanel.SuspendLayout();
           this.panel1.SuspendLayout();
           this.groupBox2.SuspendLayout();
@@ -314,6 +314,7 @@
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.CancelButton = this.btnCancel;
           this.ClientSize = new System.Drawing.Size(557, 366);
+          this.ResumeLayout(false);
           this.Controls.Add(this.bottomPanel);
           this.Controls.Add(this.bkPanel);
           this.MinimumSize = new System.Drawing.Size(500, 400);
@@ -327,7 +328,6 @@
           this.panel1.ResumeLayout(false);
           this.panel1.PerformLayout();
           this.groupBox2.ResumeLayout(false);
-          this.ResumeLayout(false);
 
         }
 
