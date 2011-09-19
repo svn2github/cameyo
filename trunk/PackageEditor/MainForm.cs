@@ -188,6 +188,7 @@ namespace PackageEditor
                 catch { }
                 dialog.Text = pleaseWaitMsg.title;
                 msg.Text = pleaseWaitMsg.msg;
+                dialog.ClientSize = new Size(Math.Max(msg.Width + 100, 250),70);
                 dialog.Show(null);
                 EventWaitHandle pleaseWaitDialogEvent = AutoResetEvent.OpenExisting("pleaseWaitDialogEvent");
                 while (!pleaseWaitDialogEvent.WaitOne(10, false))
@@ -998,8 +999,7 @@ namespace PackageEditor
         private void InsertTopItem(String fileName)
         {
             // Delete maximum entry, if it exists
-            try { regKey.DeleteValue(Convert.ToString(maxItems - 1)); }
-            catch { }
+            regKey.DeleteValue(Convert.ToString(maxItems - 1), false);
 
             // Look for empty holes (or last element) to move all items up to
             int moveTo = -1;

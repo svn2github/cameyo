@@ -14,8 +14,8 @@ namespace PackageEditor
     public class FileData
     {
         public VirtFsNode virtFsNode;
-        public String addedFrom;
-        public bool deleted;
+        public String addedFrom;        // Only filled for new added files, contains the 'source' from the real system.
+        public bool deleted;            // True if file deleted from virtual package
     }
 
     public class FolderTreeNode : TreeNode
@@ -146,10 +146,23 @@ namespace PackageEditor
                     {
                         foreach (FileData child in curFolder.childFiles)
                         {
-                            if (child.deleted)                  // Deleted File
-                                virtPackage.DeleteFile(child.virtFsNode.FileName);
-                            else if (child.addedFrom != "")     // Added File
-                                virtPackage.AddFile(child.addedFrom, child.virtFsNode.FileName, false);
+                          if (child.deleted)                  // Deleted File
+                          {
+                            findFile = child.virtFsNode.FileName;
+                            findDeleted = false;
+                            if (!curFolder.childFiles.Exists(findFileData))
+                            {
+                              // only delete if no new file is added with same name.
+                              // the virtPackage will automaticaly replace it when AddFile is called.
+
+                              virtPackage.DeleteFile(child.virtFsNode.FileName);
+                            }
+                          }
+                          else
+                          {
+                            if (child.addedFrom != "")     // Added File
+                              virtPackage.AddFile(child.addedFrom, child.virtFsNode.FileName, false);
+                          }
                         }
                     }
                     if (curFolder.addedEmpty)
@@ -158,6 +171,12 @@ namespace PackageEditor
                 }
             }
             return true;
+        }
+
+        String findFile; bool findDeleted;
+        public bool findFileData(FileData data)
+        {
+          return data.virtFsNode.FileName.Equals(findFile, StringComparison.CurrentCultureIgnoreCase) && data.deleted == findDeleted;
         }
 
         public bool OnPackageSave()
@@ -271,10 +290,9 @@ namespace PackageEditor
             fsFilesList.Items.Clear();
             if (folderNode.childFiles != null)
             {
-                foreach (FileData childFile in folderNode.childFiles)
-                //for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
+                for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
                 {
-                    //FileData childFile = folderNode.childFiles[i];
+                    FileData childFile = folderNode.childFiles[i];
                     FileListViewItem newItem = new FileListViewItem();
                     newItem.Text = Path.GetFileName(childFile.virtFsNode.FileName);
                     newItem.SubItems.Add(StrFormatByteSize64(childFile.virtFsNode.EndOfFile));
@@ -400,26 +418,42 @@ namespace PackageEditor
             // if path is a file
             if (File.Exists(path))
             {
+                VirtFsNode virtFsFileNode;
+                FileData fileOverwrite = null;
                 if (parentNode.childFiles != null)
-                {
+                {   
+                    
                     foreach (FileData file in parentNode.childFiles)
                     {
-                        if (Path.GetFileName(file.virtFsNode.FileName).Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
+                      if (!file.deleted && Path.GetFileName(file.virtFsNode.FileName).Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
                         {
-                            MessageBox.Show("File already exists");
+                          if (MessageBox.Show(String.Format("File \"{0}\" already exists, overwrite?", file.virtFsNode.FileName), "Overwrite?", MessageBoxButtons.YesNo) == DialogResult.No)
                             return false;
+                          else
+                          {                            
+                            if ((file.addedFrom != ""))
+                              fileOverwrite = file;
+                            else
+                              file.deleted = true;
+                            break;
+                          }
                         }
                     }
                 }
 
-                VirtFsNode virtFsFileNode = new VirtFsNode();
+                
+                virtFsFileNode = new VirtFsNode();                
                 #pragma warning disable 1690
                 virtFsFileNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(path));
                 #pragma warning restore 1690
                 virtFsFileNode.FileFlags = VirtPackage.VIRT_FILE_FLAGS_ISFILE;      //it's a file
                 System.IO.FileInfo fi = new System.IO.FileInfo(path);
                 virtFsFileNode.EndOfFile = (ulong)fi.Length;
-                AddFileOrFolder(virtFsFileNode, path);     // Also sets dirty = true
+
+                if (fileOverwrite != null)
+                  fileOverwrite.virtFsNode = virtFsFileNode;
+                else
+                  AddFileOrFolder(virtFsFileNode, path);     // Also sets dirty = true
 
                 if (parentNode == fsFolderTree.SelectedNode)
                 {
@@ -433,28 +467,47 @@ namespace PackageEditor
             if (!Directory.Exists(path))
                 return false;
 
+            FolderTreeNode folderOverwrite = null;
             //foreach (String subdir in subdirs)
             {
                 foreach (FolderTreeNode childNode in parentNode.Nodes)
                 {
-                    if (childNode.Text.Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
+                  if (childNode.Text.Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
                     {
-                        MessageBox.Show("Folder already exists");
-                        return false;
+                      
+#pragma warning disable 1690
+                    if (!childNode.deleted && MessageBox.Show(String.Format("Folder \"{0}\" already exists, overwrite?", childNode.virtFsNode.FileName), "Overwrite?", MessageBoxButtons.YesNo) == DialogResult.No)
+#pragma warning restore 1690
+                      return false;
+                      else
+                      {
+                        folderOverwrite = childNode;
+                        childNode.deleted = false;
+                        if (childNode.childFiles != null)
+                          foreach (FileData file in childNode.childFiles)
+                            file.deleted = true;// make sure files from a previously deleted folder dont come back..
+                        break;
+                      }
                     }
                 }
             }
 
             String[] lsFiles = Directory.GetFiles(path);
             String[] lsDirs = Directory.GetDirectories(path);
+            FolderTreeNode subdirNode;
+            if (folderOverwrite == null)
+            {
+              // if path is a folder
+              VirtFsNode virtFsDirNode = new VirtFsNode();
+#pragma warning disable 1690
+              virtFsDirNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(path));
+#pragma warning restore 1690
+              virtFsDirNode.FileFlags = 0;                                       //it's a dir
+              subdirNode = AddFileOrFolder(virtFsDirNode, path);     // Also sets dirty = true
+            }
+            else
+              subdirNode = folderOverwrite;
 
-            // if path is a folder
-            VirtFsNode virtFsDirNode = new VirtFsNode();
-            #pragma warning disable 1690
-            virtFsDirNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(path));
-            #pragma warning restore 1690
-            virtFsDirNode.FileFlags = 0;                                       //it's a dir
-            FolderTreeNode subdirNode = AddFileOrFolder(virtFsDirNode, path);     // Also sets dirty = true
 
             foreach (String file in lsFiles)
             {
@@ -506,13 +559,6 @@ namespace PackageEditor
                             break;
                         }
                     }
-
-                    /*if (item.ForeColor == Color.Green)      // Just added
-                        item.Remove();
-                    else
-                        item.ForeColor = Color.Red;*/
-                    //String FileName = TreeHelper.FullPath(folderNode.virtFsNode.FileName, item.Text);
-                    //virtPackage.DeleteFile(FileName);
                 }
                 TreeViewEventArgs ev = new TreeViewEventArgs(folderNode);
                 OnFolderTreeSelect(sender, ev);
@@ -529,6 +575,9 @@ namespace PackageEditor
                     if (curNode.Nodes.Count > 0)
                         OnRemoveBtnClick(curNode.Nodes[0], e);
                     RefreshFolderNodeRecursively(curNode, 0);
+                    TreeViewEventArgs ev = new TreeViewEventArgs(curNode);
+                    OnFolderTreeSelect(sender, ev);
+
                 }
                 else
                 {
@@ -588,21 +637,39 @@ namespace PackageEditor
 
             //String[] subdirs = newFolderName.Split('\\');
             FolderTreeNode curParentNode = parentNode;
+            FolderTreeNode folderOverwrite = null;
             //foreach (String subdir in subdirs)
             {
                 foreach (FolderTreeNode childNode in curParentNode.Nodes)
                 {
-                    if (childNode.Text.Equals(newFolderName, StringComparison.CurrentCultureIgnoreCase))
+                  if (childNode.Text.Equals(newFolderName, StringComparison.CurrentCultureIgnoreCase))
                     {
+                      if (!childNode.deleted)
+                      {
                         MessageBox.Show("Folder already exists");
                         return;
+                      }
+                      else
+                      {
+                        folderOverwrite = childNode;
+                        childNode.deleted = false;
+                        if (childNode.childFiles != null)
+                          foreach (FileData file in childNode.childFiles)
+                            file.deleted = true;// make sure files from a previously deleted folder dont come back..
+                      }
                     }
                 }
             }
-            
-            FolderTreeNode newNode = AddFileOrFolder(virtFsNode, newFolderName);     // Also sets dirty = true
-            if (newNode != null)
+          
+            FolderTreeNode newNode;
+            if (folderOverwrite != null)
+              newNode = folderOverwrite;
+            else
+            {
+              newNode = AddFileOrFolder(virtFsNode, newFolderName);     // Also sets dirty = true
+              if (newNode != null)
                 newNode.addedEmpty = true;
+            }
             RefreshFolderNodeRecursively(parentNode, 0);
             TreeViewEventArgs ev = new TreeViewEventArgs(parentNode);
             OnFolderTreeSelect(sender, ev);

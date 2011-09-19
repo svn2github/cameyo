@@ -775,7 +775,7 @@
           // columnFileName
           // 
           this.columnFileName.Text = "File";
-          this.columnFileName.Width = 430;
+          this.columnFileName.Width = 413;
           // 
           // columnFileSize
           // 
@@ -1290,7 +1290,7 @@
           // columnHeader4
           // 
           this.columnHeader4.Text = "Value";
-          this.columnHeader4.Width = 263;
+          this.columnHeader4.Width = 246;
           // 
           // columnHeader5
           // 
