@@ -20,11 +20,11 @@ namespace PackageEditor
 
     public class FolderTreeNode : TreeNode
     {
-        public VirtFsNode virtFsNode;
-        public List<FileData> childFiles;
-        public UInt32 sandboxFlags;
-        public bool deleted;
-        public bool addedEmpty;         // User added this as a new empty folder
+      public VirtFsNode virtFsNode;
+      public List<FileData> childFiles;
+      public UInt32 sandboxFlags;
+      public bool deleted;
+      public bool addedEmpty;         // User added this as a new empty folder
     }
 
     public class FileSystemEditor
@@ -46,6 +46,11 @@ namespace PackageEditor
         // creation of delegate for AddFileOrFolderRecursive
         public delegate bool DelegateAddFileOrFolderRecursive(FolderTreeNode parentNode, String path);
         public DelegateAddFileOrFolderRecursive Del_AddFOrFR;
+
+        public FolderTreeNode getFileTree()
+        {
+          return (FolderTreeNode)fsFolderTree.Nodes[0];
+        }
 
         public FileSystemEditor(VirtPackage virtPackage, TreeView fsFolderTree, ListView fsFilesList, 
             Label fsFolderInfoFullName, ComboBox fsFolderInfoIsolationCombo,
@@ -148,9 +153,11 @@ namespace PackageEditor
                         {
                           if (child.deleted)                  // Deleted File
                           {
-                            findFile = child.virtFsNode.FileName;
-                            findDeleted = false;
-                            if (!curFolder.childFiles.Exists(findFileData))
+                            String findFile = child.virtFsNode.FileName;
+                            Boolean findDeleted = false;
+                            if (!curFolder.childFiles.Exists(delegate(FileData data) { 
+                                return data.virtFsNode.FileName.Equals(findFile, StringComparison.CurrentCultureIgnoreCase) && data.deleted == findDeleted; 
+                            }))
                             {
                               // only delete if no new file is added with same name.
                               // the virtPackage will automaticaly replace it when AddFile is called.
@@ -171,12 +178,6 @@ namespace PackageEditor
                 }
             }
             return true;
-        }
-
-        String findFile; bool findDeleted;
-        public bool findFileData(FileData data)
-        {
-          return data.virtFsNode.FileName.Equals(findFile, StringComparison.CurrentCultureIgnoreCase) && data.deleted == findDeleted;
         }
 
         public bool OnPackageSave()

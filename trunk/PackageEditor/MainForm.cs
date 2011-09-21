@@ -25,7 +25,12 @@ namespace PackageEditor
         private MRU mru;
         public bool dirty;
         private bool dragging;
-        private string CleanupOnExitCmd = "%MyExe%>-Quiet -Confirm -Remove";
+        private string CleanupOnExitExe = "%MyExe%";
+        private string CleanupOnExitOptionQuiet = "-Quiet";
+        private string CleanupOnExitOptionConfirm = "-Confirm";
+        private string CleanupOnExitOptionRemove = "-Remove";
+        private string CleanupOnExitOptionRemoveReg = "-Remove:Reg";
+
         private Control[] Editors;
 
         // creation of delegate for PackageOpen
@@ -90,8 +95,9 @@ namespace PackageEditor
         {
             regEditor.OnPackageOpenBeforeUI();
             regLoaded = true;
+            regLoadThread = null;
         }
-
+      
         private void regProgressTimer_Tick(object sender, EventArgs e)
         {
             if (regLoaded)
@@ -292,13 +298,25 @@ namespace PackageEditor
 
         private bool PackageSave(String fileName)
         {
+          String CantSaveBecause = "";
+          if (String.IsNullOrEmpty(propertyAppID.Text))
+            CantSaveBecause += "- AppID is a required field to save a package.\r\n";
+          if (String.IsNullOrEmpty(virtPackage.GetProperty("AutoLaunch")))
+            CantSaveBecause += "- The package does not have any program(s) selected to launch.\r\nPlease select a program to launch on the tab:General > Panel:Basics > Item:Startup.";
+
+          if (CantSaveBecause != "")
+          {
+            MessageBox.Show(this,CantSaveBecause,"Cant save the package.",MessageBoxButtons.OK,MessageBoxIcon.Hand);
+            return false;
+          }
+
             bool ret = false;
             PleaseWaitBegin("Saving package", "Saving " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
             {
-                this.OnPackageSave();
-                fsEditor.OnPackageSave();
-                regEditor.OnPackageSave();
-                ret = virtPackage.Save(fileName);
+                ret = this.OnPackageSave();
+                ret &= fsEditor.OnPackageSave();
+                ret &= regEditor.OnPackageSave();
+                ret &= virtPackage.Save(fileName);
             }
             PleaseWaitEnd();
 
@@ -402,14 +420,31 @@ namespace PackageEditor
             propertyIsolationMerge.Checked = (isolationType == VirtPackage.ISOLATIONMODE_FULL_ACCESS);
 
             // Icon
-            Icon ico = Icon.ExtractAssociatedIcon(virtPackage.openedFile);
-            propertyIcon.Image = ico.ToBitmap();
+            if (!String.IsNullOrEmpty(virtPackage.openedFile))
+            {
+              Icon ico = Icon.ExtractAssociatedIcon(virtPackage.openedFile);
+              propertyIcon.Image = ico.ToBitmap();
+            }
 
             // StopInheritance
             propertyStopInheritance.Text = virtPackage.GetProperty("StopInheritance");
 
             // CleanupOnExit
-            propertyCleanupOnExit.Checked = virtPackage.GetProperty("OnStopUnvirtualized").Contains(CleanupOnExitCmd);
+            String cleanupCommand = GetCleanUpStopCommand();
+            if (cleanupCommand == "")
+            {
+              rdbCleanNone.Checked = true;
+            }
+            else
+            {
+              chkCleanAsk.Checked = cleanupCommand.Contains(CleanupOnExitOptionConfirm);
+              chkCleanDoneDialog.Checked = !cleanupCommand.Contains(CleanupOnExitOptionQuiet);
+              if (cleanupCommand.EndsWith(CleanupOnExitOptionRemoveReg))
+                rdbCleanRegOnly.Checked = true;
+              else
+                rdbCleanAll.Checked = true;
+            }
+
 
             // Expiration
             String expiration = virtPackage.GetProperty("Expiration");
@@ -432,6 +467,35 @@ namespace PackageEditor
             dirty = false;
         }
 
+        private void RemoveIfStartswith(ref String str, String value)
+        {
+          String newStr = str.TrimStart(' ');
+          if (newStr.StartsWith(value))
+            str = newStr.Remove(0, value.Length);
+        }
+
+        private string GetCleanUpStopCommand()
+        {
+          String[] OnStopUnvirtualized = virtPackage.GetProperty("OnStopUnvirtualized").Split(';');
+          foreach (String stopCommand in OnStopUnvirtualized)
+          {
+            if (stopCommand.StartsWith(CleanupOnExitExe + '>') && (stopCommand.EndsWith(CleanupOnExitOptionRemove) || stopCommand.EndsWith(CleanupOnExitOptionRemoveReg)))
+            {
+              String checkNoRemains = stopCommand;
+              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitExe);
+              RemoveIfStartswith(ref checkNoRemains, ">");
+              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionConfirm);
+              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionQuiet);
+
+              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionRemoveReg);
+              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionRemove);
+              if (checkNoRemains == "")
+                return stopCommand;
+            }
+          }
+          return "";
+        }
+
         public void OnTabActivate()
         {
             //no needed anymore: DisplayIsolation();
@@ -452,6 +516,33 @@ namespace PackageEditor
 
             // propertyCleanupOnExit
             String str = virtPackage.GetProperty("OnStopUnvirtualized");
+            String oldCleanupCommand = GetCleanUpStopCommand();
+            String newCleanupCommand = "";
+            if (!rdbCleanNone.Checked)
+            {
+              if (chkCleanAsk.Checked)
+                newCleanupCommand += ' ' + CleanupOnExitOptionConfirm;
+              if (!chkCleanDoneDialog.Checked)
+                newCleanupCommand += ' ' + CleanupOnExitOptionQuiet;
+
+              if (rdbCleanRegOnly.Checked)
+                newCleanupCommand += ' ' + CleanupOnExitOptionRemoveReg;
+              if (rdbCleanAll.Checked)
+                newCleanupCommand += ' ' + CleanupOnExitOptionRemove;
+
+              newCleanupCommand = CleanupOnExitExe + '>' + newCleanupCommand.Trim();
+            }
+            if (oldCleanupCommand == "")
+              str += ";" + newCleanupCommand;
+            else
+            {
+              str = ";" + str + ";";
+              str = str.Replace(";" + oldCleanupCommand + ";", ";" + newCleanupCommand + ";");
+              str = str.Replace(";;", ";");
+              str = str.Trim(';');
+            }
+            Ret &= virtPackage.SetProperty("OnStopUnvirtualized", str);
+            /*
             if (propertyCleanupOnExit.Checked)
             {
                 if (!str.Contains(CleanupOnExitCmd))
@@ -471,7 +562,7 @@ namespace PackageEditor
                     str = str.Trim(';');
                     Ret &= virtPackage.SetProperty("OnStopUnvirtualized", str);
                 }
-            }
+            }*/
 
             // AutoLaunch (and SaveAutoLaunchCmd + SaveAutoLaunchMenu) already set by AutoLaunchForm
 
@@ -496,7 +587,7 @@ namespace PackageEditor
             propertyAutoLaunch.Text = "";
             propertyIcon.Image = null;
             propertyStopInheritance.Text = "";
-            propertyCleanupOnExit.Checked = false;
+            //propertyCleanupOnExit.Checked = false;
             this.Text = "Package Editor";
         }
 
@@ -530,27 +621,33 @@ namespace PackageEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String tmpFileName = virtPackage.openedFile + ".new";
-            DeleteFile(tmpFileName);
-            //DeleteFile(virtPackage.openedFile + ".bak");
-            if (PackageSave(tmpFileName))
-            {
-                // Release (close) original file, and delete it (otherwise it won't be erasable)
-                String packageExeFile = virtPackage.openedFile;
-                if (regLoadThread != null)
-                    regLoadThread.Abort();
-                virtPackage.Close();
+          if (String.IsNullOrEmpty(virtPackage.openedFile))
+          {
+            // Its a new package.. so save as to get a filename.
+            saveasToolStripMenuItem_Click(sender, e);
+            return;
+          }
+          String tmpFileName = virtPackage.openedFile + ".new";
+          DeleteFile(tmpFileName);
+          //DeleteFile(virtPackage.openedFile + ".bak");
+          if (PackageSave(tmpFileName))
+          {
+            // Release (close) original file, and delete it (otherwise it won't be erasable)
+            String packageExeFile = virtPackage.openedFile;
+            if (regLoadThread != null)
+              regLoadThread.Abort();
+            virtPackage.Close();
 
-                DeleteFile(packageExeFile);
-                if (!MoveFile(tmpFileName, packageExeFile))
-                    MessageBox.Show("Cannot rename: " + tmpFileName + " to: " + packageExeFile);
-                virtPackage.Open(packageExeFile);
-            }
-            else
-            {
-                // Save failed. Delete .new file.
-                System.IO.File.Delete(virtPackage.openedFile + ".new");
-            }
+            DeleteFile(packageExeFile);
+            if (!MoveFile(tmpFileName, packageExeFile))
+              MessageBox.Show("Cannot rename: " + tmpFileName + " to: " + packageExeFile);
+            virtPackage.Open(packageExeFile);
+          }
+          else
+          {
+            // Save failed. Delete .new file.
+            System.IO.File.Delete(virtPackage.openedFile + ".new");
+          }          
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -618,7 +715,7 @@ namespace PackageEditor
 
         private void lnkAutoLaunch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AutoLaunchForm autoLaunchForm = new AutoLaunchForm(virtPackage);
+            AutoLaunchForm autoLaunchForm = new AutoLaunchForm(virtPackage, fsEditor);
             String oldValue = virtPackage.GetProperty("AutoLaunch");
             if (autoLaunchForm.ShowDialog() == DialogResult.OK)
             {
@@ -908,6 +1005,39 @@ namespace PackageEditor
           {
             openToolStripMenuItem_Click(this, null);
           }
+        }
+
+        private void rdb_CheckedChanged(object sender, EventArgs e)
+        {
+          bool cleanup = !rdbCleanNone.Checked;
+          chkCleanAsk.Enabled = cleanup;
+          chkCleanDoneDialog.Enabled = cleanup;
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          if (!PackageClose())
+            return;
+          Directory.SetCurrentDirectory(Path.GetDirectoryName(Application.ExecutablePath));
+          if (!virtPackage.Create("New Package ID", "AppVirtDll.dll", "Loader.exe"))
+          {
+            MessageBox.Show("Faild to create a new package.");
+            return;
+          }
+          dirty = false;
+          this.OnPackageOpen();
+          fsEditor.OnPackageOpen();
+          tabControl.SelectedIndex = 0;
+
+          rdbCleanNone.Checked = true;
+          rdbCleanRegOnly.Checked = false;
+          rdbCleanAll.Checked = false;
+          chkCleanAsk.Checked = true;
+          chkCleanDoneDialog.Checked = false;
+
+          EnableDisablePackageControls(true);
+          regLoaded = true;
+          regProgressTimer_Tick(null, null);          
         }
     }
   

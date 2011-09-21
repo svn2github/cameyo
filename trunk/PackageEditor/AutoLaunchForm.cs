@@ -13,6 +13,7 @@ namespace PackageEditor
     public partial class AutoLaunchForm : Form
     {
         private VirtPackage virtPackage;
+        private FileSystemEditor fileSystemEditor;
         String autoLaunchCmd;
         String autoLaunchMenu;
 
@@ -71,9 +72,10 @@ namespace PackageEditor
             return property;
         }
 
-        public AutoLaunchForm(VirtPackage virtPackage)
+        public AutoLaunchForm(VirtPackage virtPackage, FileSystemEditor fileSystemEditor)
         {
             this.virtPackage = virtPackage;
+            this.fileSystemEditor = fileSystemEditor;
             InitializeComponent();
         }
 
@@ -131,7 +133,7 @@ namespace PackageEditor
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AutoLaunchEditItemForm autoLaunchEditItemForm = new AutoLaunchEditItemForm(virtPackage);
+          AutoLaunchEditItemForm autoLaunchEditItemForm = new AutoLaunchEditItemForm(virtPackage, fileSystemEditor);
             autoLaunchEditItemForm.Text = btnAdd.Text.Replace("&", "");
             autoLaunchEditItemForm.SetValues("", "", "", "");
             if (autoLaunchEditItemForm.ShowDialog() == DialogResult.OK)
@@ -168,7 +170,7 @@ namespace PackageEditor
             String target = propertyMenuLV.SelectedItems[0].SubItems[1].Text;       // Note: SubItems are 1-indexed!
             String args = propertyMenuLV.SelectedItems[0].SubItems[3].Text;         // Note: SubItems are 1-indexed!
             String description = propertyMenuLV.SelectedItems[0].SubItems[2].Text;  // Note: SubItems are 1-indexed!
-            AutoLaunchEditItemForm autoLaunchEditItemForm = new AutoLaunchEditItemForm(virtPackage);
+            AutoLaunchEditItemForm autoLaunchEditItemForm = new AutoLaunchEditItemForm(virtPackage, fileSystemEditor);
             autoLaunchEditItemForm.Text = btnModify.Text.Replace("&", ""); ;
             autoLaunchEditItemForm.SetValues(name, target, args, description);
             if (autoLaunchEditItemForm.ShowDialog() == DialogResult.OK)
@@ -196,7 +198,7 @@ namespace PackageEditor
         private void btnOk_Click(object sender, EventArgs e)
         {
             // Validate menu (only if menu is selected)
-            if (propertyMenuRadio.Checked &&propertyMenuLV.Items.Count < 2)
+            if (propertyMenuRadio.Checked && propertyMenuLV.Items.Count < 2)
             {
                 MessageBox.Show("Menu requires at least two programs");
                 return;
@@ -220,7 +222,7 @@ namespace PackageEditor
 
         private void btnVirtFilesBrowse_Click(object sender, EventArgs e)
         {
-            VirtFilesBrowse virtFilesBrowse = new VirtFilesBrowse(virtPackage);
+          VirtFilesBrowse virtFilesBrowse = new VirtFilesBrowse(virtPackage, fileSystemEditor);
             String path = "";
             if (virtFilesBrowse.Do(ref path, false))
             {

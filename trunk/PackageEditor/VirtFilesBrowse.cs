@@ -7,24 +7,63 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using VirtPackageAPI;
+using System.IO;
 
 namespace PackageEditor
 {
     public partial class VirtFilesBrowse : Form
     {
         private VirtPackage virtPackage;
+        private FileSystemEditor fileSystemEditor;
         private bool allowSelectFolder;
         const int IMGINDEX_FOLDER = 0;
         const int IMGINDEX_FILE = 3;
 
-        public VirtFilesBrowse(VirtPackage virtPackage)
+        public VirtFilesBrowse(VirtPackage virtPackage, FileSystemEditor fileSystemEditor)
         {
             InitializeComponent();
             this.virtPackage = virtPackage;
+            this.fileSystemEditor = fileSystemEditor;
+        }
+
+        private void ShowFiles(TreeNodeCollection treeNodeCollection, FolderTreeNode folder)
+        {
+          if (folder.childFiles != null)
+          {
+            foreach (FileData fd in folder.childFiles)
+            {
+              if (!fd.deleted)
+              {
+                TreeNode filenode = treeNodeCollection.Add(Path.GetFileName(fd.virtFsNode.FileName));
+                filenode.ImageIndex = 3;
+                filenode.SelectedImageIndex = 3;
+              }
+            }
+          }
+        }
+      
+        private void AddItems(TreeNodeCollection fsFolderTree, FolderTreeNode folderTree)
+        {
+          foreach(FolderTreeNode folder in folderTree.Nodes)
+          {
+            if (!folder.deleted)
+            {
+              TreeNode folderNode  = fsFolderTree.Add(folder.Text);
+              folderNode.ImageIndex = 0;
+              folderNode.SelectedImageIndex = 0;
+              AddItems(folderNode.Nodes, folder);
+              ShowFiles(folderNode.Nodes, folder);
+            }
+          }
         }
 
         private void Populate()
         {
+            fsFolderTree.Nodes.Clear();//
+            FolderTreeNode folderTree = fileSystemEditor.getFileTree();
+            AddItems(fsFolderTree.Nodes, folderTree);  
+            return;
+
             List<VirtFsNode> virtFsNodes = new List<VirtFsNode>();
             virtPackage.EnumFiles(ref virtFsNodes);
             fsFolderTree.Nodes.Clear();

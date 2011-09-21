@@ -13,11 +13,13 @@ namespace PackageEditor
     public partial class AutoLaunchEditItemForm : Form
     {
         private VirtPackage virtPackage;
+        private FileSystemEditor fileSystemEditor;
 
-        public AutoLaunchEditItemForm(VirtPackage virtPackage)
+        public AutoLaunchEditItemForm(VirtPackage virtPackage, FileSystemEditor fileSystemEditor)
         {
             InitializeComponent();
             this.virtPackage = virtPackage;
+            this.fileSystemEditor = fileSystemEditor;
         }
 
         public void SetValues(String name, String target, String args, String description)
@@ -58,7 +60,7 @@ namespace PackageEditor
 
         private void btnVirtFilesBrowse_Click(object sender, EventArgs e)
         {
-            VirtFilesBrowse virtFilesBrowse = new VirtFilesBrowse(virtPackage);
+          VirtFilesBrowse virtFilesBrowse = new VirtFilesBrowse(virtPackage, fileSystemEditor);
             String path = "";
             if (virtFilesBrowse.Do(ref path, false))
                 targetBox.Text = path;

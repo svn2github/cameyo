@@ -37,6 +37,7 @@
           this.imageList = new System.Windows.Forms.ImageList(this.components);
           this.menuStrip1 = new System.Windows.Forms.MenuStrip();
           this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.saveasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,6 +112,10 @@
           this.tbValue = new System.Windows.Forms.TextBox();
           this.tbSize = new System.Windows.Forms.TextBox();
           this.tbFile = new System.Windows.Forms.TextBox();
+          this.regFilesList = new PackageEditor.ListViewEx();
+          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
           this.panel4 = new System.Windows.Forms.Panel();
           this.panel6 = new System.Windows.Forms.Panel();
           this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -125,8 +130,13 @@
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.propertyExpiration = new System.Windows.Forms.CheckBox();
           this.propertyExpirationDatePicker = new System.Windows.Forms.DateTimePicker();
+          this.groupBox7 = new System.Windows.Forms.GroupBox();
+          this.chkCleanDoneDialog = new System.Windows.Forms.CheckBox();
+          this.rdbCleanNone = new System.Windows.Forms.RadioButton();
+          this.chkCleanAsk = new System.Windows.Forms.CheckBox();
+          this.rdbCleanAll = new System.Windows.Forms.RadioButton();
+          this.rdbCleanRegOnly = new System.Windows.Forms.RadioButton();
           this.groupBox5 = new System.Windows.Forms.GroupBox();
-          this.propertyCleanupOnExit = new System.Windows.Forms.CheckBox();
           this.label8 = new System.Windows.Forms.Label();
           this.label7 = new System.Windows.Forms.Label();
           this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
@@ -136,10 +146,6 @@
           this.panel11 = new System.Windows.Forms.PictureBox();
           this.panel12 = new System.Windows.Forms.PictureBox();
           this.bottomPanel = new System.Windows.Forms.Panel();
-          this.regFilesList = new PackageEditor.ListViewEx();
-          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
           this.menuStrip1.SuspendLayout();
           this.tabControl.SuspendLayout();
           this.tabGeneral.SuspendLayout();
@@ -172,6 +178,7 @@
           this.regToolStrip.SuspendLayout();
           this.tabAdvanced.SuspendLayout();
           this.groupBox6.SuspendLayout();
+          this.groupBox7.SuspendLayout();
           this.groupBox5.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.panel11)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.panel12)).BeginInit();
@@ -202,6 +209,7 @@
           // fileToolStripMenuItem
           // 
           this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveasToolStripMenuItem,
@@ -211,6 +219,13 @@
           this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
           this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
           this.fileToolStripMenuItem.Text = "&File";
+          // 
+          // newToolStripMenuItem
+          // 
+          this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+          this.newToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+          this.newToolStripMenuItem.Text = "&New";
+          this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
           // 
           // openToolStripMenuItem
           // 
@@ -1005,6 +1020,44 @@
           this.tbFile.TabIndex = 8;
           this.tbFile.Visible = false;
           // 
+          // regFilesList
+          // 
+          this.regFilesList.AllowColumnReorder = true;
+          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.regFilesList.DoubleClickActivation = false;
+          this.regFilesList.FullRowSelect = true;
+          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+          this.regFilesList.Location = new System.Drawing.Point(0, 25);
+          this.regFilesList.Name = "regFilesList";
+          this.regFilesList.Size = new System.Drawing.Size(509, 334);
+          this.regFilesList.TabIndex = 7;
+          this.regFilesList.UseCompatibleStateImageBehavior = false;
+          this.regFilesList.View = System.Windows.Forms.View.Details;
+          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+          // 
+          // columnHeader3
+          // 
+          this.columnHeader3.Text = "File";
+          this.columnHeader3.Width = 144;
+          // 
+          // columnHeader4
+          // 
+          this.columnHeader4.Text = "Value";
+          this.columnHeader4.Width = 246;
+          // 
+          // columnHeader5
+          // 
+          this.columnHeader5.Text = "Type";
+          this.columnHeader5.Width = 98;
+          // 
           // panel4
           // 
           this.panel4.Controls.Add(this.panel6);
@@ -1106,6 +1159,7 @@
           // tabAdvanced
           // 
           this.tabAdvanced.Controls.Add(this.groupBox6);
+          this.tabAdvanced.Controls.Add(this.groupBox7);
           this.tabAdvanced.Controls.Add(this.groupBox5);
           this.tabAdvanced.Location = new System.Drawing.Point(4, 22);
           this.tabAdvanced.Name = "tabAdvanced";
@@ -1119,12 +1173,13 @@
           // 
           this.groupBox6.Controls.Add(this.propertyExpiration);
           this.groupBox6.Controls.Add(this.propertyExpirationDatePicker);
-          this.groupBox6.Location = new System.Drawing.Point(6, 98);
+          this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
+          this.groupBox6.Location = new System.Drawing.Point(3, 186);
           this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
           this.groupBox6.Name = "groupBox6";
           this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
-          this.groupBox6.Size = new System.Drawing.Size(712, 82);
-          this.groupBox6.TabIndex = 8;
+          this.groupBox6.Size = new System.Drawing.Size(713, 82);
+          this.groupBox6.TabIndex = 10;
           this.groupBox6.TabStop = false;
           this.groupBox6.Text = "Expiration";
           // 
@@ -1146,9 +1201,80 @@
           this.propertyExpirationDatePicker.Size = new System.Drawing.Size(434, 20);
           this.propertyExpirationDatePicker.TabIndex = 1;
           // 
+          // groupBox7
+          // 
+          this.groupBox7.Controls.Add(this.chkCleanDoneDialog);
+          this.groupBox7.Controls.Add(this.rdbCleanNone);
+          this.groupBox7.Controls.Add(this.chkCleanAsk);
+          this.groupBox7.Controls.Add(this.rdbCleanAll);
+          this.groupBox7.Controls.Add(this.rdbCleanRegOnly);
+          this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
+          this.groupBox7.Location = new System.Drawing.Point(3, 86);
+          this.groupBox7.Name = "groupBox7";
+          this.groupBox7.Size = new System.Drawing.Size(713, 100);
+          this.groupBox7.TabIndex = 9;
+          this.groupBox7.TabStop = false;
+          this.groupBox7.Text = "Remove program upon exit";
+          // 
+          // chkCleanDoneDialog
+          // 
+          this.chkCleanDoneDialog.AutoSize = true;
+          this.chkCleanDoneDialog.Location = new System.Drawing.Point(434, 67);
+          this.chkCleanDoneDialog.Name = "chkCleanDoneDialog";
+          this.chkCleanDoneDialog.Size = new System.Drawing.Size(194, 17);
+          this.chkCleanDoneDialog.TabIndex = 31;
+          this.chkCleanDoneDialog.Text = "Show dialog when cleanup is done.";
+          this.chkCleanDoneDialog.UseVisualStyleBackColor = true;
+          // 
+          // rdbCleanNone
+          // 
+          this.rdbCleanNone.AutoSize = true;
+          this.rdbCleanNone.Location = new System.Drawing.Point(7, 19);
+          this.rdbCleanNone.Name = "rdbCleanNone";
+          this.rdbCleanNone.Size = new System.Drawing.Size(251, 17);
+          this.rdbCleanNone.TabIndex = 30;
+          this.rdbCleanNone.TabStop = true;
+          this.rdbCleanNone.Text = "No cleanup. Leave system ready to run. (Faster)";
+          this.rdbCleanNone.UseVisualStyleBackColor = true;
+          this.rdbCleanNone.CheckedChanged += new System.EventHandler(this.rdb_CheckedChanged);
+          // 
+          // chkCleanAsk
+          // 
+          this.chkCleanAsk.AutoSize = true;
+          this.chkCleanAsk.Location = new System.Drawing.Point(434, 50);
+          this.chkCleanAsk.Name = "chkCleanAsk";
+          this.chkCleanAsk.Size = new System.Drawing.Size(195, 17);
+          this.chkCleanAsk.TabIndex = 29;
+          this.chkCleanAsk.Text = "Ask for confirmation before removal.";
+          this.chkCleanAsk.UseVisualStyleBackColor = true;
+          // 
+          // rdbCleanAll
+          // 
+          this.rdbCleanAll.AutoSize = true;
+          this.rdbCleanAll.Location = new System.Drawing.Point(7, 67);
+          this.rdbCleanAll.Name = "rdbCleanAll";
+          this.rdbCleanAll.Size = new System.Drawing.Size(149, 17);
+          this.rdbCleanAll.TabIndex = 28;
+          this.rdbCleanAll.TabStop = true;
+          this.rdbCleanAll.Text = "Remove all virtualized files";
+          this.rdbCleanAll.UseVisualStyleBackColor = true;
+          this.rdbCleanAll.CheckedChanged += new System.EventHandler(this.rdb_CheckedChanged);
+          // 
+          // rdbCleanRegOnly
+          // 
+          this.rdbCleanRegOnly.AutoSize = true;
+          this.rdbCleanRegOnly.Location = new System.Drawing.Point(7, 36);
+          this.rdbCleanRegOnly.Name = "rdbCleanRegOnly";
+          this.rdbCleanRegOnly.Size = new System.Drawing.Size(367, 30);
+          this.rdbCleanRegOnly.TabIndex = 27;
+          this.rdbCleanRegOnly.TabStop = true;
+          this.rdbCleanRegOnly.Text = "Only remove the virtualized registry items. (The changes will NOT be lost)\r\nAny c" +
+              "hanges to the registry will be restored from the VirtReg.export file.";
+          this.rdbCleanRegOnly.UseVisualStyleBackColor = true;
+          this.rdbCleanRegOnly.CheckedChanged += new System.EventHandler(this.rdb_CheckedChanged);
+          // 
           // groupBox5
           // 
-          this.groupBox5.Controls.Add(this.propertyCleanupOnExit);
           this.groupBox5.Controls.Add(this.label8);
           this.groupBox5.Controls.Add(this.label7);
           this.groupBox5.Controls.Add(this.lnkCustomEvents);
@@ -1156,26 +1282,16 @@
           this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
           this.groupBox5.Location = new System.Drawing.Point(3, 3);
           this.groupBox5.Name = "groupBox5";
-          this.groupBox5.Size = new System.Drawing.Size(713, 89);
+          this.groupBox5.Size = new System.Drawing.Size(713, 83);
           this.groupBox5.TabIndex = 7;
           this.groupBox5.TabStop = false;
           this.groupBox5.Text = "Advanced";
-          // 
-          // propertyCleanupOnExit
-          // 
-          this.propertyCleanupOnExit.AutoSize = true;
-          this.propertyCleanupOnExit.Location = new System.Drawing.Point(10, 32);
-          this.propertyCleanupOnExit.Name = "propertyCleanupOnExit";
-          this.propertyCleanupOnExit.Size = new System.Drawing.Size(153, 17);
-          this.propertyCleanupOnExit.TabIndex = 26;
-          this.propertyCleanupOnExit.Text = "Remove program upon exit";
-          this.propertyCleanupOnExit.UseVisualStyleBackColor = true;
           // 
           // label8
           // 
           this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
           this.label8.AutoSize = true;
-          this.label8.Location = new System.Drawing.Point(507, 71);
+          this.label8.Location = new System.Drawing.Point(507, 53);
           this.label8.Name = "label8";
           this.label8.Size = new System.Drawing.Size(172, 13);
           this.label8.TabIndex = 25;
@@ -1184,7 +1300,7 @@
           // label7
           // 
           this.label7.AutoSize = true;
-          this.label7.Location = new System.Drawing.Point(7, 51);
+          this.label7.Location = new System.Drawing.Point(7, 33);
           this.label7.Name = "label7";
           this.label7.Size = new System.Drawing.Size(208, 13);
           this.label7.TabIndex = 24;
@@ -1203,7 +1319,7 @@
           // 
           // propertyStopInheritance
           // 
-          this.propertyStopInheritance.Location = new System.Drawing.Point(272, 48);
+          this.propertyStopInheritance.Location = new System.Drawing.Point(272, 30);
           this.propertyStopInheritance.Name = "propertyStopInheritance";
           this.propertyStopInheritance.Size = new System.Drawing.Size(435, 20);
           this.propertyStopInheritance.TabIndex = 6;
@@ -1258,44 +1374,6 @@
           this.bottomPanel.Name = "bottomPanel";
           this.bottomPanel.Size = new System.Drawing.Size(751, 47);
           this.bottomPanel.TabIndex = 8;
-          // 
-          // regFilesList
-          // 
-          this.regFilesList.AllowColumnReorder = true;
-          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.regFilesList.DoubleClickActivation = false;
-          this.regFilesList.FullRowSelect = true;
-          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-          this.regFilesList.Location = new System.Drawing.Point(0, 25);
-          this.regFilesList.Name = "regFilesList";
-          this.regFilesList.Size = new System.Drawing.Size(509, 334);
-          this.regFilesList.TabIndex = 7;
-          this.regFilesList.UseCompatibleStateImageBehavior = false;
-          this.regFilesList.View = System.Windows.Forms.View.Details;
-          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-          // 
-          // columnHeader3
-          // 
-          this.columnHeader3.Text = "File";
-          this.columnHeader3.Width = 144;
-          // 
-          // columnHeader4
-          // 
-          this.columnHeader4.Text = "Value";
-          this.columnHeader4.Width = 246;
-          // 
-          // columnHeader5
-          // 
-          this.columnHeader5.Text = "Type";
-          this.columnHeader5.Width = 98;
           // 
           // MainForm
           // 
@@ -1368,6 +1446,8 @@
           this.tabAdvanced.ResumeLayout(false);
           this.groupBox6.ResumeLayout(false);
           this.groupBox6.PerformLayout();
+          this.groupBox7.ResumeLayout(false);
+          this.groupBox7.PerformLayout();
           this.groupBox5.ResumeLayout(false);
           this.groupBox5.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.panel11)).EndInit();
@@ -1465,7 +1545,6 @@
         private System.Windows.Forms.ToolStripButton regEditBtn;
         private System.Windows.Forms.TabPage tabAdvanced;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.CheckBox propertyCleanupOnExit;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.LinkLabel lnkCustomEvents;
@@ -1480,12 +1559,19 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.TextBox tbType;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.DateTimePicker propertyExpirationDatePicker;
-        private System.Windows.Forms.CheckBox propertyExpiration;
         private System.Windows.Forms.PictureBox panel11;
         private System.Windows.Forms.PictureBox panel12;
         private System.Windows.Forms.Panel bottomPanel;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.CheckBox propertyExpiration;
+        private System.Windows.Forms.DateTimePicker propertyExpirationDatePicker;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.CheckBox chkCleanAsk;
+        private System.Windows.Forms.RadioButton rdbCleanAll;
+        private System.Windows.Forms.RadioButton rdbCleanRegOnly;
+        private System.Windows.Forms.RadioButton rdbCleanNone;
+        private System.Windows.Forms.CheckBox chkCleanDoneDialog;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
 
     }
 }
