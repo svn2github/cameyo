@@ -1018,8 +1018,9 @@ namespace PackageEditor
         {
             if (!PackageClose())
                 return;
-            Directory.SetCurrentDirectory(Path.GetDirectoryName(Application.ExecutablePath));
-            if (!virtPackage.Create("New Package ID", "AppVirtDll.dll", "Loader.exe"))
+            if (!virtPackage.Create("New Package ID", 
+                Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "AppVirtDll.dll"),
+                Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Loader.exe")))
             {
                 MessageBox.Show("Faild to create a new package.");
                 return;

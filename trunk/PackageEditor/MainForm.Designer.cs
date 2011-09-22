@@ -944,9 +944,9 @@
             // 
             this.panel1.Controls.Add(this.regSplitContainer);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 21);
+            this.panel1.Location = new System.Drawing.Point(0, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 359);
+            this.panel1.Size = new System.Drawing.Size(713, 334);
             this.panel1.TabIndex = 11;
             // 
             // regSplitContainer
@@ -967,7 +967,7 @@
             this.regSplitContainer.Panel2.Controls.Add(this.tbFile);
             this.regSplitContainer.Panel2.Controls.Add(this.regFilesList);
             this.regSplitContainer.Panel2.Controls.Add(this.panel4);
-            this.regSplitContainer.Size = new System.Drawing.Size(713, 359);
+            this.regSplitContainer.Size = new System.Drawing.Size(713, 334);
             this.regSplitContainer.SplitterDistance = 200;
             this.regSplitContainer.TabIndex = 5;
             // 
@@ -979,7 +979,7 @@
             this.regFolderTree.Location = new System.Drawing.Point(0, 0);
             this.regFolderTree.Name = "regFolderTree";
             this.regFolderTree.SelectedImageIndex = 0;
-            this.regFolderTree.Size = new System.Drawing.Size(200, 359);
+            this.regFolderTree.Size = new System.Drawing.Size(200, 334);
             this.regFolderTree.TabIndex = 3;
             // 
             // tbType
@@ -1076,13 +1076,13 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(713, 21);
+            this.panel7.Size = new System.Drawing.Size(713, 46);
             this.panel7.TabIndex = 10;
             // 
             // regProgressBar
             // 
             this.regProgressBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.regProgressBar.Location = new System.Drawing.Point(0, 0);
+            this.regProgressBar.Location = new System.Drawing.Point(0, 25);
             this.regProgressBar.Name = "regProgressBar";
             this.regProgressBar.Size = new System.Drawing.Size(713, 21);
             this.regProgressBar.TabIndex = 14;
@@ -1352,7 +1352,7 @@
             listViewItem4});
             this.regFilesList.Location = new System.Drawing.Point(0, 25);
             this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(509, 334);
+            this.regFilesList.Size = new System.Drawing.Size(509, 309);
             this.regFilesList.TabIndex = 7;
             this.regFilesList.UseCompatibleStateImageBehavior = false;
             this.regFilesList.View = System.Windows.Forms.View.Details;
