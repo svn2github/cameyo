@@ -74,7 +74,7 @@ namespace PackageEditor
                 }
             }
 
-            #if DropBox
+#if DropBox
             if (!System.IO.File.Exists(Application.StartupPath + "\\AppLimit.CloudComputing.oAuth.dll")
                 || !System.IO.File.Exists(Application.StartupPath + "\\AppLimit.CloudComputing.SharpBox.dll")
                 || !System.IO.File.Exists(Application.StartupPath + "\\Newtonsoft.Json.Net20.dll"))
@@ -84,11 +84,11 @@ namespace PackageEditor
                 resetCredLink.Hide();
                 MessageBox.Show("This version is compiled with DropBox funtionality, but one or more of the dlls needed are missing:\nAppLimit.CloudComputing.oAuth.dll\nAppLimit.CloudComputing.SharpBox.dll\nNewtonsoft.Json.Net20.dll\n\nThe button will be hidden", "Missing DLL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            #else
+#else
             dropboxLabel.Hide();
             dropboxButton.Hide();
             resetCredLink.Hide();
-            #endif
+#endif
         }
 
         private void ThreadedRegLoad()
@@ -97,7 +97,7 @@ namespace PackageEditor
             regLoaded = true;
             regLoadThread = null;
         }
-      
+
         private void regProgressTimer_Tick(object sender, EventArgs e)
         {
             if (regLoaded)
@@ -130,7 +130,7 @@ namespace PackageEditor
             saveToolStripMenuItem.Enabled = enable;
             saveasToolStripMenuItem.Enabled = enable;
             closeToolStripMenuItem.Enabled = enable;
-        
+
         }
 
         #region PleaseWaitDialog
@@ -194,7 +194,7 @@ namespace PackageEditor
                 catch { }
                 dialog.Text = pleaseWaitMsg.title;
                 msg.Text = pleaseWaitMsg.msg;
-                dialog.ClientSize = new Size(Math.Max(msg.Width + 100, 250),70);
+                dialog.ClientSize = new Size(Math.Max(msg.Width + 100, 250), 70);
                 dialog.Show(null);
                 EventWaitHandle pleaseWaitDialogEvent = AutoResetEvent.OpenExisting("pleaseWaitDialogEvent");
                 while (!pleaseWaitDialogEvent.WaitOne(10, false))
@@ -228,8 +228,8 @@ namespace PackageEditor
 
         private bool PackageOpen(String packageExeFile)
         {
-          int apiRet;
-          return PackageOpen(packageExeFile, out apiRet);
+            int apiRet;
+            return PackageOpen(packageExeFile, out apiRet);
         }
 
         private bool PackageOpen(String packageExeFile, out int apiRet)
@@ -239,7 +239,7 @@ namespace PackageEditor
             if (virtPackage.opened && !PackageClose())      // User doesn't want to discard changes
                 return false;
             PleaseWaitBegin("Opening package", "Opening " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
-            {                
+            {
                 if (virtPackage.Open(packageExeFile, out apiRet))
                 {
                     regLoaded = false;
@@ -281,7 +281,7 @@ namespace PackageEditor
                     MessageBoxButtons.YesNo) != DialogResult.Yes)
                 {
                     return false;
-                }            
+                }
             }
 
             // If regLoadThread is working, wait for it to finish
@@ -298,17 +298,17 @@ namespace PackageEditor
 
         private bool PackageSave(String fileName)
         {
-          String CantSaveBecause = "";
-          if (String.IsNullOrEmpty(propertyAppID.Text))
-            CantSaveBecause += "- AppID is a required field to save a package.\r\n";
-          if (String.IsNullOrEmpty(virtPackage.GetProperty("AutoLaunch")))
-            CantSaveBecause += "- The package does not have any program(s) selected to launch.\r\nPlease select a program to launch on the tab:General > Panel:Basics > Item:Startup.";
+            String CantSaveBecause = "";
+            if (String.IsNullOrEmpty(propertyAppID.Text))
+                CantSaveBecause += "- AppID is a required field to save a package.\r\n";
+            if (String.IsNullOrEmpty(virtPackage.GetProperty("AutoLaunch")))
+                CantSaveBecause += "- The package does not have any program(s) selected to launch.\r\nPlease select a program to launch on the tab:General > Panel:Basics > Item:Startup.";
 
-          if (CantSaveBecause != "")
-          {
-            MessageBox.Show(this,CantSaveBecause,"Cant save the package.",MessageBoxButtons.OK,MessageBoxIcon.Hand);
-            return false;
-          }
+            if (CantSaveBecause != "")
+            {
+                MessageBox.Show(this, CantSaveBecause, "Cant save the package.", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return false;
+            }
 
             bool ret = false;
             PleaseWaitBegin("Saving package", "Saving " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
@@ -337,19 +337,19 @@ namespace PackageEditor
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          OpenFileDialog openFileDialog = new OpenFileDialog();
-          //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo Packages";
-          openFileDialog.Multiselect = false;
-          openFileDialog.Filter = "Virtual packages (*.virtual.exe)|*.virtual.exe|All files (*.*)|*.*";
-          //openFileDialog.DefaultExt = "virtual.exe";
-          if (openFileDialog.ShowDialog() == DialogResult.OK)
-          {
-            int apiRet;
-            if (!PackageOpen(openFileDialog.FileName, out apiRet))
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo Packages";
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Virtual packages (*.virtual.exe)|*.virtual.exe|All files (*.*)|*.*";
+            //openFileDialog.DefaultExt = "virtual.exe";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-              MessageBox.Show(String.Format("Failed to open package. API error:{0}" , apiRet));
+                int apiRet;
+                if (!PackageOpen(openFileDialog.FileName, out apiRet))
+                {
+                    MessageBox.Show(String.Format("Failed to open package. API error:{0}", apiRet));
+                }
             }
-          }
         }
 
         private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -422,8 +422,8 @@ namespace PackageEditor
             // Icon
             if (!String.IsNullOrEmpty(virtPackage.openedFile))
             {
-              Icon ico = Icon.ExtractAssociatedIcon(virtPackage.openedFile);
-              propertyIcon.Image = ico.ToBitmap();
+                Icon ico = Icon.ExtractAssociatedIcon(virtPackage.openedFile);
+                propertyIcon.Image = ico.ToBitmap();
             }
 
             // StopInheritance
@@ -433,16 +433,16 @@ namespace PackageEditor
             String cleanupCommand = GetCleanUpStopCommand();
             if (cleanupCommand == "")
             {
-              rdbCleanNone.Checked = true;
+                rdbCleanNone.Checked = true;
             }
             else
             {
-              chkCleanAsk.Checked = cleanupCommand.Contains(CleanupOnExitOptionConfirm);
-              chkCleanDoneDialog.Checked = !cleanupCommand.Contains(CleanupOnExitOptionQuiet);
-              if (cleanupCommand.EndsWith(CleanupOnExitOptionRemoveReg))
-                rdbCleanRegOnly.Checked = true;
-              else
-                rdbCleanAll.Checked = true;
+                chkCleanAsk.Checked = cleanupCommand.Contains(CleanupOnExitOptionConfirm);
+                chkCleanDoneDialog.Checked = !cleanupCommand.Contains(CleanupOnExitOptionQuiet);
+                if (cleanupCommand.EndsWith(CleanupOnExitOptionRemoveReg))
+                    rdbCleanRegOnly.Checked = true;
+                else
+                    rdbCleanAll.Checked = true;
             }
 
 
@@ -469,31 +469,31 @@ namespace PackageEditor
 
         private void RemoveIfStartswith(ref String str, String value)
         {
-          String newStr = str.TrimStart(' ');
-          if (newStr.StartsWith(value))
-            str = newStr.Remove(0, value.Length);
+            String newStr = str.TrimStart(' ');
+            if (newStr.StartsWith(value))
+                str = newStr.Remove(0, value.Length);
         }
 
         private string GetCleanUpStopCommand()
         {
-          String[] OnStopUnvirtualized = virtPackage.GetProperty("OnStopUnvirtualized").Split(';');
-          foreach (String stopCommand in OnStopUnvirtualized)
-          {
-            if (stopCommand.StartsWith(CleanupOnExitExe + '>') && (stopCommand.EndsWith(CleanupOnExitOptionRemove) || stopCommand.EndsWith(CleanupOnExitOptionRemoveReg)))
+            String[] OnStopUnvirtualized = virtPackage.GetProperty("OnStopUnvirtualized").Split(';');
+            foreach (String stopCommand in OnStopUnvirtualized)
             {
-              String checkNoRemains = stopCommand;
-              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitExe);
-              RemoveIfStartswith(ref checkNoRemains, ">");
-              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionConfirm);
-              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionQuiet);
+                if (stopCommand.StartsWith(CleanupOnExitExe + '>') && (stopCommand.EndsWith(CleanupOnExitOptionRemove) || stopCommand.EndsWith(CleanupOnExitOptionRemoveReg)))
+                {
+                    String checkNoRemains = stopCommand;
+                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitExe);
+                    RemoveIfStartswith(ref checkNoRemains, ">");
+                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionConfirm);
+                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionQuiet);
 
-              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionRemoveReg);
-              RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionRemove);
-              if (checkNoRemains == "")
-                return stopCommand;
+                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionRemoveReg);
+                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionRemove);
+                    if (checkNoRemains == "")
+                        return stopCommand;
+                }
             }
-          }
-          return "";
+            return "";
         }
 
         public void OnTabActivate()
@@ -520,26 +520,26 @@ namespace PackageEditor
             String newCleanupCommand = "";
             if (!rdbCleanNone.Checked)
             {
-              if (chkCleanAsk.Checked)
-                newCleanupCommand += ' ' + CleanupOnExitOptionConfirm;
-              if (!chkCleanDoneDialog.Checked)
-                newCleanupCommand += ' ' + CleanupOnExitOptionQuiet;
+                if (chkCleanAsk.Checked)
+                    newCleanupCommand += ' ' + CleanupOnExitOptionConfirm;
+                if (!chkCleanDoneDialog.Checked)
+                    newCleanupCommand += ' ' + CleanupOnExitOptionQuiet;
 
-              if (rdbCleanRegOnly.Checked)
-                newCleanupCommand += ' ' + CleanupOnExitOptionRemoveReg;
-              if (rdbCleanAll.Checked)
-                newCleanupCommand += ' ' + CleanupOnExitOptionRemove;
+                if (rdbCleanRegOnly.Checked)
+                    newCleanupCommand += ' ' + CleanupOnExitOptionRemoveReg;
+                if (rdbCleanAll.Checked)
+                    newCleanupCommand += ' ' + CleanupOnExitOptionRemove;
 
-              newCleanupCommand = CleanupOnExitExe + '>' + newCleanupCommand.Trim();
+                newCleanupCommand = CleanupOnExitExe + '>' + newCleanupCommand.Trim();
             }
             if (oldCleanupCommand == "")
-              str += ";" + newCleanupCommand;
+                str += ";" + newCleanupCommand;
             else
             {
-              str = ";" + str + ";";
-              str = str.Replace(";" + oldCleanupCommand + ";", ";" + newCleanupCommand + ";");
-              str = str.Replace(";;", ";");
-              str = str.Trim(';');
+                str = ";" + str + ";";
+                str = str.Replace(";" + oldCleanupCommand + ";", ";" + newCleanupCommand + ";");
+                str = str.Replace(";;", ";");
+                str = str.Trim(';');
             }
             Ret &= virtPackage.SetProperty("OnStopUnvirtualized", str);
             /*
@@ -621,33 +621,33 @@ namespace PackageEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          if (String.IsNullOrEmpty(virtPackage.openedFile))
-          {
-            // Its a new package.. so save as to get a filename.
-            saveasToolStripMenuItem_Click(sender, e);
-            return;
-          }
-          String tmpFileName = virtPackage.openedFile + ".new";
-          DeleteFile(tmpFileName);
-          //DeleteFile(virtPackage.openedFile + ".bak");
-          if (PackageSave(tmpFileName))
-          {
-            // Release (close) original file, and delete it (otherwise it won't be erasable)
-            String packageExeFile = virtPackage.openedFile;
-            if (regLoadThread != null)
-              regLoadThread.Abort();
-            virtPackage.Close();
+            if (String.IsNullOrEmpty(virtPackage.openedFile))
+            {
+                // Its a new package.. so save as to get a filename.
+                saveasToolStripMenuItem_Click(sender, e);
+                return;
+            }
+            String tmpFileName = virtPackage.openedFile + ".new";
+            DeleteFile(tmpFileName);
+            //DeleteFile(virtPackage.openedFile + ".bak");
+            if (PackageSave(tmpFileName))
+            {
+                // Release (close) original file, and delete it (otherwise it won't be erasable)
+                String packageExeFile = virtPackage.openedFile;
+                if (regLoadThread != null)
+                    regLoadThread.Abort();
+                virtPackage.Close();
 
-            DeleteFile(packageExeFile);
-            if (!MoveFile(tmpFileName, packageExeFile))
-              MessageBox.Show("Cannot rename: " + tmpFileName + " to: " + packageExeFile);
-            virtPackage.Open(packageExeFile);
-          }
-          else
-          {
-            // Save failed. Delete .new file.
-            System.IO.File.Delete(virtPackage.openedFile + ".new");
-          }          
+                DeleteFile(packageExeFile);
+                if (!MoveFile(tmpFileName, packageExeFile))
+                    MessageBox.Show("Cannot rename: " + tmpFileName + " to: " + packageExeFile);
+                virtPackage.Open(packageExeFile);
+            }
+            else
+            {
+                // Save failed. Delete .new file.
+                System.IO.File.Delete(virtPackage.openedFile + ".new");
+            }
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -744,30 +744,30 @@ namespace PackageEditor
             }
         }
 
-         static public bool ExecProg(String fileName, String args, bool wait, ref int exitCode)
-	        {
-	            try
-	            {
-	                System.Diagnostics.ProcessStartInfo procStartInfo =
-	                    new System.Diagnostics.ProcessStartInfo(fileName, args);
-	                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-	                procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-	                procStartInfo.CreateNoWindow = true;
-	                procStartInfo.UseShellExecute = false;
-	                proc.StartInfo = procStartInfo;
-	                proc.Start();
-	                if (wait)
-	                {
-	                    proc.WaitForExit();
-	                    exitCode = proc.ExitCode;
-	                }
-	                return true;
-	            }
-	            catch
-	            {
-	            }
-	            return false;
-	        }
+        static public bool ExecProg(String fileName, String args, bool wait, ref int exitCode)
+        {
+            try
+            {
+                System.Diagnostics.ProcessStartInfo procStartInfo =
+                    new System.Diagnostics.ProcessStartInfo(fileName, args);
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                procStartInfo.CreateNoWindow = true;
+                procStartInfo.UseShellExecute = false;
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+                if (wait)
+                {
+                    proc.WaitForExit();
+                    exitCode = proc.ExitCode;
+                }
+                return true;
+            }
+            catch
+            {
+            }
+            return false;
+        }
 
         // dragdrop function (DragDrop) to open a new file dropping it in the main form
         private void MainForm_DragDrop(object sender, DragEventArgs e)
@@ -782,25 +782,25 @@ namespace PackageEditor
             }
             //if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
             //         + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
-             if (System.IO.Path.GetFileName(files[0]).IndexOf("AppVirtDll.", StringComparison.InvariantCultureIgnoreCase) != -1)
-	            {
-	                String openedFile = "";
-	                CloseAndReopen_Before(ref openedFile);
-                    try
-	                {
-	                    // Syntax: myPath\Packager.exe -ChangeEngine AppName.virtual.exe AppVirtDll.dll
-	                    string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-	                    int exitCode = 0;
-	                    if (!ExecProg(openedFile, "-ChangeEngine \"" + files[0] + "\"", true, ref exitCode))
-	                        MessageBox.Show("Could not execute: " + Path.Combine(myPath, "Packager.exe"));
-	                }
-	                finally
-	                {
-	                    CloseAndReopn_After(openedFile);
-	                }
-	                return;
-	            }
-	            else if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
+            if (System.IO.Path.GetFileName(files[0]).IndexOf("AppVirtDll.", StringComparison.InvariantCultureIgnoreCase) != -1)
+            {
+                String openedFile = "";
+                CloseAndReopen_Before(ref openedFile);
+                try
+                {
+                    // Syntax: myPath\Packager.exe -ChangeEngine AppName.virtual.exe AppVirtDll.dll
+                    string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                    int exitCode = 0;
+                    if (!ExecProg(openedFile, "-ChangeEngine \"" + files[0] + "\"", true, ref exitCode))
+                        MessageBox.Show("Could not execute: " + Path.Combine(myPath, "Packager.exe"));
+                }
+                finally
+                {
+                    CloseAndReopn_After(openedFile);
+                }
+                return;
+            }
+            else if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
             {
                 MessageBox.Show("You can only open files with .exe extension");
                 return;
@@ -849,7 +849,7 @@ namespace PackageEditor
             String[] paths = (String[])e.Data.GetData(DataFormats.FileDrop);
             foreach (String path in paths)
             {
-                this.BeginInvoke(fsEditor.Del_AddFOrFR, new object[]{ parentNode, path });
+                this.BeginInvoke(fsEditor.Del_AddFOrFR, new object[] { parentNode, path });
             }
         }
 
@@ -929,7 +929,7 @@ namespace PackageEditor
 
         private void dropboxButton_Click(object sender, EventArgs e)
         {
-            #if DropBox
+#if DropBox
             String openedFile = "";
             CloseAndReopen_Before(ref openedFile);
             try
@@ -941,7 +941,7 @@ namespace PackageEditor
             {
                 CloseAndReopn_After(openedFile);
             }
-            #endif
+#endif
         }
 
 
@@ -974,25 +974,25 @@ namespace PackageEditor
 
         private void regFilesList_SubItemEndEditing(object sender, SubItemEndEditingEventArgs e)
         {
-            Registry.SetValue(regEditor.Masterkey, regEditor.Currentkey[regFilesList.Items.IndexOf(e.Item)].ToString(), e.DisplayText);  
+            Registry.SetValue(regEditor.Masterkey, regEditor.Currentkey[regFilesList.Items.IndexOf(e.Item)].ToString(), e.DisplayText);
         }
 
         ListViewSorter fsFilesListSorter = new FileListViewSorter();
         private void fsFilesList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-          fsFilesListSorter.Sort(fsFilesList, e.Column);
+            fsFilesListSorter.Sort(fsFilesList, e.Column);
         }
 
         ListViewSorter regFilesListSorter = new RegListViewSorter();
         private void regFilesList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-          regFilesListSorter.Sort(regFilesList, e.Column);
+            regFilesListSorter.Sort(regFilesList, e.Column);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-          bool OK = PackageClose();
-          e.Cancel = !OK;
+            bool OK = PackageClose();
+            e.Cancel = !OK;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -1001,102 +1001,102 @@ namespace PackageEditor
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-          if (!virtPackage.opened)
-          {
-            openToolStripMenuItem_Click(this, null);
-          }
+            if (!virtPackage.opened)
+            {
+                openToolStripMenuItem_Click(this, null);
+            }
         }
 
         private void rdb_CheckedChanged(object sender, EventArgs e)
         {
-          bool cleanup = !rdbCleanNone.Checked;
-          chkCleanAsk.Enabled = cleanup;
-          chkCleanDoneDialog.Enabled = cleanup;
+            bool cleanup = !rdbCleanNone.Checked;
+            chkCleanAsk.Enabled = cleanup;
+            chkCleanDoneDialog.Enabled = cleanup;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          if (!PackageClose())
-            return;
-          Directory.SetCurrentDirectory(Path.GetDirectoryName(Application.ExecutablePath));
-          if (!virtPackage.Create("New Package ID", "AppVirtDll.dll", "Loader.exe"))
-          {
-            MessageBox.Show("Faild to create a new package.");
-            return;
-          }
-          dirty = false;
-          this.OnPackageOpen();
-          fsEditor.OnPackageOpen();
-          tabControl.SelectedIndex = 0;
+            if (!PackageClose())
+                return;
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(Application.ExecutablePath));
+            if (!virtPackage.Create("New Package ID", "AppVirtDll.dll", "Loader.exe"))
+            {
+                MessageBox.Show("Faild to create a new package.");
+                return;
+            }
+            dirty = false;
+            this.OnPackageOpen();
+            fsEditor.OnPackageOpen();
+            tabControl.SelectedIndex = 0;
 
-          rdbCleanNone.Checked = true;
-          rdbCleanRegOnly.Checked = false;
-          rdbCleanAll.Checked = false;
-          chkCleanAsk.Checked = true;
-          chkCleanDoneDialog.Checked = false;
+            rdbCleanNone.Checked = true;
+            rdbCleanRegOnly.Checked = false;
+            rdbCleanAll.Checked = false;
+            chkCleanAsk.Checked = true;
+            chkCleanDoneDialog.Checked = false;
 
-          EnableDisablePackageControls(true);
-          regLoaded = true;
-          regProgressTimer_Tick(null, null);          
+            EnableDisablePackageControls(true);
+            regLoaded = true;
+            regProgressTimer_Tick(null, null);
         }
     }
-  
+
     class RegListViewSorter : ListViewSorter
     {
-      protected override int CompareItems(ListViewItem x, ListViewItem y)
-      {
-        return String.Compare(x.SubItems[currentcolumn].Text, y.SubItems[currentcolumn].Text);
-      }
+        protected override int CompareItems(ListViewItem x, ListViewItem y)
+        {
+            return String.Compare(x.SubItems[currentcolumn].Text, y.SubItems[currentcolumn].Text);
+        }
     }
 
     public class FileListViewItem : ListViewItem
     {
-      public ulong fileSize = 0;
+        public ulong fileSize = 0;
     }
 
     class FileListViewSorter : ListViewSorter
     {
-      bool isFileSizeColumn = false;
-      public override void Sort(ListView List, int ColumnNumber)
-      {
-        isFileSizeColumn = List.Columns[ColumnNumber].Text == "Size";
-        base.Sort(List, ColumnNumber);
-      }
-      protected override int CompareItems(ListViewItem x, ListViewItem y)
-      {
-        int res;
-        if (isFileSizeColumn)
-          res = ((FileListViewItem)x).fileSize.CompareTo(((FileListViewItem)y).fileSize);
-        else
-          res = String.Compare(x.SubItems[currentcolumn].Text, y.SubItems[currentcolumn].Text);
-        return res;
-      }
+        bool isFileSizeColumn = false;
+        public override void Sort(ListView List, int ColumnNumber)
+        {
+            isFileSizeColumn = List.Columns[ColumnNumber].Text == "Size";
+            base.Sort(List, ColumnNumber);
+        }
+        protected override int CompareItems(ListViewItem x, ListViewItem y)
+        {
+            int res;
+            if (isFileSizeColumn)
+                res = ((FileListViewItem)x).fileSize.CompareTo(((FileListViewItem)y).fileSize);
+            else
+                res = String.Compare(x.SubItems[currentcolumn].Text, y.SubItems[currentcolumn].Text);
+            return res;
+        }
     }
 
     abstract class ListViewSorter : IComparer
     {
-      protected int currentcolumn = -1;
-      bool currentAsc = true;
-      public virtual void Sort(ListView List, int ColumnNumber)
-      {
-        if (currentcolumn == ColumnNumber)
+        protected int currentcolumn = -1;
+        bool currentAsc = true;
+        public virtual void Sort(ListView List, int ColumnNumber)
         {
-          currentAsc = !currentAsc;
+            if (currentcolumn == ColumnNumber)
+            {
+                currentAsc = !currentAsc;
+            }
+            else
+                currentAsc = true;
+            currentcolumn = ColumnNumber;
+            List.ListViewItemSorter = this;
+            List.Sort();
         }
-        else
-          currentAsc = true;
-        currentcolumn = ColumnNumber;
-        List.ListViewItemSorter = this;
-        List.Sort();
-      }
-      public int Compare(object x, object y)
-      {
-        int res = CompareItems((ListViewItem)x, (ListViewItem)y);
-        if (!currentAsc)
-          res = -res;
-        return res;
-      }
-      abstract protected int CompareItems(ListViewItem x, ListViewItem y);
+        public int Compare(object x, object y)
+        {
+            int res = CompareItems((ListViewItem)x, (ListViewItem)y);
+            if (!currentAsc)
+                res = -res;
+            return res;
+        }
+        abstract protected int CompareItems(ListViewItem x, ListViewItem y);
     }
 
     public class MRU
