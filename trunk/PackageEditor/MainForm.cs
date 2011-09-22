@@ -1028,6 +1028,7 @@ namespace PackageEditor
             dirty = false;
             this.OnPackageOpen();
             fsEditor.OnPackageOpen();
+            regEditor.OnPackageOpenBeforeUI();
             tabControl.SelectedIndex = 0;
 
             rdbCleanNone.Checked = true;
@@ -1039,6 +1040,16 @@ namespace PackageEditor
             EnableDisablePackageControls(true);
             regLoaded = true;
             regProgressTimer_Tick(null, null);
+        }
+
+        private void toolStripMenuItemExport_Click(object sender, EventArgs e)
+        {
+          regEditor.toolStripMenuItemExport_Click(sender, e);
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          regRemoveBtn.PerformClick();
         }
     }
 

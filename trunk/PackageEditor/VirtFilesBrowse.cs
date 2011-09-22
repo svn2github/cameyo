@@ -62,24 +62,6 @@ namespace PackageEditor
             fsFolderTree.Nodes.Clear();//
             FolderTreeNode folderTree = fileSystemEditor.getFileTree();
             AddItems(fsFolderTree.Nodes, folderTree);  
-            return;
-
-            List<VirtFsNode> virtFsNodes = new List<VirtFsNode>();
-            virtPackage.EnumFiles(ref virtFsNodes);
-            fsFolderTree.Nodes.Clear();
-
-            // Add first "FileSystem" root node"
-            /*FolderTreeNode newNode = new FolderTreeNode();
-            newNode.Text = "FileSystem";
-            newNode.virtFsNode = new VirtFsNode();
-            fsFolderTree.Nodes.Add(newNode);*/
-
-            foreach (VirtFsNode virtFsNode in virtFsNodes)
-            {
-                AddFileOrFolder(virtFsNode, "");
-            }
-            //fsFolderTree.Nodes[0].Expand();             // Expand the "FileSystem" node
-            //fsFolderTree.SelectedNode = fsFolderTree.Nodes[0];
         }
 
         private void AddFileOrFolder(VirtFsNode virtFsNode, String SourceFileName)

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using VirtPackageAPI;
 using System.Collections;
+using System.IO;
 
 namespace PackageEditor
 {
@@ -290,5 +291,173 @@ namespace PackageEditor
             }
         }
 
+        class TRegistrySubstitute
+        {
+          public String originalKey;
+          public String virtualKey;
+          public TRegistrySubstitute(String originalKey, String virtualKey)
+          {
+            this.originalKey = originalKey;
+            this.virtualKey = virtualKey;
+          }
+        }
+
+        void enumRegKeyValues(StreamWriter sw, int rootKeyLen, RegistryKey key)
+        {
+          //string keyname = key.Name;      
+          string keyname = key.Name.Substring(rootKeyLen);
+          if (String.IsNullOrEmpty(keyname))
+            return;
+
+          List<TRegistrySubstitute> virtualKeys = new List<TRegistrySubstitute>();
+          virtualKeys.Add(new TRegistrySubstitute("HKEY_CURRENT_USER", "\\%CurrentUser%\\"));
+          virtualKeys.Add(new TRegistrySubstitute("HKEY_LOCAL_MACHINE", "\\MACHINE\\"));
+          virtualKeys.Add(new TRegistrySubstitute("HKEY_CURRENT_USER\\Software\\Classes", "\\%CurrentUser%_Classes\\"));
+          virtualKeys.Add(new TRegistrySubstitute("HKEY_USERS", "\\USER\\"));
+
+          bool found = false;
+          string keynameCheck = keyname + '\\';
+          foreach (TRegistrySubstitute rs in virtualKeys)
+          {
+            if (keynameCheck.StartsWith(rs.virtualKey, StringComparison.InvariantCultureIgnoreCase))
+            {
+              keyname = keyname.Substring(rs.virtualKey.Length - 1).Insert(0, rs.originalKey);
+              found = true;
+              break;
+            }
+
+          }
+          if (!found)
+          {
+            MessageBox.Show(String.Format("Not yet implemented registry key: {0}", keyname));
+            return;
+          }
+          sw.WriteLine("[{0}]", keyname);
+          foreach (string valuename in key.GetValueNames())
+          {
+            object value = null;
+            String regvalue = null;
+            RegistryValueKind kind = key.GetValueKind(valuename);
+            if (kind != RegistryValueKind.Unknown)
+            {
+              value = key.GetValue(valuename);
+              regvalue = value.ToString();
+            }
+
+            string regvaluename = valuename.Replace("\\", "\\\\");
+            regvaluename = regvaluename.Replace("\"", "\\\"");
+            if (regvaluename.Length == 0)
+              regvaluename = "@";
+            else
+              regvaluename = "\"" + regvaluename + "\"";
+
+            switch (kind)
+            {
+              case RegistryValueKind.Binary:
+                {
+                  //hex:12,3a,bd,ef,ff,a0
+                  System.Byte[] x = (System.Byte[])value;
+                  regvalue = "hex:";
+                  for (int i = 0; i < x.Length; i++)
+                  {
+                    regvalue = regvalue + string.Format("{0:x2},", x[i]);
+                  }
+                  if (x.Length > 0)
+                    regvalue = regvalue.Remove(regvalue.Length - 1);
+                  break;
+                }
+              case RegistryValueKind.DWord:
+                regvalue = string.Format("dword:{0:x8}", value);
+                break;
+              case RegistryValueKind.ExpandString:
+                regvalue = "hex(2):";
+                Char[] x2 = ((String)value).ToCharArray();
+                for (int i = 0; i < x2.Length; i++)
+                {
+                  regvalue = regvalue + string.Format("{0:x2},{1:x2},", (int)x2[i], 0);
+                }
+                regvalue = regvalue + "00,00,";
+
+                break;
+              case RegistryValueKind.MultiString:
+                string[] sa = (string[])value;
+
+                regvalue = "hex(7):";
+                for (int m = 0; m < sa.Length; m++)
+                {
+
+                  Char[] x = sa[m].ToCharArray();
+                  for (int i = 0; i < x.Length; i++)
+                  {
+                    regvalue = regvalue + string.Format("{0:x2},{1:x2},", (int)x[i], 0);
+                  }
+                  regvalue = regvalue + "00,00,";
+                }
+                regvalue = regvalue + "00,00";
+                break;
+              case RegistryValueKind.QWord:
+                break;
+              case RegistryValueKind.String:
+                regvalue = ((string)value).Replace("\\", "\\\\");
+                regvalue = regvalue.Replace("\"", "\\\"");
+                regvalue = string.Format("\"{0}\"", regvalue);
+                break;
+              case RegistryValueKind.Unknown:
+                regvalue = "hex(0):";
+                break;
+              default:
+                break;
+            }
+            sw.WriteLine("{0}={1}", regvaluename, regvalue);
+          }
+          sw.WriteLine("");
+        }
+
+        void enumRegKeys(StreamWriter sw, int rootKeyLen, RegistryKey key)
+        {
+          enumRegKeyValues(sw, rootKeyLen, key);
+          string[] subkeys = key.GetSubKeyNames();
+          for (int t = 0; t < subkeys.Length; t++)
+          {
+            RegistryKey subkey = key.OpenSubKey(subkeys[t]);
+            String keyName = subkey.Name.Substring(rootKeyLen);
+            enumRegKeys(sw, rootKeyLen, subkey);
+            subkey.Close();
+          }
+        }
+
+        public void toolStripMenuItemExport_Click(object sender, EventArgs e)
+        {
+          SaveFileDialog sfd = new SaveFileDialog();
+          sfd.AddExtension = true;
+          sfd.Filter = "Registry file (*.reg)|*.reg";
+          if (sfd.ShowDialog() == DialogResult.OK)
+          {
+            String RegFileName = sfd.FileName;
+
+            FileStream fs;
+            BufferedStream bfs;
+            StreamWriter sw;
+            int rootKeyLen;
+            fs = new FileStream(RegFileName, FileMode.Create);
+            bfs = new BufferedStream(fs);
+            sw = new StreamWriter(bfs);
+
+            sw.WriteLine("Windows Registry Editor Version 5.00");
+            sw.WriteLine("");
+
+            // Read Registry Keys in the package
+            RegistryKey key = virtPackage.GetRegWorkKey();
+
+            String fullName = treeHelper.GetFullNodeName(fsFolderTree.SelectedNode);
+            rootKeyLen = key.Name.Length;
+            if (!String.IsNullOrEmpty(fullName))
+              key = key.OpenSubKey(fullName);
+            enumRegKeys(sw, rootKeyLen, key);
+            sw.Close();
+            bfs.Close();
+            fs.Close();
+          }
+        }
     }
 }

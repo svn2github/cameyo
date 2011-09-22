@@ -141,6 +141,12 @@ namespace VirtPackageAPI
 
         // VirtReg functions
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtRegGetWorkKey(
+            IntPtr hPkg,
+            StringBuilder WorkKey,
+            UInt32 WorkKeyLen);
+
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int VirtRegGetWorkKeyEx(
             IntPtr hPkg,
             StringBuilder WorkKey,
@@ -412,10 +418,15 @@ namespace VirtPackageAPI
         public RegistryKey GetRegWorkKeyEx(System.Threading.AutoResetEvent abortEvent)
         {
             StringBuilder sbWorkKey = new StringBuilder(MAX_STRING);
-            int Ret = VirtRegGetWorkKeyEx(hPkg, sbWorkKey, MAX_STRING, IntPtr.Zero);
+            //int Ret = VirtRegGetWorkKeyEx(hPkg, sbWorkKey, MAX_STRING, IntPtr.Zero);
+            int Ret = VirtRegGetWorkKey(hPkg, sbWorkKey, MAX_STRING);
             if (Ret == APIRET_SUCCESS)
             {
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(sbWorkKey.ToString(), true);
+                if (key == null)
+                {
+                  key = Registry.CurrentUser.CreateSubKey(sbWorkKey.ToString());
+                }
                 return (key);
             }
             else if (Ret == APIRET_INSUFFICIENT_BUFFER)
