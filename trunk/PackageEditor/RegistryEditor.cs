@@ -81,7 +81,10 @@ namespace PackageEditor
         public void OnPackageOpenUI()
         {
             fsFolderTree.Nodes.Clear();
-            TreeNode rootNode = fsFolderTree.Nodes.Add("Registry");
+            TreeNode rootNode = new TreeNode("Registry");
+            treeHelper.SetFolderNodeImage(rootNode,
+                false, virtPackage.GetRegistrySandbox("", false));
+            fsFolderTree.Nodes.Add(rootNode);
             if (workKey != null)
                 PopulateSubKeys(workKey, "", rootNode);
             fsFolderTree.Nodes[0].Expand();     // Expand the "Registry" node

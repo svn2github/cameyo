@@ -199,8 +199,11 @@ namespace PackageEditor
             {
                 try
                 {
+                  if (!String.IsNullOrEmpty(pleaseWaitMsg.iconFileName))
+                  {
                     iconFile = Icon.ExtractAssociatedIcon(pleaseWaitMsg.iconFileName);
                     icon.Image = iconFile.ToBitmap();
+                  }
                 }
                 catch { }
                 dialog.Text = pleaseWaitMsg.title;

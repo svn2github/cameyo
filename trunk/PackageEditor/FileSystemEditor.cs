@@ -167,8 +167,17 @@ namespace PackageEditor
                           }
                           else
                           {
-                            if (child.addedFrom != "")     // Added File
+                            if (child.addedFrom != "")
+                            {// Added File
                               virtPackage.AddFile(child.addedFrom, child.virtFsNode.FileName, false);
+                              
+                              /*
+                               * SDK functions GetFileFlags SetFileFlags are available implemented currently.
+                               * 
+                              uint flags = virtPackage.GetFileFlags(child.virtFsNode.FileName);
+                              flags = (flags & VIRT_FILE_FLAGS_DEPLOYED) - VIRT_FILE_FLAGS_DEPLOYED;
+                              virtPackage.SetFileFlags(child.virtFsNode.FileName, flags);*/ 
+                            }
                           }
                         }
                     }
