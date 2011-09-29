@@ -340,7 +340,7 @@ namespace PackageEditor
             OpenFileDialog openFileDialog = new OpenFileDialog();
             //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo Packages";
             openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "Virtual packages (*.virtual.exe)|*.virtual.exe|All files (*.*)|*.*";
+            openFileDialog.Filter = "Virtual packages (*.virtual.exe;*.cameyo.exe)|*.virtual.exe;*.cameyo.exe|All files (*.*)|*.*";
             //openFileDialog.DefaultExt = "virtual.exe";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
