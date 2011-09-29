@@ -39,6 +39,7 @@
           this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.exportAsZeroInstallerXmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.saveasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,10 +111,15 @@
           this.regFolderTree = new System.Windows.Forms.TreeView();
           this.ContextMenuStripRegistryFolder = new System.Windows.Forms.ContextMenuStrip(this.components);
           this.toolStripMenuItemExport = new System.Windows.Forms.ToolStripMenuItem();
+          this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.tbType = new System.Windows.Forms.TextBox();
           this.tbValue = new System.Windows.Forms.TextBox();
           this.tbSize = new System.Windows.Forms.TextBox();
           this.tbFile = new System.Windows.Forms.TextBox();
+          this.regFilesList = new PackageEditor.ListViewEx();
+          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
           this.panel4 = new System.Windows.Forms.Panel();
           this.panel6 = new System.Windows.Forms.Panel();
           this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -144,11 +150,6 @@
           this.panel11 = new System.Windows.Forms.PictureBox();
           this.panel12 = new System.Windows.Forms.PictureBox();
           this.bottomPanel = new System.Windows.Forms.Panel();
-          this.regFilesList = new PackageEditor.ListViewEx();
-          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-          this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.menuStrip1.SuspendLayout();
           this.tabControl.SuspendLayout();
           this.tabGeneral.SuspendLayout();
@@ -215,6 +216,7 @@
           this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
+            this.exportAsZeroInstallerXmlToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveasToolStripMenuItem,
             this.closeToolStripMenuItem,
@@ -227,47 +229,55 @@
           // newToolStripMenuItem
           // 
           this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-          this.newToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+          this.newToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
           this.newToolStripMenuItem.Text = "&New virtual package";
           this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
           // 
           // openToolStripMenuItem
           // 
           this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-          this.openToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+          this.openToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
           this.openToolStripMenuItem.Text = "&Open virtual package";
           this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+          // 
+          // exportAsZeroInstallerXmlToolStripMenuItem
+          // 
+          this.exportAsZeroInstallerXmlToolStripMenuItem.Name = "exportAsZeroInstallerXmlToolStripMenuItem";
+          this.exportAsZeroInstallerXmlToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+          this.exportAsZeroInstallerXmlToolStripMenuItem.Text = "&Export as ZeroInstaller xml";
+          this.exportAsZeroInstallerXmlToolStripMenuItem.Visible = false;
+          this.exportAsZeroInstallerXmlToolStripMenuItem.Click += new System.EventHandler(this.exportAsZeroInstallerXmlToolStripMenuItem_Click);
           // 
           // saveToolStripMenuItem
           // 
           this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-          this.saveToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+          this.saveToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
           this.saveToolStripMenuItem.Text = "&Save";
           this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
           // 
           // saveasToolStripMenuItem
           // 
           this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-          this.saveasToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+          this.saveasToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
           this.saveasToolStripMenuItem.Text = "Save &as";
           this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
           // 
           // closeToolStripMenuItem
           // 
           this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-          this.closeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+          this.closeToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
           this.closeToolStripMenuItem.Text = "&Close";
           this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
           // 
           // toolStripMenuItem1
           // 
           this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-          this.toolStripMenuItem1.Size = new System.Drawing.Size(184, 6);
+          this.toolStripMenuItem1.Size = new System.Drawing.Size(211, 6);
           // 
           // exitToolStripMenuItem
           // 
           this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-          this.exitToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+          this.exitToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
           this.exitToolStripMenuItem.Text = "E&xit";
           this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
           // 
@@ -993,7 +1003,7 @@
             this.toolStripMenuItemExport,
             this.deleteToolStripMenuItem});
           this.ContextMenuStripRegistryFolder.Name = "Export";
-          this.ContextMenuStripRegistryFolder.Size = new System.Drawing.Size(171, 70);
+          this.ContextMenuStripRegistryFolder.Size = new System.Drawing.Size(171, 48);
           // 
           // toolStripMenuItemExport
           // 
@@ -1001,6 +1011,13 @@
           this.toolStripMenuItemExport.Size = new System.Drawing.Size(170, 22);
           this.toolStripMenuItemExport.Text = "&Export to .reg file";
           this.toolStripMenuItemExport.Click += new System.EventHandler(this.toolStripMenuItemExport_Click);
+          // 
+          // deleteToolStripMenuItem
+          // 
+          this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+          this.deleteToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+          this.deleteToolStripMenuItem.Text = "Delete";
+          this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
           // 
           // tbType
           // 
@@ -1039,6 +1056,44 @@
           this.tbFile.Size = new System.Drawing.Size(100, 20);
           this.tbFile.TabIndex = 8;
           this.tbFile.Visible = false;
+          // 
+          // regFilesList
+          // 
+          this.regFilesList.AllowColumnReorder = true;
+          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.regFilesList.DoubleClickActivation = false;
+          this.regFilesList.FullRowSelect = true;
+          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+          this.regFilesList.Location = new System.Drawing.Point(0, 25);
+          this.regFilesList.Name = "regFilesList";
+          this.regFilesList.Size = new System.Drawing.Size(509, 334);
+          this.regFilesList.TabIndex = 7;
+          this.regFilesList.UseCompatibleStateImageBehavior = false;
+          this.regFilesList.View = System.Windows.Forms.View.Details;
+          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+          // 
+          // columnHeader3
+          // 
+          this.columnHeader3.Text = "File";
+          this.columnHeader3.Width = 144;
+          // 
+          // columnHeader4
+          // 
+          this.columnHeader4.Text = "Value";
+          this.columnHeader4.Width = 246;
+          // 
+          // columnHeader5
+          // 
+          this.columnHeader5.Text = "Type";
+          this.columnHeader5.Width = 98;
           // 
           // panel4
           // 
@@ -1357,51 +1412,6 @@
           this.bottomPanel.Size = new System.Drawing.Size(751, 47);
           this.bottomPanel.TabIndex = 8;
           // 
-          // regFilesList
-          // 
-          this.regFilesList.AllowColumnReorder = true;
-          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.regFilesList.DoubleClickActivation = false;
-          this.regFilesList.FullRowSelect = true;
-          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-          this.regFilesList.Location = new System.Drawing.Point(0, 25);
-          this.regFilesList.Name = "regFilesList";
-          this.regFilesList.Size = new System.Drawing.Size(509, 334);
-          this.regFilesList.TabIndex = 7;
-          this.regFilesList.UseCompatibleStateImageBehavior = false;
-          this.regFilesList.View = System.Windows.Forms.View.Details;
-          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-          // 
-          // columnHeader3
-          // 
-          this.columnHeader3.Text = "File";
-          this.columnHeader3.Width = 144;
-          // 
-          // columnHeader4
-          // 
-          this.columnHeader4.Text = "Value";
-          this.columnHeader4.Width = 246;
-          // 
-          // columnHeader5
-          // 
-          this.columnHeader5.Text = "Type";
-          this.columnHeader5.Width = 98;
-          // 
-          // deleteToolStripMenuItem
-          // 
-          this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-          this.deleteToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-          this.deleteToolStripMenuItem.Text = "Delete";
-          this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-          // 
           // MainForm
           // 
           this.AllowDrop = true;
@@ -1603,6 +1613,7 @@
         private System.Windows.Forms.ContextMenuStrip ContextMenuStripRegistryFolder;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemExport;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportAsZeroInstallerXmlToolStripMenuItem;
 
     }
 }

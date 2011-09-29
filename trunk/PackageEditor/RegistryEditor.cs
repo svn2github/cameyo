@@ -7,6 +7,7 @@ using Microsoft.Win32;
 using VirtPackageAPI;
 using System.Collections;
 using System.IO;
+using System.Threading;
 
 namespace PackageEditor
 {
@@ -24,7 +25,8 @@ namespace PackageEditor
         public bool dirty;
         private string masterkey;
         private ArrayList currentkey;
-
+        private AutoResetEvent regLoadAutoResetEvent;
+        
         public string Masterkey
         {
             get { return masterkey; }
@@ -65,9 +67,10 @@ namespace PackageEditor
         {
             try
             {
-                workKey = virtPackage.GetRegWorkKey();
-                if (workKey == null)    // No virtual registry?
-                    return;
+              regLoadAutoResetEvent = new AutoResetEvent(false);
+              workKey = virtPackage.GetRegWorkKeyEx(regLoadAutoResetEvent);
+              if (workKey == null)    // No virtual registry?
+                return;
             }
             catch
             {
@@ -447,7 +450,7 @@ namespace PackageEditor
             sw.WriteLine("");
 
             // Read Registry Keys in the package
-            RegistryKey key = virtPackage.GetRegWorkKey();
+            RegistryKey key = workKey;
 
             String fullName = treeHelper.GetFullNodeName(fsFolderTree.SelectedNode);
             rootKeyLen = key.Name.Length;
@@ -458,6 +461,12 @@ namespace PackageEditor
             bfs.Close();
             fs.Close();
           }
+        }
+
+        internal void threadedRegLoadStop()
+        {
+          if (regLoadAutoResetEvent != null)
+            regLoadAutoResetEvent.Set();
         }
     }
 }

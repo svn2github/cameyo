@@ -12,6 +12,7 @@ using VirtPackageAPI;
 using System.IO;
 using System.Collections;
 using System.Diagnostics;
+using System.Xml;
 
 namespace PackageEditor
 {
@@ -96,6 +97,16 @@ namespace PackageEditor
             regEditor.OnPackageOpenBeforeUI();
             regLoaded = true;
             regLoadThread = null;
+        }
+
+        private void ThreadedRegLoadStop()
+        {
+          regEditor.threadedRegLoadStop();
+          if (regLoadThread != null)
+          {
+            regLoadThread.Join();
+            regLoadThread = null;
+          }
         }
 
         private void regProgressTimer_Tick(object sender, EventArgs e)
@@ -228,11 +239,11 @@ namespace PackageEditor
 
         private bool PackageOpen(String packageExeFile)
         {
-            int apiRet;
+            VirtPackage.APIRET apiRet;
             return PackageOpen(packageExeFile, out apiRet);
         }
 
-        private bool PackageOpen(String packageExeFile, out int apiRet)
+        private bool PackageOpen(String packageExeFile, out VirtPackage.APIRET apiRet)
         {
             bool ret;
             apiRet = 0;
@@ -252,8 +263,8 @@ namespace PackageEditor
                     regToolStrip.Visible = false;
                     regSplitContainer.Visible = false;
                     regProgressTimer.Enabled = true;
-                    if (regLoadThread != null)
-                        regLoadThread.Abort();
+
+                    ThreadedRegLoadStop();
                     regLoadThread = new Thread(ThreadedRegLoad);
                     regLoadThread.Start();
 
@@ -285,8 +296,7 @@ namespace PackageEditor
             }
 
             // If regLoadThread is working, wait for it to finish
-            if (regLoadThread != null)
-                regLoadThread.Abort();
+            ThreadedRegLoadStop();
 
             this.OnPackageClose();
             fsEditor.OnPackageClose();
@@ -310,28 +320,29 @@ namespace PackageEditor
                 return false;
             }
 
-            bool ret = false;
+            int ret = 0;
+            VirtPackage.APIRET apiRet = 0;
             PleaseWaitBegin("Saving package", "Saving " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
             {
-                ret = this.OnPackageSave();
-                ret &= fsEditor.OnPackageSave();
-                ret &= regEditor.OnPackageSave();
-                ret &= virtPackage.Save(fileName);
+              ret = ret == 0 && !this.OnPackageSave() ? 1 : ret;
+              ret = ret == 0 && !fsEditor.OnPackageSave() ? 2 : ret;
+              ret = ret == 0 && !regEditor.OnPackageSave() ? 3 : ret;
+              ret = ret == 0 && !virtPackage.SaveEx(fileName, out apiRet) ? 4 : ret;
             }
             PleaseWaitEnd();
 
-            if (ret)
+            if (ret == 0)
             {
-                this.dirty = false;
-                fsEditor.dirty = false;
-                regEditor.dirty = false;
-                MessageBox.Show("Package saved.");
-                return true;
+              this.dirty = false;
+              fsEditor.dirty = false;
+              regEditor.dirty = false;
+              MessageBox.Show("Package saved.");
+              return true;
             }
             else
             {
-                MessageBox.Show("Cannot save file.");
-                return false;
+              MessageBox.Show(String.Format("Cannot save file. Error:{0} ApiRet:{1}", ret, apiRet));
+              return false;
             }
         }
 
@@ -344,7 +355,7 @@ namespace PackageEditor
             //openFileDialog.DefaultExt = "virtual.exe";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                int apiRet;
+                VirtPackage.APIRET apiRet;
                 if (!PackageOpen(openFileDialog.FileName, out apiRet))
                 {
                     MessageBox.Show(String.Format("Failed to open package. API error:{0}", apiRet));
@@ -367,6 +378,62 @@ namespace PackageEditor
                     this.Text = "Package Editor" + " - " + saveFileDialog.FileName;
                 }
             }
+        }
+
+        private void exportAsZeroInstallerXmlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          SaveFileDialog saveFileDialog = new SaveFileDialog();
+          saveFileDialog.AddExtension = true;
+          saveFileDialog.Filter = "ZeroInstaller configuration file (*.xml)|*.xml";
+          saveFileDialog.DefaultExt = "xml";
+          if (saveFileDialog.ShowDialog() == DialogResult.OK)
+          {
+            XmlTextWriter xmlOut = new XmlTextWriter(saveFileDialog.FileName, Encoding.Default);
+            xmlOut.Formatting = Formatting.Indented;
+            xmlOut.WriteStartDocument();
+            xmlOut.WriteStartElement("ZeroInstallerXml");
+
+              xmlOut.WriteStartElement("Properties");
+                xmlOut.WriteStartElement("Property");
+                xmlOut.WriteAttributeString("AppName", "TestApp");
+                xmlOut.WriteEndElement();
+                xmlOut.WriteStartElement("Property");
+                xmlOut.WriteAttributeString("AppVersion", "1.0");
+                xmlOut.WriteEndElement();
+                xmlOut.WriteStartElement("Property");
+                xmlOut.WriteAttributeString("IconFile", "Icon.exe");
+                xmlOut.WriteEndElement();
+                xmlOut.WriteStartElement("Property");
+                xmlOut.WriteAttributeString("StopInheritance", "");
+                xmlOut.WriteEndElement();
+                xmlOut.WriteStartElement("Property");
+                xmlOut.WriteAttributeString("BuildOutput", "[AppName].exe");
+                xmlOut.WriteEndElement();
+              xmlOut.WriteEndElement();
+
+              xmlOut.WriteStartElement("FileSystem");
+              xmlOut.WriteEndElement();
+
+              xmlOut.WriteStartElement("Registry");
+              xmlOut.WriteEndElement();
+
+              xmlOut.WriteStartElement("Sandbox");
+                xmlOut.WriteStartElement("FileSystem");
+                xmlOut.WriteAttributeString("access", "Full");
+                xmlOut.WriteEndElement();
+
+                xmlOut.WriteStartElement("Registry");
+                xmlOut.WriteAttributeString("access", "Full");
+                xmlOut.WriteEndElement();
+              xmlOut.WriteEndElement();
+
+            xmlOut.WriteEndElement();
+            xmlOut.WriteEndDocument();
+            xmlOut.Flush();
+            xmlOut.Close();
+
+            xmlOut.Close();
+          }
         }
 
         private void DisplayAutoLaunch()
@@ -634,8 +701,8 @@ namespace PackageEditor
             {
                 // Release (close) original file, and delete it (otherwise it won't be erasable)
                 String packageExeFile = virtPackage.openedFile;
-                if (regLoadThread != null)
-                    regLoadThread.Abort();
+
+                ThreadedRegLoadStop();
                 virtPackage.Close();
 
                 DeleteFile(packageExeFile);
@@ -709,8 +776,7 @@ namespace PackageEditor
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (regLoadThread != null)
-                regLoadThread.Abort();
+          ThreadedRegLoadStop();
         }
 
         private void lnkAutoLaunch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
