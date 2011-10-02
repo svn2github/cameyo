@@ -309,18 +309,24 @@ namespace PackageEditor
             return true;
         }
 
+        private bool PackageCanSave(out String message)
+        {
+          message = "";
+          if (String.IsNullOrEmpty(propertyAppID.Text))
+            message += "- AppID is a required field to save a package.\r\n";
+          if (String.IsNullOrEmpty(virtPackage.GetProperty("AutoLaunch")))
+            message += "- The package does not have any program(s) selected to launch.\r\nPlease select a program to launch on the tab:General > Panel:Basics > Item:Startup.";
+
+          return message == "";
+        }
+
         private bool PackageSave(String fileName)
         {
             String CantSaveBecause = "";
-            if (String.IsNullOrEmpty(propertyAppID.Text))
-                CantSaveBecause += "- AppID is a required field to save a package.\r\n";
-            if (String.IsNullOrEmpty(virtPackage.GetProperty("AutoLaunch")))
-                CantSaveBecause += "- The package does not have any program(s) selected to launch.\r\nPlease select a program to launch on the tab:General > Panel:Basics > Item:Startup.";
-
-            if (CantSaveBecause != "")
+            if (!PackageCanSave(out CantSaveBecause))
             {
-                MessageBox.Show(this, CantSaveBecause, "Cant save the package.", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                return false;
+              MessageBox.Show(this, CantSaveBecause, "Cant save the package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+              return false;
             }
 
             int ret = 0;
@@ -368,6 +374,12 @@ namespace PackageEditor
 
         private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            String message;
+            if(!PackageCanSave(out message))
+            {
+              MessageBox.Show(this, message, "Cant save the package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+              return;
+            }
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.AddExtension = true;
             saveFileDialog.Filter = "Virtual packages (*.virtual.exe)|*.virtual.exe";
@@ -1119,6 +1131,36 @@ namespace PackageEditor
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
           regRemoveBtn.PerformClick();
+        }
+
+        private void tabRegistry_DragDrop(object sender, DragEventArgs e)
+        {
+          dragging = true;
+
+          String[] paths = (String[])e.Data.GetData(DataFormats.FileDrop);
+          foreach (String path in paths)
+          {
+            this.BeginInvoke(regEditor.Del_AddFOrF, new object[] { path });
+          }
+        }
+
+        private void tabRegistry_DragEnter(object sender, DragEventArgs e)
+        {
+          if (e.Data.GetDataPresent(DataFormats.FileDrop))
+          {
+            ((Control)sender).Focus();
+            e.Effect = DragDropEffects.Copy;
+            dragging = false;
+          }
+          else
+          {
+            e.Effect = DragDropEffects.None;
+          }
+        }
+
+        private void tabRegistry_DragOver(object sender, DragEventArgs e)
+        {
+          //
         }
     }
 

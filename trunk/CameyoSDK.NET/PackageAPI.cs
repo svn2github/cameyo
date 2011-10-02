@@ -189,6 +189,18 @@ namespace VirtPackageAPI
             bool bVariablizeName,
             UInt32 SandboxFlags);
 
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsGetFileFlags(
+            IntPtr hPkg,
+            String Path,
+            ref UInt32 FileFlags);
+
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsSetFileFlags(
+            IntPtr hPkg,
+            String Path,
+            UInt32 FileFlags);
+
         //
         // .NET wrapper
         public VirtPackage()
@@ -495,6 +507,17 @@ namespace VirtPackageAPI
             SandboxSetFileFlags(hPkg, Path, bVariablizeName, SandboxFlags);
         }
         public void SetFileSandbox(String Path, UInt32 SandboxFlags) { SetFileSandbox(Path, SandboxFlags, false); }   // Overload
+
+        public void SetFileFlags(String Path, UInt32 FileFlags)
+        {
+          APIRET apiRet = (APIRET)VirtFsSetFileFlags(hPkg, Path, FileFlags);
+        }
+        public UInt32 GetFileFlags(String Path)
+        {
+          UInt32 FileFlags = 0;
+          APIRET apiRet = (APIRET)VirtFsGetFileFlags(hPkg, Path, ref FileFlags);
+          return FileFlags;
+        }
 
         static public String FriendlyShortcutName(String rawShortcutName)
         {

@@ -102,6 +102,8 @@
     <Compile Include="AutoLaunchForm.Designer.cs">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegFile.cs" />
+    <Compile Include="RegistryFunctions.cs" />
     <Compile Include="CustomEventsForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -935,6 +935,7 @@
           // 
           // tabRegistry
           // 
+          this.tabRegistry.AllowDrop = true;
           this.tabRegistry.Controls.Add(this.panel8);
           this.tabRegistry.Location = new System.Drawing.Point(4, 22);
           this.tabRegistry.Name = "tabRegistry";
@@ -943,6 +944,9 @@
           this.tabRegistry.TabIndex = 2;
           this.tabRegistry.Text = "Registry";
           this.tabRegistry.UseVisualStyleBackColor = true;
+          this.tabRegistry.DragOver += new System.Windows.Forms.DragEventHandler(this.tabRegistry_DragOver);
+          this.tabRegistry.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabRegistry_DragDrop);
+          this.tabRegistry.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabRegistry_DragEnter);
           // 
           // panel8
           // 
@@ -1232,10 +1236,10 @@
           // 
           // propertyExpirationDatePicker
           // 
-          this.propertyExpirationDatePicker.Location = new System.Drawing.Point(269, 17);
+          this.propertyExpirationDatePicker.Location = new System.Drawing.Point(272, 14);
           this.propertyExpirationDatePicker.Margin = new System.Windows.Forms.Padding(2);
           this.propertyExpirationDatePicker.Name = "propertyExpirationDatePicker";
-          this.propertyExpirationDatePicker.Size = new System.Drawing.Size(434, 20);
+          this.propertyExpirationDatePicker.Size = new System.Drawing.Size(174, 20);
           this.propertyExpirationDatePicker.TabIndex = 1;
           // 
           // groupBox7
