@@ -325,7 +325,7 @@ namespace PackageEditor
             String CantSaveBecause = "";
             if (!PackageCanSave(out CantSaveBecause))
             {
-              MessageBox.Show(this, CantSaveBecause, "Cant save the package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+              MessageBox.Show(this, CantSaveBecause, "Cannot save package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
               return false;
             }
 
@@ -1082,10 +1082,6 @@ namespace PackageEditor
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            if (!virtPackage.opened)
-            {
-                openToolStripMenuItem_Click(this, null);
-            }
         }
 
         private void rdb_CheckedChanged(object sender, EventArgs e)
