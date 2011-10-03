@@ -21,26 +21,26 @@ namespace VirtPackageAPI
     };
     public class VirtPackage
     {
-      public enum APIRET
-      {
-        SUCCESS = 0,
-        FAILURE = 1,
-        VIRTFILES_DB_ERROR = 2,
-        VIRTFILES_ZIP_ERROR = 3,
-        NOT_FOUND = 5,
-        INVALID_PARAMETER = 6,
-        FILE_CREATE_ERROR = 7,
-        PE_RESOURCE_ERROR = 8,
-        MEMORY_ERROR = 9,
-        COMMIT_ERROR = 10,
-        VIRTREG_DEPLOY_ERROR = 11,
-        OUTPUT_ERROR = 12,
-        INSUFFICIENT_BUFFER = 13,
-      }
-        public const int VIRT_FILE_FLAGS_ISFILE = 0x0001; 	// File or directory?
-        public const int VIRT_FILE_FLAGS_DELETED = 0x0002; 	// Deleted by virtual app (NOT_FOUND)
-        public const int VIRT_FILE_FLAGS_DEPLOYED = 0x0008; 	// Set upon first file opening
-        public const int VIRT_FILE_FLAGS_DISCONNECTED = 0x0010; 	// Set when on-disk file is modified from DB
+        public enum APIRET
+        {
+            SUCCESS = 0,
+            FAILURE = 1,
+            VIRTFILES_DB_ERROR = 2,
+            VIRTFILES_ZIP_ERROR = 3,
+            NOT_FOUND = 5,
+            INVALID_PARAMETER = 6,
+            FILE_CREATE_ERROR = 7,
+            PE_RESOURCE_ERROR = 8,
+            MEMORY_ERROR = 9,
+            COMMIT_ERROR = 10,
+            VIRTREG_DEPLOY_ERROR = 11,
+            OUTPUT_ERROR = 12,
+            INSUFFICIENT_BUFFER = 13,
+        }
+        public const uint VIRT_FILE_FLAGS_ISFILE = 0x0001; 	// File or directory?
+        public const uint VIRT_FILE_FLAGS_DELETED = 0x0002; 	// Deleted by virtual app (NOT_FOUND)
+        public const uint VIRT_FILE_FLAGS_DEPLOYED = 0x0008; 	// Set upon first file opening
+        public const uint VIRT_FILE_FLAGS_DISCONNECTED = 0x0010; 	// Set when on-disk file is modified from DB
 
         public const int SANDBOXFLAGS_MERGE = 1;
         public const int SANDBOXFLAGS_WRITE_COPY = 2;
@@ -228,30 +228,30 @@ namespace VirtPackageAPI
 
         public bool Save(String FileName)
         {
-          APIRET apiRet;
-          return SaveEx(FileName, out apiRet);
+            APIRET apiRet;
+            return SaveEx(FileName, out apiRet);
         }
 
         public bool SaveEx(String FileName, out APIRET apiRet)
         {
-          int Ret = PackageSave(hPkg, FileName);
-          apiRet = (APIRET)Ret;
-          if (apiRet == APIRET.SUCCESS)
-            return true;
-          else
-            return false;
+            int Ret = PackageSave(hPkg, FileName);
+            apiRet = (APIRET)Ret;
+            if (apiRet == APIRET.SUCCESS)
+                return true;
+            else
+                return false;
         }
 
         public bool Open(String PackageExeFile)
         {
-          APIRET apiRet;
-          return Open(PackageExeFile, out apiRet);
+            APIRET apiRet;
+            return Open(PackageExeFile, out apiRet);
         }
 
         public bool Open(String PackageExeFile, out APIRET apiRet)
         {
-          apiRet = (APIRET)PackageOpen(PackageExeFile, 0, ref hPkg);
-          if (apiRet == APIRET.SUCCESS)
+            apiRet = (APIRET)PackageOpen(PackageExeFile, 0, ref hPkg);
+            if (apiRet == APIRET.SUCCESS)
             {
                 opened = true;
                 openedFile = PackageExeFile;
@@ -263,7 +263,7 @@ namespace VirtPackageAPI
 
         public bool Create(String AppID, String AppVirtDll, String LoaderExe)
         {
-          APIRET Ret = (APIRET)PackageCreate(AppID, AppVirtDll, LoaderExe, ref hPkg);
+            APIRET Ret = (APIRET)PackageCreate(AppID, AppVirtDll, LoaderExe, ref hPkg);
             if (Ret == APIRET.SUCCESS)
             {
                 opened = true;
@@ -443,16 +443,16 @@ namespace VirtPackageAPI
 
             SafeWaitHandle waitHandle;
             if (abortEvent != null)
-              waitHandle = abortEvent.SafeWaitHandle;
+                waitHandle = abortEvent.SafeWaitHandle;
             else
-              waitHandle = new SafeWaitHandle(IntPtr.Zero, true); ;
+                waitHandle = new SafeWaitHandle(IntPtr.Zero, true); ;
             APIRET Ret = (APIRET)VirtRegGetWorkKeyEx(hPkg, sbWorkKey, MAX_STRING, waitHandle);
             if (Ret == APIRET.SUCCESS)
             {
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(sbWorkKey.ToString(), true);
                 if (key == null)
                 {
-                  key = Registry.CurrentUser.CreateSubKey(sbWorkKey.ToString());
+                    key = Registry.CurrentUser.CreateSubKey(sbWorkKey.ToString());
                 }
                 return (key);
             }
@@ -510,13 +510,13 @@ namespace VirtPackageAPI
 
         public void SetFileFlags(String Path, UInt32 FileFlags)
         {
-          APIRET apiRet = (APIRET)VirtFsSetFileFlags(hPkg, Path, FileFlags);
+            APIRET apiRet = (APIRET)VirtFsSetFileFlags(hPkg, Path, FileFlags);
         }
         public UInt32 GetFileFlags(String Path)
         {
-          UInt32 FileFlags = 0;
-          APIRET apiRet = (APIRET)VirtFsGetFileFlags(hPkg, Path, ref FileFlags);
-          return FileFlags;
+            UInt32 FileFlags = 0;
+            APIRET apiRet = (APIRET)VirtFsGetFileFlags(hPkg, Path, ref FileFlags);
+            return FileFlags;
         }
 
         static public String FriendlyShortcutName(String rawShortcutName)

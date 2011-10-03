@@ -20,11 +20,11 @@ namespace PackageEditor
 
     public class FolderTreeNode : TreeNode
     {
-      public VirtFsNode virtFsNode;
-      public List<FileData> childFiles;
-      public UInt32 sandboxFlags;
-      public bool deleted;
-      public bool addedEmpty;         // User added this as a new empty folder
+        public VirtFsNode virtFsNode;
+        public List<FileData> childFiles;
+        public UInt32 sandboxFlags;
+        public bool deleted;
+        public bool addedEmpty;         // User added this as a new empty folder
     }
 
     public class FileSystemEditor
@@ -49,12 +49,12 @@ namespace PackageEditor
 
         public FolderTreeNode getFileTree()
         {
-          return (FolderTreeNode)fsFolderTree.Nodes[0];
+            return (FolderTreeNode)fsFolderTree.Nodes[0];
         }
 
-        public FileSystemEditor(VirtPackage virtPackage, TreeView fsFolderTree, ListView fsFilesList, 
+        public FileSystemEditor(VirtPackage virtPackage, TreeView fsFolderTree, ListView fsFilesList,
             Label fsFolderInfoFullName, ComboBox fsFolderInfoIsolationCombo,
-            ToolStripButton fsAddBtn, ToolStripButton fsRemoveBtn, ToolStripButton fsAddEmptyDirBtn, 
+            ToolStripButton fsAddBtn, ToolStripButton fsRemoveBtn, ToolStripButton fsAddEmptyDirBtn,
             ToolStripButton fsSaveFileAsBtn, ToolStripButton fsAddDirBtn)
         {
             this.virtPackage = virtPackage;
@@ -98,7 +98,7 @@ namespace PackageEditor
             FolderTreeNode newNode = new FolderTreeNode();
             newNode.Text = "FileSystem";
             newNode.virtFsNode = new VirtFsNode();
-            treeHelper.SetFolderNodeImage(newNode, 
+            treeHelper.SetFolderNodeImage(newNode,
                 false, virtPackage.GetFileSandbox("", false));
             fsFolderTree.Nodes.Add(newNode);
 
@@ -151,31 +151,33 @@ namespace PackageEditor
                     {
                         foreach (FileData child in curFolder.childFiles)
                         {
-                          if (child.deleted)                  // Deleted File
-                          {
-                            String findFile = child.virtFsNode.FileName;
-                            Boolean findDeleted = false;
-                            if (!curFolder.childFiles.Exists(delegate(FileData data) { 
-                                return data.virtFsNode.FileName.Equals(findFile, StringComparison.CurrentCultureIgnoreCase) && data.deleted == findDeleted; 
-                            }))
+                            if (child.deleted)                  // Deleted File
                             {
-                              // only delete if no new file is added with same name.
-                              // the virtPackage will automaticaly replace it when AddFile is called.
+                                String findFile = child.virtFsNode.FileName;
+                                Boolean findDeleted = false;
+                                if (!curFolder.childFiles.Exists(
+                                    delegate(FileData data)
+                                    {
+                                        return data.virtFsNode.FileName.Equals(findFile, StringComparison.CurrentCultureIgnoreCase) && data.deleted == findDeleted;
+                                    }))
+                                {
+                                    // only delete if no new file is added with same name.
+                                    // the virtPackage will automaticaly replace it when AddFile is called.
 
-                              virtPackage.DeleteFile(child.virtFsNode.FileName);
+                                    virtPackage.DeleteFile(child.virtFsNode.FileName);
+                                }
                             }
-                          }
-                          else
-                          {
-                            if (child.addedFrom != "")
-                            {// Added File
-                              virtPackage.AddFile(child.addedFrom, child.virtFsNode.FileName, false);
-                              
-                              uint flags = virtPackage.GetFileFlags(child.virtFsNode.FileName);
-                              flags = (flags | VirtPackage.VIRT_FILE_FLAGS_DEPLOYED) - VirtPackage.VIRT_FILE_FLAGS_DEPLOYED;
-                              virtPackage.SetFileFlags(child.virtFsNode.FileName, flags); 
+                            else
+                            {
+                                if (child.addedFrom != "")
+                                {
+                                    // Added File
+                                    virtPackage.AddFile(child.addedFrom, child.virtFsNode.FileName, false);
+                                    uint flags = virtPackage.GetFileFlags(child.virtFsNode.FileName);
+                                    flags &= ~(VirtPackage.VIRT_FILE_FLAGS_DEPLOYED);
+                                    virtPackage.SetFileFlags(child.virtFsNode.FileName, flags);
+                                }
                             }
-                          }
                         }
                     }
                     if (curFolder.addedEmpty)
@@ -265,9 +267,9 @@ namespace PackageEditor
                         FolderTreeNode upperParent = curParent;
                         while (upperParent != null)
                         {
-                            #pragma warning disable 1690
+#pragma warning disable 1690
                             upperParent.virtFsNode.EndOfFile += virtFsNode.EndOfFile;   // CS1690 is OK
-                            #pragma warning restore 1690
+#pragma warning restore 1690
                             upperParent = (FolderTreeNode)upperParent.Parent;
                         }
                     }
@@ -410,7 +412,7 @@ namespace PackageEditor
             String selectedFolder = "";
             FolderBrowserDialog selectFolder = new FolderBrowserDialog();
             selectFolder.ShowNewFolderButton = false;
-            
+
             if (selectFolder.ShowDialog() != DialogResult.OK)
                 return;
 
@@ -428,39 +430,39 @@ namespace PackageEditor
                 VirtFsNode virtFsFileNode;
                 FileData fileOverwrite = null;
                 if (parentNode.childFiles != null)
-                {   
-                    
+                {
+
                     foreach (FileData file in parentNode.childFiles)
                     {
-                      if (!file.deleted && Path.GetFileName(file.virtFsNode.FileName).Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
+                        if (!file.deleted && Path.GetFileName(file.virtFsNode.FileName).Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
                         {
-                          if (MessageBox.Show(String.Format("File \"{0}\" already exists, overwrite?", file.virtFsNode.FileName), "Overwrite?", MessageBoxButtons.YesNo) == DialogResult.No)
-                            return false;
-                          else
-                          {                            
-                            if ((file.addedFrom != ""))
-                              fileOverwrite = file;
+                            if (MessageBox.Show(String.Format("File \"{0}\" already exists, overwrite?", file.virtFsNode.FileName), "Overwrite?", MessageBoxButtons.YesNo) == DialogResult.No)
+                                return false;
                             else
-                              file.deleted = true;
-                            break;
-                          }
+                            {
+                                if ((file.addedFrom != ""))
+                                    fileOverwrite = file;
+                                else
+                                    file.deleted = true;
+                                break;
+                            }
                         }
                     }
                 }
 
-                
-                virtFsFileNode = new VirtFsNode();                
-                #pragma warning disable 1690
+
+                virtFsFileNode = new VirtFsNode();
+#pragma warning disable 1690
                 virtFsFileNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(path));
-                #pragma warning restore 1690
+#pragma warning restore 1690
                 virtFsFileNode.FileFlags = VirtPackage.VIRT_FILE_FLAGS_ISFILE;      //it's a file
                 System.IO.FileInfo fi = new System.IO.FileInfo(path);
                 virtFsFileNode.EndOfFile = (ulong)fi.Length;
 
                 if (fileOverwrite != null)
-                  fileOverwrite.virtFsNode = virtFsFileNode;
+                    fileOverwrite.virtFsNode = virtFsFileNode;
                 else
-                  AddFileOrFolder(virtFsFileNode, path);     // Also sets dirty = true
+                    AddFileOrFolder(virtFsFileNode, path);     // Also sets dirty = true
 
                 if (parentNode == fsFolderTree.SelectedNode)
                 {
@@ -479,22 +481,22 @@ namespace PackageEditor
             {
                 foreach (FolderTreeNode childNode in parentNode.Nodes)
                 {
-                  if (childNode.Text.Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
+                    if (childNode.Text.Equals(Path.GetFileName(path), StringComparison.CurrentCultureIgnoreCase))
                     {
-                      
+
 #pragma warning disable 1690
-                    if (!childNode.deleted && MessageBox.Show(String.Format("Folder \"{0}\" already exists, overwrite?", childNode.virtFsNode.FileName), "Overwrite?", MessageBoxButtons.YesNo) == DialogResult.No)
+                        if (!childNode.deleted && MessageBox.Show(String.Format("Folder \"{0}\" already exists, overwrite?", childNode.virtFsNode.FileName), "Overwrite?", MessageBoxButtons.YesNo) == DialogResult.No)
 #pragma warning restore 1690
-                      return false;
-                      else
-                      {
-                        folderOverwrite = childNode;
-                        childNode.deleted = false;
-                        if (childNode.childFiles != null)
-                          foreach (FileData file in childNode.childFiles)
-                            file.deleted = true;// make sure files from a previously deleted folder dont come back..
-                        break;
-                      }
+                            return false;
+                        else
+                        {
+                            folderOverwrite = childNode;
+                            childNode.deleted = false;
+                            if (childNode.childFiles != null)
+                                foreach (FileData file in childNode.childFiles)
+                                    file.deleted = true;// make sure files from a previously deleted folder dont come back..
+                            break;
+                        }
                     }
                 }
             }
@@ -504,16 +506,16 @@ namespace PackageEditor
             FolderTreeNode subdirNode;
             if (folderOverwrite == null)
             {
-              // if path is a folder
-              VirtFsNode virtFsDirNode = new VirtFsNode();
+                // if path is a folder
+                VirtFsNode virtFsDirNode = new VirtFsNode();
 #pragma warning disable 1690
-              virtFsDirNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(path));
+                virtFsDirNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(path));
 #pragma warning restore 1690
-              virtFsDirNode.FileFlags = 0;                                       //it's a dir
-              subdirNode = AddFileOrFolder(virtFsDirNode, path);     // Also sets dirty = true
+                virtFsDirNode.FileFlags = 0;                                       //it's a dir
+                subdirNode = AddFileOrFolder(virtFsDirNode, path);     // Also sets dirty = true
             }
             else
-              subdirNode = folderOverwrite;
+                subdirNode = folderOverwrite;
 
 
             foreach (String file in lsFiles)
@@ -599,7 +601,7 @@ namespace PackageEditor
             }
             else
                 MessageBox.Show("Please select a folder/file to remove");
-            
+
             /* TODO:
              * it seems some file remain in the folder after it's been deleted (only on delete folder)
              * Check and correct.
@@ -637,9 +639,9 @@ namespace PackageEditor
             }
 
             VirtFsNode virtFsNode = new VirtFsNode();
-            #pragma warning disable 1690
+#pragma warning disable 1690
             virtFsNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, newFolderName);
-            #pragma warning restore 1690
+#pragma warning restore 1690
             virtFsNode.FileFlags = 0;                       // Folder, not file
 
             //String[] subdirs = newFolderName.Split('\\');
@@ -649,33 +651,33 @@ namespace PackageEditor
             {
                 foreach (FolderTreeNode childNode in curParentNode.Nodes)
                 {
-                  if (childNode.Text.Equals(newFolderName, StringComparison.CurrentCultureIgnoreCase))
+                    if (childNode.Text.Equals(newFolderName, StringComparison.CurrentCultureIgnoreCase))
                     {
-                      if (!childNode.deleted)
-                      {
-                        MessageBox.Show("Folder already exists");
-                        return;
-                      }
-                      else
-                      {
-                        folderOverwrite = childNode;
-                        childNode.deleted = false;
-                        if (childNode.childFiles != null)
-                          foreach (FileData file in childNode.childFiles)
-                            file.deleted = true;// make sure files from a previously deleted folder dont come back..
-                      }
+                        if (!childNode.deleted)
+                        {
+                            MessageBox.Show("Folder already exists");
+                            return;
+                        }
+                        else
+                        {
+                            folderOverwrite = childNode;
+                            childNode.deleted = false;
+                            if (childNode.childFiles != null)
+                                foreach (FileData file in childNode.childFiles)
+                                    file.deleted = true;// make sure files from a previously deleted folder dont come back..
+                        }
                     }
                 }
             }
-          
+
             FolderTreeNode newNode;
             if (folderOverwrite != null)
-              newNode = folderOverwrite;
+                newNode = folderOverwrite;
             else
             {
-              newNode = AddFileOrFolder(virtFsNode, newFolderName);     // Also sets dirty = true
-              if (newNode != null)
-                newNode.addedEmpty = true;
+                newNode = AddFileOrFolder(virtFsNode, newFolderName);     // Also sets dirty = true
+                if (newNode != null)
+                    newNode.addedEmpty = true;
             }
             RefreshFolderNodeRecursively(parentNode, 0);
             TreeViewEventArgs ev = new TreeViewEventArgs(parentNode);
@@ -684,74 +686,74 @@ namespace PackageEditor
 
         private void OnSaveFileAsBtnClick(object sender, EventArgs e)
         {
-          FolderTreeNode folderNode = (FolderTreeNode)fsFolderTree.SelectedNode;
-          if (folderNode == null)
-          {
-            MessageBox.Show("Please select a file to save");
-            return;
-          }
-
-          if (fileSaveTargetDir == null || !Directory.Exists(fileSaveTargetDir))
-            fileSaveTargetDir = Path.GetDirectoryName(virtPackage.openedFile);
-
-          ListView.SelectedListViewItemCollection fileItems = fsFilesList.SelectedItems;
-          if (fileItems.Count == 0)    // In this case, folderNode is always selected too
-          {
-            if (TreeHelper.InputFolderBrowserDialog("Select the destination path on your hard disk to save the files.", ref fileSaveTargetDir) != DialogResult.OK)
-              return;
-            SaveFolderContent(folderNode, fileSaveTargetDir);
-            //MessageBox.Show("Please select a file, not a folder");
-            return;
-          }
-
-          if (TreeHelper.InputFolderBrowserDialog("Select the destination path on your hard disk to save the file.", ref fileSaveTargetDir) != DialogResult.OK)
-            return;
-
-          // Save files
-          if (folderNode.childFiles.Count == 0)
-            return;     // Should never happen
-
-          foreach (ListViewItem item in fileItems)
-          {
-            FileData fileData;
-            for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
+            FolderTreeNode folderNode = (FolderTreeNode)fsFolderTree.SelectedNode;
+            if (folderNode == null)
             {
-              fileData = folderNode.childFiles[i];
-              if (Path.GetFileName(fileData.virtFsNode.FileName) == item.Text)
-              {
-                SaveFile(fileData, fileSaveTargetDir);
-                break;
-              }
+                MessageBox.Show("Please select a file to save");
+                return;
             }
-          }
+
+            if (fileSaveTargetDir == null || !Directory.Exists(fileSaveTargetDir))
+                fileSaveTargetDir = Path.GetDirectoryName(virtPackage.openedFile);
+
+            ListView.SelectedListViewItemCollection fileItems = fsFilesList.SelectedItems;
+            if (fileItems.Count == 0)    // In this case, folderNode is always selected too
+            {
+                if (TreeHelper.InputFolderBrowserDialog("Select the destination path on your hard disk to save the files.", ref fileSaveTargetDir) != DialogResult.OK)
+                    return;
+                SaveFolderContent(folderNode, fileSaveTargetDir);
+                //MessageBox.Show("Please select a file, not a folder");
+                return;
+            }
+
+            if (TreeHelper.InputFolderBrowserDialog("Select the destination path on your hard disk to save the file.", ref fileSaveTargetDir) != DialogResult.OK)
+                return;
+
+            // Save files
+            if (folderNode.childFiles.Count == 0)
+                return;     // Should never happen
+
+            foreach (ListViewItem item in fileItems)
+            {
+                FileData fileData;
+                for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
+                {
+                    fileData = folderNode.childFiles[i];
+                    if (Path.GetFileName(fileData.virtFsNode.FileName) == item.Text)
+                    {
+                        SaveFile(fileData, fileSaveTargetDir);
+                        break;
+                    }
+                }
+            }
         }
 
         private void SaveFile(FileData fileData, string fileSaveTargetDir)
         {
-          if (fileData.addedFrom != "")   // Just added
-            MessageBox.Show("Cannot save a file that was just added: " + fileData.virtFsNode.FileName);
-          else
-          {
-            if (!virtPackage.ExtractFile(fileData.virtFsNode.FileName, fileSaveTargetDir))
-              MessageBox.Show("Cannot save file: " + fileData.virtFsNode.FileName + " to " + fileSaveTargetDir);
-          }
+            if (fileData.addedFrom != "")   // Just added
+                MessageBox.Show("Cannot save a file that was just added: " + fileData.virtFsNode.FileName);
+            else
+            {
+                if (!virtPackage.ExtractFile(fileData.virtFsNode.FileName, fileSaveTargetDir))
+                    MessageBox.Show("Cannot save file: " + fileData.virtFsNode.FileName + " to " + fileSaveTargetDir);
+            }
         }
 
         private void SaveFolderContent(FolderTreeNode node, string fileSaveTargetDir)
         {
-          if (node.childFiles != null)
-          {
-            foreach (FileData f in node.childFiles)
+            if (node.childFiles != null)
             {
-              SaveFile(f, fileSaveTargetDir);
+                foreach (FileData f in node.childFiles)
+                {
+                    SaveFile(f, fileSaveTargetDir);
+                }
             }
-          }
-          foreach (FolderTreeNode f in node.Nodes)
-          {
-            String subFolder = fileSaveTargetDir + '\\' + f.Text;
-            Directory.CreateDirectory(subFolder);
-            SaveFolderContent(f, subFolder);
-          }
+            foreach (FolderTreeNode f in node.Nodes)
+            {
+                String subFolder = fileSaveTargetDir + '\\' + f.Text;
+                Directory.CreateDirectory(subFolder);
+                SaveFolderContent(f, subFolder);
+            }
         }
 
         // Misc internal functions
@@ -878,13 +880,13 @@ namespace PackageEditor
 
 
         public static DialogResult InputFolderBrowserDialog(string promptText, ref string value)
-        {          
-          FolderBrowserDialog fbd = new FolderBrowserDialog();
-          fbd.Description = promptText;
-          fbd.SelectedPath = value;
-          DialogResult dialogResult = fbd.ShowDialog();          
-          value = fbd.SelectedPath;
-          return dialogResult;
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.Description = promptText;
+            fbd.SelectedPath = value;
+            DialogResult dialogResult = fbd.ShowDialog();
+            value = fbd.SelectedPath;
+            return dialogResult;
         }
 
         public static DialogResult InputBox(string title, string promptText, ref string value)
