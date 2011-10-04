@@ -47,6 +47,7 @@ namespace PackageEditor
             Del_Open = new DelegatePackageOpen(this.PackageOpen);
 
             tabControl.Visible = false;
+            panelWelcome.Visible = !tabControl.Visible;
             regLoaded = false;
             dirty = false;
             virtPackage = new VirtPackage();
@@ -138,6 +139,7 @@ namespace PackageEditor
         private void EnableDisablePackageControls(bool enable)
         {
             tabControl.Visible = enable;
+            panelWelcome.Visible = !tabControl.Visible;
             saveToolStripMenuItem.Enabled = enable;
             saveasToolStripMenuItem.Enabled = enable;
             closeToolStripMenuItem.Enabled = enable;
@@ -1078,10 +1080,30 @@ namespace PackageEditor
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+          MainForm_Resize(null, null);
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
+          foreach(MRUitem item in mru.GetItems())
+          {
+            Icon ico = Icon.ExtractAssociatedIcon(item.file);
+            int imageId = imageListMRU.Images.Add(ico.ToBitmap(), Color.Empty);
+
+            String fileName = Path.GetFileNameWithoutExtension(item.file);
+            if (fileName.EndsWith(".virtual")) fileName = fileName.Remove(fileName.Length-8);
+            if (fileName.EndsWith(".cameyo"))  fileName = fileName.Remove(fileName.Length-7);
+            
+            ListViewItem lvitem = listViewMRU.Items.Add(fileName);
+            lvitem.ImageIndex = imageId;
+            lvitem.Tag = item.file;
+          }
+          panelWelcome.Parent = this;
+          panelWelcome.BringToFront();
+          panelWelcome.Dock = DockStyle.None;
+          panelWelcome.Dock = DockStyle.Fill;
+          
+          tabControl.TabPages.Remove(tabWelcome);
         }
 
         private void rdb_CheckedChanged(object sender, EventArgs e)
@@ -1158,6 +1180,72 @@ namespace PackageEditor
         {
           //
         }
+
+        private void listViewMRU_Resize(object sender, EventArgs e)
+        {
+          columnFileN.Width = listViewMRU.ClientSize.Width;
+        }
+
+        private void btnNewPackage_Click(object sender, EventArgs e)
+        {
+          newToolStripMenuItem_Click(sender, e);
+        }
+
+        private void btnEditPackage_Click(object sender, EventArgs e)
+        {
+          openToolStripMenuItem_Click(sender, e);
+        }
+
+        private void listViewMRU_Click(object sender, EventArgs e)
+        {
+          if (listViewMRU.SelectedItems.Count != 1)
+            return;
+          
+          //ListViewItem[] l = listViewMRU.SelectedItems.ToString();
+          PackageOpen((String)listViewMRU.SelectedItems[0].Tag);
+        }
+
+        void centerOnForm(Control c,int offset)
+        {
+          c.Left = (this.Width - c.Width) / 2 + offset;
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+          centerOnForm(panelRecentPackages,0);
+          centerOnForm(btnNewPackage, -btnNewPackage.Width / 2 - 10);
+          centerOnForm(btnEditPackage, btnEditPackage.Width / 2 + 10);
+          pictureBox2.Width = panelWelcome.ClientSize.Width;
+        }
+
+        private void btnEditPackage_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_SizeChanged(object sender, EventArgs e)
+        {
+          Rectangle r = pictureBox2.ClientRectangle;
+          if (r.Width > 0)
+          {
+            Bitmap bm = new Bitmap(r.Width, r.Height);
+
+            pictureBox2.Image = null;
+            pictureBox2.Image = bm;
+
+            System.Drawing.Graphics graphicsObj;
+            graphicsObj = Graphics.FromImage(bm); //pictureBox2.CreateGraphics();
+            graphicsObj.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            
+            Rectangle myRectangle = new Rectangle(-20, -100, r.Width+40, 200);
+            graphicsObj.FillEllipse(new SolidBrush(Color.FromArgb(64,64,64)), myRectangle);
+            
+            myRectangle = new Rectangle(0, 135, r.Width, 10);
+            graphicsObj.FillRectangle(new SolidBrush(Color.FromArgb(64,64,64)), myRectangle);
+            myRectangle = new Rectangle(0, 145, r.Width, 10);
+            graphicsObj.FillRectangle(Brushes.DarkGray, myRectangle);
+          }
+        }
     }
 
     class RegListViewSorter : ListViewSorter
@@ -1216,6 +1304,16 @@ namespace PackageEditor
             return res;
         }
         abstract protected int CompareItems(ListViewItem x, ListViewItem y);
+    }
+
+    public class MRUitem
+    {
+      public MRUitem(String name,String file){
+        this.name = name;
+        this.file = file;
+      }
+      public String name;
+      public String file;
     }
 
     public class MRU
@@ -1277,6 +1375,23 @@ namespace PackageEditor
             // Add "0" item
             try { regKey.SetValue("0", fileName); }
             catch { }
+        }
+
+        public List<MRUitem> GetItems()
+        {
+          List<MRUitem> result = new List<MRUitem>();
+
+          String[] items = regKey.GetValueNames();
+          List<String> list = new List<string>(items);
+          list.Sort();
+          for (int i = 0; i < list.Count; i++)
+          {
+            String fileNameValue = (String)regKey.GetValue(list[i]);
+            if (fileNameValue == null || !File.Exists(fileNameValue))
+              continue;
+            result.Add(new MRUitem(list[i], fileNameValue));            
+          }
+          return result;
         }
 
         public void AddFile(String fileName)
