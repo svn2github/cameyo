@@ -1264,7 +1264,7 @@
           this.groupBox7.Size = new System.Drawing.Size(713, 106);
           this.groupBox7.TabIndex = 9;
           this.groupBox7.TabStop = false;
-          this.groupBox7.Text = "Remove traves upon app exit";
+          this.groupBox7.Text = "Remove traces upon app exit";
           // 
           // chkCleanDoneDialog
           // 
