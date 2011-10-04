@@ -1246,6 +1246,19 @@ namespace PackageEditor
             graphicsObj.FillRectangle(Brushes.DarkGray, myRectangle);
           }
         }
+        private ListViewItem mHoverItem;
+        private void listViewMRU_MouseHover(object sender, EventArgs e)
+        {
+          Point p = listViewMRU.PointToClient(new Point(MousePosition.X, MousePosition.Y));
+          ListViewItem item = listViewMRU.GetItemAt(p.X, p.Y);
+          if (object.ReferenceEquals(mHoverItem, item)) 
+            return;
+          if (mHoverItem != null) 
+             mHoverItem.Font = listViewMRU.Font;
+          if (item != null)
+            item.Font = new Font(listViewMRU.Font, FontStyle.Underline);
+          mHoverItem = item;
+        }
     }
 
     class RegListViewSorter : ListViewSorter
