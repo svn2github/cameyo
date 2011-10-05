@@ -202,8 +202,9 @@ namespace PackageEditor.RegFileReader
     {
       String result = byteArray;
       int baseNum = firstPrefixLen;
-      int count = (result.Length + firstPrefixLen);
+      int count = (result.Length);
       int i = (79 - firstPrefixLen) / 3 * 3;
+      i = Math.Max(i, 3);
       while (i < count)
       {
         result = result.Insert(i, "\\\r\n  ");

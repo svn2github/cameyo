@@ -71,7 +71,10 @@ namespace PackageEditor
     void writeRegKeyValues(StreamWriter sw, int rootKeyLen, RegistryKey key)
     {
       //string keyname = key.Name;      
-      string keyname = key.Name.Substring(rootKeyLen);
+      string keyname = "";
+      if (rootKeyLen > key.Name.Length)
+        return;//should only happen for the vos root  HKCU\..TempVirtReg\myApp\registry
+      keyname = key.Name.Substring(rootKeyLen);
       if (String.IsNullOrEmpty(keyname))
         return;
 
