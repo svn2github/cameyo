@@ -1218,11 +1218,6 @@ namespace PackageEditor
           pictureBox2.Width = panelWelcome.ClientSize.Width;
         }
 
-        private void btnEditPackage_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void pictureBox2_SizeChanged(object sender, EventArgs e)
         {
           Rectangle r = pictureBox2.ClientRectangle;

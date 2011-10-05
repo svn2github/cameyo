@@ -30,10 +30,10 @@
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-          System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
-          System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
-          System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("");
-          System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("");
+          System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+          System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+          System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+          System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
           this.imageList = new System.Windows.Forms.ImageList(this.components);
           this.menuStrip1 = new System.Windows.Forms.MenuStrip();
           this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -804,8 +804,8 @@
             this.columnFileSize});
           this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
           this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
           this.fsFilesList.Location = new System.Drawing.Point(0, 25);
           this.fsFilesList.Name = "fsFilesList";
           this.fsFilesList.Size = new System.Drawing.Size(509, 330);
@@ -1081,8 +1081,8 @@
           this.regFilesList.DoubleClickActivation = false;
           this.regFilesList.FullRowSelect = true;
           this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
           this.regFilesList.Location = new System.Drawing.Point(0, 25);
           this.regFilesList.Name = "regFilesList";
           this.regFilesList.Size = new System.Drawing.Size(509, 334);
@@ -1410,6 +1410,7 @@
           this.btnEditPackage.TabIndex = 10;
           this.btnEditPackage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
           this.btnEditPackage.UseVisualStyleBackColor = true;
+          this.btnEditPackage.Click += new System.EventHandler(this.btnEditPackage_Click);
           // 
           // imageList1
           // 
@@ -1428,6 +1429,7 @@
           this.btnNewPackage.TabIndex = 9;
           this.btnNewPackage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
           this.btnNewPackage.UseVisualStyleBackColor = true;
+          this.btnNewPackage.Click += new System.EventHandler(this.btnNewPackage_Click);
           // 
           // panelRecentPackages
           // 
