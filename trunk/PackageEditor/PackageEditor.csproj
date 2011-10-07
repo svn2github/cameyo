@@ -103,6 +103,8 @@
     <Compile Include="AutoLaunchForm.Designer.cs">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MouseExtender\IconHelper.cs" />
+    <Compile Include="MouseExtender\Win32Helper.cs" />
     <Compile Include="RegFile.cs" />
     <Compile Include="RegistryFunctions.cs" />
     <Compile Include="CustomEventsForm.cs">

@@ -13,6 +13,7 @@ using System.IO;
 using System.Collections;
 using System.Diagnostics;
 using System.Xml;
+using MouseExtender.Logic.Helpers;
 
 namespace PackageEditor
 {
@@ -203,7 +204,7 @@ namespace PackageEditor
                 {
                   if (!String.IsNullOrEmpty(pleaseWaitMsg.iconFileName))
                   {
-                    iconFile = Icon.ExtractAssociatedIcon(pleaseWaitMsg.iconFileName);
+                    iconFile = IconHelper.getIconFromFile(pleaseWaitMsg.iconFileName);
                     icon.Image = iconFile.ToBitmap();
                   }
                 }
@@ -504,10 +505,12 @@ namespace PackageEditor
             propertyIsolationMerge.Checked = (isolationType == VirtPackage.ISOLATIONMODE_FULL_ACCESS);
 
             // Icon
-            if (!String.IsNullOrEmpty(virtPackage.openedFile))
-            {
-                Icon ico = Icon.ExtractAssociatedIcon(virtPackage.openedFile);
-                propertyIcon.Image = ico.ToBitmap();
+            if (!String.IsNullOrEmpty(virtPackage.openedFile)){
+              Icon icon = IconHelper.getIconFromFile(virtPackage.openedFile);
+              if (icon != null)
+              {
+                propertyIcon.Image = icon.ToBitmap();
+              }
             }
 
             // StopInheritance
@@ -779,7 +782,7 @@ namespace PackageEditor
             openFileDialog.Multiselect = false;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Icon ico = Icon.ExtractAssociatedIcon(openFileDialog.FileName);
+                Icon ico = IconHelper.getIconFromFile(openFileDialog.FileName);
                 if (virtPackage.SetIcon(openFileDialog.FileName))
                 {
                     propertyIcon.Image = ico.ToBitmap();
@@ -1086,8 +1089,8 @@ namespace PackageEditor
         private void MainForm_Shown(object sender, EventArgs e)
         {
           foreach(MRUitem item in mru.GetItems())
-          {
-            Icon ico = Icon.ExtractAssociatedIcon(item.file);
+          { 
+            Icon ico = IconHelper.getIconFromFile(item.file);
             int imageId = imageListMRU.Images.Add(ico.ToBitmap(), Color.Empty);
 
             String fileName = Path.GetFileNameWithoutExtension(item.file);
