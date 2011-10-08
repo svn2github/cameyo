@@ -13,7 +13,6 @@ using System.IO;
 using System.Collections;
 using System.Diagnostics;
 using System.Xml;
-using MouseExtender.Logic.Helpers;
 
 namespace PackageEditor
 {
@@ -204,7 +203,7 @@ namespace PackageEditor
                 {
                   if (!String.IsNullOrEmpty(pleaseWaitMsg.iconFileName))
                   {
-                    iconFile = IconHelper.getIconFromFile(pleaseWaitMsg.iconFileName);
+                    iconFile = Win32Function.getIconFromFile(pleaseWaitMsg.iconFileName);
                     icon.Image = iconFile.ToBitmap();
                   }
                 }
@@ -506,7 +505,7 @@ namespace PackageEditor
 
             // Icon
             if (!String.IsNullOrEmpty(virtPackage.openedFile)){
-              Icon icon = IconHelper.getIconFromFile(virtPackage.openedFile);
+              Icon icon = Win32Function.getIconFromFile(virtPackage.openedFile);
               if (icon != null)
               {
                 propertyIcon.Image = icon.ToBitmap();
@@ -782,7 +781,7 @@ namespace PackageEditor
             openFileDialog.Multiselect = false;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Icon ico = IconHelper.getIconFromFile(openFileDialog.FileName);
+                Icon ico = Win32Function.getIconFromFile(openFileDialog.FileName);
                 if (virtPackage.SetIcon(openFileDialog.FileName))
                 {
                     propertyIcon.Image = ico.ToBitmap();
@@ -1090,7 +1089,7 @@ namespace PackageEditor
         {
           foreach(MRUitem item in mru.GetItems())
           { 
-            Icon ico = IconHelper.getIconFromFile(item.file);
+            Icon ico = Win32Function.getIconFromFile(item.file);
             int imageId = imageListMRU.Images.Add(ico.ToBitmap(), Color.Empty);
 
             String fileName = Path.GetFileNameWithoutExtension(item.file);
