@@ -1155,7 +1155,7 @@ namespace PackageEditor
 
         private void tabRegistry_DragDrop(object sender, DragEventArgs e)
         {
-          dragging = true;
+          dragging = false;
 
           String[] paths = (String[])e.Data.GetData(DataFormats.FileDrop);
           foreach (String path in paths)

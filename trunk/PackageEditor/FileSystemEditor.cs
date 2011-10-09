@@ -467,7 +467,7 @@ namespace PackageEditor
                 virtFsFileNode.FileFlags = VIRT_FILE_FLAGS.ISFILE;      //it's a file
                 if (Path.GetExtension(virtFsFileNode.FileName).Equals(".dll"))
                 {
-                  virtFsFileNode.FileFlags &= VIRT_FILE_FLAGS.DEPLOYED;
+                  virtFsFileNode.FileFlags |= VIRT_FILE_FLAGS.DEPLOYED;
                 }
 
 
