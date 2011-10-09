@@ -103,6 +103,12 @@
     <Compile Include="AutoLaunchForm.Designer.cs">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FilesEditing\FileProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FilesEditing\FileProperties.Designer.cs">
+      <DependentUpon>FileProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegFile.cs" />
     <Compile Include="RegistryFunctions.cs" />
     <Compile Include="CustomEventsForm.cs">
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DropboxLogin.resx">
       <DependentUpon>DropboxLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilesEditing\FileProperties.resx">
+      <DependentUpon>FileProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListViewEx.resx">
       <DependentUpon>ListViewEx.cs</DependentUpon>

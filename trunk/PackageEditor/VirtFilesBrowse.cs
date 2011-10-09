@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using VirtPackageAPI;
@@ -99,7 +98,7 @@ namespace PackageEditor
                     newNode.Text = System.IO.Path.GetFileName(virtFsNode.FileName);
                     newNode.virtFsNode = virtFsNode;
                     newNode.ImageIndex = newNode.SelectedImageIndex =
-                        (virtFsNode.FileFlags & VirtPackage.VIRT_FILE_FLAGS_ISFILE) > 0 ? IMGINDEX_FILE : IMGINDEX_FOLDER;
+                        (virtFsNode.FileFlags & VIRT_FILE_FLAGS.ISFILE) > 0 ? IMGINDEX_FILE : IMGINDEX_FOLDER;
                     if (curParent != null)
                         curParent.Nodes.Add(newNode);
                     else

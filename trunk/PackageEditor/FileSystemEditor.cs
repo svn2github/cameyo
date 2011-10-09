@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using VirtPackageAPI;
+using PackageEditor.FilesEditing;
 
 namespace PackageEditor
 {
@@ -171,12 +171,10 @@ namespace PackageEditor
                             {
                                 if (child.addedFrom != "")
                                 {
-                                    // Added File
-                                    virtPackage.AddFile(child.addedFrom, child.virtFsNode.FileName, false);
-                                    uint flags = virtPackage.GetFileFlags(child.virtFsNode.FileName);
-                                    flags &= ~(VirtPackage.VIRT_FILE_FLAGS_DEPLOYED);
-                                    virtPackage.SetFileFlags(child.virtFsNode.FileName, flags);
+                                  // Added File                                  
+                                  virtPackage.AddFileEx(child.addedFrom, child.virtFsNode.FileName, false, (VIRT_FILE_FLAGS)child.virtFsNode.FileFlags);
                                 }
+                                virtPackage.SetFileFlags(child.virtFsNode.FileName, child.virtFsNode.FileFlags);
                             }
                         }
                     }
@@ -231,7 +229,7 @@ namespace PackageEditor
                 }
                 if (bFound == false)
                 {
-                    if ((virtFsNode.FileFlags & VirtPackage.VIRT_FILE_FLAGS_ISFILE) == 0)
+                    if ((virtFsNode.FileFlags & VIRT_FILE_FLAGS.ISFILE) == 0)
                     {
                         // Adding Folder
                         newNode = new FolderTreeNode();
@@ -306,15 +304,14 @@ namespace PackageEditor
                     newItem.Text = Path.GetFileName(childFile.virtFsNode.FileName);
                     newItem.SubItems.Add(StrFormatByteSize64(childFile.virtFsNode.EndOfFile));
 
-                    newItem.flags = (VirtPackage.VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags;
+                    newItem.flags = (VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags;
 
-                    if ((newItem.flags & VirtPackage.VIRT_FILE_FLAGS.DEPLOYED) == VirtPackage.VIRT_FILE_FLAGS.DEPLOYED)
+                    /*if ((newItem.flags & VirtPackage.VIRT_FILE_FLAGS.DEPLOYED) == VirtPackage.VIRT_FILE_FLAGS.DEPLOYED)
                     {
                       newItem.ImageIndex = 1;
-                    }
+                    }*/
                     ListViewItem.ListViewSubItem x = new ListViewItem.ListViewSubItem();
-                    x.Text = ((VirtPackage.VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags).ToString();
-                    x.Text += " - " + virtPackage.GetFileFlags(childFile.virtFsNode.FileName).ToString();
+                    x.Text = ((VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags).ToString();
                     newItem.SubItems.Add(x);
                   
                     newItem.fileSize = childFile.virtFsNode.EndOfFile;
@@ -467,7 +464,13 @@ namespace PackageEditor
 #pragma warning disable 1690
                 virtFsFileNode.FileName = TreeHelper.FullPath(parentNode.virtFsNode.FileName, Path.GetFileName(path));
 #pragma warning restore 1690
-                virtFsFileNode.FileFlags = VirtPackage.VIRT_FILE_FLAGS_ISFILE;      //it's a file
+                virtFsFileNode.FileFlags = VIRT_FILE_FLAGS.ISFILE;      //it's a file
+                if (Path.GetExtension(virtFsFileNode.FileName).Equals(".dll"))
+                {
+                  virtFsFileNode.FileFlags &= VIRT_FILE_FLAGS.DEPLOYED;
+                }
+
+
                 System.IO.FileInfo fi = new System.IO.FileInfo(path);
                 virtFsFileNode.EndOfFile = (ulong)fi.Length;
 
@@ -808,6 +811,34 @@ namespace PackageEditor
         static extern bool FileTimeToLocalFileTime([In] ref System.Runtime.InteropServices.ComTypes.FILETIME lpFileTime, out System.Runtime.InteropServices.ComTypes.FILETIME lpLocalFileTime);
         [DllImport("Kernel32.dll", SetLastError = true)]
         private static extern long FileTimeToSystemTime(ref System.Runtime.InteropServices.ComTypes.FILETIME FileTime, ref SYSTEMTIME SystemTime);*/
+
+        private List<FileData> getSelectedFiles()
+        {
+          FolderTreeNode currentfolder = (FolderTreeNode)fsFolderTree.SelectedNode;
+          List<FileData> result = new List<FileData>();
+          foreach (FileListViewItem file in fsFilesList.SelectedItems)
+          {
+            foreach (FileData fd in currentfolder.childFiles)
+            {
+              if (Path.GetFileName(fd.virtFsNode.FileName).Equals(file.Text, StringComparison.CurrentCultureIgnoreCase))
+              {
+                result.Add(fd);
+              }
+            }
+          }
+          return result;
+        }
+
+        internal void ShowProperties()
+        {
+          FileProperties fp = new FileProperties(virtPackage);
+          if (fp.Open(getSelectedFiles()))
+          {
+            FolderTreeNode node = (FolderTreeNode)fsFolderTree.SelectedNode;
+            TreeViewEventArgs ev = new TreeViewEventArgs(node);
+            OnFolderTreeSelect(null, ev);
+          }           
+        }
     }
 
     public class TreeHelper

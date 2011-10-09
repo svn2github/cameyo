@@ -10,7 +10,7 @@ namespace VirtPackageAPI
     public struct VirtFsNode
     {
         public String FileName;
-        public UInt32 FileFlags;
+        public VIRT_FILE_FLAGS FileFlags;
         public UInt64 CreationTime;
         public UInt64 LastAccessTime;
         public UInt64 LastWriteTime;
@@ -19,6 +19,19 @@ namespace VirtPackageAPI
         public UInt32 FileAttributes;
         public Object ClientData;     // Arbitrary client data; you can use this however you like
     };
+
+    [Flags]
+    public enum VIRT_FILE_FLAGS
+    {
+      NO_FLAGS = 0x0,
+      ISFILE = 0x0001,        // File or directory?
+      DELETED = 0x0002,       // Deleted by virtual app (NOT_FOUND)
+      DEPLOYED = 0x0008,      // Set upon first file opening
+      DISCONNECTED = 0x0010,  // Set when on-disk file is modified from DB
+      PKG_FILE = 0x0020,      // File/dir is part of the original package (as opposed to files newly-added to sandbox during package use)
+      ALL_FLAGS = ISFILE | DELETED | DEPLOYED | DISCONNECTED | PKG_FILE
+    }
+
     public class VirtPackage
     {
         public enum APIRET
@@ -37,23 +50,6 @@ namespace VirtPackageAPI
             OUTPUT_ERROR = 12,
             INSUFFICIENT_BUFFER = 13,
         }
-
-        [Flags]
-        public enum VIRT_FILE_FLAGS
-        {
-          none = 0x0,
-          ISFILE = 0x0001, 	// File or directory?
-          DELETED = 0x0002, 	// Deleted by virtual app (NOT_FOUND)
-          DEPLOYED = 0x0008, 	// Set upon first file opening
-          DISCONNECTED = 0x0010, 	// Set when on-disk file is modified from DB
-          FLAG_0x20 = 0x0020, // ?
-          all = ISFILE | DELETED | DEPLOYED | DISCONNECTED | FLAG_0x20
-        }
-
-        public const uint VIRT_FILE_FLAGS_ISFILE = 0x0001; 	// File or directory?
-        public const uint VIRT_FILE_FLAGS_DELETED = 0x0002; 	// Deleted by virtual app (NOT_FOUND)
-        public const uint VIRT_FILE_FLAGS_DEPLOYED = 0x0008; 	// Set upon first file opening
-        public const uint VIRT_FILE_FLAGS_DISCONNECTED = 0x0010; 	// Set when on-disk file is modified from DB
 
         public const int SANDBOXFLAGS_MERGE = 1;
         public const int SANDBOXFLAGS_WRITE_COPY = 2;
@@ -355,7 +351,7 @@ namespace VirtPackageAPI
         {
             VirtFsNode virtFsNode = new VirtFsNode();
             virtFsNode.FileName = FileName;
-            virtFsNode.FileFlags = FileFlags;
+            virtFsNode.FileFlags = (VIRT_FILE_FLAGS)FileFlags;
             virtFsNode.CreationTime = CreationTime;
             virtFsNode.LastAccessTime = LastAccessTime;
             virtFsNode.LastWriteTime = LastWriteTime;
@@ -380,15 +376,25 @@ namespace VirtPackageAPI
             String DestFileName,
             bool bVariablizeName)
         {
-            APIRET Ret = (APIRET)VirtFsAdd(hPkg, SrcFileName, DestFileName, bVariablizeName);
-            if (Ret == APIRET.SUCCESS)
-                return true;
-            else if (Ret == APIRET.VIRTFILES_DB_ERROR)
-                return true;
-            else if (Ret == APIRET.NOT_FOUND)
-                return false;
-            else
-                return false;
+          VIRT_FILE_FLAGS fileFlags = VIRT_FILE_FLAGS.ISFILE & VIRT_FILE_FLAGS.DEPLOYED & VIRT_FILE_FLAGS.PKG_FILE;
+          return AddFileEx(SrcFileName, DestFileName, bVariablizeName, fileFlags);
+        }
+
+        public bool AddFileEx(
+            String SrcFileName,
+            String DestFileName,
+            bool bVariablizeName,
+            VIRT_FILE_FLAGS fileFlags)
+        {
+          APIRET Ret = (APIRET)VirtFsAddEx(hPkg, SrcFileName, DestFileName, bVariablizeName, (uint)fileFlags);
+          if (Ret == APIRET.SUCCESS)
+            return true;
+          else if (Ret == APIRET.VIRTFILES_DB_ERROR)
+            return true;
+          else if (Ret == APIRET.NOT_FOUND)
+            return false;
+          else
+            return false;
         }
 
         public bool AddEmptyDir(
@@ -529,15 +535,15 @@ namespace VirtPackageAPI
         }
         public void SetFileSandbox(String Path, UInt32 SandboxFlags) { SetFileSandbox(Path, SandboxFlags, false); }   // Overload
 
-        public void SetFileFlags(String Path, UInt32 FileFlags)
+        public void SetFileFlags(String Path, VIRT_FILE_FLAGS FileFlags)
         {
-            APIRET apiRet = (APIRET)VirtFsSetFileFlags(hPkg, Path, FileFlags);
+          APIRET apiRet = (APIRET)VirtFsSetFileFlags(hPkg, Path, (UInt32)FileFlags);
         }
-        public UInt32 GetFileFlags(String Path)
+        public VIRT_FILE_FLAGS GetFileFlags(String Path)
         {
             UInt32 FileFlags = 0;
             APIRET apiRet = (APIRET)VirtFsGetFileFlags(hPkg, Path, ref FileFlags);
-            return FileFlags;
+            return (VIRT_FILE_FLAGS)FileFlags;
         }
 
         static public String FriendlyShortcutName(String rawShortcutName)

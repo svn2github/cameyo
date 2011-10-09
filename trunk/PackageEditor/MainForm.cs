@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-//using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
@@ -13,6 +12,7 @@ using System.IO;
 using System.Collections;
 using System.Diagnostics;
 using System.Xml;
+using PackageEditor.FilesEditing;
 
 namespace PackageEditor
 {
@@ -232,7 +232,7 @@ namespace PackageEditor
             Thread thread = new Thread(new ParameterizedThreadStart(PleaseWaitJob));
             PleaseWaitMsg pleaseWaitMsg = new PleaseWaitMsg(title, msg, iconFileName);
             thread.Start(pleaseWaitMsg);
-            Thread.Sleep(4 * 1000);
+            Thread.Sleep(500);
             return pleaseWaitDialogEvent;
         }
 
@@ -1088,7 +1088,7 @@ namespace PackageEditor
         private void MainForm_Shown(object sender, EventArgs e)
         {
           foreach(MRUitem item in mru.GetItems())
-          { 
+          {
             Icon ico = Win32Function.getIconFromFile(item.file);
             int imageId = imageListMRU.Images.Add(ico.ToBitmap(), Color.Empty);
 
@@ -1267,70 +1267,14 @@ namespace PackageEditor
           regEditor.RegFileImport();
         }
 
-        private void fsFilesList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-          //
-          bool deployed = false;
-          bool deleted = false;
-          VirtPackage.VIRT_FILE_FLAGS min = VirtPackage.VIRT_FILE_FLAGS.all;
-          VirtPackage.VIRT_FILE_FLAGS max = VirtPackage.VIRT_FILE_FLAGS.none;
-          ListView.SelectedListViewItemCollection fileItems = fsFilesList.SelectedItems;
-          if (fileItems.Count > 0)
-          {
-            foreach (FileListViewItem file in fileItems)
-            {
-              min &= file.flags;
-              max |= file.flags;
-            }
-            if (min != max)
-            {
-              MessageBox.Show("Items with different flags selected");
-            }
-            else
-            {
-              deployed = (min & VirtPackage.VIRT_FILE_FLAGS.DEPLOYED) == VirtPackage.VIRT_FILE_FLAGS.DEPLOYED;
-              deleted = (min & VirtPackage.VIRT_FILE_FLAGS.DELETED) == VirtPackage.VIRT_FILE_FLAGS.DELETED;
-            }
-            int index = 0;
-            index += deployed ? 1 : 0;
-            index += deleted ? 2 : 0;
-
-            fsFileFlagsCombobox.SelectedIndex = index;
-          }
+        private void fileContextMenuDelete_Click(object sender, EventArgs e)
+        { 
+          fsRemoveBtn.PerformClick();
         }
 
-        private void fsFileFlagsCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        private void fileContextMenuProperties_Click(object sender, EventArgs e)
         {
-          ListView.SelectedListViewItemCollection fileItems = fsFilesList.SelectedItems;
-          if (fileItems.Count > 0)
-          {
-            FolderTreeNode currentfolder = (FolderTreeNode)fsFolderTree.SelectedNode;
-            foreach (FileListViewItem file in fileItems)
-            {
-
-              FileData filedata = null;
-              foreach(FileData fd in currentfolder.childFiles)
-              {                  
-                if (Path.GetFileName(fd.virtFsNode.FileName).Equals(file.Text,StringComparison.CurrentCultureIgnoreCase))
-                {
-                  filedata = fd;
-                }
-              }
-              uint flags = virtPackage.GetFileFlags(filedata.virtFsNode.FileName);
-
-              flags &= ~VirtPackage.VIRT_FILE_FLAGS_DEPLOYED;
-              if (fsFileFlagsCombobox.SelectedIndex == 1)
-              {
-                flags |= VirtPackage.VIRT_FILE_FLAGS_DEPLOYED;
-              }
-              virtPackage.SetFileFlags(filedata.virtFsNode.FileName, flags);
-            }
-          }
-        }
-
-        private void fsFileFlagsCombobox_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-
+          fsEditor.ShowProperties();
         }
     }
 
@@ -1345,7 +1289,7 @@ namespace PackageEditor
     public class FileListViewItem : ListViewItem
     {
         public ulong fileSize = 0;
-        public VirtPackage.VIRT_FILE_FLAGS flags = VirtPackage.VIRT_FILE_FLAGS.none;
+        public VIRT_FILE_FLAGS flags = VIRT_FILE_FLAGS.NO_FLAGS;
     }
 
     class FileListViewSorter : ListViewSorter

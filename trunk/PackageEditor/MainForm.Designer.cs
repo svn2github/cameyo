@@ -30,10 +30,10 @@
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-          System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
-          System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
           System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
           System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+          System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
+          System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
           this.imageList = new System.Windows.Forms.ImageList(this.components);
           this.menuStrip1 = new System.Windows.Forms.MenuStrip();
           this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,14 +92,15 @@
           this.columnFileName = new System.Windows.Forms.ColumnHeader();
           this.columnFileSize = new System.Windows.Forms.ColumnHeader();
           this.columnFileFlags = new System.Windows.Forms.ColumnHeader();
+          this.fileContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+          this.fileContextMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
+          this.fileContextMenuProperties = new System.Windows.Forms.ToolStripMenuItem();
           this.panel2 = new System.Windows.Forms.Panel();
           this.panel3 = new System.Windows.Forms.Panel();
-          this.fsFileFlagsCombobox = new System.Windows.Forms.ComboBox();
-          this.label11 = new System.Windows.Forms.Label();
           this.fsFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
           this.fsFolderInfoIsolationLbl = new System.Windows.Forms.Label();
           this.fsFolderInfoFullName = new System.Windows.Forms.Label();
-          this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+          this.fileToolStrip = new System.Windows.Forms.ToolStrip();
           this.fsAddBtn = new System.Windows.Forms.ToolStripButton();
           this.fsAddDirBtn = new System.Windows.Forms.ToolStripButton();
           this.fsAddEmptyDirBtn = new System.Windows.Forms.ToolStripButton();
@@ -182,9 +183,10 @@
           this.splitContainer1.Panel1.SuspendLayout();
           this.splitContainer1.Panel2.SuspendLayout();
           this.splitContainer1.SuspendLayout();
+          this.fileContextMenu.SuspendLayout();
           this.panel2.SuspendLayout();
           this.panel3.SuspendLayout();
-          this.toolStrip1.SuspendLayout();
+          this.fileToolStrip.SuspendLayout();
           this.tabRegistry.SuspendLayout();
           this.panel8.SuspendLayout();
           this.panel1.SuspendLayout();
@@ -748,7 +750,7 @@
           // tabFileSystem
           // 
           this.tabFileSystem.Controls.Add(this.panel5);
-          this.tabFileSystem.Controls.Add(this.toolStrip1);
+          this.tabFileSystem.Controls.Add(this.fileToolStrip);
           this.tabFileSystem.Location = new System.Drawing.Point(4, 22);
           this.tabFileSystem.Name = "tabFileSystem";
           this.tabFileSystem.Padding = new System.Windows.Forms.Padding(3);
@@ -808,18 +810,18 @@
             this.columnFileName,
             this.columnFileSize,
             this.columnFileFlags});
+          this.fsFilesList.ContextMenuStrip = this.fileContextMenu;
           this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
           this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
-          this.fsFilesList.Location = new System.Drawing.Point(0, 55);
+            listViewItem1,
+            listViewItem2});
+          this.fsFilesList.Location = new System.Drawing.Point(0, 25);
           this.fsFilesList.Name = "fsFilesList";
-          this.fsFilesList.Size = new System.Drawing.Size(509, 300);
+          this.fsFilesList.Size = new System.Drawing.Size(509, 330);
           this.fsFilesList.SmallImageList = this.imageList;
           this.fsFilesList.TabIndex = 7;
           this.fsFilesList.UseCompatibleStateImageBehavior = false;
           this.fsFilesList.View = System.Windows.Forms.View.Details;
-          this.fsFilesList.SelectedIndexChanged += new System.EventHandler(this.fsFilesList_SelectedIndexChanged);
           this.fsFilesList.DragDrop += new System.Windows.Forms.DragEventHandler(this.Vfs_DragDrop);
           this.fsFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.fsFilesList_ColumnClick);
           this.fsFilesList.DragEnter += new System.Windows.Forms.DragEventHandler(this.Vfs_DragEnter);
@@ -828,7 +830,7 @@
           // 
           this.columnFileName.DisplayIndex = 1;
           this.columnFileName.Text = "File";
-          this.columnFileName.Width = 413;
+          this.columnFileName.Width = 368;
           // 
           // columnFileSize
           // 
@@ -840,7 +842,29 @@
           // 
           this.columnFileFlags.DisplayIndex = 0;
           this.columnFileFlags.Text = "Flags";
-          this.columnFileFlags.Width = 143;
+          this.columnFileFlags.Width = 40;
+          // 
+          // fileContextMenu
+          // 
+          this.fileContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileContextMenuDelete,
+            this.fileContextMenuProperties});
+          this.fileContextMenu.Name = "fileContextMenu";
+          this.fileContextMenu.Size = new System.Drawing.Size(135, 48);
+          // 
+          // fileContextMenuDelete
+          // 
+          this.fileContextMenuDelete.Name = "fileContextMenuDelete";
+          this.fileContextMenuDelete.Size = new System.Drawing.Size(134, 22);
+          this.fileContextMenuDelete.Text = "Delete";
+          this.fileContextMenuDelete.Click += new System.EventHandler(this.fileContextMenuDelete_Click);
+          // 
+          // fileContextMenuProperties
+          // 
+          this.fileContextMenuProperties.Name = "fileContextMenuProperties";
+          this.fileContextMenuProperties.Size = new System.Drawing.Size(134, 22);
+          this.fileContextMenuProperties.Text = "&Properties";
+          this.fileContextMenuProperties.Click += new System.EventHandler(this.fileContextMenuProperties_Click);
           // 
           // panel2
           // 
@@ -849,51 +873,26 @@
           this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
           this.panel2.Location = new System.Drawing.Point(0, 0);
           this.panel2.Name = "panel2";
-          this.panel2.Size = new System.Drawing.Size(509, 55);
+          this.panel2.Size = new System.Drawing.Size(509, 25);
           this.panel2.TabIndex = 6;
           // 
           // panel3
           // 
-          this.panel3.Controls.Add(this.fsFileFlagsCombobox);
-          this.panel3.Controls.Add(this.label11);
           this.panel3.Controls.Add(this.fsFolderInfoIsolationCombo);
           this.panel3.Controls.Add(this.fsFolderInfoIsolationLbl);
           this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-          this.panel3.Location = new System.Drawing.Point(305, 0);
+          this.panel3.Location = new System.Drawing.Point(298, 0);
           this.panel3.Name = "panel3";
-          this.panel3.Size = new System.Drawing.Size(204, 55);
+          this.panel3.Size = new System.Drawing.Size(211, 25);
           this.panel3.TabIndex = 4;
-          // 
-          // fsFileFlagsCombobox
-          // 
-          this.fsFileFlagsCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-          this.fsFileFlagsCombobox.FormattingEnabled = true;
-          this.fsFileFlagsCombobox.Items.AddRange(new object[] {
-            "Normal",
-            "Deployed"});
-          this.fsFileFlagsCombobox.Location = new System.Drawing.Point(94, 30);
-          this.fsFileFlagsCombobox.Name = "fsFileFlagsCombobox";
-          this.fsFileFlagsCombobox.Size = new System.Drawing.Size(107, 21);
-          this.fsFileFlagsCombobox.TabIndex = 7;
-          this.fsFileFlagsCombobox.SelectionChangeCommitted += new System.EventHandler(this.fsFileFlagsCombobox_SelectionChangeCommitted);
-          this.fsFileFlagsCombobox.SelectedIndexChanged += new System.EventHandler(this.fsFileFlagsCombobox_SelectedIndexChanged);
-          // 
-          // label11
-          // 
-          this.label11.Location = new System.Drawing.Point(29, 33);
-          this.label11.Name = "label11";
-          this.label11.Size = new System.Drawing.Size(62, 17);
-          this.label11.TabIndex = 6;
-          this.label11.Text = "File Flags:";
-          this.label11.TextAlign = System.Drawing.ContentAlignment.TopRight;
           // 
           // fsFolderInfoIsolationCombo
           // 
           this.fsFolderInfoIsolationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
           this.fsFolderInfoIsolationCombo.FormattingEnabled = true;
-          this.fsFolderInfoIsolationCombo.Location = new System.Drawing.Point(94, 3);
+          this.fsFolderInfoIsolationCombo.Location = new System.Drawing.Point(90, 1);
           this.fsFolderInfoIsolationCombo.Name = "fsFolderInfoIsolationCombo";
-          this.fsFolderInfoIsolationCombo.Size = new System.Drawing.Size(107, 21);
+          this.fsFolderInfoIsolationCombo.Size = new System.Drawing.Size(121, 21);
           this.fsFolderInfoIsolationCombo.TabIndex = 5;
           // 
           // fsFolderInfoIsolationLbl
@@ -914,20 +913,20 @@
           this.fsFolderInfoFullName.TabIndex = 0;
           this.fsFolderInfoFullName.Text = "fsFolderInfoFullName";
           // 
-          // toolStrip1
+          // fileToolStrip
           // 
-          this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+          this.fileToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fsAddBtn,
             this.fsAddDirBtn,
             this.fsAddEmptyDirBtn,
             this.fsRemoveBtn,
             this.toolStripSeparator1,
             this.fsSaveFileAsBtn});
-          this.toolStrip1.Location = new System.Drawing.Point(3, 3);
-          this.toolStrip1.Name = "toolStrip1";
-          this.toolStrip1.Size = new System.Drawing.Size(713, 25);
-          this.toolStrip1.TabIndex = 6;
-          this.toolStrip1.Text = "toolStrip1";
+          this.fileToolStrip.Location = new System.Drawing.Point(3, 3);
+          this.fileToolStrip.Name = "fileToolStrip";
+          this.fileToolStrip.Size = new System.Drawing.Size(713, 25);
+          this.fileToolStrip.TabIndex = 6;
+          this.fileToolStrip.Text = "toolStrip1";
           // 
           // fsAddBtn
           // 
@@ -1122,8 +1121,8 @@
           this.regFilesList.DoubleClickActivation = false;
           this.regFilesList.FullRowSelect = true;
           this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
           this.regFilesList.Location = new System.Drawing.Point(0, 25);
           this.regFilesList.Name = "regFilesList";
           this.regFilesList.Size = new System.Drawing.Size(509, 334);
@@ -1653,11 +1652,12 @@
           this.splitContainer1.Panel1.ResumeLayout(false);
           this.splitContainer1.Panel2.ResumeLayout(false);
           this.splitContainer1.ResumeLayout(false);
+          this.fileContextMenu.ResumeLayout(false);
           this.panel2.ResumeLayout(false);
           this.panel2.PerformLayout();
           this.panel3.ResumeLayout(false);
-          this.toolStrip1.ResumeLayout(false);
-          this.toolStrip1.PerformLayout();
+          this.fileToolStrip.ResumeLayout(false);
+          this.fileToolStrip.PerformLayout();
           this.tabRegistry.ResumeLayout(false);
           this.panel8.ResumeLayout(false);
           this.panel8.PerformLayout();
@@ -1756,7 +1756,7 @@
         private System.Windows.Forms.ComboBox fsFolderInfoIsolationCombo;
         private System.Windows.Forms.Label fsFolderInfoIsolationLbl;
         private System.Windows.Forms.Label fsFolderInfoFullName;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip fileToolStrip;
         private System.Windows.Forms.ToolStripButton fsAddBtn;
         private System.Windows.Forms.ToolStripButton fsAddDirBtn;
         private System.Windows.Forms.ToolStripButton fsRemoveBtn;
@@ -1825,8 +1825,9 @@
         private System.Windows.Forms.ToolStripButton regExportBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ColumnHeader columnFileFlags;
-        private System.Windows.Forms.ComboBox fsFileFlagsCombobox;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ContextMenuStrip fileContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem fileContextMenuDelete;
+        private System.Windows.Forms.ToolStripMenuItem fileContextMenuProperties;
 
     }
 }
