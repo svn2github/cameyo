@@ -30,10 +30,10 @@
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+          System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
+          System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
           System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
           System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
-          System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
-          System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
           this.imageList = new System.Windows.Forms.ImageList(this.components);
           this.menuStrip1 = new System.Windows.Forms.MenuStrip();
           this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,8 +91,11 @@
           this.fsFilesList = new System.Windows.Forms.ListView();
           this.columnFileName = new System.Windows.Forms.ColumnHeader();
           this.columnFileSize = new System.Windows.Forms.ColumnHeader();
+          this.columnFileFlags = new System.Windows.Forms.ColumnHeader();
           this.panel2 = new System.Windows.Forms.Panel();
           this.panel3 = new System.Windows.Forms.Panel();
+          this.fsFileFlagsCombobox = new System.Windows.Forms.ComboBox();
+          this.label11 = new System.Windows.Forms.Label();
           this.fsFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
           this.fsFolderInfoIsolationLbl = new System.Windows.Forms.Label();
           this.fsFolderInfoFullName = new System.Windows.Forms.Label();
@@ -129,6 +132,9 @@
           this.regToolStrip = new System.Windows.Forms.ToolStrip();
           this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
           this.regEditBtn = new System.Windows.Forms.ToolStripButton();
+          this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+          this.regImportBtn = new System.Windows.Forms.ToolStripButton();
+          this.regExportBtn = new System.Windows.Forms.ToolStripButton();
           this.tabAdvanced = new System.Windows.Forms.TabPage();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.propertyExpiration = new System.Windows.Forms.CheckBox();
@@ -147,7 +153,7 @@
           this.tabWelcome = new System.Windows.Forms.TabPage();
           this.panelWelcome = new System.Windows.Forms.Panel();
           this.btnEditPackage = new System.Windows.Forms.Button();
-          this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+          this.imageListWelcomeScreen = new System.Windows.Forms.ImageList(this.components);
           this.btnNewPackage = new System.Windows.Forms.Button();
           this.panelRecentPackages = new System.Windows.Forms.Panel();
           this.listViewMRU = new System.Windows.Forms.ListView();
@@ -155,7 +161,6 @@
           this.imageListMRU = new System.Windows.Forms.ImageList(this.components);
           this.label9 = new System.Windows.Forms.Label();
           this.pictureBox2 = new System.Windows.Forms.PictureBox();
-          this.miniToolStrip = new System.Windows.Forms.ToolStrip();
           this.bkPanel = new System.Windows.Forms.Panel();
           this.panel11 = new System.Windows.Forms.PictureBox();
           this.panel12 = new System.Windows.Forms.PictureBox();
@@ -801,30 +806,41 @@
           this.fsFilesList.AllowDrop = true;
           this.fsFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnFileName,
-            this.columnFileSize});
+            this.columnFileSize,
+            this.columnFileFlags});
           this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
           this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-          this.fsFilesList.Location = new System.Drawing.Point(0, 25);
+            listViewItem5,
+            listViewItem6});
+          this.fsFilesList.Location = new System.Drawing.Point(0, 55);
           this.fsFilesList.Name = "fsFilesList";
-          this.fsFilesList.Size = new System.Drawing.Size(509, 330);
+          this.fsFilesList.Size = new System.Drawing.Size(509, 300);
+          this.fsFilesList.SmallImageList = this.imageList;
           this.fsFilesList.TabIndex = 7;
           this.fsFilesList.UseCompatibleStateImageBehavior = false;
           this.fsFilesList.View = System.Windows.Forms.View.Details;
+          this.fsFilesList.SelectedIndexChanged += new System.EventHandler(this.fsFilesList_SelectedIndexChanged);
           this.fsFilesList.DragDrop += new System.Windows.Forms.DragEventHandler(this.Vfs_DragDrop);
           this.fsFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.fsFilesList_ColumnClick);
           this.fsFilesList.DragEnter += new System.Windows.Forms.DragEventHandler(this.Vfs_DragEnter);
           // 
           // columnFileName
           // 
+          this.columnFileName.DisplayIndex = 1;
           this.columnFileName.Text = "File";
           this.columnFileName.Width = 413;
           // 
           // columnFileSize
           // 
+          this.columnFileSize.DisplayIndex = 2;
           this.columnFileSize.Text = "Size";
           this.columnFileSize.Width = 75;
+          // 
+          // columnFileFlags
+          // 
+          this.columnFileFlags.DisplayIndex = 0;
+          this.columnFileFlags.Text = "Flags";
+          this.columnFileFlags.Width = 143;
           // 
           // panel2
           // 
@@ -833,35 +849,60 @@
           this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
           this.panel2.Location = new System.Drawing.Point(0, 0);
           this.panel2.Name = "panel2";
-          this.panel2.Size = new System.Drawing.Size(509, 25);
+          this.panel2.Size = new System.Drawing.Size(509, 55);
           this.panel2.TabIndex = 6;
           // 
           // panel3
           // 
+          this.panel3.Controls.Add(this.fsFileFlagsCombobox);
+          this.panel3.Controls.Add(this.label11);
           this.panel3.Controls.Add(this.fsFolderInfoIsolationCombo);
           this.panel3.Controls.Add(this.fsFolderInfoIsolationLbl);
           this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-          this.panel3.Location = new System.Drawing.Point(298, 0);
+          this.panel3.Location = new System.Drawing.Point(305, 0);
           this.panel3.Name = "panel3";
-          this.panel3.Size = new System.Drawing.Size(211, 25);
+          this.panel3.Size = new System.Drawing.Size(204, 55);
           this.panel3.TabIndex = 4;
+          // 
+          // fsFileFlagsCombobox
+          // 
+          this.fsFileFlagsCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+          this.fsFileFlagsCombobox.FormattingEnabled = true;
+          this.fsFileFlagsCombobox.Items.AddRange(new object[] {
+            "Normal",
+            "Deployed"});
+          this.fsFileFlagsCombobox.Location = new System.Drawing.Point(94, 30);
+          this.fsFileFlagsCombobox.Name = "fsFileFlagsCombobox";
+          this.fsFileFlagsCombobox.Size = new System.Drawing.Size(107, 21);
+          this.fsFileFlagsCombobox.TabIndex = 7;
+          this.fsFileFlagsCombobox.SelectionChangeCommitted += new System.EventHandler(this.fsFileFlagsCombobox_SelectionChangeCommitted);
+          this.fsFileFlagsCombobox.SelectedIndexChanged += new System.EventHandler(this.fsFileFlagsCombobox_SelectedIndexChanged);
+          // 
+          // label11
+          // 
+          this.label11.Location = new System.Drawing.Point(29, 33);
+          this.label11.Name = "label11";
+          this.label11.Size = new System.Drawing.Size(62, 17);
+          this.label11.TabIndex = 6;
+          this.label11.Text = "File Flags:";
+          this.label11.TextAlign = System.Drawing.ContentAlignment.TopRight;
           // 
           // fsFolderInfoIsolationCombo
           // 
           this.fsFolderInfoIsolationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
           this.fsFolderInfoIsolationCombo.FormattingEnabled = true;
-          this.fsFolderInfoIsolationCombo.Location = new System.Drawing.Point(90, 1);
+          this.fsFolderInfoIsolationCombo.Location = new System.Drawing.Point(94, 3);
           this.fsFolderInfoIsolationCombo.Name = "fsFolderInfoIsolationCombo";
-          this.fsFolderInfoIsolationCombo.Size = new System.Drawing.Size(121, 21);
+          this.fsFolderInfoIsolationCombo.Size = new System.Drawing.Size(107, 21);
           this.fsFolderInfoIsolationCombo.TabIndex = 5;
           // 
           // fsFolderInfoIsolationLbl
           // 
-          this.fsFolderInfoIsolationLbl.Location = new System.Drawing.Point(6, 5);
+          this.fsFolderInfoIsolationLbl.Location = new System.Drawing.Point(3, 6);
           this.fsFolderInfoIsolationLbl.Name = "fsFolderInfoIsolationLbl";
-          this.fsFolderInfoIsolationLbl.Size = new System.Drawing.Size(78, 17);
+          this.fsFolderInfoIsolationLbl.Size = new System.Drawing.Size(88, 17);
           this.fsFolderInfoIsolationLbl.TabIndex = 4;
-          this.fsFolderInfoIsolationLbl.Text = "Isolation:";
+          this.fsFolderInfoIsolationLbl.Text = "Folder Isolation:";
           this.fsFolderInfoIsolationLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
           // 
           // fsFolderInfoFullName
@@ -1081,8 +1122,8 @@
           this.regFilesList.DoubleClickActivation = false;
           this.regFilesList.FullRowSelect = true;
           this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
           this.regFilesList.Location = new System.Drawing.Point(0, 25);
           this.regFilesList.Name = "regFilesList";
           this.regFilesList.Size = new System.Drawing.Size(509, 334);
@@ -1179,7 +1220,10 @@
           // 
           this.regToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.regRemoveBtn,
-            this.regEditBtn});
+            this.regEditBtn,
+            this.toolStripSeparator2,
+            this.regImportBtn,
+            this.regExportBtn});
           this.regToolStrip.Location = new System.Drawing.Point(0, 0);
           this.regToolStrip.Name = "regToolStrip";
           this.regToolStrip.Size = new System.Drawing.Size(713, 25);
@@ -1205,6 +1249,32 @@
           this.regEditBtn.Name = "regEditBtn";
           this.regEditBtn.Size = new System.Drawing.Size(23, 22);
           this.regEditBtn.ToolTipText = "Edit registry";
+          // 
+          // toolStripSeparator2
+          // 
+          this.toolStripSeparator2.Name = "toolStripSeparator2";
+          this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+          // 
+          // regImportBtn
+          // 
+          this.regImportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.regImportBtn.Image = ((System.Drawing.Image)(resources.GetObject("regImportBtn.Image")));
+          this.regImportBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.regImportBtn.Name = "regImportBtn";
+          this.regImportBtn.Size = new System.Drawing.Size(23, 22);
+          this.regImportBtn.Text = "Import";
+          this.regImportBtn.ToolTipText = "Import a .reg file";
+          this.regImportBtn.Click += new System.EventHandler(this.regImportBtn_Click);
+          // 
+          // regExportBtn
+          // 
+          this.regExportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.regExportBtn.Image = ((System.Drawing.Image)(resources.GetObject("regExportBtn.Image")));
+          this.regExportBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.regExportBtn.Name = "regExportBtn";
+          this.regExportBtn.Size = new System.Drawing.Size(23, 22);
+          this.regExportBtn.ToolTipText = "Export selected registry key to a .reg file";
+          this.regExportBtn.Click += new System.EventHandler(this.regExportBtn_Click);
           // 
           // tabAdvanced
           // 
@@ -1403,7 +1473,7 @@
           // btnEditPackage
           // 
           this.btnEditPackage.ImageIndex = 1;
-          this.btnEditPackage.ImageList = this.imageList1;
+          this.btnEditPackage.ImageList = this.imageListWelcomeScreen;
           this.btnEditPackage.Location = new System.Drawing.Point(368, 18);
           this.btnEditPackage.Name = "btnEditPackage";
           this.btnEditPackage.Size = new System.Drawing.Size(104, 108);
@@ -1412,17 +1482,17 @@
           this.btnEditPackage.UseVisualStyleBackColor = true;
           this.btnEditPackage.Click += new System.EventHandler(this.btnEditPackage_Click);
           // 
-          // imageList1
+          // imageListWelcomeScreen
           // 
-          this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-          this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-          this.imageList1.Images.SetKeyName(0, "Cameyo New Package.png");
-          this.imageList1.Images.SetKeyName(1, "Cameyo Edit Package.png");
+          this.imageListWelcomeScreen.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListWelcomeScreen.ImageStream")));
+          this.imageListWelcomeScreen.TransparentColor = System.Drawing.Color.Transparent;
+          this.imageListWelcomeScreen.Images.SetKeyName(0, "Cameyo New Package.png");
+          this.imageListWelcomeScreen.Images.SetKeyName(1, "Cameyo Edit Package.png");
           // 
           // btnNewPackage
           // 
           this.btnNewPackage.ImageIndex = 0;
-          this.btnNewPackage.ImageList = this.imageList1;
+          this.btnNewPackage.ImageList = this.imageListWelcomeScreen;
           this.btnNewPackage.Location = new System.Drawing.Point(238, 18);
           this.btnNewPackage.Name = "btnNewPackage";
           this.btnNewPackage.Size = new System.Drawing.Size(104, 108);
@@ -1458,7 +1528,6 @@
           this.listViewMRU.UseCompatibleStateImageBehavior = false;
           this.listViewMRU.View = System.Windows.Forms.View.Details;
           this.listViewMRU.Resize += new System.EventHandler(this.listViewMRU_Resize);
-          this.listViewMRU.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listViewMRU_MouseHover);
           this.listViewMRU.MouseHover += new System.EventHandler(this.listViewMRU_MouseHover);
           this.listViewMRU.MouseLeave += new System.EventHandler(this.listViewMRU_MouseHover);
           this.listViewMRU.Click += new System.EventHandler(this.listViewMRU_Click);
@@ -1493,17 +1562,6 @@
           this.pictureBox2.TabIndex = 11;
           this.pictureBox2.TabStop = false;
           this.pictureBox2.SizeChanged += new System.EventHandler(this.pictureBox2_SizeChanged);
-          // 
-          // miniToolStrip
-          // 
-          this.miniToolStrip.AutoSize = false;
-          this.miniToolStrip.CanOverflow = false;
-          this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-          this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-          this.miniToolStrip.Location = new System.Drawing.Point(136, 3);
-          this.miniToolStrip.Name = "miniToolStrip";
-          this.miniToolStrip.Size = new System.Drawing.Size(713, 25);
-          this.miniToolStrip.TabIndex = 6;
           // 
           // bkPanel
           // 
@@ -1726,7 +1784,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.LinkLabel lnkCustomEvents;
         private System.Windows.Forms.TextBox propertyStopInheritance;
-        private System.Windows.Forms.ToolStrip miniToolStrip;
         private System.Windows.Forms.Panel bkPanel;
         private ListViewEx regFilesList;
         private System.Windows.Forms.TextBox tbValue;
@@ -1754,7 +1811,7 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportAsZeroInstallerXmlToolStripMenuItem;
         private System.Windows.Forms.Panel panelWelcome;
-        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ImageList imageListWelcomeScreen;
         private System.Windows.Forms.ListView listViewMRU;
         private System.Windows.Forms.ColumnHeader columnFileN;
         private System.Windows.Forms.ImageList imageListMRU;
@@ -1764,6 +1821,12 @@
         private System.Windows.Forms.Button btnEditPackage;
         private System.Windows.Forms.Button btnNewPackage;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ToolStripButton regImportBtn;
+        private System.Windows.Forms.ToolStripButton regExportBtn;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ColumnHeader columnFileFlags;
+        private System.Windows.Forms.ComboBox fsFileFlagsCombobox;
+        private System.Windows.Forms.Label label11;
 
     }
 }

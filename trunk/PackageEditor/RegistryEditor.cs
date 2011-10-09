@@ -317,19 +317,7 @@ namespace PackageEditor
 
         public void toolStripMenuItemExport_Click(object sender, EventArgs e)
         {
-          SaveFileDialog sfd = new SaveFileDialog();
-          sfd.AddExtension = true;
-          sfd.Filter = "Registry file (*.reg)|*.reg";
-          if (sfd.ShowDialog() == DialogResult.OK)
-          {
-            String RegFileName = sfd.FileName;
-            
-            // Read Registry Keys in the package
-            RegistryKey key = workKey;
-            String virtKey = treeHelper.GetFullNodeName(fsFolderTree.SelectedNode);
-            RegistryFunctions registryFunctions = new RegistryFunctions();
-            registryFunctions.ExportVirtualRegistryToFile(RegFileName, key, virtKey);
-          }
+          RegFileExport();
         }
 
         private void importRegFile(string path)
@@ -348,6 +336,33 @@ namespace PackageEditor
         {
           if (regLoadAutoResetEvent != null)
             regLoadAutoResetEvent.Set();
+        }
+
+        internal void RegFileExport()
+        {
+          SaveFileDialog sfd = new SaveFileDialog();
+          sfd.AddExtension = true;
+          sfd.Filter = "Registry file (*.reg)|*.reg";
+          if (sfd.ShowDialog() == DialogResult.OK)
+          {
+            String RegFileName = sfd.FileName;
+
+            // Read Registry Keys in the package
+            RegistryKey key = workKey;
+            String virtKey = treeHelper.GetFullNodeName(fsFolderTree.SelectedNode);
+            RegistryFunctions registryFunctions = new RegistryFunctions();
+            registryFunctions.ExportVirtualRegistryToFile(RegFileName, key, virtKey);
+          }
+        }
+
+        internal void RegFileImport()
+        {
+          OpenFileDialog ofd = new OpenFileDialog();
+          ofd.Filter = "Registry file (*.reg)|*.reg";
+          if (ofd.ShowDialog() == DialogResult.OK)
+          {
+            AddFileOrFolder(ofd.FileName);
+          }
         }
     }
 }

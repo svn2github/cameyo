@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
@@ -37,6 +37,19 @@ namespace VirtPackageAPI
             OUTPUT_ERROR = 12,
             INSUFFICIENT_BUFFER = 13,
         }
+
+        [Flags]
+        public enum VIRT_FILE_FLAGS
+        {
+          none = 0x0,
+          ISFILE = 0x0001, 	// File or directory?
+          DELETED = 0x0002, 	// Deleted by virtual app (NOT_FOUND)
+          DEPLOYED = 0x0008, 	// Set upon first file opening
+          DISCONNECTED = 0x0010, 	// Set when on-disk file is modified from DB
+          FLAG_0x20 = 0x0020, // ?
+          all = ISFILE | DELETED | DEPLOYED | DISCONNECTED | FLAG_0x20
+        }
+
         public const uint VIRT_FILE_FLAGS_ISFILE = 0x0001; 	// File or directory?
         public const uint VIRT_FILE_FLAGS_DELETED = 0x0002; 	// Deleted by virtual app (NOT_FOUND)
         public const uint VIRT_FILE_FLAGS_DEPLOYED = 0x0008; 	// Set upon first file opening
@@ -124,6 +137,14 @@ namespace VirtPackageAPI
             String SrcFileName,
             String DestFileName,
             bool bVariablizeName);
+
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsAddEx(
+            IntPtr hPkg,
+            String SrcFileName,
+            String DestFileName,
+            bool bVariablizeName,
+            UInt32 FileFlags);
 
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int VirtFsAddEmptyDir(

@@ -1256,6 +1256,82 @@ namespace PackageEditor
             item.Font = new Font(listViewMRU.Font, FontStyle.Underline);
           mHoverItem = item;
         }
+
+        private void regImportBtn_Click(object sender, EventArgs e)
+        {
+          regEditor.RegFileExport();
+        }
+
+        private void regExportBtn_Click(object sender, EventArgs e)
+        {
+          regEditor.RegFileImport();
+        }
+
+        private void fsFilesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          //
+          bool deployed = false;
+          bool deleted = false;
+          VirtPackage.VIRT_FILE_FLAGS min = VirtPackage.VIRT_FILE_FLAGS.all;
+          VirtPackage.VIRT_FILE_FLAGS max = VirtPackage.VIRT_FILE_FLAGS.none;
+          ListView.SelectedListViewItemCollection fileItems = fsFilesList.SelectedItems;
+          if (fileItems.Count > 0)
+          {
+            foreach (FileListViewItem file in fileItems)
+            {
+              min &= file.flags;
+              max |= file.flags;
+            }
+            if (min != max)
+            {
+              MessageBox.Show("Items with different flags selected");
+            }
+            else
+            {
+              deployed = (min & VirtPackage.VIRT_FILE_FLAGS.DEPLOYED) == VirtPackage.VIRT_FILE_FLAGS.DEPLOYED;
+              deleted = (min & VirtPackage.VIRT_FILE_FLAGS.DELETED) == VirtPackage.VIRT_FILE_FLAGS.DELETED;
+            }
+            int index = 0;
+            index += deployed ? 1 : 0;
+            index += deleted ? 2 : 0;
+
+            fsFileFlagsCombobox.SelectedIndex = index;
+          }
+        }
+
+        private void fsFileFlagsCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          ListView.SelectedListViewItemCollection fileItems = fsFilesList.SelectedItems;
+          if (fileItems.Count > 0)
+          {
+            FolderTreeNode currentfolder = (FolderTreeNode)fsFolderTree.SelectedNode;
+            foreach (FileListViewItem file in fileItems)
+            {
+
+              FileData filedata = null;
+              foreach(FileData fd in currentfolder.childFiles)
+              {                  
+                if (Path.GetFileName(fd.virtFsNode.FileName).Equals(file.Text,StringComparison.CurrentCultureIgnoreCase))
+                {
+                  filedata = fd;
+                }
+              }
+              uint flags = virtPackage.GetFileFlags(filedata.virtFsNode.FileName);
+
+              flags &= ~VirtPackage.VIRT_FILE_FLAGS_DEPLOYED;
+              if (fsFileFlagsCombobox.SelectedIndex == 1)
+              {
+                flags |= VirtPackage.VIRT_FILE_FLAGS_DEPLOYED;
+              }
+              virtPackage.SetFileFlags(filedata.virtFsNode.FileName, flags);
+            }
+          }
+        }
+
+        private void fsFileFlagsCombobox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+        }
     }
 
     class RegListViewSorter : ListViewSorter
@@ -1269,6 +1345,7 @@ namespace PackageEditor
     public class FileListViewItem : ListViewItem
     {
         public ulong fileSize = 0;
+        public VirtPackage.VIRT_FILE_FLAGS flags = VirtPackage.VIRT_FILE_FLAGS.none;
     }
 
     class FileListViewSorter : ListViewSorter

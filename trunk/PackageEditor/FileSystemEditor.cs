@@ -305,6 +305,18 @@ namespace PackageEditor
                     FileListViewItem newItem = new FileListViewItem();
                     newItem.Text = Path.GetFileName(childFile.virtFsNode.FileName);
                     newItem.SubItems.Add(StrFormatByteSize64(childFile.virtFsNode.EndOfFile));
+
+                    newItem.flags = (VirtPackage.VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags;
+
+                    if ((newItem.flags & VirtPackage.VIRT_FILE_FLAGS.DEPLOYED) == VirtPackage.VIRT_FILE_FLAGS.DEPLOYED)
+                    {
+                      newItem.ImageIndex = 1;
+                    }
+                    ListViewItem.ListViewSubItem x = new ListViewItem.ListViewSubItem();
+                    x.Text = ((VirtPackage.VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags).ToString();
+                    x.Text += " - " + virtPackage.GetFileFlags(childFile.virtFsNode.FileName).ToString();
+                    newItem.SubItems.Add(x);
+                  
                     newItem.fileSize = childFile.virtFsNode.EndOfFile;
                     if (childFile.addedFrom != "")
                     {
