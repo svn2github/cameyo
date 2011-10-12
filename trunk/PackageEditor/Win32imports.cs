@@ -24,6 +24,13 @@ namespace PackageEditor
             }
             return ico;
         }
+
+        public static string StrFormatByteSize64(ulong qdw)
+        {
+          StringBuilder StrSize = new StringBuilder(64);
+          Win32imports.StrFormatByteSize64(qdw, StrSize, 64U);
+          return StrSize.ToString();
+        }
     }
 
     class Win32imports
@@ -83,5 +90,9 @@ namespace PackageEditor
             /// <summary>Get the index of the overlay in the upper 8 bits of the iIcon</summary>
             OverlayIndex = 0x000000040,
         }
+
+        // Misc internal functions
+        [DllImport("shlwapi")]
+        public static extern int StrFormatByteSize64(ulong qdw, StringBuilder pszBuf, uint cchBuf);
     }
 }

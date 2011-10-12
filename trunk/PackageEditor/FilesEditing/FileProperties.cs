@@ -42,6 +42,7 @@ namespace PackageEditor.FilesEditing
         fileNames += (fileNames == null ? "" : ", ") + Path.GetFileName(fd.virtFsNode.FileName);
       }
       lblFileName.Text = fileNames;
+      lblFileSize.Text = Win32Function.StrFormatByteSize64(totalSize);
 
 
       chkFileFlagISFILE.CheckState = getCheckedState(VIRT_FILE_FLAGS.ISFILE, min, max);

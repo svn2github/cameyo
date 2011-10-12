@@ -160,9 +160,9 @@
       this.chkFileFlagISFILE.Enabled = false;
       this.chkFileFlagISFILE.Location = new System.Drawing.Point(6, 19);
       this.chkFileFlagISFILE.Name = "chkFileFlagISFILE";
-      this.chkFileFlagISFILE.Size = new System.Drawing.Size(58, 17);
+      this.chkFileFlagISFILE.Size = new System.Drawing.Size(144, 17);
       this.chkFileFlagISFILE.TabIndex = 0;
-      this.chkFileFlagISFILE.Text = "ISFILE";
+      this.chkFileFlagISFILE.Text = "ISFILE (File or directory?)";
       this.chkFileFlagISFILE.UseVisualStyleBackColor = true;
       // 
       // chkFileFlagPKG_FILE
@@ -170,9 +170,9 @@
       this.chkFileFlagPKG_FILE.AutoSize = true;
       this.chkFileFlagPKG_FILE.Location = new System.Drawing.Point(6, 111);
       this.chkFileFlagPKG_FILE.Name = "chkFileFlagPKG_FILE";
-      this.chkFileFlagPKG_FILE.Size = new System.Drawing.Size(76, 17);
+      this.chkFileFlagPKG_FILE.Size = new System.Drawing.Size(259, 17);
       this.chkFileFlagPKG_FILE.TabIndex = 4;
-      this.chkFileFlagPKG_FILE.Text = "PKG_FILE";
+      this.chkFileFlagPKG_FILE.Text = "PKG_FILE (File/dir is part of the original package)";
       this.chkFileFlagPKG_FILE.UseVisualStyleBackColor = true;
       // 
       // chkFileFlagDELETED
@@ -180,19 +180,20 @@
       this.chkFileFlagDELETED.AutoSize = true;
       this.chkFileFlagDELETED.Location = new System.Drawing.Point(6, 42);
       this.chkFileFlagDELETED.Name = "chkFileFlagDELETED";
-      this.chkFileFlagDELETED.Size = new System.Drawing.Size(76, 17);
+      this.chkFileFlagDELETED.Size = new System.Drawing.Size(188, 17);
       this.chkFileFlagDELETED.TabIndex = 1;
-      this.chkFileFlagDELETED.Text = "DELETED";
+      this.chkFileFlagDELETED.Text = "DELETED (Deleted by virtual app)";
       this.chkFileFlagDELETED.UseVisualStyleBackColor = true;
       // 
       // chkFileFlagDISCONNECTED
       // 
       this.chkFileFlagDISCONNECTED.AutoSize = true;
+      this.chkFileFlagDISCONNECTED.Enabled = false;
       this.chkFileFlagDISCONNECTED.Location = new System.Drawing.Point(6, 88);
       this.chkFileFlagDISCONNECTED.Name = "chkFileFlagDISCONNECTED";
-      this.chkFileFlagDISCONNECTED.Size = new System.Drawing.Size(111, 17);
+      this.chkFileFlagDISCONNECTED.Size = new System.Drawing.Size(311, 17);
       this.chkFileFlagDISCONNECTED.TabIndex = 3;
-      this.chkFileFlagDISCONNECTED.Text = "DISCONNECTED";
+      this.chkFileFlagDISCONNECTED.Text = "DISCONNECTED (Set when on-disk file is modified from DB)";
       this.chkFileFlagDISCONNECTED.UseVisualStyleBackColor = true;
       // 
       // chkFileFlagDEPLOYED
@@ -200,9 +201,9 @@
       this.chkFileFlagDEPLOYED.AutoSize = true;
       this.chkFileFlagDEPLOYED.Location = new System.Drawing.Point(6, 65);
       this.chkFileFlagDEPLOYED.Name = "chkFileFlagDEPLOYED";
-      this.chkFileFlagDEPLOYED.Size = new System.Drawing.Size(84, 17);
+      this.chkFileFlagDEPLOYED.Size = new System.Drawing.Size(212, 17);
       this.chkFileFlagDEPLOYED.TabIndex = 2;
-      this.chkFileFlagDEPLOYED.Text = "DEPLOYED";
+      this.chkFileFlagDEPLOYED.Text = "DEPLOYED (Set upon first file opening)";
       this.chkFileFlagDEPLOYED.UseVisualStyleBackColor = true;
       // 
       // FileProperties

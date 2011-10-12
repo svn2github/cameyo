@@ -64,6 +64,8 @@
           this.linkLabel7 = new System.Windows.Forms.LinkLabel();
           this.linkLabel6 = new System.Windows.Forms.LinkLabel();
           this.groupBox3 = new System.Windows.Forms.GroupBox();
+          this.label10 = new System.Windows.Forms.Label();
+          this.propertyFileVersion = new System.Windows.Forms.TextBox();
           this.label2 = new System.Windows.Forms.Label();
           this.propertyFriendlyName = new System.Windows.Forms.TextBox();
           this.propertyAppID = new System.Windows.Forms.TextBox();
@@ -363,7 +365,7 @@
           this.groupBox4.Controls.Add(this.pictureBox4);
           this.groupBox4.Controls.Add(this.pictureBox3);
           this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
-          this.groupBox4.Location = new System.Drawing.Point(3, 336);
+          this.groupBox4.Location = new System.Drawing.Point(3, 356);
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.Size = new System.Drawing.Size(713, 75);
           this.groupBox4.TabIndex = 3;
@@ -456,7 +458,7 @@
           this.managementGroup.Controls.Add(this.linkLabel7);
           this.managementGroup.Controls.Add(this.linkLabel6);
           this.managementGroup.Dock = System.Windows.Forms.DockStyle.Top;
-          this.managementGroup.Location = new System.Drawing.Point(3, 244);
+          this.managementGroup.Location = new System.Drawing.Point(3, 264);
           this.managementGroup.Name = "managementGroup";
           this.managementGroup.Size = new System.Drawing.Size(713, 92);
           this.managementGroup.TabIndex = 1;
@@ -516,6 +518,8 @@
           // 
           // groupBox3
           // 
+          this.groupBox3.Controls.Add(this.label10);
+          this.groupBox3.Controls.Add(this.propertyFileVersion);
           this.groupBox3.Controls.Add(this.label2);
           this.groupBox3.Controls.Add(this.propertyFriendlyName);
           this.groupBox3.Controls.Add(this.propertyAppID);
@@ -523,10 +527,30 @@
           this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
           this.groupBox3.Location = new System.Drawing.Point(3, 174);
           this.groupBox3.Name = "groupBox3";
-          this.groupBox3.Size = new System.Drawing.Size(713, 70);
+          this.groupBox3.Size = new System.Drawing.Size(713, 90);
           this.groupBox3.TabIndex = 1;
           this.groupBox3.TabStop = false;
           this.groupBox3.Text = "Extras";
+          // 
+          // label10
+          // 
+          this.label10.AutoSize = true;
+          this.label10.Location = new System.Drawing.Point(7, 68);
+          this.label10.Name = "label10";
+          this.label10.Size = new System.Drawing.Size(63, 13);
+          this.label10.TabIndex = 26;
+          this.label10.Text = "File version:";
+          this.label10.Visible = false;
+          // 
+          // propertyFileVersion
+          // 
+          this.propertyFileVersion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.propertyFileVersion.Location = new System.Drawing.Point(100, 65);
+          this.propertyFileVersion.Name = "propertyFileVersion";
+          this.propertyFileVersion.Size = new System.Drawing.Size(102, 20);
+          this.propertyFileVersion.TabIndex = 25;
+          this.propertyFileVersion.Visible = false;
           // 
           // label2
           // 
@@ -822,9 +846,11 @@
           this.fsFilesList.TabIndex = 7;
           this.fsFilesList.UseCompatibleStateImageBehavior = false;
           this.fsFilesList.View = System.Windows.Forms.View.Details;
+          this.fsFilesList.QueryContinueDrag += new System.Windows.Forms.QueryContinueDragEventHandler(this.fsFilesList_QueryContinueDrag);
           this.fsFilesList.DragDrop += new System.Windows.Forms.DragEventHandler(this.Vfs_DragDrop);
           this.fsFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.fsFilesList_ColumnClick);
           this.fsFilesList.DragEnter += new System.Windows.Forms.DragEventHandler(this.Vfs_DragEnter);
+          this.fsFilesList.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.fsFilesList_ItemDrag);
           // 
           // columnFileName
           // 
@@ -1527,6 +1553,7 @@
           this.listViewMRU.UseCompatibleStateImageBehavior = false;
           this.listViewMRU.View = System.Windows.Forms.View.Details;
           this.listViewMRU.Resize += new System.EventHandler(this.listViewMRU_Resize);
+          this.listViewMRU.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listViewMRU_MouseMove);
           this.listViewMRU.MouseHover += new System.EventHandler(this.listViewMRU_MouseHover);
           this.listViewMRU.MouseLeave += new System.EventHandler(this.listViewMRU_MouseHover);
           this.listViewMRU.Click += new System.EventHandler(this.listViewMRU_Click);
@@ -1828,6 +1855,8 @@
         private System.Windows.Forms.ContextMenuStrip fileContextMenu;
         private System.Windows.Forms.ToolStripMenuItem fileContextMenuDelete;
         private System.Windows.Forms.ToolStripMenuItem fileContextMenuProperties;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox propertyFileVersion;
 
     }
 }

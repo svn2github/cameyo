@@ -289,7 +289,7 @@ namespace PackageEditor
 
             // Fill info panel
             String fullName = treeHelper.GetFullNodeName(folderNode);
-            fsFolderInfoFullName.Text = "[" + StrFormatByteSize64(virtFsNode.EndOfFile) + "] " + fullName;
+            fsFolderInfoFullName.Text = "[" + Win32Function.StrFormatByteSize64(virtFsNode.EndOfFile) + "] " + fullName;
             fsFolderInfoIsolationCombo.SelectedIndex = treeHelper.SandboxFlagsToComboIndex(
                 virtPackage.GetFileSandbox(fullName, false));
 
@@ -302,7 +302,7 @@ namespace PackageEditor
                     FileData childFile = folderNode.childFiles[i];
                     FileListViewItem newItem = new FileListViewItem();
                     newItem.Text = Path.GetFileName(childFile.virtFsNode.FileName);
-                    newItem.SubItems.Add(StrFormatByteSize64(childFile.virtFsNode.EndOfFile));
+                    newItem.SubItems.Add(Win32Function.StrFormatByteSize64(childFile.virtFsNode.EndOfFile));
 
                     newItem.flags = (VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags;
 
@@ -617,8 +617,7 @@ namespace PackageEditor
             else
                 MessageBox.Show("Please select a folder/file to remove");
 
-            /* TODO:
-             * it seems some file remain in the folder after it's been deleted (only on delete folder)
+            /* ToDo: it seems some file remain in the folder after it's been deleted (only on delete folder)
              * Check and correct.
              *
             if (folderNode == fsFolderTree.SelectedNode && folderNode.childFiles.Count == 0)
@@ -769,16 +768,6 @@ namespace PackageEditor
                 Directory.CreateDirectory(subFolder);
                 SaveFolderContent(f, subFolder);
             }
-        }
-
-        // Misc internal functions
-        [DllImport("shlwapi")]
-        private static extern int StrFormatByteSize64(ulong qdw, StringBuilder pszBuf, uint cchBuf);
-        private static string StrFormatByteSize64(ulong qdw)
-        {
-            StringBuilder StrSize = new StringBuilder(64);
-            StrFormatByteSize64(qdw, StrSize, 64U);
-            return StrSize.ToString();
         }
 
         private void RefreshFolderNodeRecursively(FolderTreeNode node, int iteration)

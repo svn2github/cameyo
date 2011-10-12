@@ -43,6 +43,12 @@ namespace PackageEditor
             InitializeComponent();
             dragging = false;
 
+            panelWelcome.Parent = this;
+            panelWelcome.BringToFront();
+            panelWelcome.Dock = DockStyle.None;
+            panelWelcome.Dock = DockStyle.Fill;
+            tabControl.TabPages.Remove(tabWelcome);
+
             // delegate for PackageOpen init
             Del_Open = new DelegatePackageOpen(this.PackageOpen);
 
@@ -139,11 +145,10 @@ namespace PackageEditor
         private void EnableDisablePackageControls(bool enable)
         {
             tabControl.Visible = enable;
-            panelWelcome.Visible = !tabControl.Visible;
+            panelWelcome.Visible = !enable;
             saveToolStripMenuItem.Enabled = enable;
             saveasToolStripMenuItem.Enabled = enable;
             closeToolStripMenuItem.Enabled = enable;
-
         }
 
         #region PleaseWaitDialog
@@ -383,6 +388,8 @@ namespace PackageEditor
               return;
             }
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Path.GetDirectoryName(virtPackage.openedFile);
+            saveFileDialog.FileName = Path.GetFileName(virtPackage.openedFile);
             saveFileDialog.AddExtension = true;
             saveFileDialog.Filter = "Virtual packages (*.virtual.exe)|*.virtual.exe";
             saveFileDialog.DefaultExt = "virtual.exe";
@@ -399,6 +406,7 @@ namespace PackageEditor
 
         private void exportAsZeroInstallerXmlToolStripMenuItem_Click(object sender, EventArgs e)
         {
+          // TODO:piba,ZeroInstaller, exportAsZeroInstallerXml
           SaveFileDialog saveFileDialog = new SaveFileDialog();
           saveFileDialog.AddExtension = true;
           saveFileDialog.Filter = "ZeroInstaller configuration file (*.xml)|*.xml";
@@ -1100,12 +1108,6 @@ namespace PackageEditor
             lvitem.ImageIndex = imageId;
             lvitem.Tag = item.file;
           }
-          panelWelcome.Parent = this;
-          panelWelcome.BringToFront();
-          panelWelcome.Dock = DockStyle.None;
-          panelWelcome.Dock = DockStyle.Fill;
-          
-          tabControl.TabPages.Remove(tabWelcome);
         }
 
         private void rdb_CheckedChanged(object sender, EventArgs e)
@@ -1257,14 +1259,19 @@ namespace PackageEditor
           mHoverItem = item;
         }
 
+        private void listViewMRU_MouseMove(object sender, MouseEventArgs e)
+        {
+          listViewMRU_MouseHover(null, null);
+        }
+
         private void regImportBtn_Click(object sender, EventArgs e)
         {
-          regEditor.RegFileExport();
+          regEditor.RegFileImport();  
         }
 
         private void regExportBtn_Click(object sender, EventArgs e)
         {
-          regEditor.RegFileImport();
+          regEditor.RegFileExport();  
         }
 
         private void fileContextMenuDelete_Click(object sender, EventArgs e)
@@ -1275,6 +1282,26 @@ namespace PackageEditor
         private void fileContextMenuProperties_Click(object sender, EventArgs e)
         {
           fsEditor.ShowProperties();
+        }
+
+        private void fsFilesList_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+          return;
+          // TODO:piba,DragDrop, FilesList_ItemDrag
+          string[] files = {@"Q:\@Cameyo packages\Test\test.dat"};
+          DoDragDrop(new DataObject(DataFormats.FileDrop, files),
+                     DragDropEffects.Copy |
+                     DragDropEffects.Move /* | 
+                   DragDropEffects.Link */
+                                            );
+
+          //RefreshView();
+        }
+
+        private void fsFilesList_QueryContinueDrag(object sender, QueryContinueDragEventArgs e)
+        {
+          return;
+          // TODO:piba,DragDrop, fsFilesList_QueryContinueDrag
         }
     }
 
