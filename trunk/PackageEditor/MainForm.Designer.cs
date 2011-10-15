@@ -121,10 +121,6 @@
           this.tbValue = new System.Windows.Forms.TextBox();
           this.tbSize = new System.Windows.Forms.TextBox();
           this.tbFile = new System.Windows.Forms.TextBox();
-          this.regFilesList = new PackageEditor.ListViewEx();
-          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
           this.panel4 = new System.Windows.Forms.Panel();
           this.panel6 = new System.Windows.Forms.Panel();
           this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -168,6 +164,11 @@
           this.panel11 = new System.Windows.Forms.PictureBox();
           this.panel12 = new System.Windows.Forms.PictureBox();
           this.bottomPanel = new System.Windows.Forms.Panel();
+          this.columnFileType = new System.Windows.Forms.ColumnHeader();
+          this.regFilesList = new PackageEditor.ListViewEx();
+          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
           this.menuStrip1.SuspendLayout();
           this.tabControl.SuspendLayout();
           this.tabGeneral.SuspendLayout();
@@ -833,7 +834,8 @@
           this.fsFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnFileName,
             this.columnFileSize,
-            this.columnFileFlags});
+            this.columnFileFlags,
+            this.columnFileType});
           this.fsFilesList.ContextMenuStrip = this.fileContextMenu;
           this.fsFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
           this.fsFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
@@ -846,7 +848,6 @@
           this.fsFilesList.TabIndex = 7;
           this.fsFilesList.UseCompatibleStateImageBehavior = false;
           this.fsFilesList.View = System.Windows.Forms.View.Details;
-          this.fsFilesList.QueryContinueDrag += new System.Windows.Forms.QueryContinueDragEventHandler(this.fsFilesList_QueryContinueDrag);
           this.fsFilesList.DragDrop += new System.Windows.Forms.DragEventHandler(this.Vfs_DragDrop);
           this.fsFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.fsFilesList_ColumnClick);
           this.fsFilesList.DragEnter += new System.Windows.Forms.DragEventHandler(this.Vfs_DragEnter);
@@ -1135,44 +1136,6 @@
           this.tbFile.Size = new System.Drawing.Size(100, 20);
           this.tbFile.TabIndex = 8;
           this.tbFile.Visible = false;
-          // 
-          // regFilesList
-          // 
-          this.regFilesList.AllowColumnReorder = true;
-          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.regFilesList.DoubleClickActivation = false;
-          this.regFilesList.FullRowSelect = true;
-          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-          this.regFilesList.Location = new System.Drawing.Point(0, 25);
-          this.regFilesList.Name = "regFilesList";
-          this.regFilesList.Size = new System.Drawing.Size(509, 334);
-          this.regFilesList.TabIndex = 7;
-          this.regFilesList.UseCompatibleStateImageBehavior = false;
-          this.regFilesList.View = System.Windows.Forms.View.Details;
-          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-          // 
-          // columnHeader3
-          // 
-          this.columnHeader3.Text = "File";
-          this.columnHeader3.Width = 144;
-          // 
-          // columnHeader4
-          // 
-          this.columnHeader4.Text = "Value";
-          this.columnHeader4.Width = 246;
-          // 
-          // columnHeader5
-          // 
-          this.columnHeader5.Text = "Type";
-          this.columnHeader5.Width = 98;
           // 
           // panel4
           // 
@@ -1629,6 +1592,48 @@
           this.bottomPanel.Size = new System.Drawing.Size(751, 47);
           this.bottomPanel.TabIndex = 8;
           // 
+          // columnFileType
+          // 
+          this.columnFileType.Text = "Type";
+          // 
+          // regFilesList
+          // 
+          this.regFilesList.AllowColumnReorder = true;
+          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.regFilesList.DoubleClickActivation = false;
+          this.regFilesList.FullRowSelect = true;
+          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+          this.regFilesList.Location = new System.Drawing.Point(0, 25);
+          this.regFilesList.Name = "regFilesList";
+          this.regFilesList.Size = new System.Drawing.Size(509, 334);
+          this.regFilesList.TabIndex = 7;
+          this.regFilesList.UseCompatibleStateImageBehavior = false;
+          this.regFilesList.View = System.Windows.Forms.View.Details;
+          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+          // 
+          // columnHeader3
+          // 
+          this.columnHeader3.Text = "File";
+          this.columnHeader3.Width = 144;
+          // 
+          // columnHeader4
+          // 
+          this.columnHeader4.Text = "Value";
+          this.columnHeader4.Width = 246;
+          // 
+          // columnHeader5
+          // 
+          this.columnHeader5.Text = "Type";
+          this.columnHeader5.Width = 98;
+          // 
           // MainForm
           // 
           this.AllowDrop = true;
@@ -1857,6 +1862,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileContextMenuProperties;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox propertyFileVersion;
+        private System.Windows.Forms.ColumnHeader columnFileType;
 
     }
 }

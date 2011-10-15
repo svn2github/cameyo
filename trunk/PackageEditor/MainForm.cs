@@ -13,6 +13,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Xml;
 using PackageEditor.FilesEditing;
+using Delay;
 
 namespace PackageEditor
 {
@@ -1285,24 +1286,10 @@ namespace PackageEditor
         }
 
         private void fsFilesList_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-          return;
-          // TODO:piba,DragDrop, FilesList_ItemDrag
-          string[] files = {@"Q:\@Cameyo packages\Test\test.dat"};
-          DoDragDrop(new DataObject(DataFormats.FileDrop, files),
-                     DragDropEffects.Copy |
-                     DragDropEffects.Move /* | 
-                   DragDropEffects.Link */
-                                            );
-
-          //RefreshView();
+        {          
+          fsEditor.DragDropFiles();
         }
 
-        private void fsFilesList_QueryContinueDrag(object sender, QueryContinueDragEventArgs e)
-        {
-          return;
-          // TODO:piba,DragDrop, fsFilesList_QueryContinueDrag
-        }
     }
 
     class RegListViewSorter : ListViewSorter

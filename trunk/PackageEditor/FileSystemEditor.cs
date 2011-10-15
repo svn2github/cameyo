@@ -8,6 +8,8 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using VirtPackageAPI;
 using PackageEditor.FilesEditing;
+using PackageEditor.Utilities;
+using Delay;
 
 namespace PackageEditor
 {
@@ -41,6 +43,7 @@ namespace PackageEditor
         private ToolStripButton fsSaveFileAsBtn;
         private TreeHelper treeHelper;
         private String fileSaveTargetDir;
+        private String DnDtempFolder;// for Drag and Drop from the PackageEditor to Explorer, folder used for temporarely extracting files
         public bool dirty;
 
         // creation of delegate for AddFileOrFolderRecursive
@@ -313,6 +316,7 @@ namespace PackageEditor
                     ListViewItem.ListViewSubItem x = new ListViewItem.ListViewSubItem();
                     x.Text = ((VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags).ToString();
                     newItem.SubItems.Add(x);
+                    newItem.SubItems.Add(Path.GetExtension(newItem.Text));
                   
                     newItem.fileSize = childFile.virtFsNode.EndOfFile;
                     if (childFile.addedFrom != "")
@@ -726,19 +730,10 @@ namespace PackageEditor
             // Save files
             if (folderNode.childFiles.Count == 0)
                 return;     // Should never happen
-
-            foreach (ListViewItem item in fileItems)
+            List<FileData> files = getSelectedFiles();
+            foreach  (FileData item in files)
             {
-                FileData fileData;
-                for (int i = folderNode.childFiles.Count - 1; i >= 0; i--)
-                {
-                    fileData = folderNode.childFiles[i];
-                    if (Path.GetFileName(fileData.virtFsNode.FileName) == item.Text)
-                    {
-                        SaveFile(fileData, fileSaveTargetDir);
-                        break;
-                    }
-                }
+              SaveFile(item, fileSaveTargetDir);
             }
         }
 
@@ -818,6 +813,52 @@ namespace PackageEditor
           return result;
         }
 
+        public void GetFileData(Delay.VirtualFileDataObject.Tuple<Stream, string> tuple)
+        {
+          String tempFile = Path.Combine(DnDtempFolder, tuple.Item2);
+          Directory.CreateDirectory(Path.GetDirectoryName(tempFile));
+          virtPackage.ExtractFile(tuple.Item2, Path.GetDirectoryName(tempFile));
+
+          using (FileStream sourceStream = new FileStream(tempFile, FileMode.Open, FileAccess.Read))
+          {
+            byte[] buffer = new byte[1024 * 1024];
+            while (true)
+            {
+              int read = sourceStream.Read(buffer, 0, buffer.Length);
+              if (read <= 0)
+                break;
+              tuple.Item1.Write(buffer, 0, read);
+            }
+          }
+          File.Delete(tempFile);
+        }
+
+        internal bool DragDropFiles()
+        {
+          DnDtempFolder = Common.CreateTempFolder("PackageEditorDnD_");
+
+          VirtualFileDataObject vfdo = new VirtualFileDataObject();
+          vfdo.IsAsynchronous = true;
+          vfdo.PreferredDropEffect = DragDropEffects.Copy;
+
+          List<VirtualFileDataObject.FileDescriptor> fileDescriptors = new List<VirtualFileDataObject.FileDescriptor>();
+          List<FileData> files = getSelectedFiles();
+          foreach (FileData item in files)
+          {
+            VirtualFileDataObject.FileDescriptor fileDecriptor1 = new VirtualFileDataObject.FileDescriptor();
+            fileDecriptor1.Name = Path.GetFileName(item.virtFsNode.FileName);
+            fileDecriptor1.Length = (long)item.virtFsNode.EndOfFile;
+            fileDecriptor1.ChangeTimeUtc = DateTime.FromFileTime((long)item.virtFsNode.ChangeTime).ToUniversalTime();
+            fileDecriptor1.ExtraInfo = item.virtFsNode.FileName;
+            fileDecriptor1.StreamContents = new VirtualFileDataObject.MyAction<Delay.VirtualFileDataObject.Tuple<Stream, string>>(GetFileData);
+            fileDescriptors.Add(fileDecriptor1);
+          }
+          vfdo.SetData(fileDescriptors);
+          vfdo.PreferredDropEffect = DragDropEffects.Copy;
+          fsFilesList.DoDragDrop(vfdo, DragDropEffects.Copy);
+          return true;
+        }
+
         internal void ShowProperties()
         {
           FileProperties fp = new FileProperties(virtPackage);
@@ -826,7 +867,7 @@ namespace PackageEditor
             FolderTreeNode node = (FolderTreeNode)fsFolderTree.SelectedNode;
             TreeViewEventArgs ev = new TreeViewEventArgs(node);
             OnFolderTreeSelect(null, ev);
-          }           
+          }
         }
     }
 

@@ -7,6 +7,7 @@
  * No 'application specific' functions will be implemented in this class.
  * 
  * Usage:
+RegFile regFile = new RegFile("C:\Test\myRegistryKeys.reg")
 RegFileRegistryKey regFileRegistryKey;
 while (regFile.readKey(out regFileRegistryKey))
 {

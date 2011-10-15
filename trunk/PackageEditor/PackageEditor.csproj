@@ -103,6 +103,7 @@
     <Compile Include="FilesEditing\FileProperties.Designer.cs">
       <DependentUpon>FileProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="FilesEditing\VirtualFileDataObject.cs" />
     <Compile Include="RegFile.cs" />
     <Compile Include="RegistryFunctions.cs" />
     <Compile Include="CustomEventsForm.cs">
@@ -204,6 +205,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="RegistryEditor.cs" />
+    <Compile Include="Utilities\Common.cs" />
     <Compile Include="VirtFilesBrowse.cs">
       <SubType>Form</SubType>
     </Compile>
