@@ -94,6 +94,7 @@
           this.columnFileName = new System.Windows.Forms.ColumnHeader();
           this.columnFileSize = new System.Windows.Forms.ColumnHeader();
           this.columnFileFlags = new System.Windows.Forms.ColumnHeader();
+          this.columnFileType = new System.Windows.Forms.ColumnHeader();
           this.fileContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
           this.fileContextMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
           this.fileContextMenuProperties = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,6 +122,10 @@
           this.tbValue = new System.Windows.Forms.TextBox();
           this.tbSize = new System.Windows.Forms.TextBox();
           this.tbFile = new System.Windows.Forms.TextBox();
+          this.regFilesList = new PackageEditor.ListViewEx();
+          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
           this.panel4 = new System.Windows.Forms.Panel();
           this.panel6 = new System.Windows.Forms.Panel();
           this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -164,11 +169,6 @@
           this.panel11 = new System.Windows.Forms.PictureBox();
           this.panel12 = new System.Windows.Forms.PictureBox();
           this.bottomPanel = new System.Windows.Forms.Panel();
-          this.columnFileType = new System.Windows.Forms.ColumnHeader();
-          this.regFilesList = new PackageEditor.ListViewEx();
-          this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-          this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
           this.menuStrip1.SuspendLayout();
           this.tabControl.SuspendLayout();
           this.tabGeneral.SuspendLayout();
@@ -826,6 +826,7 @@
           this.fsFolderTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fsFolderTree_AfterSelect);
           this.fsFolderTree.DragEnter += new System.Windows.Forms.DragEventHandler(this.Vfs_DragEnter);
           this.fsFolderTree.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.fsFolderTree_BeforeSelect);
+          this.fsFolderTree.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.fsFolderTree_ItemDrag);
           this.fsFolderTree.DragOver += new System.Windows.Forms.DragEventHandler(this.fsFolderTree_DragOver);
           // 
           // fsFilesList
@@ -870,6 +871,10 @@
           this.columnFileFlags.DisplayIndex = 0;
           this.columnFileFlags.Text = "Flags";
           this.columnFileFlags.Width = 40;
+          // 
+          // columnFileType
+          // 
+          this.columnFileType.Text = "Type";
           // 
           // fileContextMenu
           // 
@@ -1136,6 +1141,44 @@
           this.tbFile.Size = new System.Drawing.Size(100, 20);
           this.tbFile.TabIndex = 8;
           this.tbFile.Visible = false;
+          // 
+          // regFilesList
+          // 
+          this.regFilesList.AllowColumnReorder = true;
+          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.regFilesList.DoubleClickActivation = false;
+          this.regFilesList.FullRowSelect = true;
+          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+          this.regFilesList.Location = new System.Drawing.Point(0, 25);
+          this.regFilesList.Name = "regFilesList";
+          this.regFilesList.Size = new System.Drawing.Size(509, 334);
+          this.regFilesList.TabIndex = 7;
+          this.regFilesList.UseCompatibleStateImageBehavior = false;
+          this.regFilesList.View = System.Windows.Forms.View.Details;
+          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+          // 
+          // columnHeader3
+          // 
+          this.columnHeader3.Text = "File";
+          this.columnHeader3.Width = 144;
+          // 
+          // columnHeader4
+          // 
+          this.columnHeader4.Text = "Value";
+          this.columnHeader4.Width = 246;
+          // 
+          // columnHeader5
+          // 
+          this.columnHeader5.Text = "Type";
+          this.columnHeader5.Width = 98;
           // 
           // panel4
           // 
@@ -1591,48 +1634,6 @@
           this.bottomPanel.Name = "bottomPanel";
           this.bottomPanel.Size = new System.Drawing.Size(751, 47);
           this.bottomPanel.TabIndex = 8;
-          // 
-          // columnFileType
-          // 
-          this.columnFileType.Text = "Type";
-          // 
-          // regFilesList
-          // 
-          this.regFilesList.AllowColumnReorder = true;
-          this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-          this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.regFilesList.DoubleClickActivation = false;
-          this.regFilesList.FullRowSelect = true;
-          this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-          this.regFilesList.Location = new System.Drawing.Point(0, 25);
-          this.regFilesList.Name = "regFilesList";
-          this.regFilesList.Size = new System.Drawing.Size(509, 334);
-          this.regFilesList.TabIndex = 7;
-          this.regFilesList.UseCompatibleStateImageBehavior = false;
-          this.regFilesList.View = System.Windows.Forms.View.Details;
-          this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-          this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-          this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-          // 
-          // columnHeader3
-          // 
-          this.columnHeader3.Text = "File";
-          this.columnHeader3.Width = 144;
-          // 
-          // columnHeader4
-          // 
-          this.columnHeader4.Text = "Value";
-          this.columnHeader4.Width = 246;
-          // 
-          // columnHeader5
-          // 
-          this.columnHeader5.Text = "Type";
-          this.columnHeader5.Width = 98;
           // 
           // MainForm
           // 

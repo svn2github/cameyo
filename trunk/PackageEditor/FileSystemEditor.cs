@@ -798,7 +798,8 @@ namespace PackageEditor
 
         private List<FileData> getSelectedFiles()
         {
-          FolderTreeNode currentfolder = (FolderTreeNode)fsFolderTree.SelectedNode;
+          FolderTreeNode currentfolder = (FolderTreeNode)fsFolderTree.SelectedNode;          
+
           List<FileData> result = new List<FileData>();
           foreach (FileListViewItem file in fsFilesList.SelectedItems)
           {
@@ -833,26 +834,71 @@ namespace PackageEditor
           File.Delete(tempFile);
         }
 
-        internal bool DragDropFiles()
+        List<FileData> getAllFilesUnderNode(FolderTreeNode node)
+        {
+          List<FileData> files = new List<FileData>();
+
+          FileData fileData = new FileData();
+          fileData.virtFsNode = new VirtFsNode();
+          fileData.virtFsNode.FileName = treeHelper.GetFullNodeName(node) + "\\";
+          if (fileData.virtFsNode.FileName != "\\")
+          {
+            files.Add(fileData);
+          }
+
+          if (node.childFiles != null)
+          {
+            files.AddRange(node.childFiles);
+          }
+          foreach (FolderTreeNode subnode in node.Nodes)
+          {
+            files.AddRange(getAllFilesUnderNode(subnode));
+          }
+          return files;
+        }
+
+        internal bool DragDropFiles(object dragitem)
         {
           DnDtempFolder = Common.CreateTempFolder("PackageEditorDnD_");
+          List<FileData> files = null;
+          FolderTreeNode node;
+          int fullNodeNameLen = 0;     
+          if (dragitem is FolderTreeNode)
+          {
+            node = (FolderTreeNode)dragitem;
+            files = getAllFilesUnderNode(node);
+
+            VirtFsNode fsnode = node.virtFsNode;// Avoids CS1690
+            if (fsnode.FileName != null)
+              fullNodeNameLen = (treeHelper.GetFullNodeName(node)).Length - node.Text.Length;
+          }
+          else
+          {
+            node = (FolderTreeNode)fsFolderTree.SelectedNode;
+            files = getSelectedFiles();
+
+            VirtFsNode fsnode = node.virtFsNode;// Avoids CS1690
+            if (fsnode.FileName != null)
+              fullNodeNameLen = (treeHelper.GetFullNodeName(node)).Length;
+          }
+
 
           VirtualFileDataObject vfdo = new VirtualFileDataObject();
           vfdo.IsAsynchronous = true;
           vfdo.PreferredDropEffect = DragDropEffects.Copy;
-
+          
           List<VirtualFileDataObject.FileDescriptor> fileDescriptors = new List<VirtualFileDataObject.FileDescriptor>();
-          List<FileData> files = getSelectedFiles();
           foreach (FileData item in files)
           {
-            VirtualFileDataObject.FileDescriptor fileDecriptor1 = new VirtualFileDataObject.FileDescriptor();
-            fileDecriptor1.Name = Path.GetFileName(item.virtFsNode.FileName);
-            fileDecriptor1.Length = (long)item.virtFsNode.EndOfFile;
-            fileDecriptor1.ChangeTimeUtc = DateTime.FromFileTime((long)item.virtFsNode.ChangeTime).ToUniversalTime();
-            fileDecriptor1.ExtraInfo = item.virtFsNode.FileName;
-            fileDecriptor1.StreamContents = new VirtualFileDataObject.MyAction<Delay.VirtualFileDataObject.Tuple<Stream, string>>(GetFileData);
-            fileDescriptors.Add(fileDecriptor1);
+            VirtualFileDataObject.FileDescriptor fileDecriptor = new VirtualFileDataObject.FileDescriptor();
+            fileDecriptor.Name = item.virtFsNode.FileName.Remove(0, fullNodeNameLen);
+            fileDecriptor.Length = (long)item.virtFsNode.EndOfFile;
+            fileDecriptor.ChangeTimeUtc = DateTime.FromFileTime((long)item.virtFsNode.ChangeTime).ToUniversalTime();
+            fileDecriptor.ExtraInfo = item.virtFsNode.FileName;
+            fileDecriptor.StreamContents = new VirtualFileDataObject.MyAction<Delay.VirtualFileDataObject.Tuple<Stream, string>>(GetFileData);
+            fileDescriptors.Add(fileDecriptor);
           }
+
           vfdo.SetData(fileDescriptors);
           vfdo.PreferredDropEffect = DragDropEffects.Copy;
           fsFilesList.DoDragDrop(vfdo, DragDropEffects.Copy);

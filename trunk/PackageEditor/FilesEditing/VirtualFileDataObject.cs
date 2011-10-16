@@ -1,5 +1,11 @@
-﻿//
+﻿// Based on Delay's work  :
+//(http://blogs.msdn.com/delay/archive/2009/10/26/creating-something-from-nothing-developer-friendly-virtual-file-implementation-for-net.aspx)
+//
+// Source used from a comment in:
 // http://www.codeproject.com/KB/dotnet/DataObjectEx.aspx?msg=3605857#xx3605857xx
+//
+// Modified for Cameyo purpose by PiBa:
+//  - Added support for dropping empty folders by using FD_ATTRIBUTES.
 //
 using System;
 using System.Collections.Generic;
@@ -467,6 +473,12 @@ namespace Delay
           FILEDESCRIPTOR.dwFlags |= NativeMethods.FD_FILESIZE;
           FILEDESCRIPTOR.nFileSizeLow = (uint)(fileDescriptor.Length & 0xffffffff);
           FILEDESCRIPTOR.nFileSizeHigh = (uint)(fileDescriptor.Length >> 32);
+        }
+        if (fileDescriptor.Name.EndsWith("\\"))
+        {
+          FILEDESCRIPTOR.dwFlags |= NativeMethods.FD_ATTRIBUTES;
+          FILEDESCRIPTOR.dwFileAttributes = (uint)FileAttributes.Directory;
+          FILEDESCRIPTOR.cFileName = FILEDESCRIPTOR.cFileName.Remove(FILEDESCRIPTOR.cFileName.Length - 1);
         }
         // Add structure to buffer
         bytes.AddRange(StructureBytes(FILEDESCRIPTOR));
@@ -954,6 +966,7 @@ namespace Delay
       public const int DV_E_FORMATETC = -2147221404;
       public const int DV_E_TYMED = -2147221399;
       public const int E_FAIL = -2147467259;
+      public const uint FD_ATTRIBUTES = 0x00000004;
       public const uint FD_CREATETIME = 0x00000008;
       public const uint FD_WRITESTIME = 0x00000020;
       public const uint FD_FILESIZE = 0x00000040;
@@ -1011,7 +1024,7 @@ namespace Delay
         }
       }
 
-
+      
       [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Justification = "Structure exists for interop.")]
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       public struct DROPFILES

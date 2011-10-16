@@ -1286,10 +1286,14 @@ namespace PackageEditor
         }
 
         private void fsFilesList_ItemDrag(object sender, ItemDragEventArgs e)
-        {          
-          fsEditor.DragDropFiles();
+        {
+          fsEditor.DragDropFiles((FileListViewItem)e.Item);
         }
 
+        private void fsFolderTree_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+          fsEditor.DragDropFiles((FolderTreeNode)e.Item);
+        }
     }
 
     class RegListViewSorter : ListViewSorter
