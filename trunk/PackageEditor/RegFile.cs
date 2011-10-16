@@ -40,11 +40,11 @@ namespace PackageEditor.RegFileReader
     StreamReader sr;
     String NextMasterKey = null;
     Dictionary<string, RegistryValueKind> regFileRegType = new Dictionary<string, RegistryValueKind>();
-    public String errors = "";
+    public StringBuilder errors = new StringBuilder();
 
     public RegFile(String fileName)
     {
-      errors = "";
+      errors = new StringBuilder();
       FileStream fs = new FileStream(fileName, FileMode.Open);
       BufferedStream bs = new BufferedStream(fs);
       sr = new StreamReader(bs);
@@ -99,20 +99,22 @@ namespace PackageEditor.RegFileReader
           if (more)
           {
             String extra;
-            line = line.Remove(line.Length - 1);
+            StringBuilder data = new StringBuilder(1024);
+            data.Append(line.Remove(line.Length - 1));
             while (more)
             {
               extra = sr.ReadLine();
               more = extra.EndsWith("\\");
               if (more)
                 extra = extra.Remove(extra.Length - 1);
-              line += extra.Trim();
+              data.Append(extra.Trim());
             }
+            line = data.ToString();
           }
           int i = 0;
           bool isInString = false;
 
-          String valueName = "";
+          StringBuilder valueNameB = new StringBuilder(line.Length);
           while (isInString || line[i] != '=')
           {
             if (line[i] == '\"')
@@ -121,10 +123,11 @@ namespace PackageEditor.RegFileReader
             {
             if (line[i] == '\\')
               i++;
-              valueName += line[i];
+            valueNameB.Append(line[i]);
             };
             i++;
           }
+          String valueName = valueNameB.ToString();
           if (valueName == "@" && i == 1)
             valueName = "";
           String valueValue = line.Substring(i + 1);
@@ -142,7 +145,10 @@ namespace PackageEditor.RegFileReader
           switch (regValue.type)
           {
             case RegistryValueKind.String:
-              regValue.value = valueValue.Substring(1, valueValue.Length - 2);
+              String strValue = valueValue.Substring(1, valueValue.Length - 2);
+              strValue = strValue.Replace("\\\"", "\"");
+              strValue = strValue.Replace("\\\\", "\\");
+              regValue.value = strValue;
               break;
             case RegistryValueKind.DWord:
               regValue.value = int.Parse(valueValue.Substring(6), System.Globalization.NumberStyles.HexNumber);
@@ -176,13 +182,20 @@ namespace PackageEditor.RegFileReader
                 String strdata = valueValue.Substring(7);
                 byte[] byteArray = RegFileHelper.HexCommaToByteArray(strdata);
                 String regString = Encoding.Unicode.GetString(byteArray);
-                regString = regString.Remove(regString.Length - 2);
-                String[] value = regString.Split(new char[] { '\0' });
+                String[] value;
+                if (regString == "\0")
+                {
+                  value = new String[0]; // not a single string is pressent..
+                } else
+                {
+                  regString = regString.Remove(regString.Length - 2);
+                  value = regString.Split(new char[] { '\0' });
+                }
                 regValue.value = value;
                 break;
               }
             default:
-              errors += String.Format("\r\n------------------------------------------------\r\nRegistry value not supported Valuename:{0}\r\nType:{1}\r\nValue:{2}\r\nIn key:{3}", regValue.name, regValue.type, valueValue, NextMasterKey);
+              errors.Append(String.Format("\r\n------------------------------------------------\r\nRegistry value not supported Valuename:{0}\r\nType:{1}\r\nValue:{2}\r\nIn key:{3}", regValue.name, regValue.type, valueValue, NextMasterKey));
               break;
           }
           myRegistryKey.values.Add(regValue);            

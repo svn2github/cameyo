@@ -10,7 +10,7 @@ namespace PackageEditor
 {
   class RegistryFunctions
   {
-    String errors = "";
+    StringBuilder errors = new StringBuilder();
     Dictionary<String, String> virtualKeys = new Dictionary<string, string>();
     public RegistryFunctions()
     {
@@ -49,7 +49,7 @@ namespace PackageEditor
       bfs.Close();
       fs.Close();
 
-      if (!String.IsNullOrEmpty(errors))
+      if (errors.Length > 0)
       {
         MessageBox.Show("The following errors occured while exporting the registry: "+errors);
       }
@@ -127,7 +127,7 @@ namespace PackageEditor
           case RegistryValueKind.ExpandString:
             byte[] bytes = Encoding.Unicode.GetBytes((String)value);
             regvalue = RegFileHelper.ByteArrayToHexComma(bytes);
-            regvalue = regvalue + ",00,00";
+            regvalue += (regvalue != "" ? "," : "") + "00,00";
             RegFile.ByteArrayFormatString(ref regvalue, regvaluename.Length + 8);
             regvalue = "hex(2):" + regvalue;
             break;
@@ -161,7 +161,7 @@ namespace PackageEditor
             regvalue = "hex(0):";
             break;
           default:
-            errors += String.Format("\r\nWARNING: RegistryFunctions.enumRegKeyValues  RegistryValueKind.{0} not supported", kind);
+            errors.Append(String.Format("\r\nWARNING: RegistryFunctions.enumRegKeyValues  RegistryValueKind.{0} not supported", kind));
             break;
         }
         sw.WriteLine("{0}={1}", regvaluename, regvalue);
@@ -175,29 +175,32 @@ namespace PackageEditor
       RegFile regFile = new RegFile(RegFileName);
 
       RegFileRegistryKey regFileRegistryKey;
+      KeyValuePair<string, string> virtReplaceKey = new KeyValuePair<string,string>("-","");
       while (regFile.readKey(out regFileRegistryKey))
       {
         if (writeKey != null)
           writeKey.Close();
         writeKey = null;
 
-        String virtKeyReplacement = "";
-        KeyValuePair<string, string> virtReplaceKey = new KeyValuePair<string,string>();
-        foreach (KeyValuePair<string, string> value in virtualKeys)
+        if (!regFileRegistryKey.keyName.StartsWith(virtReplaceKey.Key+'\\'))
         {
-          if (regFileRegistryKey.keyName.StartsWith(value.Key))
+          virtReplaceKey = new KeyValuePair<string, string>("-", "");
+          foreach (KeyValuePair<string, string> value in virtualKeys)
           {
-            virtReplaceKey = value;
-            break;
+            if (regFileRegistryKey.keyName.StartsWith(value.Key))
+            {
+              virtReplaceKey = value;
+              break;
+            }
           }
         }
-        if (virtKeyReplacement != null)
+        if (virtReplaceKey.Key != "-")
         {
-          String virtKey = regFileRegistryKey.keyName.Replace(virtReplaceKey.Key, virtReplaceKey.Value);
+          String virtKey = regFileRegistryKey.keyName.Remove(0, virtReplaceKey.Key.Length).Insert(0, virtReplaceKey.Value);
           writeKey = key.CreateSubKey(virtKey);
         }
         else
-          regFile.errors += "\r\n\r\n#### Registry root key not supported in current import:" + regFileRegistryKey.keyName + " ####\r\n";
+          regFile.errors.Append("\r\n\r\n#### Registry root key not supported in current import:" + regFileRegistryKey.keyName + " ####\r\n");
 
         if (writeKey != null)
         {
@@ -212,7 +215,7 @@ namespace PackageEditor
       }
       regFile.Close();
 
-      if (!String.IsNullOrEmpty(regFile.errors))
+      if (regFile.errors.Length > 0)
       {
         MessageBox.Show("The following errors occured while importing the .reg file: " + regFile.errors);
       }
