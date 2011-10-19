@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.IO;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
 
@@ -68,6 +69,30 @@ namespace VirtPackageAPI
         public bool opened;
         public String openedFile;
 
+        private const int MAX_PATH = 260;
+        public const int MAX_APPID_LENGTH = 128;
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct SYSTEMTIME
+        {
+            [MarshalAs(UnmanagedType.U2)]
+            public short Year;
+            [MarshalAs(UnmanagedType.U2)]
+            public short Month;
+            [MarshalAs(UnmanagedType.U2)]
+            public short DayOfWeek;
+            [MarshalAs(UnmanagedType.U2)]
+            public short Day;
+            [MarshalAs(UnmanagedType.U2)]
+            public short Hour;
+            [MarshalAs(UnmanagedType.U2)]
+            public short Minute;
+            [MarshalAs(UnmanagedType.U2)]
+            public short Second;
+            [MarshalAs(UnmanagedType.U2)]
+            public short Milliseconds;
+        }
+
         //
         // DLL imports
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
@@ -110,7 +135,7 @@ namespace VirtPackageAPI
             IntPtr hPkg,
             String FileName);
 
-        // VirtFs functions
+        // VirtFs imports
         private delegate bool VIRTFS_ENUM_CALLBACK(
             ref Object Data,
             [MarshalAs(UnmanagedType.LPWStr)] String FileName,
@@ -159,7 +184,7 @@ namespace VirtPackageAPI
             IntPtr hPkg,
             String FileName);
 
-        // VirtReg functions
+        // VirtReg imports
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int VirtRegGetWorkKey(
             IntPtr hPkg,
@@ -177,7 +202,7 @@ namespace VirtPackageAPI
         private extern static int VirtRegSaveWorkKey(
             IntPtr hPkg);
 
-        // Sandbox functions
+        // Sandbox imports
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int SandboxGetRegistryFlags(
             IntPtr hPkg,
@@ -217,6 +242,64 @@ namespace VirtPackageAPI
             IntPtr hPkg,
             String Path,
             UInt32 FileFlags);
+
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        public extern static int QuickReadIni(
+            String PackageExeFile,
+            StringBuilder IniBuf,
+            UInt32 IniBufLen);
+
+        // RunningApp imports
+        [StructLayout(LayoutKind.Sequential)]
+        private struct RUNNING_APP
+        {
+            public UInt32 Version;
+            public UInt32 SerialId;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_PATH * 4 * 2)]
+            public char[] CarrierExeName;
+            public UInt32 CarrierPID;
+            public UInt32 StartTickTime;
+            public UInt32 SyncStreamingDuration;
+            public UInt32 TotalPIDs;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2048)]
+            public UInt32[] PIDs;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_APPID_LENGTH * 2)]
+            public char[] AppID;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_APPID_LENGTH * 2)]
+            public char[] FriendlyName;
+        }
+        public class RunningApp
+        {
+            public String AppID;
+            public List<UInt32> PIDs;
+            public String CarrierExeName;
+            public UInt32 SerialId;
+            public UInt32 CarrierPID;
+            public UInt32 StartTickTime;
+            public String FriendlyName;
+        }
+        private delegate bool RUNNINGAPP_ENUM_CALLBACK(
+            ref Object Data,
+            ref RUNNING_APP RunningApp);
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int RunningAppEnum(
+            RUNNINGAPP_ENUM_CALLBACK Callback,
+            ref Object Data);
+
+        // DeployedApp imports
+        private delegate bool DEPLOYEDAPP_ENUM_CALLBACK(
+            ref Object Data,
+            [MarshalAs(UnmanagedType.LPWStr)] String AppID);
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int DeployedAppEnum(
+            DEPLOYEDAPP_ENUM_CALLBACK Callback,
+            ref Object Data);
+
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        public extern static int DeployedAppGetDir(
+            String AppID,
+            StringBuilder BaseDirName,
+            UInt32 BaseDirNameLen);
 
         //
         // .NET wrapper
@@ -337,6 +420,7 @@ namespace VirtPackageAPI
                 return false;
         }
 
+        //
         // VirtFs functions
         private bool EnumFilesCallback(
             ref Object Data,
@@ -463,6 +547,7 @@ namespace VirtPackageAPI
                 return false;
         }
 
+        //
         // VirtReg functions
         public RegistryKey GetRegWorkKeyEx(System.Threading.AutoResetEvent abortEvent)
         {
@@ -505,6 +590,9 @@ namespace VirtPackageAPI
                 return false;
         }
 
+        //
+        // Sandbox functions
+
         // Sandbox Get functions
         public UInt32 GetRegistrySandbox(String Path, bool bVariablizeName)
         {
@@ -546,6 +634,77 @@ namespace VirtPackageAPI
             return (VIRT_FILE_FLAGS)FileFlags;
         }
 
+        String LPWStrToString(char[] lpwstr)
+        {
+            String res = "";
+            for (int i = 0; i < lpwstr.Length; i += 2)
+            {
+                if (lpwstr[i] == 0)
+                    break;
+                res += lpwstr[i];
+            }
+            return res;
+        }
+
+        List<UInt32> DWordArrayToList(UInt32[] array, UInt32 count)
+        {
+            List<UInt32> res = new List<uint>();
+            for (int i = 0; i < count; i++)
+                res.Add(array[i]);
+            return res;
+        }
+
+        //
+        // RunningApp functions
+        private bool EnumRunningAppsCallback(
+            ref Object Data,
+            ref RUNNING_APP RunningAppRaw)
+        {
+            RunningApp runningApp = new RunningApp() {
+                AppID = LPWStrToString(RunningAppRaw.AppID),
+                CarrierExeName = LPWStrToString(RunningAppRaw.CarrierExeName),
+                FriendlyName = LPWStrToString(RunningAppRaw.FriendlyName),
+                CarrierPID = RunningAppRaw.CarrierPID,
+                StartTickTime = RunningAppRaw.StartTickTime,
+                SerialId = RunningAppRaw.SerialId,
+                PIDs = DWordArrayToList(RunningAppRaw.PIDs, RunningAppRaw.TotalPIDs)
+            };
+            ((List<RunningApp>)Data).Add(runningApp);
+            return true;
+        }
+        public List<RunningApp> EnumRunningApps()
+        {
+            RUNNINGAPP_ENUM_CALLBACK Callback = new RUNNINGAPP_ENUM_CALLBACK(EnumRunningAppsCallback);
+            List<RunningApp> list = new List<RunningApp>();
+            Object data = list;
+            if ((APIRET)RunningAppEnum(Callback, ref data) == APIRET.SUCCESS)
+                return list;
+            else
+                return null;
+        }
+
+        //
+        // DeployedApp functions
+        private bool EnumDeployedAppsCallback(
+            ref Object Data,
+            [MarshalAs(UnmanagedType.LPWStr)] String AppID)
+        {
+            ((List<String>)Data).Add(AppID);
+            return true;
+        }
+        public List<String> EnumDeployedApps()
+        {
+            DEPLOYEDAPP_ENUM_CALLBACK Callback = new DEPLOYEDAPP_ENUM_CALLBACK(EnumDeployedAppsCallback);
+            List<String> list = new List<String>();
+            Object data = list;
+            if ((APIRET)DeployedAppEnum(Callback, ref data) == APIRET.SUCCESS)
+                return list;
+            else
+                return null;
+        }
+
+        //
+        // Helper functions
         static public String FriendlyShortcutName(String rawShortcutName)
         {
             String friendly = System.IO.Path.GetFileName(rawShortcutName);
@@ -606,5 +765,35 @@ namespace VirtPackageAPI
             }
         }
 
+        static public System.Collections.Hashtable ReadIniSettings(String IniFile)
+        {
+            try
+            {
+                String iniBuf = File.ReadAllText(IniFile, Encoding.Unicode);
+                if (iniBuf.IndexOf("AppID") == -1)
+                    iniBuf = File.ReadAllText(IniFile, Encoding.ASCII);  // Happens when modified with notepad
+                String[] lines = iniBuf.Split('\r', '\n');
+                System.Collections.Hashtable values = new System.Collections.Hashtable();
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (String.IsNullOrEmpty(lines[i]))
+                        continue;
+                    try
+                    {
+                        int equal = lines[i].IndexOf('=');
+                        if (equal != -1)
+                            values.Add(lines[i].Substring(0, equal), lines[i].Substring(equal + 1));
+                        else
+                            values.Add(lines[i], "");
+                    }
+                    catch { }
+                }
+                return values;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }
