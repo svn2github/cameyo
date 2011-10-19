@@ -634,7 +634,7 @@ namespace VirtPackageAPI
             return (VIRT_FILE_FLAGS)FileFlags;
         }
 
-        String LPWStrToString(char[] lpwstr)
+        static String LPWStrToString(char[] lpwstr)
         {
             String res = "";
             for (int i = 0; i < lpwstr.Length; i += 2)
@@ -646,7 +646,7 @@ namespace VirtPackageAPI
             return res;
         }
 
-        List<UInt32> DWordArrayToList(UInt32[] array, UInt32 count)
+        static List<UInt32> DWordArrayToList(UInt32[] array, UInt32 count)
         {
             List<UInt32> res = new List<uint>();
             for (int i = 0; i < count; i++)
@@ -656,7 +656,7 @@ namespace VirtPackageAPI
 
         //
         // RunningApp functions
-        private bool EnumRunningAppsCallback(
+        static private bool EnumRunningAppsCallback(
             ref Object Data,
             ref RUNNING_APP RunningAppRaw)
         {
@@ -672,7 +672,7 @@ namespace VirtPackageAPI
             ((List<RunningApp>)Data).Add(runningApp);
             return true;
         }
-        public List<RunningApp> EnumRunningApps()
+        static public List<RunningApp> EnumRunningApps()
         {
             RUNNINGAPP_ENUM_CALLBACK Callback = new RUNNINGAPP_ENUM_CALLBACK(EnumRunningAppsCallback);
             List<RunningApp> list = new List<RunningApp>();
@@ -685,14 +685,14 @@ namespace VirtPackageAPI
 
         //
         // DeployedApp functions
-        private bool EnumDeployedAppsCallback(
+        static private bool EnumDeployedAppsCallback(
             ref Object Data,
             [MarshalAs(UnmanagedType.LPWStr)] String AppID)
         {
             ((List<String>)Data).Add(AppID);
             return true;
         }
-        public List<String> EnumDeployedApps()
+        static public List<String> EnumDeployedApps()
         {
             DEPLOYEDAPP_ENUM_CALLBACK Callback = new DEPLOYEDAPP_ENUM_CALLBACK(EnumDeployedAppsCallback);
             List<String> list = new List<String>();
