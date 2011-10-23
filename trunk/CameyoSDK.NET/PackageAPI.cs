@@ -184,6 +184,11 @@ namespace VirtPackageAPI
             IntPtr hPkg,
             String FileName);
 
+        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        public extern static int VirtFsSetFileStreaming(
+            IntPtr hPkg,
+            String FileName);
+
         // VirtReg imports
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int VirtRegGetWorkKey(
@@ -296,7 +301,7 @@ namespace VirtPackageAPI
             ref Object Data);
 
         [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        public extern static int DeployedAppGetDir(
+        private extern static int DeployedAppGetDir(
             String AppID,
             StringBuilder BaseDirName,
             UInt32 BaseDirNameLen);
@@ -547,6 +552,18 @@ namespace VirtPackageAPI
                 return false;
         }
 
+        public bool SetFileStreaming(
+            String FileName)
+        {
+            APIRET Ret = (APIRET)VirtFsSetFileStreaming(hPkg, FileName);
+            if (Ret == APIRET.SUCCESS)
+                return true;
+            else if (Ret == APIRET.NOT_FOUND)
+                return false;
+            else
+                return false;
+        }
+
         //
         // VirtReg functions
         public RegistryKey GetRegWorkKeyEx(System.Threading.AutoResetEvent abortEvent)
@@ -701,6 +718,16 @@ namespace VirtPackageAPI
                 return list;
             else
                 return null;
+        }
+
+        static public String DeployedAppDir(String AppID)
+        {
+            StringBuilder sbValue = new StringBuilder(MAX_STRING);
+            APIRET Ret = (APIRET)DeployedAppGetDir(AppID, sbValue, MAX_STRING);
+            if (Ret == APIRET.SUCCESS)
+                return sbValue.ToString();
+            else
+                return null;  // Error
         }
 
         //
