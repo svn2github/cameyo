@@ -823,4 +823,39 @@ namespace VirtPackageAPI
             }
         }
     }
+
+    public class DeployedApp
+    {
+        public String AppID { get { return m_AppID; } }
+        internal String m_AppID;
+        public String BaseDirName { get { return m_BaseDirName; } }
+        internal String m_BaseDirName;
+        public String CarrierExeName { get { return m_CarrierExeName; } }
+        internal String m_CarrierExeName;
+        public System.Collections.Hashtable IniProperties { get { return m_IniProperties; } }
+        internal System.Collections.Hashtable m_IniProperties;
+
+        public DeployedApp(String appID, String baseDirName, String carrierExeName)
+        {
+            m_AppID = appID;
+            m_BaseDirName = baseDirName;
+            m_CarrierExeName = carrierExeName;
+            m_IniProperties = VirtPackage.ReadIniSettings(Path.Combine(baseDirName, "VirtApp.ini"));
+        }
+
+        static public DeployedApp FromAppID(String appID)
+        {
+            try
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\VOS\\" + appID, false);
+                String baseDirName = (String)key.GetValue("BaseDirName");
+                String carrierExeName = (String)key.GetValue("CarrierExeName");
+                return new DeployedApp(appID, baseDirName, carrierExeName);
+            }
+            catch (NotFiniteNumberException dbg)
+            {
+                return null;
+            }
+        }
+    }
 }
