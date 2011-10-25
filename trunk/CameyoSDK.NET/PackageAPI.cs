@@ -848,11 +848,13 @@ namespace VirtPackageAPI
             try
             {
                 RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\VOS\\" + appID, false);
+                if (key == null)
+                    return null;
                 String baseDirName = (String)key.GetValue("BaseDirName");
                 String carrierExeName = (String)key.GetValue("CarrierExeName");
                 return new DeployedApp(appID, baseDirName, carrierExeName);
             }
-            catch (NotFiniteNumberException dbg)
+            catch
             {
                 return null;
             }
