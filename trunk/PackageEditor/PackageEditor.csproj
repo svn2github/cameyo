@@ -104,6 +104,12 @@
       <DependentUpon>FileProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="FilesEditing\VirtualFileDataObject.cs" />
+    <Compile Include="ModForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModForm.Designer.cs">
+      <DependentUpon>ModForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegFile.cs" />
     <Compile Include="RegistryFunctions.cs" />
     <Compile Include="CustomEventsForm.cs">
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModForm.resx">
+      <DependentUpon>ModForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PackageBuiltNotify.resx">
       <DependentUpon>PackageBuiltNotify.cs</DependentUpon>

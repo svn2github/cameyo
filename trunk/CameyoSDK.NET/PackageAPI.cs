@@ -689,7 +689,8 @@ namespace VirtPackageAPI
             ((List<RunningApp>)Data).Add(runningApp);
             return true;
         }
-        static public List<RunningApp> EnumRunningApps()
+
+        static public List<RunningApp> RunningApps()
         {
             RUNNINGAPP_ENUM_CALLBACK Callback = new RUNNINGAPP_ENUM_CALLBACK(EnumRunningAppsCallback);
             List<RunningApp> list = new List<RunningApp>();
@@ -698,6 +699,19 @@ namespace VirtPackageAPI
                 return list;
             else
                 return null;
+        }
+
+        static public RunningApp FindRunningApp(string appID)
+        {
+            List<RunningApp> list = RunningApps();
+            if (list == null)
+                return null;
+            foreach (RunningApp app in list)
+            {
+                if (app.AppID == appID)
+                    return app;
+            }
+            return null;
         }
 
         //
@@ -709,7 +723,8 @@ namespace VirtPackageAPI
             ((List<String>)Data).Add(AppID);
             return true;
         }
-        static public List<String> EnumDeployedApps()
+
+        static public List<String> DeployedAppIDs()
         {
             DEPLOYEDAPP_ENUM_CALLBACK Callback = new DEPLOYEDAPP_ENUM_CALLBACK(EnumDeployedAppsCallback);
             List<String> list = new List<String>();
@@ -718,6 +733,17 @@ namespace VirtPackageAPI
                 return list;
             else
                 return null;
+        }
+
+        static public List<DeployedApp> DeployedApps()
+        {
+            List<String> appIDs = DeployedAppIDs();
+            List<DeployedApp> deployedApps = new List<DeployedApp>();
+            foreach (String appID in appIDs)
+            {
+                deployedApps.Add(DeployedApp.FromAppID (appID));
+            }
+            return deployedApps;
         }
 
         static public String DeployedAppDir(String AppID)
