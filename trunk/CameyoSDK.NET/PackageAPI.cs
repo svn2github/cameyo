@@ -254,6 +254,13 @@ namespace VirtPackageAPI
             StringBuilder IniBuf,
             UInt32 IniBufLen);
 
+        [StructLayout(LayoutKind.Sequential)]
+        private struct VIRT_PROCESS
+        {
+            UInt32 PID;
+            UInt32 Flags;
+        }
+
         // RunningApp imports
         [StructLayout(LayoutKind.Sequential)]
         private struct RUNNING_APP
@@ -267,7 +274,7 @@ namespace VirtPackageAPI
             public UInt32 SyncStreamingDuration;
             public UInt32 TotalPIDs;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2048)]
-            public UInt32[] PIDs;
+            public UInt32[] VIRT_PROCESS;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_APPID_LENGTH * 2)]
             public char[] AppID;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_APPID_LENGTH * 2)]
