@@ -255,7 +255,7 @@ namespace VirtPackageAPI
             UInt32 IniBufLen);
 
         [StructLayout(LayoutKind.Sequential)]
-        private struct VIRT_PROCESS
+        public struct VIRT_PROCESS
         {
             UInt32 PID;
             UInt32 Flags;
@@ -274,7 +274,7 @@ namespace VirtPackageAPI
             public UInt32 SyncStreamingDuration;
             public UInt32 TotalPIDs;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2048)]
-            public UInt32[] VIRT_PROCESS;
+            public VIRT_PROCESS[] Processes;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_APPID_LENGTH * 2)]
             public char[] AppID;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_APPID_LENGTH * 2)]
@@ -283,7 +283,7 @@ namespace VirtPackageAPI
         public class RunningApp
         {
             public String AppID;
-            public List<UInt32> PIDs;
+            public List<VIRT_PROCESS> Processes;
             public String CarrierExeName;
             public UInt32 SerialId;
             public UInt32 CarrierPID;
@@ -670,9 +670,17 @@ namespace VirtPackageAPI
             return res;
         }
 
-        static List<UInt32> DWordArrayToList(UInt32[] array, UInt32 count)
+        static List<UInt32> ArrayToList(UInt32[] array, UInt32 count)
         {
-            List<UInt32> res = new List<uint>();
+            List<UInt32> res = new List<UInt32>();
+            for (int i = 0; i < count; i++)
+                res.Add(array[i]);
+            return res;
+        }
+
+        static List<VIRT_PROCESS> ArrayToList(VIRT_PROCESS[] array, UInt32 count)
+        {
+            List<VIRT_PROCESS> res = new List<VIRT_PROCESS>();
             for (int i = 0; i < count; i++)
                 res.Add(array[i]);
             return res;
@@ -691,7 +699,7 @@ namespace VirtPackageAPI
                 CarrierPID = RunningAppRaw.CarrierPID,
                 StartTickTime = RunningAppRaw.StartTickTime,
                 SerialId = RunningAppRaw.SerialId,
-                PIDs = DWordArrayToList(RunningAppRaw.PIDs, RunningAppRaw.TotalPIDs)
+                Processes = ArrayToList(RunningAppRaw.Processes, RunningAppRaw.TotalPIDs)
             };
             ((List<RunningApp>)Data).Add(runningApp);
             return true;
