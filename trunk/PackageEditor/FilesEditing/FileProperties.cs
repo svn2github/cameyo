@@ -10,81 +10,90 @@ using System.IO;
 
 namespace PackageEditor.FilesEditing
 {
-  public partial class FileProperties : Form
-  {
-    VirtPackage virtPackage;
-    List<FileData> files;
-
-    public FileProperties(VirtPackage virtPackage)
+    public partial class FileProperties : Form
     {
-      InitializeComponent();
-      this.virtPackage = virtPackage;
-    }
+        VirtPackage virtPackage;
+        List<FileData> files;
 
-    internal bool Open(List<FileData> files)
-    {
-      this.files = files;
-      bool result = false;
-
-      int count = files.Count;
-      lblFileCount.Text = count.ToString();
-
-      String fileNames = null;
-      ulong totalSize = 0;
-      VIRT_FILE_FLAGS min = VIRT_FILE_FLAGS.ALL_FLAGS;
-      VIRT_FILE_FLAGS max = VIRT_FILE_FLAGS.NO_FLAGS;
-      foreach (FileData fd in files)
-      {
-        totalSize += fd.virtFsNode.EndOfFile;
-        min &= (VIRT_FILE_FLAGS)fd.virtFsNode.FileFlags;
-        max |= (VIRT_FILE_FLAGS)fd.virtFsNode.FileFlags;
-        
-        fileNames += (fileNames == null ? "" : ", ") + Path.GetFileName(fd.virtFsNode.FileName);
-      }
-      lblFileName.Text = fileNames;
-      lblFileSize.Text = Win32Function.StrFormatByteSize64(totalSize);
-
-
-      chkFileFlagISFILE.CheckState = getCheckedState(VIRT_FILE_FLAGS.ISFILE, min, max);
-      chkFileFlagPKG_FILE.CheckState = getCheckedState(VIRT_FILE_FLAGS.PKG_FILE, min, max);
-      chkFileFlagDELETED.CheckState = getCheckedState(VIRT_FILE_FLAGS.DELETED, min, max);
-      chkFileFlagDISCONNECTED.CheckState = getCheckedState(VIRT_FILE_FLAGS.DISCONNECTED, min, max);
-      chkFileFlagDEPLOYED.CheckState = getCheckedState(VIRT_FILE_FLAGS.DEPLOYED, min, max);
-      if (ShowDialog() == DialogResult.OK)
-      {
-        min = VIRT_FILE_FLAGS.NO_FLAGS;
-        max = VIRT_FILE_FLAGS.ALL_FLAGS;
-        if (chkFileFlagISFILE.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.ISFILE;
-        if (chkFileFlagISFILE.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.ISFILE;
-        if (chkFileFlagPKG_FILE.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.PKG_FILE;
-        if (chkFileFlagPKG_FILE.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.PKG_FILE;
-        if (chkFileFlagDELETED.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.DELETED;
-        if (chkFileFlagDELETED.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.DELETED;
-        if (chkFileFlagDISCONNECTED.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.DISCONNECTED;
-        if (chkFileFlagDISCONNECTED.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.DISCONNECTED;
-        if (chkFileFlagDEPLOYED.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.DEPLOYED;
-        if (chkFileFlagDEPLOYED.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.DEPLOYED;
-
-        foreach (FileData fd in files)
+        public FileProperties(VirtPackage virtPackage)
         {
-          VIRT_FILE_FLAGS flags = fd.virtFsNode.FileFlags;
-          flags |= min;
-          flags &= max;
-          fd.virtFsNode.FileFlags = flags;
+            InitializeComponent();
+            this.virtPackage = virtPackage;
         }
-        result = true;
-      }
-      return result;
-    }
 
-    private CheckState getCheckedState(VIRT_FILE_FLAGS flag,VIRT_FILE_FLAGS min,VIRT_FILE_FLAGS max)
-    {
-      CheckState state = CheckState.Indeterminate;
-      if ((min & flag) == (max & flag))
-      {
-        state = (min & flag) == flag ? CheckState.Checked : CheckState.Unchecked;
-      } 
-      return state;
+        internal bool Open(List<FileData> files)
+        {
+            this.files = files;
+            bool result = false;
+            String fileNames = null;
+            ulong totalSize = 0;
+            String dirStr = "", itemsStr;
+            VIRT_FILE_FLAGS min = VIRT_FILE_FLAGS.ALL_FLAGS;
+            VIRT_FILE_FLAGS max = VIRT_FILE_FLAGS.NO_FLAGS;
+
+            foreach (FileData fd in files)
+            {
+                totalSize += fd.virtFsNode.EndOfFile;
+                min &= (VIRT_FILE_FLAGS)fd.virtFsNode.FileFlags;
+                max |= (VIRT_FILE_FLAGS)fd.virtFsNode.FileFlags;
+                fileNames += (fileNames == null ? "" : ", ") + Path.GetFileName(fd.virtFsNode.FileName);
+            }
+            String sizeStr = Win32Function.StrFormatByteSize64(totalSize);
+            this.Text = fileNames;
+            tbFullPath.Text = files[0].virtFsNode.FileName;
+
+            if (((VIRT_FILE_FLAGS)files[0].virtFsNode.FileFlags & VIRT_FILE_FLAGS.ISFILE) == 0)
+            {
+                dirStr = " (directory)";
+                itemsStr = "directories";
+            }
+            else
+                itemsStr = "files";
+            if (files.Count == 1)
+                groupBox.Text = Path.GetFileName(files[0].virtFsNode.FileName) + dirStr + ": " + sizeStr;
+            else
+                groupBox.Text = files.Count + " " + itemsStr + ": " + sizeStr;
+
+            chkFileFlagDEPLOYED.CheckState = getCheckedState(VIRT_FILE_FLAGS.DEPLOYED, min, max);
+            chkFileFlagDELETED.CheckState = getCheckedState(VIRT_FILE_FLAGS.DELETED, min, max);
+            chkFileFlagISFILE.CheckState = getCheckedState(VIRT_FILE_FLAGS.ISFILE, min, max);
+            chkFileFlagPKG_FILE.CheckState = getCheckedState(VIRT_FILE_FLAGS.PKG_FILE, min, max);
+            chkFileFlagDISCONNECTED.CheckState = getCheckedState(VIRT_FILE_FLAGS.DISCONNECTED, min, max);
+            if (ShowDialog() == DialogResult.OK)
+            {
+                min = VIRT_FILE_FLAGS.NO_FLAGS;
+                max = VIRT_FILE_FLAGS.ALL_FLAGS;
+                if (chkFileFlagDEPLOYED.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.DEPLOYED;
+                if (chkFileFlagDEPLOYED.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.DEPLOYED;
+                if (chkFileFlagDELETED.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.DELETED;
+                if (chkFileFlagDELETED.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.DELETED;
+                if (chkFileFlagISFILE.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.ISFILE;
+                if (chkFileFlagISFILE.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.ISFILE;
+                if (chkFileFlagPKG_FILE.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.PKG_FILE;
+                if (chkFileFlagPKG_FILE.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.PKG_FILE;
+                if (chkFileFlagDISCONNECTED.CheckState == CheckState.Checked) min |= VIRT_FILE_FLAGS.DISCONNECTED;
+                if (chkFileFlagDISCONNECTED.CheckState == CheckState.Unchecked) max &= ~VIRT_FILE_FLAGS.DISCONNECTED;
+
+                foreach (FileData fd in files)
+                {
+                    VIRT_FILE_FLAGS flags = fd.virtFsNode.FileFlags;
+                    flags |= min;
+                    flags &= max;
+                    fd.virtFsNode.FileFlags = flags;
+                }
+                result = true;
+            }
+            return result;
+        }
+
+        private CheckState getCheckedState(VIRT_FILE_FLAGS flag, VIRT_FILE_FLAGS min, VIRT_FILE_FLAGS max)
+        {
+            CheckState state = CheckState.Indeterminate;
+            if ((min & flag) == (max & flag))
+            {
+                state = (min & flag) == flag ? CheckState.Checked : CheckState.Unchecked;
+            }
+            return state;
+        }
     }
-  }
 }

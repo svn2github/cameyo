@@ -366,7 +366,7 @@ namespace PackageEditor
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo Packages";
+            //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo apps";
             openFileDialog.Multiselect = false;
             openFileDialog.Filter = "Virtual packages (*.virtual.exe;*.cameyo.exe)|*.virtual.exe;*.cameyo.exe|All files (*.*)|*.*";
             //openFileDialog.DefaultExt = "virtual.exe";
@@ -790,15 +790,20 @@ namespace PackageEditor
             openFileDialog.Multiselect = false;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Icon ico = Win32Function.getIconFromFile(openFileDialog.FileName);
-                if (virtPackage.SetIcon(openFileDialog.FileName))
-                {
-                    propertyIcon.Image = ico.ToBitmap();
-                    //propertyNewIconFileName.Text = openFileDialog.FileName;
-                    dirty = true;
-                }
+                if (openFileDialog.FileName.EndsWith(".ico", StringComparison.InvariantCultureIgnoreCase))
+                    MessageBox.Show("Please select an executable file (.EXE) to copy the icon from.");
                 else
-                    MessageBox.Show("Error: file not found");
+                {
+                    Icon ico = Win32Function.getIconFromFile(openFileDialog.FileName);
+                    if (virtPackage.SetIcon(openFileDialog.FileName))
+                    {
+                        propertyIcon.Image = ico.ToBitmap();
+                        //propertyNewIconFileName.Text = openFileDialog.FileName;
+                        dirty = true;
+                    }
+                    else
+                        MessageBox.Show("Error: file not found");
+                }
             }
         }
 
@@ -1096,7 +1101,7 @@ namespace PackageEditor
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-          foreach(MRUitem item in mru.GetItems())
+          foreach (MRUitem item in mru.GetItems())
           {
             Icon ico = Win32Function.getIconFromFile(item.file);
             int imageId = imageListMRU.Images.Add(ico.ToBitmap(), Color.Empty);

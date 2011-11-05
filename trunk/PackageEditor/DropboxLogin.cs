@@ -97,17 +97,17 @@ namespace PackageEditor
             ICloudDirectoryEntry dir = null;
             try
             {
-                dir = storage.GetFolder(@"/Cameyo Packages");
+                dir = storage.GetFolder(@"/Cameyo apps");
             }
             catch
             {
                 try
                 {
-                    dir = storage.CreateFolder(@"/Cameyo Packages");
+                    dir = storage.CreateFolder(@"/Cameyo apps");
                 }
                 catch
                 {
-                    MessageBox.Show("Unable to create \"Dropbox/Cameyo Packages\" folder");
+                    MessageBox.Show("Unable to create \"Dropbox/Cameyo apps\" folder");
                     return;
                 }
             }
@@ -124,7 +124,7 @@ namespace PackageEditor
             // Upload the file
             ICloudFileSystemEntry fsEntry = null;
             if ((fsEntry = storage.UploadFile(path, dir)) != null)
-                MessageBox.Show("Uploaded successfully to Dropbox/Cameyo Packages/" + fsEntry.Name);
+                MessageBox.Show("Uploaded successfully to Dropbox/Cameyo apps/" + fsEntry.Name);
             else
                 MessageBox.Show("Upload to Dropbox failed");
             //*** End of publish file code

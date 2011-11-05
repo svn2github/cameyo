@@ -24,13 +24,13 @@ namespace VirtPackageAPI
     [Flags]
     public enum VIRT_FILE_FLAGS
     {
-      NO_FLAGS = 0x0,
-      ISFILE = 0x0001,        // File or directory?
-      DELETED = 0x0002,       // Deleted by virtual app (NOT_FOUND)
-      DEPLOYED = 0x0008,      // Set upon first file opening
-      DISCONNECTED = 0x0010,  // Set when on-disk file is modified from DB
-      PKG_FILE = 0x0020,      // File/dir is part of the original package (as opposed to files newly-added to sandbox during package use)
-      ALL_FLAGS = ISFILE | DELETED | DEPLOYED | DISCONNECTED | PKG_FILE
+        NO_FLAGS = 0x0,
+        ISFILE = 0x0001,        // File or directory?
+        DELETED = 0x0002,       // Deleted by virtual app (NOT_FOUND)
+        DEPLOYED = 0x0008,      // Set upon first file opening
+        DISCONNECTED = 0x0010,  // Set when on-disk file is modified from DB
+        PKG_FILE = 0x0020,      // File/dir is part of the original package (as opposed to files newly-added to sandbox during package use)
+        ALL_FLAGS = ISFILE | DELETED | DEPLOYED | DISCONNECTED | PKG_FILE
     }
 
     public class VirtPackage
@@ -873,6 +873,18 @@ namespace VirtPackageAPI
         internal String m_BaseDirName;
         public String CarrierExeName { get { return m_CarrierExeName; } }
         internal String m_CarrierExeName;
+
+        // Basic ini settings
+        public String BuildUid { get { return (String)IniProperties["BuildUID"]; } }
+        public String CloudPkgId { get { return (String)IniProperties["CloudPkgId"]; } }
+        public String Streamer { get { return (String)IniProperties["Streamer"]; } }
+        public String Publisher { get { return (String)IniProperties["Publisher"]; } }
+        public String Version { get { return (String)IniProperties["Version"]; } }
+        public String FriendlyName { get { return (String)IniProperties["FriendlyName"]; } }
+        public String AutoLaunch { get { return (String)IniProperties["AutoLaunch"]; } }
+        public String Shortcuts { get { return (String)IniProperties["Shortcuts"]; } }
+        public String StopInheritance { get { return (String)IniProperties["StopInheritance"]; } }
+
         public System.Collections.Hashtable IniProperties { get { return m_IniProperties; } }
         internal System.Collections.Hashtable m_IniProperties;
 
@@ -898,6 +910,22 @@ namespace VirtPackageAPI
             catch
             {
                 return null;
+            }
+        }
+
+        static public bool RunningInfoDword(string appID, string item, ref int ret)
+        {
+            try
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\VOS\\" + appID + "\\RunningInfo", false);
+                if (key == null)
+                    return false;
+                ret = (int)key.GetValue(item);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

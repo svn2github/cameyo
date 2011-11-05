@@ -309,13 +309,13 @@ namespace PackageEditor
 
                     newItem.flags = (VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags;
 
-                    /*if ((newItem.flags & VirtPackage.VIRT_FILE_FLAGS.DEPLOYED) == VirtPackage.VIRT_FILE_FLAGS.DEPLOYED)
-                    {
-                      newItem.ImageIndex = 1;
-                    }*/
-                    ListViewItem.ListViewSubItem x = new ListViewItem.ListViewSubItem();
-                    x.Text = ((VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags).ToString();
-                    newItem.SubItems.Add(x);
+                    if ((newItem.flags & VirtPackageAPI.VIRT_FILE_FLAGS.DEPLOYED) != 0)
+                        newItem.ImageIndex = 6;
+                    else
+                        newItem.ImageIndex = 3;
+                    //ListViewItem.ListViewSubItem x = new ListViewItem.ListViewSubItem();
+                    //x.Text = ((VIRT_FILE_FLAGS)childFile.virtFsNode.FileFlags).ToString();
+                    //newItem.SubItems.Add(x);
                     newItem.SubItems.Add(Path.GetExtension(newItem.Text));
                   
                     newItem.fileSize = childFile.virtFsNode.EndOfFile;
