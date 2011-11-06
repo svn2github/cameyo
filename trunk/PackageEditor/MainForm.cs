@@ -109,12 +109,12 @@ namespace PackageEditor
 
         private void ThreadedRegLoadStop()
         {
-          regEditor.threadedRegLoadStop();
-          if (regLoadThread != null)
-          {
-            regLoadThread.Join();
-            regLoadThread = null;
-          }
+            regEditor.threadedRegLoadStop();
+            if (regLoadThread != null)
+            {
+                regLoadThread.Join();
+                regLoadThread = null;
+            }
         }
 
         private void regProgressTimer_Tick(object sender, EventArgs e)
@@ -207,11 +207,11 @@ namespace PackageEditor
             {
                 try
                 {
-                  if (!String.IsNullOrEmpty(pleaseWaitMsg.iconFileName))
-                  {
-                    iconFile = Win32Function.getIconFromFile(pleaseWaitMsg.iconFileName);
-                    icon.Image = iconFile.ToBitmap();
-                  }
+                    if (!String.IsNullOrEmpty(pleaseWaitMsg.iconFileName))
+                    {
+                        iconFile = Win32Function.getIconFromFile(pleaseWaitMsg.iconFileName);
+                        icon.Image = iconFile.ToBitmap();
+                    }
                 }
                 catch { }
                 dialog.Text = pleaseWaitMsg.title;
@@ -319,13 +319,13 @@ namespace PackageEditor
 
         private bool PackageCanSave(out String message)
         {
-          message = "";
-          if (String.IsNullOrEmpty(propertyAppID.Text))
-            message += "- AppID is a required field to save a package.\r\n";
-          if (String.IsNullOrEmpty(virtPackage.GetProperty("AutoLaunch")))
-            message += "- The package does not have any program(s) selected to launch.\r\nPlease select a program to launch on the tab:General > Panel:Basics > Item:Startup.";
+            message = "";
+            if (String.IsNullOrEmpty(propertyAppID.Text))
+                message += "- AppID is a required field to save a package.\r\n";
+            if (String.IsNullOrEmpty(virtPackage.GetProperty("AutoLaunch")))
+                message += "- The package does not have any program(s) selected to launch.\r\nPlease select a program to launch on the tab:General > Panel:Basics > Item:Startup.";
 
-          return message == "";
+            return message == "";
         }
 
         private bool PackageSave(String fileName)
@@ -333,33 +333,33 @@ namespace PackageEditor
             String CantSaveBecause = "";
             if (!PackageCanSave(out CantSaveBecause))
             {
-              MessageBox.Show(this, CantSaveBecause, "Cannot save package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-              return false;
+                MessageBox.Show(this, CantSaveBecause, "Cannot save package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
 
             int ret = 0;
             VirtPackage.APIRET apiRet = 0;
             PleaseWaitBegin("Saving package", "Saving " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
             {
-              ret = ret == 0 && !this.OnPackageSave() ? 1 : ret;
-              ret = ret == 0 && !fsEditor.OnPackageSave() ? 2 : ret;
-              ret = ret == 0 && !regEditor.OnPackageSave() ? 3 : ret;
-              ret = ret == 0 && !virtPackage.SaveEx(fileName, out apiRet) ? 4 : ret;
+                ret = ret == 0 && !this.OnPackageSave() ? 1 : ret;
+                ret = ret == 0 && !fsEditor.OnPackageSave() ? 2 : ret;
+                ret = ret == 0 && !regEditor.OnPackageSave() ? 3 : ret;
+                ret = ret == 0 && !virtPackage.SaveEx(fileName, out apiRet) ? 4 : ret;
             }
             PleaseWaitEnd();
 
             if (ret == 0)
             {
-              this.dirty = false;
-              fsEditor.dirty = false;
-              regEditor.dirty = false;
-              MessageBox.Show("Package saved.");
-              return true;
+                this.dirty = false;
+                fsEditor.dirty = false;
+                regEditor.dirty = false;
+                MessageBox.Show("Package saved.");
+                return true;
             }
             else
             {
-              MessageBox.Show(String.Format("Cannot save file. Error:{0} ApiRet:{1}", ret, apiRet));
-              return false;
+                MessageBox.Show(String.Format("Cannot save file. Error:{0} ApiRet:{1}", ret, apiRet));
+                return false;
             }
         }
 
@@ -383,10 +383,10 @@ namespace PackageEditor
         private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             String message;
-            if(!PackageCanSave(out message))
+            if (!PackageCanSave(out message))
             {
-              MessageBox.Show(this, message, "Cant save the package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-              return;
+                MessageBox.Show(this, message, "Cant save the package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = Path.GetDirectoryName(virtPackage.openedFile);
@@ -407,19 +407,19 @@ namespace PackageEditor
 
         private void exportAsZeroInstallerXmlToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          // TODO:piba,ZeroInstaller, exportAsZeroInstallerXml
-          SaveFileDialog saveFileDialog = new SaveFileDialog();
-          saveFileDialog.AddExtension = true;
-          saveFileDialog.Filter = "ZeroInstaller configuration file (*.xml)|*.xml";
-          saveFileDialog.DefaultExt = "xml";
-          if (saveFileDialog.ShowDialog() == DialogResult.OK)
-          {
-            XmlTextWriter xmlOut = new XmlTextWriter(saveFileDialog.FileName, Encoding.Default);
-            xmlOut.Formatting = Formatting.Indented;
-            xmlOut.WriteStartDocument();
-            xmlOut.WriteStartElement("ZeroInstallerXml");
+            // TODO:piba,ZeroInstaller, exportAsZeroInstallerXml
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.AddExtension = true;
+            saveFileDialog.Filter = "ZeroInstaller configuration file (*.xml)|*.xml";
+            saveFileDialog.DefaultExt = "xml";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                XmlTextWriter xmlOut = new XmlTextWriter(saveFileDialog.FileName, Encoding.Default);
+                xmlOut.Formatting = Formatting.Indented;
+                xmlOut.WriteStartDocument();
+                xmlOut.WriteStartElement("ZeroInstallerXml");
 
-              xmlOut.WriteStartElement("Properties");
+                xmlOut.WriteStartElement("Properties");
                 xmlOut.WriteStartElement("Property");
                 xmlOut.WriteAttributeString("AppName", "TestApp");
                 xmlOut.WriteEndElement();
@@ -435,15 +435,15 @@ namespace PackageEditor
                 xmlOut.WriteStartElement("Property");
                 xmlOut.WriteAttributeString("BuildOutput", "[AppName].exe");
                 xmlOut.WriteEndElement();
-              xmlOut.WriteEndElement();
+                xmlOut.WriteEndElement();
 
-              xmlOut.WriteStartElement("FileSystem");
-              xmlOut.WriteEndElement();
+                xmlOut.WriteStartElement("FileSystem");
+                xmlOut.WriteEndElement();
 
-              xmlOut.WriteStartElement("Registry");
-              xmlOut.WriteEndElement();
+                xmlOut.WriteStartElement("Registry");
+                xmlOut.WriteEndElement();
 
-              xmlOut.WriteStartElement("Sandbox");
+                xmlOut.WriteStartElement("Sandbox");
                 xmlOut.WriteStartElement("FileSystem");
                 xmlOut.WriteAttributeString("access", "Full");
                 xmlOut.WriteEndElement();
@@ -451,15 +451,15 @@ namespace PackageEditor
                 xmlOut.WriteStartElement("Registry");
                 xmlOut.WriteAttributeString("access", "Full");
                 xmlOut.WriteEndElement();
-              xmlOut.WriteEndElement();
+                xmlOut.WriteEndElement();
 
-            xmlOut.WriteEndElement();
-            xmlOut.WriteEndDocument();
-            xmlOut.Flush();
-            xmlOut.Close();
+                xmlOut.WriteEndElement();
+                xmlOut.WriteEndDocument();
+                xmlOut.Flush();
+                xmlOut.Close();
 
-            xmlOut.Close();
-          }
+                xmlOut.Close();
+            }
         }
 
         private void DisplayAutoLaunch()
@@ -513,12 +513,13 @@ namespace PackageEditor
             propertyIsolationMerge.Checked = (isolationType == VirtPackage.ISOLATIONMODE_FULL_ACCESS);
 
             // Icon
-            if (!String.IsNullOrEmpty(virtPackage.openedFile)){
-              Icon icon = Win32Function.getIconFromFile(virtPackage.openedFile);
-              if (icon != null)
-              {
-                propertyIcon.Image = icon.ToBitmap();
-              }
+            if (!String.IsNullOrEmpty(virtPackage.openedFile))
+            {
+                Icon icon = Win32Function.getIconFromFile(virtPackage.openedFile);
+                if (icon != null)
+                {
+                    propertyIcon.Image = icon.ToBitmap();
+                }
             }
 
             // StopInheritance
@@ -809,7 +810,7 @@ namespace PackageEditor
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-          ThreadedRegLoadStop();
+            ThreadedRegLoadStop();
         }
 
         private void lnkAutoLaunch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1096,24 +1097,44 @@ namespace PackageEditor
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-          MainForm_Resize(null, null);
+            //MainForm_Resize(null, null);
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-          foreach (MRUitem item in mru.GetItems())
-          {
-            Icon ico = Win32Function.getIconFromFile(item.file);
-            int imageId = imageListMRU.Images.Add(ico.ToBitmap(), Color.Empty);
+            foreach (MRUitem item in mru.GetItems())
+            {
+                if (!File.Exists(item.file))
+                    continue;
+                Icon ico = Win32Function.getIconFromFile(item.file);
+                int imageId = imageListMRU.Images.Add(ico.ToBitmap(), Color.Empty);
 
-            String fileName = Path.GetFileNameWithoutExtension(item.file);
-            if (fileName.EndsWith(".virtual")) fileName = fileName.Remove(fileName.Length-8);
-            if (fileName.EndsWith(".cameyo"))  fileName = fileName.Remove(fileName.Length-7);
-            
-            ListViewItem lvitem = listViewMRU.Items.Add(fileName);
-            lvitem.ImageIndex = imageId;
-            lvitem.Tag = item.file;
-          }
+                String fileName = Path.GetFileNameWithoutExtension(item.file);
+                if (fileName.EndsWith(".virtual")) fileName = fileName.Remove(fileName.Length - 8);
+                if (fileName.EndsWith(".cameyo")) fileName = fileName.Remove(fileName.Length - 7);
+
+                ListViewItem lvItem = listViewMRU.Items.Add(fileName);
+                lvItem.ImageIndex = imageId;
+                lvItem.Tag = item.file;
+                lvItem.Group = listViewMRU.Groups["recentlyEditedGroup"];
+            }
+
+            foreach (DeployedApp deployedApp in VirtPackage.DeployedApps())
+            {
+                if (!File.Exists(deployedApp.CarrierExeName))
+                    continue;
+                Icon ico = Win32Function.getIconFromFile(deployedApp.CarrierExeName);
+                int imageId = imageListMRU.Images.Add(ico.ToBitmap(), Color.Empty);
+
+                String fileName = deployedApp.AppID;
+                if (fileName.EndsWith(".virtual")) fileName = fileName.Remove(fileName.Length - 8);
+                if (fileName.EndsWith(".cameyo")) fileName = fileName.Remove(fileName.Length - 7);
+
+                ListViewItem lvItem = listViewMRU.Items.Add(fileName);
+                lvItem.ImageIndex = imageId;
+                lvItem.Tag = deployedApp.CarrierExeName;
+                lvItem.Group = listViewMRU.Groups["deployedAppsGroup"];
+            }
         }
 
         private void rdb_CheckedChanged(object sender, EventArgs e)
@@ -1127,7 +1148,7 @@ namespace PackageEditor
         {
             if (!PackageClose())
                 return;
-            if (!virtPackage.Create("New Package ID", 
+            if (!virtPackage.Create("New Package ID",
                 Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "AppVirtDll.dll"),
                 Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Loader.exe")))
             {
@@ -1153,151 +1174,89 @@ namespace PackageEditor
 
         private void toolStripMenuItemExport_Click(object sender, EventArgs e)
         {
-          regEditor.toolStripMenuItemExport_Click(sender, e);
+            regEditor.toolStripMenuItemExport_Click(sender, e);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          regRemoveBtn.PerformClick();
+            regRemoveBtn.PerformClick();
         }
 
         private void tabRegistry_DragDrop(object sender, DragEventArgs e)
         {
-          dragging = false;
+            dragging = false;
 
-          String[] paths = (String[])e.Data.GetData(DataFormats.FileDrop);
-          foreach (String path in paths)
-          {
-            this.BeginInvoke(regEditor.Del_AddFOrF, new object[] { path });
-          }
+            String[] paths = (String[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (String path in paths)
+            {
+                this.BeginInvoke(regEditor.Del_AddFOrF, new object[] { path });
+            }
         }
 
         private void tabRegistry_DragEnter(object sender, DragEventArgs e)
         {
-          if (e.Data.GetDataPresent(DataFormats.FileDrop))
-          {
-            ((Control)sender).Focus();
-            e.Effect = DragDropEffects.Copy;
-            dragging = false;
-          }
-          else
-          {
-            e.Effect = DragDropEffects.None;
-          }
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                ((Control)sender).Focus();
+                e.Effect = DragDropEffects.Copy;
+                dragging = false;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
         }
 
         private void tabRegistry_DragOver(object sender, DragEventArgs e)
         {
-          //
-        }
-
-        private void listViewMRU_Resize(object sender, EventArgs e)
-        {
-          columnFileN.Width = listViewMRU.ClientSize.Width;
+            //
         }
 
         private void btnNewPackage_Click(object sender, EventArgs e)
         {
-          newToolStripMenuItem_Click(sender, e);
+            newToolStripMenuItem_Click(sender, e);
         }
 
         private void btnEditPackage_Click(object sender, EventArgs e)
         {
-          openToolStripMenuItem_Click(sender, e);
+            openToolStripMenuItem_Click(sender, e);
         }
 
         private void listViewMRU_Click(object sender, EventArgs e)
         {
-          if (listViewMRU.SelectedItems.Count != 1)
-            return;
-          
-          //ListViewItem[] l = listViewMRU.SelectedItems.ToString();
-          PackageOpen((String)listViewMRU.SelectedItems[0].Tag);
-        }
-
-        void centerOnForm(Control c,int offset)
-        {
-          c.Left = (this.Width - c.Width) / 2 + offset;
-        }
-
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-          centerOnForm(panelRecentPackages,0);
-          centerOnForm(btnNewPackage, -btnNewPackage.Width / 2 - 10);
-          centerOnForm(btnEditPackage, btnEditPackage.Width / 2 + 10);
-          pictureBox2.Width = panelWelcome.ClientSize.Width;
-        }
-
-        private void pictureBox2_SizeChanged(object sender, EventArgs e)
-        {
-          Rectangle r = pictureBox2.ClientRectangle;
-          if (r.Width > 0)
-          {
-            Bitmap bm = new Bitmap(r.Width, r.Height);
-
-            pictureBox2.Image = null;
-            pictureBox2.Image = bm;
-
-            System.Drawing.Graphics graphicsObj;
-            graphicsObj = Graphics.FromImage(bm); //pictureBox2.CreateGraphics();
-            graphicsObj.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            
-            Rectangle myRectangle = new Rectangle(-20, -100, r.Width+40, 200);
-            graphicsObj.FillEllipse(new SolidBrush(Color.FromArgb(64,64,64)), myRectangle);
-            
-            myRectangle = new Rectangle(0, 135, r.Width, 10);
-            graphicsObj.FillRectangle(new SolidBrush(Color.FromArgb(64,64,64)), myRectangle);
-            myRectangle = new Rectangle(0, 145, r.Width, 10);
-            graphicsObj.FillRectangle(Brushes.DarkGray, myRectangle);
-          }
-        }
-        private ListViewItem mHoverItem;
-        private void listViewMRU_MouseHover(object sender, EventArgs e)
-        {
-          Point p = listViewMRU.PointToClient(new Point(MousePosition.X, MousePosition.Y));
-          ListViewItem item = listViewMRU.GetItemAt(p.X, p.Y);
-          if (object.ReferenceEquals(mHoverItem, item)) 
-            return;
-          if (mHoverItem != null) 
-             mHoverItem.Font = listViewMRU.Font;
-          if (item != null)
-            item.Font = new Font(listViewMRU.Font, FontStyle.Underline);
-          mHoverItem = item;
-        }
-
-        private void listViewMRU_MouseMove(object sender, MouseEventArgs e)
-        {
-          listViewMRU_MouseHover(null, null);
+            if (listViewMRU.SelectedItems.Count != 1)
+                return;
+            PackageOpen((String)listViewMRU.SelectedItems[0].Tag);
         }
 
         private void regImportBtn_Click(object sender, EventArgs e)
         {
-          regEditor.RegFileImport();  
+            regEditor.RegFileImport();
         }
 
         private void regExportBtn_Click(object sender, EventArgs e)
         {
-          regEditor.RegFileExport();  
+            regEditor.RegFileExport();
         }
 
         private void fileContextMenuDelete_Click(object sender, EventArgs e)
-        { 
-          fsRemoveBtn.PerformClick();
+        {
+            fsRemoveBtn.PerformClick();
         }
 
         private void fileContextMenuProperties_Click(object sender, EventArgs e)
         {
-          fsEditor.ShowProperties();
+            fsEditor.ShowProperties();
         }
 
         private void fsFilesList_ItemDrag(object sender, ItemDragEventArgs e)
         {
-          fsEditor.DragDropFiles((FileListViewItem)e.Item);
+            fsEditor.DragDropFiles((FileListViewItem)e.Item);
         }
 
         private void fsFolderTree_ItemDrag(object sender, ItemDragEventArgs e)
         {
-          fsEditor.DragDropFiles((FolderTreeNode)e.Item);
+            fsEditor.DragDropFiles((FolderTreeNode)e.Item);
         }
     }
 
@@ -1362,12 +1321,13 @@ namespace PackageEditor
 
     public class MRUitem
     {
-      public MRUitem(String name,String file){
-        this.name = name;
-        this.file = file;
-      }
-      public String name;
-      public String file;
+        public MRUitem(String name, String file)
+        {
+            this.name = name;
+            this.file = file;
+        }
+        public String name;
+        public String file;
     }
 
     public class MRU
@@ -1433,19 +1393,19 @@ namespace PackageEditor
 
         public List<MRUitem> GetItems()
         {
-          List<MRUitem> result = new List<MRUitem>();
+            List<MRUitem> result = new List<MRUitem>();
 
-          String[] items = regKey.GetValueNames();
-          List<String> list = new List<string>(items);
-          list.Sort();
-          for (int i = 0; i < list.Count; i++)
-          {
-            String fileNameValue = (String)regKey.GetValue(list[i]);
-            if (fileNameValue == null || !File.Exists(fileNameValue))
-              continue;
-            result.Add(new MRUitem(list[i], fileNameValue));            
-          }
-          return result;
+            String[] items = regKey.GetValueNames();
+            List<String> list = new List<string>(items);
+            list.Sort();
+            for (int i = 0; i < list.Count; i++)
+            {
+                String fileNameValue = (String)regKey.GetValue(list[i]);
+                if (fileNameValue == null || !File.Exists(fileNameValue))
+                    continue;
+                result.Add(new MRUitem(list[i], fileNameValue));
+            }
+            return result;
         }
 
         public void AddFile(String fileName)
