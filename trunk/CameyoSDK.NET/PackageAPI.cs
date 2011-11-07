@@ -756,7 +756,7 @@ namespace VirtPackageAPI
             List<DeployedApp> deployedApps = new List<DeployedApp>();
             foreach (String appID in appIDs)
             {
-                deployedApps.Add(DeployedApp.FromAppID (appID));
+                deployedApps.Add(DeployedApp.FromAppID(appID));
             }
             return deployedApps;
         }
@@ -873,6 +873,10 @@ namespace VirtPackageAPI
         internal String m_BaseDirName;
         public String CarrierExeName { get { return m_CarrierExeName; } }
         internal String m_CarrierExeName;
+        public long OccupiedSize { get { return GetOccupiedSize(); } }
+        internal long m_OccupiedSize = -1;
+        public String EngineVersion { get { return GetEngineVersion(); } }
+        internal String m_EngineVersion;
 
         // Basic ini settings
         public String BuildUid { get { return (String)IniProperties["BuildUID"]; } }
@@ -894,6 +898,50 @@ namespace VirtPackageAPI
             m_BaseDirName = baseDirName;
             m_CarrierExeName = carrierExeName;
             m_IniProperties = VirtPackage.ReadIniSettings(Path.Combine(baseDirName, "VirtApp.ini"));
+        }
+
+        private static long DirSize(DirectoryInfo d) 
+        {    
+            long Size = 0;    
+            // Add file sizes.
+            FileInfo[] fis = d.GetFiles();
+            foreach (FileInfo fi in fis) 
+            {      
+                Size += fi.Length;    
+            }
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+            foreach (DirectoryInfo di in dis) 
+            {
+                Size += DirSize(di);   
+            }
+            return(Size);  
+        }
+
+        private long GetOccupiedSize()
+        {
+            if (m_OccupiedSize != -1)
+                return m_OccupiedSize;
+            if (!Directory.Exists(m_BaseDirName))
+            {
+                m_OccupiedSize = 0;
+                return m_OccupiedSize;
+            }
+            DirectoryInfo d = new DirectoryInfo(m_BaseDirName);
+            m_OccupiedSize = DirSize(d);
+            return m_OccupiedSize;
+        }
+
+        private String GetEngineVersion()
+        {
+            if (!String.IsNullOrEmpty(m_EngineVersion))
+                return m_EngineVersion;
+            String appVirtDll = m_BaseDirName + "\\AppVirtDll_" + m_AppID + ".dll";
+            if (!File.Exists(appVirtDll))
+                return "";
+            System.Diagnostics.FileVersionInfo fileVersionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(appVirtDll);
+            m_EngineVersion = fileVersionInfo.FileVersion.Replace(" ", "").Replace(",", ".");  // virtPkg.EngineVer is in the form: "1, 7, 534, 0"
+            return m_EngineVersion;
         }
 
         static public DeployedApp FromAppID(String appID)

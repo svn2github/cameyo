@@ -19,9 +19,13 @@ namespace PackageEditor
             bool notifyPackageBuilt = false;
             if (args.Length >= 1)
             {
-                if (args.Length == 2 && args[0].ToUpper() == "/PACKAGEBUILT")
+                if (args.Length == 2 && args[0].Equals("/packagebuilt", StringComparison.InvariantCultureIgnoreCase))
                 {
                     notifyPackageBuilt = true;
+                    param = args[1];
+                }
+                else if (args.Length == 2 && args[0].Equals("/edit", StringComparison.InvariantCultureIgnoreCase))
+                {
                     param = args[1];
                 }
                 else

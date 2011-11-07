@@ -32,10 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Recently edited", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("In use on this computer", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Recently edited", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("On this computer", System.Windows.Forms.HorizontalAlignment.Left);
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,6 +123,10 @@
             this.tbValue = new System.Windows.Forms.TextBox();
             this.tbSize = new System.Windows.Forms.TextBox();
             this.tbFile = new System.Windows.Forms.TextBox();
+            this.regFilesList = new PackageEditor.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -158,14 +162,10 @@
             this.imageListMRU = new System.Windows.Forms.ImageList(this.components);
             this.btnEditPackage = new System.Windows.Forms.Button();
             this.btnNewPackage = new System.Windows.Forms.Button();
-            this.bkPanel = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.PictureBox();
-            this.panel12 = new System.Windows.Forms.PictureBox();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.regFilesList = new PackageEditor.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel12 = new System.Windows.Forms.PictureBox();
+            this.panel11 = new System.Windows.Forms.PictureBox();
+            this.bkPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
@@ -204,9 +204,9 @@
             this.groupBox5.SuspendLayout();
             this.tabWelcome.SuspendLayout();
             this.panelWelcome.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panel11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panel12)).BeginInit();
             this.bottomPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panel12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panel11)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList
@@ -1129,6 +1129,44 @@
             this.tbFile.TabIndex = 8;
             this.tbFile.Visible = false;
             // 
+            // regFilesList
+            // 
+            this.regFilesList.AllowColumnReorder = true;
+            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.regFilesList.DoubleClickActivation = false;
+            this.regFilesList.FullRowSelect = true;
+            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+            this.regFilesList.Location = new System.Drawing.Point(0, 25);
+            this.regFilesList.Name = "regFilesList";
+            this.regFilesList.Size = new System.Drawing.Size(509, 334);
+            this.regFilesList.TabIndex = 7;
+            this.regFilesList.UseCompatibleStateImageBehavior = false;
+            this.regFilesList.View = System.Windows.Forms.View.Details;
+            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "File";
+            this.columnHeader3.Width = 144;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Value";
+            this.columnHeader4.Width = 246;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Type";
+            this.columnHeader5.Width = 98;
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.panel6);
@@ -1459,7 +1497,7 @@
             this.columnFileN});
             listViewGroup1.Header = "Recently edited";
             listViewGroup1.Name = "recentlyEditedGroup";
-            listViewGroup2.Header = "In use on this computer";
+            listViewGroup2.Header = "On this computer";
             listViewGroup2.Name = "deployedAppsGroup";
             this.listViewMRU.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1,
@@ -1488,15 +1526,15 @@
             // btnEditPackage
             // 
             this.btnEditPackage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditPackage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditPackage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditPackage.Image = ((System.Drawing.Image)(resources.GetObject("btnEditPackage.Image")));
             this.btnEditPackage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEditPackage.Location = new System.Drawing.Point(23, 17);
             this.btnEditPackage.Margin = new System.Windows.Forms.Padding(0);
             this.btnEditPackage.Name = "btnEditPackage";
-            this.btnEditPackage.Size = new System.Drawing.Size(238, 34);
+            this.btnEditPackage.Size = new System.Drawing.Size(188, 34);
             this.btnEditPackage.TabIndex = 10;
-            this.btnEditPackage.Text = "   Browse existing app to edit";
+            this.btnEditPackage.Text = "   Browse existing app";
             this.btnEditPackage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEditPackage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEditPackage.UseVisualStyleBackColor = true;
@@ -1505,49 +1543,19 @@
             // btnNewPackage
             // 
             this.btnNewPackage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNewPackage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewPackage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewPackage.Image = ((System.Drawing.Image)(resources.GetObject("btnNewPackage.Image")));
             this.btnNewPackage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNewPackage.Location = new System.Drawing.Point(271, 17);
+            this.btnNewPackage.Location = new System.Drawing.Point(225, 17);
             this.btnNewPackage.Margin = new System.Windows.Forms.Padding(0);
             this.btnNewPackage.Name = "btnNewPackage";
-            this.btnNewPackage.Size = new System.Drawing.Size(238, 34);
+            this.btnNewPackage.Size = new System.Drawing.Size(188, 34);
             this.btnNewPackage.TabIndex = 9;
-            this.btnNewPackage.Text = "   Create virtual app from scratch";
+            this.btnNewPackage.Text = "   Create app from scratch";
             this.btnNewPackage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNewPackage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNewPackage.UseVisualStyleBackColor = true;
             this.btnNewPackage.Click += new System.EventHandler(this.btnNewPackage_Click);
-            // 
-            // bkPanel
-            // 
-            this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
-            this.bkPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bkPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bkPanel.Location = new System.Drawing.Point(0, 0);
-            this.bkPanel.Name = "bkPanel";
-            this.bkPanel.Size = new System.Drawing.Size(751, 506);
-            this.bkPanel.TabIndex = 9;
-            // 
-            // panel11
-            // 
-            this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel11.Location = new System.Drawing.Point(595, 0);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(156, 47);
-            this.panel11.TabIndex = 0;
-            this.panel11.TabStop = false;
-            // 
-            // panel12
-            // 
-            this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(0, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(595, 47);
-            this.panel12.TabIndex = 1;
-            this.panel12.TabStop = false;
             // 
             // bottomPanel
             // 
@@ -1559,43 +1567,35 @@
             this.bottomPanel.Size = new System.Drawing.Size(751, 47);
             this.bottomPanel.TabIndex = 8;
             // 
-            // regFilesList
+            // panel12
             // 
-            this.regFilesList.AllowColumnReorder = true;
-            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.regFilesList.DoubleClickActivation = false;
-            this.regFilesList.FullRowSelect = true;
-            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.regFilesList.Location = new System.Drawing.Point(0, 25);
-            this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(509, 334);
-            this.regFilesList.TabIndex = 7;
-            this.regFilesList.UseCompatibleStateImageBehavior = false;
-            this.regFilesList.View = System.Windows.Forms.View.Details;
-            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+            this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(595, 47);
+            this.panel12.TabIndex = 1;
+            this.panel12.TabStop = false;
             // 
-            // columnHeader3
+            // panel11
             // 
-            this.columnHeader3.Text = "File";
-            this.columnHeader3.Width = 144;
+            this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel11.Location = new System.Drawing.Point(595, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(156, 47);
+            this.panel11.TabIndex = 0;
+            this.panel11.TabStop = false;
             // 
-            // columnHeader4
+            // bkPanel
             // 
-            this.columnHeader4.Text = "Value";
-            this.columnHeader4.Width = 246;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Type";
-            this.columnHeader5.Width = 98;
+            this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
+            this.bkPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bkPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bkPanel.Location = new System.Drawing.Point(0, 0);
+            this.bkPanel.Name = "bkPanel";
+            this.bkPanel.Size = new System.Drawing.Size(751, 506);
+            this.bkPanel.TabIndex = 9;
             // 
             // MainForm
             // 
@@ -1677,9 +1677,9 @@
             this.groupBox5.PerformLayout();
             this.tabWelcome.ResumeLayout(false);
             this.panelWelcome.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panel11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panel12)).EndInit();
             this.bottomPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panel12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panel11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
