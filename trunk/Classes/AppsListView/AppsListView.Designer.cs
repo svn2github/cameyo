@@ -43,16 +43,7 @@
             this.viewBtnDetails = new System.Windows.Forms.ToolStripButton();
             this.viewBtnIcons = new System.Windows.Forms.ToolStripButton();
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
-            this.appContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.appContextMenuLaunch = new System.Windows.Forms.ToolStripMenuItem();
-            this.appContextMenuRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.appContextMenuEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.appContextMenuVintegrate = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.appContextMenuProperties = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
-            this.appContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvApps
@@ -61,7 +52,6 @@
             this.colName,
             this.colOccupiedSize,
             this.colVersion});
-            this.lvApps.ContextMenuStrip = this.appContextMenu;
             this.lvApps.Dock = System.Windows.Forms.DockStyle.Fill;
             listViewGroup1.Header = "Currently running";
             listViewGroup1.Name = "runningGroup";
@@ -150,64 +140,6 @@
             this.refreshTimer.Interval = 300;
             this.refreshTimer.Tick += new System.EventHandler(this.refreshTimer_Tick);
             // 
-            // appContextMenu
-            // 
-            this.appContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.appContextMenuLaunch,
-            this.appContextMenuRemove,
-            this.appContextMenuEdit,
-            this.toolStripSeparator1,
-            this.appContextMenuVintegrate,
-            this.toolStripSeparator2,
-            this.appContextMenuProperties});
-            this.appContextMenu.Name = "appContextMenu";
-            this.appContextMenu.Size = new System.Drawing.Size(179, 126);
-            // 
-            // appContextMenuLaunch
-            // 
-            this.appContextMenuLaunch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.appContextMenuLaunch.Name = "appContextMenuLaunch";
-            this.appContextMenuLaunch.Size = new System.Drawing.Size(178, 22);
-            this.appContextMenuLaunch.Text = "&Launch";
-            this.appContextMenuLaunch.Click += new System.EventHandler(this.appContextMenuLaunch_Click);
-            // 
-            // appContextMenuRemove
-            // 
-            this.appContextMenuRemove.Name = "appContextMenuRemove";
-            this.appContextMenuRemove.Size = new System.Drawing.Size(178, 22);
-            this.appContextMenuRemove.Text = "&Remove";
-            this.appContextMenuRemove.Click += new System.EventHandler(this.appContextMenuRemove_Click);
-            // 
-            // appContextMenuEdit
-            // 
-            this.appContextMenuEdit.Name = "appContextMenuEdit";
-            this.appContextMenuEdit.Size = new System.Drawing.Size(178, 22);
-            this.appContextMenuEdit.Text = "&Edit";
-            this.appContextMenuEdit.Click += new System.EventHandler(this.appContextMenuEdit_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(175, 6);
-            // 
-            // appContextMenuVintegrate
-            // 
-            this.appContextMenuVintegrate.Name = "appContextMenuVintegrate";
-            this.appContextMenuVintegrate.Size = new System.Drawing.Size(178, 22);
-            this.appContextMenuVintegrate.Text = "Desktop integration";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(175, 6);
-            // 
-            // appContextMenuProperties
-            // 
-            this.appContextMenuProperties.Name = "appContextMenuProperties";
-            this.appContextMenuProperties.Size = new System.Drawing.Size(178, 22);
-            this.appContextMenuProperties.Text = "&Properties";
-            this.appContextMenuProperties.Click += new System.EventHandler(this.appContextMenuProperties_Click);
-            // 
             // AppsListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,7 +151,6 @@
             this.Load += new System.EventHandler(this.AppsListView_Load);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
-            this.appContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,16 +165,8 @@
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton viewBtnDetails;
         private System.Windows.Forms.ToolStripButton viewBtnIcons;
-        private System.Windows.Forms.ImageList imgsAppsLarge;
-        private System.Windows.Forms.ImageList imgsAppsSmall;
+        public System.Windows.Forms.ImageList imgsAppsLarge;
+        public System.Windows.Forms.ImageList imgsAppsSmall;
         private System.Windows.Forms.Timer refreshTimer;
-        private System.Windows.Forms.ContextMenuStrip appContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem appContextMenuLaunch;
-        private System.Windows.Forms.ToolStripMenuItem appContextMenuRemove;
-        private System.Windows.Forms.ToolStripMenuItem appContextMenuEdit;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem appContextMenuVintegrate;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem appContextMenuProperties;
     }
 }
