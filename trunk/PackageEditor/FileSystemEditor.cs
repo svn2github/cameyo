@@ -10,6 +10,7 @@ using VirtPackageAPI;
 using PackageEditor.FilesEditing;
 using PackageEditor.Utilities;
 using Delay;
+using Cameyo.OpenSrc.Common;
 
 namespace PackageEditor
 {

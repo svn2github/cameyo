@@ -62,7 +62,8 @@ namespace VirtPackageAPI
         public const int ISOLATIONMODE_FULL_ACCESS = 2;
         public const int ISOLATIONMODE_DATA = 3;
 
-        private const String DLLNAME = "PackagerDll.dll";
+        private const String DLL32 = "PackagerDll.dll";
+        private const String DLL64 = "PackagerDll64.dll";
         private const int MAX_STRING = 64 * 1024;
 
         private IntPtr hPkg;
@@ -95,46 +96,138 @@ namespace VirtPackageAPI
 
         //
         // DLL imports
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int PackageOpen(
+
+        // PackageOpen
+        [DllImport(DLL32, EntryPoint="PackageOpen", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageOpen32(
             String PackageExeFile,
             UInt32 Reserved,
             ref IntPtr hPkg);
+        [DllImport(DLL64, EntryPoint = "PackageOpen", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageOpen64(
+            String PackageExeFile,
+            UInt32 Reserved,
+            ref IntPtr hPkg);
+        private static int PackageOpen(
+            String PackageExeFile,
+            UInt32 Reserved,
+            ref IntPtr hPkg)
+        {
+            return Is32Bit() ? PackageOpen32(PackageExeFile, Reserved, ref hPkg) : PackageOpen64(PackageExeFile, Reserved, ref hPkg);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int PackageCreate(
+        // PackageCreate
+        [DllImport(DLL32, EntryPoint="PackageCreate", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageCreate32(
             String AppID,
             String AppVirtDll,
             String LoaderExe,
             ref IntPtr hPkg);
+        [DllImport(DLL64, EntryPoint = "PackageCreate", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageCreate64(
+            String AppID,
+            String AppVirtDll,
+            String LoaderExe,
+            ref IntPtr hPkg);
+        private static int PackageCreate(
+            String AppID,
+            String AppVirtDll,
+            String LoaderExe,
+            ref IntPtr hPkg)
+        {
+            return Is32Bit() ? PackageCreate32(AppID, AppVirtDll, LoaderExe, ref hPkg) : PackageCreate64(AppID, AppVirtDll, LoaderExe, ref hPkg);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static void PackageClose(
+        // PackageClose
+        [DllImport(DLL32, EntryPoint = "PackageClose", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static void PackageClose32(
             IntPtr hPkg);
+        [DllImport(DLL64, EntryPoint = "PackageClose", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static void PackageClose64(
+            IntPtr hPkg);
+        private static void PackageClose(
+            IntPtr hPkg)
+        {
+            if (Is32Bit())
+                PackageClose32(hPkg);
+            else
+                PackageClose64(hPkg);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int PackageSave(
+        // PackageSave
+        [DllImport(DLL32, EntryPoint="PackageSave", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageSave32(
             IntPtr hPkg,
             String OutFileName);
+        [DllImport(DLL64, EntryPoint = "PackageSave", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageSave64(
+            IntPtr hPkg,
+            String OutFileName);
+        private static int PackageSave(
+            IntPtr hPkg,
+            String OutFileName)
+        {
+            return Is32Bit() ? PackageSave32(hPkg, OutFileName) : PackageSave64(hPkg, OutFileName);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int PackageGetProperty(
+        // PackageGetProperty
+        [DllImport(DLL32, EntryPoint="PackageGetProperty", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageGetProperty32(
             IntPtr hPkg,
             String Name,
             StringBuilder Value,
             UInt32 ValueLen);
+        [DllImport(DLL64, EntryPoint = "PackageGetProperty", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageGetProperty64(
+            IntPtr hPkg,
+            String Name,
+            StringBuilder Value,
+            UInt32 ValueLen);
+        private static int PackageGetProperty(
+            IntPtr hPkg,
+            String Name,
+            StringBuilder Value,
+            UInt32 ValueLen)
+        {
+            return Is32Bit() ? PackageGetProperty32(hPkg, Name, Value, ValueLen) : PackageGetProperty64(hPkg, Name, Value, ValueLen);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int PackageSetProperty(
+        // PackageSetProperty
+        [DllImport(DLL32, EntryPoint="PackageSetProperty", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageSetProperty32(
             IntPtr hPkg,
             String Name,
             String Value);
+        [DllImport(DLL64, EntryPoint = "PackageSetProperty", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageSetProperty64(
+            IntPtr hPkg,
+            String Name,
+            String Value);
+        private static int PackageSetProperty(
+            IntPtr hPkg,
+            String Name,
+            String Value)
+        {
+            return Is32Bit() ? PackageSetProperty32(hPkg, Name, Value) : PackageSetProperty64(hPkg, Name, Value);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int PackageSetIconFile(
+        // PackageSetIconFile
+        [DllImport(DLL32, EntryPoint="PackageSetIconFile", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageSetIconFile32(
             IntPtr hPkg,
             String FileName);
+        [DllImport(DLL64, EntryPoint = "PackageSetIconFile", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageSetIconFile64(
+            IntPtr hPkg,
+            String FileName);
+        private static int PackageSetIconFile(
+            IntPtr hPkg,
+            String FileName)
+        {
+            return Is32Bit() ? PackageSetIconFile32(hPkg, FileName) : PackageSetIconFile64(hPkg, FileName);
+        }
 
+        //
         // VirtFs imports
         private delegate bool VIRTFS_ENUM_CALLBACK(
             ref Object Data,
@@ -146,113 +239,390 @@ namespace VirtPackageAPI
             UInt64 ChangeTime,
             UInt64 EndOfFile,
             UInt32 FileAttributes);
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtFsEnum(
+        [DllImport(DLL32, EntryPoint="VirtFsEnum", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsEnum32(
             IntPtr hPkg,
             VIRTFS_ENUM_CALLBACK Callback,
             ref Object Data);
+        [DllImport(DLL64, EntryPoint = "VirtFsEnum", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsEnum64(
+            IntPtr hPkg,
+            VIRTFS_ENUM_CALLBACK Callback,
+            ref Object Data);
+        private static int VirtFsEnum(
+            IntPtr hPkg,
+            VIRTFS_ENUM_CALLBACK Callback,
+            ref Object Data)
+        {
+            return Is32Bit() ? VirtFsEnum32(hPkg, Callback, ref Data) : VirtFsEnum64(hPkg, Callback, ref Data);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtFsAdd(
+        // VirtFsAdd
+        [DllImport(DLL32, EntryPoint="VirtFsAdd", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsAdd32(
             IntPtr hPkg,
             String SrcFileName,
             String DestFileName,
             bool bVariablizeName);
+        [DllImport(DLL64, EntryPoint = "VirtFsAdd", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsAdd64(
+            IntPtr hPkg,
+            String SrcFileName,
+            String DestFileName,
+            bool bVariablizeName);
+        private static int VirtFsAdd(
+            IntPtr hPkg,
+            String SrcFileName,
+            String DestFileName,
+            bool bVariablizeName)
+        {
+            return Is32Bit() ? VirtFsAdd32(hPkg, SrcFileName, DestFileName, bVariablizeName) : VirtFsAdd64(hPkg, SrcFileName, DestFileName, bVariablizeName);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtFsAddEx(
+        // VirtFsAddEx
+        [DllImport(DLL32, EntryPoint="VirtFsAddEx", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsAddEx32(
             IntPtr hPkg,
             String SrcFileName,
             String DestFileName,
             bool bVariablizeName,
             UInt32 FileFlags);
+        [DllImport(DLL64, EntryPoint = "VirtFsAddEx", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsAddEx64(
+            IntPtr hPkg,
+            String SrcFileName,
+            String DestFileName,
+            bool bVariablizeName,
+            UInt32 FileFlags);
+        private static int VirtFsAddEx(
+            IntPtr hPkg,
+            String SrcFileName,
+            String DestFileName,
+            bool bVariablizeName,
+            UInt32 FileFlags)
+        {
+            return Is32Bit() ? VirtFsAddEx32(hPkg, SrcFileName, DestFileName, bVariablizeName, FileFlags) : VirtFsAddEx64(hPkg, SrcFileName, DestFileName, bVariablizeName, FileFlags);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtFsAddEmptyDir(
+        // VirtFsAddEmptyDir
+        [DllImport(DLL32, EntryPoint="VirtFsAddEmptyDir", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsAddEmptyDir32(
             IntPtr hPkg,
             String DirName,
             bool bVariablizeName);
+        [DllImport(DLL64, EntryPoint = "VirtFsAddEmptyDir", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsAddEmptyDir64(
+            IntPtr hPkg,
+            String DirName,
+            bool bVariablizeName);
+        private static int VirtFsAddEmptyDir(
+            IntPtr hPkg,
+            String DirName,
+            bool bVariablizeName)
+        {
+            return Is32Bit() ? VirtFsAddEmptyDir32(hPkg, DirName, bVariablizeName) : VirtFsAddEmptyDir64(hPkg, DirName, bVariablizeName);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtFsExtract(
+        // VirtFsExtract
+        [DllImport(DLL32, EntryPoint="VirtFsExtract", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsExtract32(
             IntPtr hPkg,
             String FileName,
             String TargetDir);
+        [DllImport(DLL64, EntryPoint = "VirtFsExtract", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsExtract64(
+            IntPtr hPkg,
+            String FileName,
+            String TargetDir);
+        private static int VirtFsExtract(
+            IntPtr hPkg,
+            String FileName,
+            String TargetDir)
+        {
+            return Is32Bit() ? VirtFsExtract32(hPkg, FileName, TargetDir) : VirtFsExtract64(hPkg, FileName, TargetDir);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtFsDelete(
+        // VirtFsDelete
+        [DllImport(DLL32, EntryPoint = "VirtFsDelete", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsDelete32(
             IntPtr hPkg,
             String FileName);
-
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        public extern static int VirtFsSetFileStreaming(
+        [DllImport(DLL64, EntryPoint = "VirtFsDelete", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsDelete64(
             IntPtr hPkg,
             String FileName);
+        private static int VirtFsDelete(
+            IntPtr hPkg,
+            String FileName)
+        {
+            return Is32Bit() ? VirtFsDelete32(hPkg, FileName) : VirtFsDelete64(hPkg, FileName);
+        }
 
+        // VirtFsSetFileStreaming
+        [DllImport(DLL32, EntryPoint="VirtFsSetFileStreaming", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsSetFileStreaming32(
+            IntPtr hPkg,
+            String FileName);
+        [DllImport(DLL64, EntryPoint = "VirtFsSetFileStreaming", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsSetFileStreaming64(
+            IntPtr hPkg,
+            String FileName);
+        public static int VirtFsSetFileStreaming(
+            IntPtr hPkg,
+            String FileName)
+        {
+            return Is32Bit() ? VirtFsSetFileStreaming32(hPkg, FileName) : VirtFsSetFileStreaming64(hPkg, FileName);
+        }
+
+
+        //
         // VirtReg imports
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtRegGetWorkKey(
+
+        // VirtRegGetWorkKey
+        [DllImport(DLL32, EntryPoint="VirtRegGetWorkKey", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtRegGetWorkKey32(
             IntPtr hPkg,
             StringBuilder WorkKey,
             UInt32 WorkKeyLen);
+        [DllImport(DLL32, EntryPoint = "VirtRegGetWorkKey", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtRegGetWorkKey64(
+            IntPtr hPkg,
+            StringBuilder WorkKey,
+            UInt32 WorkKeyLen);
+        private static int VirtRegGetWorkKey(
+            IntPtr hPkg,
+            StringBuilder WorkKey,
+            UInt32 WorkKeyLen)
+        {
+            return Is32Bit() ? VirtRegGetWorkKey32(hPkg, WorkKey, WorkKeyLen) : VirtRegGetWorkKey64(hPkg, WorkKey, WorkKeyLen);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtRegGetWorkKeyEx(
+        // VirtRegGetWorkKeyEx
+        [DllImport(DLL32, EntryPoint="VirtRegGetWorkKeyEx", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtRegGetWorkKeyEx32(
             IntPtr hPkg,
             StringBuilder WorkKey,
             UInt32 WorkKeyLen,
             SafeWaitHandle hAbortEvent);
+        [DllImport(DLL64, EntryPoint = "VirtRegGetWorkKeyEx", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtRegGetWorkKeyEx64(
+            IntPtr hPkg,
+            StringBuilder WorkKey,
+            UInt32 WorkKeyLen,
+            SafeWaitHandle hAbortEvent);
+        private static int VirtRegGetWorkKeyEx(
+            IntPtr hPkg,
+            StringBuilder WorkKey,
+            UInt32 WorkKeyLen,
+            SafeWaitHandle hAbortEvent)
+        {
+            return Is32Bit() ? VirtRegGetWorkKeyEx32(hPkg, WorkKey, WorkKeyLen, hAbortEvent) : VirtRegGetWorkKeyEx64(hPkg, WorkKey, WorkKeyLen, hAbortEvent);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtRegSaveWorkKey(
+        // VirtRegSaveWorkKey
+        [DllImport(DLL32, EntryPoint="VirtRegSaveWorkKey", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtRegSaveWorkKey32(
             IntPtr hPkg);
+        [DllImport(DLL64, EntryPoint = "VirtRegSaveWorkKey", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtRegSaveWorkKey64(
+            IntPtr hPkg);
+        private static int VirtRegSaveWorkKey(
+            IntPtr hPkg)
+        {
+            return Is32Bit() ? VirtRegSaveWorkKey32(hPkg) : VirtRegSaveWorkKey64(hPkg);
+        }
 
+
+        //
         // Sandbox imports
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int SandboxGetRegistryFlags(
+
+        // SandboxGetRegistryFlags
+        [DllImport(DLL32, EntryPoint="SandboxGetRegistryFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int SandboxGetRegistryFlags32(
             IntPtr hPkg,
             String Path,
             bool bVariablizeName,
             ref UInt32 SandboxFlags);
-
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int SandboxGetFileFlags(
+        [DllImport(DLL64, EntryPoint = "SandboxGetRegistryFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int SandboxGetRegistryFlags64(
             IntPtr hPkg,
             String Path,
             bool bVariablizeName,
             ref UInt32 SandboxFlags);
+        private static int SandboxGetRegistryFlags(
+            IntPtr hPkg,
+            String Path,
+            bool bVariablizeName,
+            ref UInt32 SandboxFlags)
+        {
+            return Is32Bit() ? SandboxGetRegistryFlags32(hPkg, Path, bVariablizeName, ref SandboxFlags) : SandboxGetRegistryFlags64(hPkg, Path, bVariablizeName, ref SandboxFlags);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int SandboxSetRegistryFlags(
+        // SandboxGetFileFlags
+        [DllImport(DLL32, EntryPoint="SandboxGetFileFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int SandboxGetFileFlags32(
+            IntPtr hPkg,
+            String Path,
+            bool bVariablizeName,
+            ref UInt32 SandboxFlags);
+        [DllImport(DLL64, EntryPoint = "SandboxGetFileFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int SandboxGetFileFlags64(
+            IntPtr hPkg,
+            String Path,
+            bool bVariablizeName,
+            ref UInt32 SandboxFlags);
+        private static int SandboxGetFileFlags(
+            IntPtr hPkg,
+            String Path,
+            bool bVariablizeName,
+            ref UInt32 SandboxFlags)
+        {
+            return Is32Bit() ? SandboxGetFileFlags32(hPkg, Path, bVariablizeName, ref SandboxFlags) : SandboxGetFileFlags64(hPkg, Path, bVariablizeName, ref SandboxFlags);
+        }
+
+        // SandboxSetRegistryFlags
+        [DllImport(DLL32, EntryPoint="SandboxSetRegistryFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int SandboxSetRegistryFlags32(
             IntPtr hPkg,
             String Path,
             bool bVariablizeName,
             UInt32 SandboxFlags);
-
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int SandboxSetFileFlags(
+        [DllImport(DLL64, EntryPoint = "SandboxSetRegistryFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int SandboxSetRegistryFlags64(
             IntPtr hPkg,
             String Path,
             bool bVariablizeName,
             UInt32 SandboxFlags);
+        private static int SandboxSetRegistryFlags(
+            IntPtr hPkg,
+            String Path,
+            bool bVariablizeName,
+            UInt32 SandboxFlags)
+        {
+            return Is32Bit() ? SandboxSetRegistryFlags32(hPkg, Path, bVariablizeName, SandboxFlags) : SandboxSetRegistryFlags64(hPkg, Path, bVariablizeName, SandboxFlags);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtFsGetFileFlags(
+        // SandboxSetFileFlags
+        [DllImport(DLL32, EntryPoint="SandboxSetFileFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int SandboxSetFileFlags32(
+            IntPtr hPkg,
+            String Path,
+            bool bVariablizeName,
+            UInt32 SandboxFlags);
+        [DllImport(DLL64, EntryPoint = "SandboxSetFileFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int SandboxSetFileFlags64(
+            IntPtr hPkg,
+            String Path,
+            bool bVariablizeName,
+            UInt32 SandboxFlags);
+        private static int SandboxSetFileFlags(
+            IntPtr hPkg,
+            String Path,
+            bool bVariablizeName,
+            UInt32 SandboxFlags)
+        {
+            return Is32Bit() ? SandboxSetFileFlags32(hPkg, Path, bVariablizeName, SandboxFlags) : SandboxSetFileFlags64(hPkg, Path, bVariablizeName, SandboxFlags);
+        }
+
+        // VirtFsGetFileFlags
+        [DllImport(DLL32, EntryPoint="VirtFsGetFileFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsGetFileFlags32(
             IntPtr hPkg,
             String Path,
             ref UInt32 FileFlags);
+        [DllImport(DLL64, EntryPoint = "VirtFsGetFileFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsGetFileFlags64(
+            IntPtr hPkg,
+            String Path,
+            ref UInt32 FileFlags);
+        private static int VirtFsGetFileFlags(
+            IntPtr hPkg,
+            String Path,
+            ref UInt32 FileFlags)
+        {
+            return Is32Bit() ? VirtFsGetFileFlags32(hPkg, Path, ref FileFlags) : VirtFsGetFileFlags64(hPkg, Path, ref FileFlags);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int VirtFsSetFileFlags(
+        // VirtFsSetFileFlags
+        [DllImport(DLL32, EntryPoint="VirtFsSetFileFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsSetFileFlags32(
             IntPtr hPkg,
             String Path,
             UInt32 FileFlags);
+        [DllImport(DLL64, EntryPoint = "VirtFsSetFileFlags", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int VirtFsSetFileFlags64(
+            IntPtr hPkg,
+            String Path,
+            UInt32 FileFlags);
+        private static int VirtFsSetFileFlags(
+            IntPtr hPkg,
+            String Path,
+            UInt32 FileFlags)
+        {
+            return Is32Bit() ? VirtFsSetFileFlags32(hPkg, Path, FileFlags) : VirtFsSetFileFlags64(hPkg, Path, FileFlags);
+        }
 
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        public extern static int QuickReadIni(
+        // QuickReadIni
+        [DllImport(DLL32, EntryPoint="QuickReadIni", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int QuickReadIni32(
             String PackageExeFile,
             StringBuilder IniBuf,
             UInt32 IniBufLen);
+        [DllImport(DLL64, EntryPoint = "QuickReadIni", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int QuickReadIni64(
+            String PackageExeFile,
+            StringBuilder IniBuf,
+            UInt32 IniBufLen);
+        public static int QuickReadIni(
+            String PackageExeFile,
+            StringBuilder IniBuf,
+            UInt32 IniBufLen)
+        {
+            return Is32Bit() ? QuickReadIni32(PackageExeFile, IniBuf, IniBufLen) : QuickReadIni64(PackageExeFile, IniBuf, IniBufLen);
+        }
+
+
+        //
+        // DeployedApp imports
+
+        private delegate bool DEPLOYEDAPP_ENUM_CALLBACK(
+            ref Object Data,
+            [MarshalAs(UnmanagedType.LPWStr)] String AppID);
+
+        // DeployedAppEnum
+        [DllImport(DLL32, EntryPoint="DeployedAppEnum", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int DeployedAppEnum32(
+            DEPLOYEDAPP_ENUM_CALLBACK Callback,
+            ref Object Data);
+        [DllImport(DLL64, EntryPoint = "DeployedAppEnum", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int DeployedAppEnum64(
+            DEPLOYEDAPP_ENUM_CALLBACK Callback,
+            ref Object Data);
+        private static int DeployedAppEnum(
+            DEPLOYEDAPP_ENUM_CALLBACK Callback,
+            ref Object Data)
+        {
+            return Is32Bit() ? DeployedAppEnum32(Callback, ref Data) : DeployedAppEnum64(Callback, ref Data);
+        }
+
+        // DeployedAppGetDir
+        [DllImport(DLL32, EntryPoint="DeployedAppGetDir", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int DeployedAppGetDir32(
+            String AppID,
+            StringBuilder BaseDirName,
+            UInt32 BaseDirNameLen);
+        [DllImport(DLL64, EntryPoint = "DeployedAppGetDir", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int DeployedAppGetDir64(
+            String AppID,
+            StringBuilder BaseDirName,
+            UInt32 BaseDirNameLen);
+        private static int DeployedAppGetDir(
+            String AppID,
+            StringBuilder BaseDirName,
+            UInt32 BaseDirNameLen)
+        {
+            return Is32Bit() ? DeployedAppGetDir32(AppID, BaseDirName, BaseDirNameLen) : DeployedAppGetDir64(AppID, BaseDirName, BaseDirNameLen);
+        }
 
         [StructLayout(LayoutKind.Sequential)]
         public struct VIRT_PROCESS
@@ -261,7 +631,26 @@ namespace VirtPackageAPI
             UInt32 Flags;
         }
 
+
+        //
         // RunningApp imports
+
+        // RunningAppEnum
+        [DllImport(DLL32, EntryPoint = "RunningAppEnum", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int RunningAppEnum32(
+            RUNNINGAPP_ENUM_CALLBACK Callback,
+            ref Object Data);
+        [DllImport(DLL64, EntryPoint = "RunningAppEnum", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int RunningAppEnum64(
+            RUNNINGAPP_ENUM_CALLBACK Callback,
+            ref Object Data);
+        private static int RunningAppEnum(
+            RUNNINGAPP_ENUM_CALLBACK Callback,
+            ref Object Data)
+        {
+            return Is32Bit() ? RunningAppEnum32(Callback, ref Data) : RunningAppEnum64(Callback, ref Data);
+        }
+
         [StructLayout(LayoutKind.Sequential)]
         private struct RUNNING_APP
         {
@@ -293,25 +682,6 @@ namespace VirtPackageAPI
         private delegate bool RUNNINGAPP_ENUM_CALLBACK(
             ref Object Data,
             ref RUNNING_APP RunningApp);
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int RunningAppEnum(
-            RUNNINGAPP_ENUM_CALLBACK Callback,
-            ref Object Data);
-
-        // DeployedApp imports
-        private delegate bool DEPLOYEDAPP_ENUM_CALLBACK(
-            ref Object Data,
-            [MarshalAs(UnmanagedType.LPWStr)] String AppID);
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int DeployedAppEnum(
-            DEPLOYEDAPP_ENUM_CALLBACK Callback,
-            ref Object Data);
-
-        [DllImport(DLLNAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
-        private extern static int DeployedAppGetDir(
-            String AppID,
-            StringBuilder BaseDirName,
-            UInt32 BaseDirNameLen);
 
         //
         // .NET wrapper
@@ -325,6 +695,11 @@ namespace VirtPackageAPI
         ~VirtPackage()
         {
             Close();
+        }
+
+        static public bool Is32Bit()
+        {
+            return (IntPtr.Size == 4);
         }
 
         public bool Close()
@@ -875,15 +1250,20 @@ namespace VirtPackageAPI
         internal String m_CarrierExeName;
         public long OccupiedSize { get { return GetOccupiedSize(); } }
         internal long m_OccupiedSize = -1;
+        public long ExeSize { get { return GetExeSize(); } }
+        public long m_ExeSize = -1;
         public String EngineVersion { get { return GetEngineVersion(); } }
-        internal String m_EngineVersion;
+        public String m_EngineVersion;
 
         // Basic ini settings
-        public String BuildUid { get { return (String)IniProperties["BuildUID"]; } }
+        public String Version { get { return GetVersion(); } }
+        public String m_Version;
+        public String Publisher { get { return GetPublisher(); } }
+        public String m_Publisher;
+        public String BuildUid { get { return GetBuildUid(); } }
+        public String m_BuildUid;
         public String CloudPkgId { get { return (String)IniProperties["CloudPkgId"]; } }
         public String Streamer { get { return (String)IniProperties["Streamer"]; } }
-        public String Publisher { get { return (String)IniProperties["Publisher"]; } }
-        public String Version { get { return (String)IniProperties["Version"]; } }
         public String FriendlyName { get { return (String)IniProperties["FriendlyName"]; } }
         public String AutoLaunch { get { return (String)IniProperties["AutoLaunch"]; } }
         public String Shortcuts { get { return (String)IniProperties["Shortcuts"]; } }
@@ -918,6 +1298,30 @@ namespace VirtPackageAPI
             return(Size);  
         }
 
+        private String GetVersion()
+        {
+            if (!String.IsNullOrEmpty(m_Version) || m_IniProperties == null || m_IniProperties["Version"] == null)
+                return m_Version;
+            m_Version = (String)IniProperties["Version"];
+            return m_Version;
+        }
+
+        private String GetPublisher()
+        {
+            if (!String.IsNullOrEmpty(m_Publisher) || m_IniProperties == null || m_IniProperties["Publisher"] == null)
+                return m_Publisher;
+            m_Publisher = (String)IniProperties["Publisher"];
+            return m_Publisher;
+        }
+
+        private String GetBuildUid()
+        {
+            if (!String.IsNullOrEmpty(m_BuildUid) || m_IniProperties == null || m_IniProperties["BuildUid"] == null)
+                return m_BuildUid;
+            m_BuildUid = (String)IniProperties["BuildUid"];
+            return m_BuildUid;
+        }
+
         private long GetOccupiedSize()
         {
             if (m_OccupiedSize != -1)
@@ -930,6 +1334,20 @@ namespace VirtPackageAPI
             DirectoryInfo d = new DirectoryInfo(m_BaseDirName);
             m_OccupiedSize = DirSize(d);
             return m_OccupiedSize;
+        }
+
+        private long GetExeSize()
+        {
+            if (m_ExeSize != -1)
+                return m_ExeSize;
+            if (!File.Exists(m_CarrierExeName))
+            {
+                m_ExeSize = 0;
+                return m_ExeSize;
+            }
+            FileInfo f = new FileInfo(m_CarrierExeName);
+            m_ExeSize = f.Length;
+            return m_ExeSize;
         }
 
         private String GetEngineVersion()

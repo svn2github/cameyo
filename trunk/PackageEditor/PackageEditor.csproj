@@ -279,6 +279,10 @@
       <Project>{36419994-CA8A-4300-826F-722E50FDFDFC}</Project>
       <Name>CameyoSDK.NET</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Classes\Common\Cameyo.OpenSrc.Common.csproj">
+      <Project>{5B07924D-C66D-4A3C-A962-B5985F761AF6}</Project>
+      <Name>Cameyo.OpenSrc.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

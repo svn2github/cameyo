@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Xml;
 using PackageEditor.FilesEditing;
 using Delay;
+using Cameyo.OpenSrc.Common;
 
 namespace PackageEditor
 {
