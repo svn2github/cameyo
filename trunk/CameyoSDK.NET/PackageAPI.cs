@@ -562,6 +562,10 @@ namespace VirtPackageAPI
             return Is32Bit() ? VirtFsSetFileFlags32(hPkg, Path, FileFlags) : VirtFsSetFileFlags64(hPkg, Path, FileFlags);
         }
 
+
+        //
+        // 'Quick' functions (do not require package to be opened, can be called on closed package files)
+
         // QuickReadIni
         [DllImport(DLL32, EntryPoint="QuickReadIni", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int QuickReadIni32(
@@ -579,6 +583,58 @@ namespace VirtPackageAPI
             UInt32 IniBufLen)
         {
             return Is32Bit() ? QuickReadIni32(PackageExeFile, IniBuf, IniBufLen) : QuickReadIni64(PackageExeFile, IniBuf, IniBufLen);
+        }
+
+        // QuickBuildAppendiceIndex (reserved for internal use)
+        [DllImport(DLL32, EntryPoint = "QuickBuildAppendiceIndex", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int QuickBuildAppendiceIndex32(
+            byte[] pLastFileBytes,
+            UInt32 cbLastFileBytes,
+            byte[] pNewIndex,
+            ref UInt32 pcbNewIndex,
+            byte[] pSandboxCfg,
+            UInt32 cbSandboxCfg,
+            byte[] pIniBuf,
+            UInt32 cbIniBuf);
+        [DllImport(DLL64, EntryPoint = "QuickBuildAppendiceIndex", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int QuickBuildAppendiceIndex64(
+            byte[] pLastFileBytes,
+            UInt32 cbLastFileBytes,
+            byte[] pNewIndex,
+            ref UInt32 pcbNewIndex,
+            byte[] pSandboxCfg,
+            UInt32 cbSandboxCfg,
+            byte[] pIniBuf,
+            UInt32 cbIniBuf);
+        public static int QuickBuildAppendiceIndex(
+            byte[] pLastFileBytes,
+            UInt32 cbLastFileBytes,
+            byte[] pNewIndex,
+            ref UInt32 pcbNewIndex,
+            byte[] pSandboxCfg,
+            UInt32 cbSandboxCfg,
+            byte[] pIniBuf,
+            UInt32 cbIniBuf)
+        {
+            return Is32Bit()
+                ? QuickBuildAppendiceIndex32(pLastFileBytes, cbLastFileBytes, pNewIndex, ref pcbNewIndex, pSandboxCfg, cbSandboxCfg, pIniBuf, cbIniBuf)
+                : QuickBuildAppendiceIndex64(pLastFileBytes, cbLastFileBytes, pNewIndex, ref pcbNewIndex, pSandboxCfg, cbSandboxCfg, pIniBuf, cbIniBuf);
+        }
+
+        // QuickExtractAppendiceIndex (reserved for internal use)
+        [DllImport(DLL32, EntryPoint = "QuickExtractAppendiceIndex", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int QuickExtractAppendiceIndex32(
+            String FileName,
+            String OutputFile);
+        [DllImport(DLL64, EntryPoint = "QuickExtractAppendiceIndex", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int QuickExtractAppendiceIndex64(
+            String FileName,
+            String OutputFile);
+        public static int QuickExtractAppendiceIndex(
+            String FileName,
+            String OutputFile)
+        {
+            return Is32Bit() ? QuickExtractAppendiceIndex32(FileName, OutputFile) : QuickExtractAppendiceIndex64(FileName, OutputFile);
         }
 
 

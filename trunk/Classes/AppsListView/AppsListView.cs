@@ -25,6 +25,7 @@ namespace Cameyo.OpenSrc.Client
         private void AppsListView_Load(object sender, EventArgs e)
         {
             RefreshApps();
+            refreshTimer.Enabled = true;
         }
 
         public void RefreshApps()
@@ -111,30 +112,74 @@ namespace Cameyo.OpenSrc.Client
         {
             if (lvApps.SelectedItems.Count != 1)
                 return;
-            lvApps.ContextMenu.MenuItems[0].PerformClick();
-            //AppItem appItem = (AppItem)(lvApps.SelectedItems[0].Tag);
+            AppItem appItem = (AppItem)(lvApps.SelectedItems[0].Tag);
+            //appItem.ContextMenuStrip.Items[0].PerformClick();
             //ToDo: appItem.DefaultAction() ?
+        }
+
+        private void lvApps_MouseUp(object sender, MouseEventArgs e)
+        {
+            lvApps.ContextMenuStrip = dummyContextMenu;
+            if (lvApps.SelectedItems.Count == 0)
+                return;
+            string className = "";
+            for (int i = 0; i < lvApps.SelectedItems.Count; i++)
+            {
+                AppItem appItem = (AppItem)lvApps.SelectedItems[i].Tag;
+                if (i == 0)
+                    className = appItem.className;
+                else
+                {
+                    if (appItem.className != className)
+                        return;   // Class mismatch: several items selected, with different classes
+                }
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                AppItem appItem = (AppItem)lvApps.SelectedItems[0].Tag;
+                lvApps.ContextMenuStrip = appItem.contextMenu;
+                //dummyContextMenu.Items.Clear();
+                /*for (int i = 0; i < appItem.contextMenu.Items.Count; i++)
+                {
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem(
+                        appItem.contextMenu.Items[i].Text, appItem.contextMenu.Items[i].Image, appItem.contextMenu.Items[i].Click);
+                    menuItem.Click += appItem.contextMenu.Items[i].Click;
+                    dummyContextMenu.Items.Add(menuItem);
+                }*/
+                //lvApps.ContextMenu.Show(lvApps, new Point(e.X, e.Y));
+            }
         }
     }
 
     public class AppItem
     {
         public DeployedApp deployedApp;
+        public string className;
+        public ContextMenuStrip contextMenu;
 
-        public AppItem(DeployedApp deployedApp)
+        public AppItem(DeployedApp deployedApp, ContextMenuStrip contextMenu)
         {
             this.deployedApp = deployedApp;
+            this.contextMenu = contextMenu;
         }
     }
 
     public class DeployedAppItem : AppItem
     {
-        public DeployedAppItem(DeployedApp deployedApp) : base(deployedApp) { }
+        public DeployedAppItem(DeployedApp deployedApp, ContextMenuStrip contextMenu)
+            : base(deployedApp, contextMenu) 
+        {
+            className = "DeployedAppItem";
+        }
     }
 
     public class RunningAppItem : AppItem
     {
         public VirtPackage.RunningApp runningApp;
-        public RunningAppItem(DeployedApp deployedApp) : base(deployedApp) { }
+        public RunningAppItem(DeployedApp deployedApp, ContextMenuStrip contextMenu)
+            : base(deployedApp, contextMenu)
+        {
+            className = "RunningAppItem";
+        }
     }
 }

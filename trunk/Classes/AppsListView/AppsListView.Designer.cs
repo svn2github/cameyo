@@ -42,16 +42,22 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.viewBtnDetails = new System.Windows.Forms.ToolStripButton();
             this.viewBtnIcons = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.dummyContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvApps
             // 
+            this.lvApps.BackgroundImageTiled = true;
+            this.lvApps.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvApps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colName,
             this.colOccupiedSize,
             this.colVersion});
+            this.lvApps.ContextMenuStrip = this.dummyContextMenu;
             this.lvApps.Dock = System.Windows.Forms.DockStyle.Fill;
             listViewGroup1.Header = "Currently running";
             listViewGroup1.Name = "runningGroup";
@@ -72,6 +78,7 @@
             this.lvApps.UseCompatibleStateImageBehavior = false;
             this.lvApps.DoubleClick += new System.EventHandler(this.lvApps_DoubleClick);
             this.lvApps.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvApps_KeyDown);
+            this.lvApps.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lvApps_MouseUp);
             // 
             // colName
             // 
@@ -105,7 +112,8 @@
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewBtnDetails,
-            this.viewBtnIcons});
+            this.viewBtnIcons,
+            this.toolStripLabel1});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(335, 25);
@@ -134,16 +142,37 @@
             this.viewBtnIcons.Text = "Icons";
             this.viewBtnIcons.Click += new System.EventHandler(this.viewBtnIcons_Click);
             // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(69, 22);
+            this.toolStripLabel1.Text = "Virtual apps";
+            // 
             // refreshTimer
             // 
-            this.refreshTimer.Enabled = true;
             this.refreshTimer.Interval = 300;
             this.refreshTimer.Tick += new System.EventHandler(this.refreshTimer_Tick);
+            // 
+            // label1
+            // 
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(0, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(335, 2);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
+            // 
+            // dummyContextMenu
+            // 
+            this.dummyContextMenu.Name = "dummyContextMenu";
+            this.dummyContextMenu.Size = new System.Drawing.Size(61, 4);
             // 
             // AppsListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lvApps);
             this.Controls.Add(this.toolStrip);
             this.Name = "AppsListView";
@@ -168,5 +197,8 @@
         public System.Windows.Forms.ImageList imgsAppsLarge;
         public System.Windows.Forms.ImageList imgsAppsSmall;
         private System.Windows.Forms.Timer refreshTimer;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip dummyContextMenu;
     }
 }
