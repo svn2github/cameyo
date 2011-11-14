@@ -153,102 +153,6 @@ namespace PackageEditor
             closeToolStripMenuItem.Enabled = enable;
         }
 
-        #region PleaseWaitDialog
-        private class PleaseWaitMsg
-        {
-            public String iconFileName;
-            public String title;
-            public String msg;
-            public PleaseWaitMsg(String title, String msg, String iconFileName)
-            {
-                this.title = title;
-                this.msg = msg;
-                this.iconFileName = iconFileName;
-            }
-        }
-
-        //System.Threading.AutoResetEvent pleaseWaitDialogEvent;
-        private class PleaseWaitDialog
-        {
-            private PictureBox icon;
-            private Label msg;
-            private Form dialog;
-            Icon iconFile;
-            //PleaseWaitMsg pleaseWaitMsg;
-
-            private void InitializeComponent()
-            {
-                icon = new PictureBox();
-                icon.Location = new Point(12, 12);
-                icon.Size = new Size(48, 48);
-
-                msg = new Label();
-                msg.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-                msg.Location = new Point(70, 12);
-                msg.AutoSize = true;
-
-                dialog = new Form();
-                dialog.ClientSize = new Size(400, 70);
-                dialog.Controls.Add(this.msg);
-                dialog.Controls.Add(this.icon);
-                dialog.FormBorderStyle = FormBorderStyle.FixedDialog;
-                dialog.MinimizeBox = false;
-                dialog.ShowInTaskbar = false;
-                dialog.ControlBox = false;
-                dialog.StartPosition = FormStartPosition.CenterScreen;
-                dialog.TopMost = true;
-            }
-
-            public PleaseWaitDialog()
-            {
-                InitializeComponent();
-            }
-
-            public void Display(PleaseWaitMsg pleaseWaitMsg)
-            {
-                try
-                {
-                    if (!String.IsNullOrEmpty(pleaseWaitMsg.iconFileName))
-                    {
-                        iconFile = Win32Function.getIconFromFile(pleaseWaitMsg.iconFileName);
-                        icon.Image = iconFile.ToBitmap();
-                    }
-                }
-                catch { }
-                dialog.Text = pleaseWaitMsg.title;
-                msg.Text = pleaseWaitMsg.msg;
-                dialog.ClientSize = new Size(Math.Max(msg.Width + 100, 250), 70);
-                dialog.Show(null);
-                EventWaitHandle pleaseWaitDialogEvent = AutoResetEvent.OpenExisting("pleaseWaitDialogEvent");
-                while (!pleaseWaitDialogEvent.WaitOne(10, false))
-                    Application.DoEvents();
-            }
-        }
-        #endregion
-
-        static void PleaseWaitJob(object data)
-        {
-            PleaseWaitMsg pleaseWaitMsg = (PleaseWaitMsg)data;
-            PleaseWaitDialog pleaseWaitDialog = new PleaseWaitDialog();
-            pleaseWaitDialog.Display(pleaseWaitMsg);
-        }
-
-        EventWaitHandle PleaseWaitBegin(String title, String msg, String iconFileName)
-        {
-            EventWaitHandle pleaseWaitDialogEvent = new EventWaitHandle(false, EventResetMode.AutoReset, "pleaseWaitDialogEvent");
-            Thread thread = new Thread(new ParameterizedThreadStart(PleaseWaitJob));
-            PleaseWaitMsg pleaseWaitMsg = new PleaseWaitMsg(title, msg, iconFileName);
-            thread.Start(pleaseWaitMsg);
-            Thread.Sleep(500);
-            return pleaseWaitDialogEvent;
-        }
-
-        void PleaseWaitEnd()
-        {
-            EventWaitHandle pleaseWaitDialogEvent = EventWaitHandle.OpenExisting("pleaseWaitDialogEvent");
-            pleaseWaitDialogEvent.Set();
-        }
-
         private bool PackageOpen(String packageExeFile)
         {
             VirtPackage.APIRET apiRet;
@@ -261,7 +165,7 @@ namespace PackageEditor
             apiRet = 0;
             if (virtPackage.opened && !PackageClose())      // User doesn't want to discard changes
                 return false;
-            PleaseWaitBegin("Opening package", "Opening " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
+            PleaseWait.PleaseWaitBegin("Opening package", "Opening " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
             {
                 if (virtPackage.Open(packageExeFile, out apiRet))
                 {
@@ -289,7 +193,7 @@ namespace PackageEditor
                 else
                     ret = false;
             }
-            PleaseWaitEnd();
+            PleaseWait.PleaseWaitEnd();
 
             return ret;
         }
@@ -340,14 +244,14 @@ namespace PackageEditor
 
             int ret = 0;
             VirtPackage.APIRET apiRet = 0;
-            PleaseWaitBegin("Saving package", "Saving " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
+            PleaseWait.PleaseWaitBegin("Saving package", "Saving " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
             {
                 ret = ret == 0 && !this.OnPackageSave() ? 1 : ret;
                 ret = ret == 0 && !fsEditor.OnPackageSave() ? 2 : ret;
                 ret = ret == 0 && !regEditor.OnPackageSave() ? 3 : ret;
                 ret = ret == 0 && !virtPackage.SaveEx(fileName, out apiRet) ? 4 : ret;
             }
-            PleaseWaitEnd();
+            PleaseWait.PleaseWaitEnd();
 
             if (ret == 0)
             {

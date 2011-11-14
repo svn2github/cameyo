@@ -1305,7 +1305,7 @@ namespace VirtPackageAPI
         public String CarrierExeName { get { return m_CarrierExeName; } }
         internal String m_CarrierExeName;
         public long OccupiedSize { get { return GetOccupiedSize(); } }
-        internal long m_OccupiedSize = -1;
+        public long m_OccupiedSize = -1;
         public long ExeSize { get { return GetExeSize(); } }
         public long m_ExeSize = -1;
         public String EngineVersion { get { return GetEngineVersion(); } }
@@ -1318,12 +1318,18 @@ namespace VirtPackageAPI
         public String m_Publisher;
         public String BuildUid { get { return GetBuildUid(); } }
         public String m_BuildUid;
-        public String CloudPkgId { get { return (String)IniProperties["CloudPkgId"]; } }
-        public String Streamer { get { return (String)IniProperties["Streamer"]; } }
-        public String FriendlyName { get { return (String)IniProperties["FriendlyName"]; } }
-        public String AutoLaunch { get { return (String)IniProperties["AutoLaunch"]; } }
-        public String Shortcuts { get { return (String)IniProperties["Shortcuts"]; } }
-        public String StopInheritance { get { return (String)IniProperties["StopInheritance"]; } }
+        public String CloudPkgId { get { return GetCloudPkgId(); } }
+        public String m_CloudPkgId;
+        public String Streamer { get { return GetStreamer(); } }
+        public String m_Streamer;
+        public String FriendlyName { get { return GetFriendlyName(); } }
+        public String m_FriendlyName;
+        public String AutoLaunch { get { return GetAutoLaunch(); } }
+        public String m_AutoLaunch;
+        public String Shortcuts { get { return GetShortcuts(); } }
+        public String m_Shortcuts;
+        public String StopInheritance { get { return GetStopInheritance(); } }
+        public String m_StopInheritance;
 
         public System.Collections.Hashtable IniProperties { get { return m_IniProperties; } }
         internal System.Collections.Hashtable m_IniProperties;
@@ -1372,10 +1378,58 @@ namespace VirtPackageAPI
 
         private String GetBuildUid()
         {
-            if (!String.IsNullOrEmpty(m_BuildUid) || m_IniProperties == null || m_IniProperties["BuildUid"] == null)
+            if (!String.IsNullOrEmpty(m_BuildUid) || m_IniProperties == null || m_IniProperties["BuildUID"] == null)
                 return m_BuildUid;
-            m_BuildUid = (String)IniProperties["BuildUid"];
+            m_BuildUid = (String)IniProperties["BuildUID"];
             return m_BuildUid;
+        }
+
+        private String GetCloudPkgId()
+        {
+            if (!String.IsNullOrEmpty(m_CloudPkgId) || m_IniProperties == null || m_IniProperties["CloudPkgId"] == null)
+                return m_CloudPkgId;
+            m_CloudPkgId = (String)IniProperties["CloudPkgId"];
+            return m_CloudPkgId;
+        }
+
+        private String GetStreamer()
+        {
+            if (!String.IsNullOrEmpty(m_Streamer) || m_IniProperties == null || m_IniProperties["Streamer"] == null)
+                return m_Streamer;
+            m_Streamer = (String)IniProperties["Streamer"];
+            return m_Streamer;
+        }
+
+        private String GetFriendlyName()
+        {
+            if (!String.IsNullOrEmpty(m_FriendlyName) || m_IniProperties == null || m_IniProperties["FriendlyName"] == null)
+                return m_FriendlyName;
+            m_FriendlyName = (String)IniProperties["FriendlyName"];
+            return m_FriendlyName;
+        }
+
+        private String GetAutoLaunch()
+        {
+            if (!String.IsNullOrEmpty(m_AutoLaunch) || m_IniProperties == null || m_IniProperties["AutoLaunch"] == null)
+                return m_AutoLaunch;
+            m_AutoLaunch = (String)IniProperties["AutoLaunch"];
+            return m_AutoLaunch;
+        }
+
+        private String GetShortcuts()
+        {
+            if (!String.IsNullOrEmpty(m_Shortcuts) || m_IniProperties == null || m_IniProperties["Shortcuts"] == null)
+                return m_Shortcuts;
+            m_Shortcuts = (String)IniProperties["Shortcuts"];
+            return m_Shortcuts;
+        }
+
+        private String GetStopInheritance()
+        {
+            if (!String.IsNullOrEmpty(m_StopInheritance) || m_IniProperties == null || m_IniProperties["StopInheritance"] == null)
+                return m_StopInheritance;
+            m_StopInheritance = (String)IniProperties["StopInheritance"];
+            return m_StopInheritance;
         }
 
         private long GetOccupiedSize()

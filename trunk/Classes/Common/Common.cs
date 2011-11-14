@@ -4,11 +4,19 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
+using System.IO;
 
 namespace Cameyo.OpenSrc.Common
 {
     public class Utils
     {
+        static public String MyPath()
+        {
+            return Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        }
+
         static public bool ExecProg(String fileName, String args, bool wait, ref int exitCode)
         {
             try
@@ -136,5 +144,105 @@ namespace Cameyo.OpenSrc.Common
         // Misc internal functions
         [DllImport("shlwapi")]
         public static extern int StrFormatByteSize64(ulong qdw, StringBuilder pszBuf, uint cchBuf);
+    }
+
+    public class PleaseWait
+    {
+        #region PleaseWaitDialog
+        private class PleaseWaitMsg
+        {
+            public String iconFileName;
+            public String title;
+            public String msg;
+            public PleaseWaitMsg(String title, String msg, String iconFileName)
+            {
+                this.title = title;
+                this.msg = msg;
+                this.iconFileName = iconFileName;
+            }
+        }
+
+        //System.Threading.AutoResetEvent pleaseWaitDialogEvent;
+        private class PleaseWaitDialog
+        {
+            private PictureBox icon;
+            private Label msg;
+            private Form dialog;
+            Icon iconFile;
+            //PleaseWaitMsg pleaseWaitMsg;
+
+            private void InitializeComponent()
+            {
+                icon = new PictureBox();
+                icon.Location = new Point(12, 12);
+                icon.Size = new Size(48, 48);
+
+                msg = new Label();
+                msg.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+                msg.AutoSize = true;
+                msg.Location = new Point(70, 12);
+
+                dialog = new Form();
+                dialog.ClientSize = new Size(400, 70);
+                dialog.Controls.Add(this.msg);
+                dialog.Controls.Add(this.icon);
+                dialog.FormBorderStyle = FormBorderStyle.FixedDialog;
+                dialog.MinimizeBox = false;
+                dialog.ShowInTaskbar = false;
+                dialog.ControlBox = false;
+                dialog.StartPosition = FormStartPosition.CenterScreen;
+                dialog.TopMost = true;
+            }
+
+            public PleaseWaitDialog()
+            {
+                InitializeComponent();
+            }
+
+            public void Display(PleaseWaitMsg pleaseWaitMsg)
+            {
+                try
+                {
+                    if (!String.IsNullOrEmpty(pleaseWaitMsg.iconFileName))
+                    {
+                        iconFile = Win32Function.getIconFromFile(pleaseWaitMsg.iconFileName);
+                        icon.Image = iconFile.ToBitmap();
+                    }
+                }
+                catch { }
+                dialog.Text = pleaseWaitMsg.title;
+                msg.Text = pleaseWaitMsg.msg;
+                dialog.ClientSize = new Size(Math.Max(msg.Width + 100, 250), 70);
+                msg.Location = new Point(dialog.ClientSize.Width / 2 - msg.Width / 2, 12);
+                dialog.Show(null);
+                EventWaitHandle pleaseWaitDialogEvent = AutoResetEvent.OpenExisting("pleaseWaitDialogEvent");
+                while (!pleaseWaitDialogEvent.WaitOne(10, false))
+                    Application.DoEvents();
+            }
+        }
+        #endregion
+
+        static public void PleaseWaitJob(object data)
+        {
+            PleaseWaitMsg pleaseWaitMsg = (PleaseWaitMsg)data;
+            PleaseWait.PleaseWaitDialog pleaseWaitDialog = new PleaseWaitDialog();
+            pleaseWaitDialog.Display(pleaseWaitMsg);
+        }
+
+        static public EventWaitHandle PleaseWaitBegin(String title, String msg, String iconFileName)
+        {
+            EventWaitHandle pleaseWaitDialogEvent = new EventWaitHandle(false, EventResetMode.AutoReset, "pleaseWaitDialogEvent");
+            Thread thread = new Thread(new ParameterizedThreadStart(PleaseWaitJob));
+            PleaseWaitMsg pleaseWaitMsg = new PleaseWaitMsg(title, msg, iconFileName);
+            thread.Start(pleaseWaitMsg);
+            Thread.Sleep(500);
+            return pleaseWaitDialogEvent;
+        }
+
+        static public void PleaseWaitEnd()
+        {
+            EventWaitHandle pleaseWaitDialogEvent = EventWaitHandle.OpenExisting("pleaseWaitDialogEvent");
+            pleaseWaitDialogEvent.Set();
+        }
     }
 }
