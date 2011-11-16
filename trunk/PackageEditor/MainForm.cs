@@ -1024,7 +1024,7 @@ namespace PackageEditor
                 lvItem.Group = listViewMRU.Groups["recentlyEditedGroup"];
             }
 
-            foreach (DeployedApp deployedApp in VirtPackage.DeployedApps())
+            /*foreach (DeployedApp deployedApp in VirtPackage.DeployedApps())
             {
                 if (!File.Exists(deployedApp.CarrierExeName))
                     continue;
@@ -1039,7 +1039,7 @@ namespace PackageEditor
                 lvItem.ImageIndex = imageId;
                 lvItem.Tag = deployedApp.CarrierExeName;
                 lvItem.Group = listViewMRU.Groups["deployedAppsGroup"];
-            }
+            }*/
         }
 
         private void rdb_CheckedChanged(object sender, EventArgs e)
