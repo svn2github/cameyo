@@ -585,6 +585,14 @@ namespace VirtPackageAPI
             return Is32Bit() ? QuickReadIni32(PackageExeFile, IniBuf, IniBufLen) : QuickReadIni64(PackageExeFile, IniBuf, IniBufLen);
         }
 
+        // QuickReadIniValues (wrapper)
+        public static System.Collections.Hashtable QuickReadIniValues(string PacakgeExeFile)
+        {
+            StringBuilder sb = new StringBuilder(8192);
+            VirtPackage.QuickReadIni(PacakgeExeFile, sb, 8192);
+            return VirtPackage.ReadIniSettingsBuf(sb.ToString());
+        }
+
         // QuickBuildAppendiceIndex (reserved for internal use)
         [DllImport(DLL32, EntryPoint = "QuickBuildAppendiceIndex", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int QuickBuildAppendiceIndex32(
@@ -1264,13 +1272,10 @@ namespace VirtPackageAPI
             }
         }
 
-        static public System.Collections.Hashtable ReadIniSettings(String IniFile)
+        static public System.Collections.Hashtable ReadIniSettingsBuf(String iniBuf)
         {
             try
             {
-                String iniBuf = File.ReadAllText(IniFile, Encoding.Unicode);
-                if (iniBuf.IndexOf("AppID") == -1)
-                    iniBuf = File.ReadAllText(IniFile, Encoding.ASCII);  // Happens when modified with notepad
                 String[] lines = iniBuf.Split('\r', '\n');
                 System.Collections.Hashtable values = new System.Collections.Hashtable();
                 for (int i = 0; i < lines.Length; i++)
@@ -1288,6 +1293,21 @@ namespace VirtPackageAPI
                     catch { }
                 }
                 return values;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        static public System.Collections.Hashtable ReadIniSettings(String IniFile)
+        {
+            try
+            {
+                String iniBuf = File.ReadAllText(IniFile, Encoding.Unicode);
+                if (iniBuf.IndexOf("AppID") == -1)
+                    iniBuf = File.ReadAllText(IniFile, Encoding.ASCII);  // Happens when modified with notepad
+                return ReadIniSettingsBuf(iniBuf);
             }
             catch
             {
@@ -1342,7 +1362,7 @@ namespace VirtPackageAPI
             m_IniProperties = VirtPackage.ReadIniSettings(Path.Combine(baseDirName, "VirtApp.ini"));
         }
 
-        private static long DirSize(DirectoryInfo d) 
+        public static long RecursiveDirSize(DirectoryInfo d) 
         {    
             long Size = 0;    
             // Add file sizes.
@@ -1355,7 +1375,7 @@ namespace VirtPackageAPI
             DirectoryInfo[] dis = d.GetDirectories();
             foreach (DirectoryInfo di in dis) 
             {
-                Size += DirSize(di);   
+                Size += RecursiveDirSize(di);   
             }
             return(Size);  
         }
@@ -1432,17 +1452,21 @@ namespace VirtPackageAPI
             return m_StopInheritance;
         }
 
+        public static long GetOccuppiedAppSize(string BaseDirName)
+        {
+            if (!Directory.Exists(BaseDirName))
+            {
+                return 0;
+            }
+            DirectoryInfo d = new DirectoryInfo(BaseDirName);
+            return RecursiveDirSize(d);
+        }
+
         private long GetOccupiedSize()
         {
             if (m_OccupiedSize != -1)
                 return m_OccupiedSize;
-            if (!Directory.Exists(m_BaseDirName))
-            {
-                m_OccupiedSize = 0;
-                return m_OccupiedSize;
-            }
-            DirectoryInfo d = new DirectoryInfo(m_BaseDirName);
-            m_OccupiedSize = DirSize(d);
+            m_OccupiedSize = GetOccuppiedAppSize(m_BaseDirName);
             return m_OccupiedSize;
         }
 
