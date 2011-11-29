@@ -1302,6 +1302,8 @@ namespace VirtPackageAPI
 
         static public System.Collections.Hashtable ReadIniSettings(String IniFile)
         {
+            if (!File.Exists(IniFile))
+                return null;
             try
             {
                 String iniBuf = File.ReadAllText(IniFile, Encoding.Unicode);
