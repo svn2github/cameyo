@@ -644,7 +644,19 @@ namespace VirtPackageAPI
         {
             return Is32Bit() ? QuickExtractAppendiceIndex32(FileName, OutputFile) : QuickExtractAppendiceIndex64(FileName, OutputFile);
         }
-
+        static public byte[] QuickExtractAppendiceIndexBytes(
+            String FileName)
+        {
+            string outputFile = Path.GetTempFileName();
+            try { File.Delete(outputFile); }
+            catch { }
+            if (VirtPackage.QuickExtractAppendiceIndex(FileName, outputFile) != (int)VirtPackage.APIRET.SUCCESS)
+                return null;
+            byte[] ret = File.ReadAllBytes(outputFile);
+            try { File.Delete(outputFile); }
+            catch { }
+            return ret;
+        }
 
         //
         // DeployedApp imports
