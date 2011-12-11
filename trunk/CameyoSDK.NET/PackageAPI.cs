@@ -64,7 +64,7 @@ namespace VirtPackageAPI
 
         private const String DLL32 = "PackagerDll.dll";
         private const String DLL64 = "PackagerDll64.dll";
-        private const int MAX_STRING = 64 * 1024;
+        public const int MAX_STRING = 64 * 1024;
 
         private IntPtr hPkg;
         public bool opened;
@@ -758,6 +758,30 @@ namespace VirtPackageAPI
         private delegate bool RUNNINGAPP_ENUM_CALLBACK(
             ref Object Data,
             ref RUNNING_APP RunningApp);
+
+
+        //
+        // Utils imports
+
+        // UtilsGenericToLocalPath
+        [DllImport(DLL32, EntryPoint = "UtilsGenericToLocalPath", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int UtilsGenericToLocalPath32(
+            String GenericPath,
+            StringBuilder LocalPath,
+            UInt32 LocalPathLen);
+        [DllImport(DLL64, EntryPoint = "UtilsGenericToLocalPath", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int UtilsGenericToLocalPath64(
+            String GenericPath,
+            StringBuilder LocalPath,
+            UInt32 LocalPathLen);
+        public static int UtilsGenericToLocalPath(
+            String GenericPath,
+            StringBuilder LocalPath,
+            UInt32 LocalPathLen)
+        {
+            return Is32Bit() ? UtilsGenericToLocalPath32(GenericPath, LocalPath, LocalPathLen) : UtilsGenericToLocalPath64(GenericPath, LocalPath, LocalPathLen);
+        }
+
 
         //
         // .NET wrapper
