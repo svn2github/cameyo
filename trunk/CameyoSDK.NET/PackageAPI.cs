@@ -781,6 +781,13 @@ namespace VirtPackageAPI
         {
             return Is32Bit() ? UtilsGenericToLocalPath32(GenericPath, LocalPath, LocalPathLen) : UtilsGenericToLocalPath64(GenericPath, LocalPath, LocalPathLen);
         }
+        public static string GenericToLocalDir(string GenericPath)
+        {
+            //if (string.IsNullOrEmpty(genericPath))
+            StringBuilder sbValue = new StringBuilder(VirtPackage.MAX_STRING);
+            VirtPackage.APIRET Ret = (VirtPackage.APIRET)VirtPackage.UtilsGenericToLocalPath(GenericPath, sbValue, VirtPackage.MAX_STRING);
+            return sbValue.ToString();
+        }
 
 
         //
