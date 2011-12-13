@@ -703,8 +703,8 @@ namespace VirtPackageAPI
         [StructLayout(LayoutKind.Sequential)]
         public struct VIRT_PROCESS
         {
-            UInt32 PID;
-            UInt32 Flags;
+            public UInt32 PID;
+            public UInt32 Flags;
         }
 
 
