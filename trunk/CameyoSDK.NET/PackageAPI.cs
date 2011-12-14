@@ -33,6 +33,13 @@ namespace VirtPackageAPI
         ALL_FLAGS = ISFILE | DELETED | DEPLOYED | DISCONNECTED | PKG_FILE
     }
 
+    [Flags]
+    public enum VIRT_PROCESS_FLAGS
+    {
+        VINTEGRATE_DESKTOP_ONLY = 1,
+        VINTEGRATE_FULL = 2
+    }
+
     public class VirtPackage
     {
         public enum APIRET
