@@ -761,6 +761,25 @@ namespace VirtPackageAPI
             public UInt32 CarrierPID;
             public UInt32 StartTickTime;
             public String FriendlyName;
+
+            public int GetVintegrationMode()
+            {
+                int vintegration = 0;
+                foreach (VirtPackage.VIRT_PROCESS process in this.Processes)
+                    vintegration |= ((int)process.Flags & ((int)VIRT_PROCESS_FLAGS.VINTEGRATE_DESKTOP_ONLY | (int)VIRT_PROCESS_FLAGS.VINTEGRATE_FULL));
+                return vintegration;
+            }
+
+            public static RunningApp FromAppID(String AppID)
+            {
+                List<RunningApp> runningApps = RunningApps();
+                foreach (RunningApp runningApp in runningApps)
+                {
+                    if (runningApp.AppID.Equals(AppID, StringComparison.InvariantCultureIgnoreCase))
+                        return runningApp;
+                }
+                return null;
+            }
         }
         private delegate bool RUNNINGAPP_ENUM_CALLBACK(
             ref Object Data,
