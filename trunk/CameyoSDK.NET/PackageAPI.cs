@@ -1430,7 +1430,7 @@ namespace VirtPackageAPI
             m_AppID = appID;
             m_BaseDirName = baseDirName;
             m_CarrierExeName = carrierExeName;
-            m_IniProperties = VirtPackage.ReadIniSettings(Path.Combine(baseDirName, "VirtApp.ini"));
+            m_IniProperties = VirtPackage.QuickReadIniValues(carrierExeName); //ReadIniSettings(Path.Combine(baseDirName, "VirtApp.ini"));
         }
 
         public static long RecursiveDirSize(DirectoryInfo d) 
