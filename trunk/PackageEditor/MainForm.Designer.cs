@@ -32,15 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Recently edited", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("On this computer", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Recently edited apps", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("On this computer", System.Windows.Forms.HorizontalAlignment.Left);
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAsZeroInstallerXmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,12 +105,6 @@
             this.fsFolderInfoIsolationLbl = new System.Windows.Forms.Label();
             this.fsFolderInfoFullName = new System.Windows.Forms.Label();
             this.fileToolStrip = new System.Windows.Forms.ToolStrip();
-            this.fsAddBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsAddDirBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsAddEmptyDirBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsRemoveBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.fsSaveFileAsBtn = new System.Windows.Forms.ToolStripButton();
             this.tabRegistry = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -123,6 +117,10 @@
             this.tbValue = new System.Windows.Forms.TextBox();
             this.tbSize = new System.Windows.Forms.TextBox();
             this.tbFile = new System.Windows.Forms.TextBox();
+            this.regFilesList = new PackageEditor.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -131,11 +129,6 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.regProgressBar = new System.Windows.Forms.ProgressBar();
             this.regToolStrip = new System.Windows.Forms.ToolStrip();
-            this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
-            this.regEditBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.regImportBtn = new System.Windows.Forms.ToolStripButton();
-            this.regExportBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.propertyExpiration = new System.Windows.Forms.CheckBox();
@@ -153,24 +146,30 @@
             this.propertyStopInheritance = new System.Windows.Forms.TextBox();
             this.tabWelcome = new System.Windows.Forms.TabPage();
             this.panelWelcome = new System.Windows.Forms.Panel();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.lnkCapture = new System.Windows.Forms.LinkLabel();
+            this.lnkPackageEdit = new System.Windows.Forms.LinkLabel();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.listViewMRU = new System.Windows.Forms.ListView();
             this.columnFileN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageListMRU = new System.Windows.Forms.ImageList(this.components);
-            this.btnEditPackage = new System.Windows.Forms.Button();
-            this.btnNewPackage = new System.Windows.Forms.Button();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.PictureBox();
             this.bkPanel = new System.Windows.Forms.Panel();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.regFilesList = new PackageEditor.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.menuStrip1.SuspendLayout();
+            this.fsAddBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsAddDirBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsAddEmptyDirBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsRemoveBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsSaveFileAsBtn = new System.Windows.Forms.ToolStripButton();
+            this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
+            this.regEditBtn = new System.Windows.Forms.ToolStripButton();
+            this.regImportBtn = new System.Windows.Forms.ToolStripButton();
+            this.regExportBtn = new System.Windows.Forms.ToolStripButton();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -190,7 +189,6 @@
             this.fileContextMenu.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.fileToolStrip.SuspendLayout();
             this.tabRegistry.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -201,18 +199,18 @@
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.regToolStrip.SuspendLayout();
             this.tabAdvanced.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tabWelcome.SuspendLayout();
             this.panelWelcome.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBox8.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel11)).BeginInit();
-            this.groupBox8.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList
@@ -239,8 +237,8 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
             this.openToolStripMenuItem,
+            this.newToolStripMenuItem,
             this.exportAsZeroInstallerXmlToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveasToolStripMenuItem,
@@ -251,24 +249,24 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.newToolStripMenuItem.Text = "&New virtual package";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.openToolStripMenuItem.Text = "&Open virtual package";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.newToolStripMenuItem.Text = "&New empty virtual package";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // exportAsZeroInstallerXmlToolStripMenuItem
             // 
             this.exportAsZeroInstallerXmlToolStripMenuItem.Name = "exportAsZeroInstallerXmlToolStripMenuItem";
-            this.exportAsZeroInstallerXmlToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.exportAsZeroInstallerXmlToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.exportAsZeroInstallerXmlToolStripMenuItem.Text = "&Export as ZeroInstaller xml";
             this.exportAsZeroInstallerXmlToolStripMenuItem.Visible = false;
             this.exportAsZeroInstallerXmlToolStripMenuItem.Click += new System.EventHandler(this.exportAsZeroInstallerXmlToolStripMenuItem_Click);
@@ -276,33 +274,33 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveasToolStripMenuItem
             // 
             this.saveasToolStripMenuItem.Name = "saveasToolStripMenuItem";
-            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.saveasToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.saveasToolStripMenuItem.Text = "Save &as";
             this.saveasToolStripMenuItem.Click += new System.EventHandler(this.saveasToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.closeToolStripMenuItem.Text = "&Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(208, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(215, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -764,7 +762,6 @@
             // dropboxButton
             // 
             this.dropboxButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dropboxButton.BackgroundImage = global::PackageEditor.Properties.Resources.dropbox_logo_home;
             this.dropboxButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.dropboxButton.Location = new System.Drawing.Point(952, 250);
             this.dropboxButton.Name = "dropboxButton";
@@ -953,60 +950,6 @@
             this.fileToolStrip.TabIndex = 6;
             this.fileToolStrip.Text = "toolStrip1";
             // 
-            // fsAddBtn
-            // 
-            this.fsAddBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddBtn.Image")));
-            this.fsAddBtn.ImageTransparentColor = System.Drawing.Color.Olive;
-            this.fsAddBtn.Name = "fsAddBtn";
-            this.fsAddBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsAddBtn.Text = "Add";
-            this.fsAddBtn.ToolTipText = "Add file";
-            // 
-            // fsAddDirBtn
-            // 
-            this.fsAddDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddDirBtn.Image")));
-            this.fsAddDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.fsAddDirBtn.Name = "fsAddDirBtn";
-            this.fsAddDirBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsAddDirBtn.Text = "toolStripButton1";
-            this.fsAddDirBtn.ToolTipText = "Add folder";
-            // 
-            // fsAddEmptyDirBtn
-            // 
-            this.fsAddEmptyDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddEmptyDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddEmptyDirBtn.Image")));
-            this.fsAddEmptyDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.fsAddEmptyDirBtn.Name = "fsAddEmptyDirBtn";
-            this.fsAddEmptyDirBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsAddEmptyDirBtn.Text = "toolStripButton1";
-            this.fsAddEmptyDirBtn.ToolTipText = "Add empty folder";
-            // 
-            // fsRemoveBtn
-            // 
-            this.fsRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsRemoveBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsRemoveBtn.Image")));
-            this.fsRemoveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.fsRemoveBtn.Name = "fsRemoveBtn";
-            this.fsRemoveBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsRemoveBtn.Text = "Delete";
-            this.fsRemoveBtn.ToolTipText = "Remove file or folder";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // fsSaveFileAsBtn
-            // 
-            this.fsSaveFileAsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsSaveFileAsBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsSaveFileAsBtn.Image")));
-            this.fsSaveFileAsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.fsSaveFileAsBtn.Name = "fsSaveFileAsBtn";
-            this.fsSaveFileAsBtn.Size = new System.Drawing.Size(23, 22);
-            this.fsSaveFileAsBtn.ToolTipText = "Save file as";
-            // 
             // tabRegistry
             // 
             this.tabRegistry.AllowDrop = true;
@@ -1135,6 +1078,44 @@
             this.tbFile.TabIndex = 8;
             this.tbFile.Visible = false;
             // 
+            // regFilesList
+            // 
+            this.regFilesList.AllowColumnReorder = true;
+            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.regFilesList.DoubleClickActivation = false;
+            this.regFilesList.FullRowSelect = true;
+            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+            this.regFilesList.Location = new System.Drawing.Point(0, 25);
+            this.regFilesList.Name = "regFilesList";
+            this.regFilesList.Size = new System.Drawing.Size(509, 334);
+            this.regFilesList.TabIndex = 7;
+            this.regFilesList.UseCompatibleStateImageBehavior = false;
+            this.regFilesList.View = System.Windows.Forms.View.Details;
+            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "File";
+            this.columnHeader3.Width = 144;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Value";
+            this.columnHeader4.Width = 246;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Type";
+            this.columnHeader5.Width = 98;
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.panel6);
@@ -1216,51 +1197,6 @@
             this.regToolStrip.TabIndex = 12;
             this.regToolStrip.Text = "toolStrip2";
             this.regToolStrip.Visible = false;
-            // 
-            // regRemoveBtn
-            // 
-            this.regRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.regRemoveBtn.Image = ((System.Drawing.Image)(resources.GetObject("regRemoveBtn.Image")));
-            this.regRemoveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.regRemoveBtn.Name = "regRemoveBtn";
-            this.regRemoveBtn.Size = new System.Drawing.Size(23, 22);
-            this.regRemoveBtn.Text = "Delete";
-            this.regRemoveBtn.ToolTipText = "Remove key";
-            // 
-            // regEditBtn
-            // 
-            this.regEditBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.regEditBtn.Image = ((System.Drawing.Image)(resources.GetObject("regEditBtn.Image")));
-            this.regEditBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.regEditBtn.Name = "regEditBtn";
-            this.regEditBtn.Size = new System.Drawing.Size(23, 22);
-            this.regEditBtn.ToolTipText = "Edit registry";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // regImportBtn
-            // 
-            this.regImportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.regImportBtn.Image = ((System.Drawing.Image)(resources.GetObject("regImportBtn.Image")));
-            this.regImportBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.regImportBtn.Name = "regImportBtn";
-            this.regImportBtn.Size = new System.Drawing.Size(23, 22);
-            this.regImportBtn.Text = "Import";
-            this.regImportBtn.ToolTipText = "Import a .reg file";
-            this.regImportBtn.Click += new System.EventHandler(this.regImportBtn_Click);
-            // 
-            // regExportBtn
-            // 
-            this.regExportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.regExportBtn.Image = ((System.Drawing.Image)(resources.GetObject("regExportBtn.Image")));
-            this.regExportBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.regExportBtn.Name = "regExportBtn";
-            this.regExportBtn.Size = new System.Drawing.Size(23, 22);
-            this.regExportBtn.ToolTipText = "Export selected registry key to a .reg file";
-            this.regExportBtn.Click += new System.EventHandler(this.regExportBtn_Click);
             // 
             // tabAdvanced
             // 
@@ -1446,13 +1382,87 @@
             this.panelWelcome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelWelcome.BackColor = System.Drawing.Color.Transparent;
-            this.panelWelcome.Controls.Add(this.groupBox9);
+            this.panelWelcome.Controls.Add(this.pictureBox5);
+            this.panelWelcome.Controls.Add(this.pictureBox2);
+            this.panelWelcome.Controls.Add(this.lnkCapture);
+            this.panelWelcome.Controls.Add(this.lnkPackageEdit);
             this.panelWelcome.Controls.Add(this.groupBox8);
             this.panelWelcome.Location = new System.Drawing.Point(6, 6);
             this.panelWelcome.Name = "panelWelcome";
             this.panelWelcome.Size = new System.Drawing.Size(707, 380);
             this.panelWelcome.TabIndex = 0;
             this.panelWelcome.Visible = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(13, 38);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox5.TabIndex = 16;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::PackageEditor.Properties.Resources._038;
+            this.pictureBox2.Location = new System.Drawing.Point(13, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 15;
+            this.pictureBox2.TabStop = false;
+            // 
+            // lnkCapture
+            // 
+            this.lnkCapture.AutoSize = true;
+            this.lnkCapture.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkCapture.Location = new System.Drawing.Point(55, 11);
+            this.lnkCapture.Name = "lnkCapture";
+            this.lnkCapture.Size = new System.Drawing.Size(133, 18);
+            this.lnkCapture.TabIndex = 14;
+            this.lnkCapture.TabStop = true;
+            this.lnkCapture.Text = "Capture installation";
+            this.lnkCapture.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCapture_LinkClicked);
+            // 
+            // lnkPackageEdit
+            // 
+            this.lnkPackageEdit.AutoSize = true;
+            this.lnkPackageEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkPackageEdit.Location = new System.Drawing.Point(55, 45);
+            this.lnkPackageEdit.Name = "lnkPackageEdit";
+            this.lnkPackageEdit.Size = new System.Drawing.Size(176, 18);
+            this.lnkPackageEdit.TabIndex = 13;
+            this.lnkPackageEdit.TabStop = true;
+            this.lnkPackageEdit.Text = "Edit an existing virtual app";
+            this.lnkPackageEdit.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkPackageEdit_LinkClicked);
+            this.lnkPackageEdit.Click += new System.EventHandler(this.btnEditPackage_Click);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox8.Controls.Add(this.label9);
+            this.groupBox8.Controls.Add(this.listViewMRU);
+            this.groupBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox8.Location = new System.Drawing.Point(13, 76);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(681, 289);
+            this.groupBox8.TabIndex = 12;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Recently edited apps";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(491, 11);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(184, 22);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Drag && drop apps to edit";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // listViewMRU
             // 
@@ -1463,7 +1473,7 @@
             this.listViewMRU.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnFileN});
             this.listViewMRU.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            listViewGroup1.Header = "Recently edited";
+            listViewGroup1.Header = "Recently edited apps";
             listViewGroup1.Name = "recentlyEditedGroup";
             listViewGroup2.Header = "On this computer";
             listViewGroup2.Name = "deployedAppsGroup";
@@ -1472,10 +1482,10 @@
             listViewGroup2});
             this.listViewMRU.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listViewMRU.LargeImageList = this.imageListMRU;
-            this.listViewMRU.Location = new System.Drawing.Point(10, 66);
+            this.listViewMRU.Location = new System.Drawing.Point(10, 36);
             this.listViewMRU.MultiSelect = false;
             this.listViewMRU.Name = "listViewMRU";
-            this.listViewMRU.Size = new System.Drawing.Size(662, 208);
+            this.listViewMRU.Size = new System.Drawing.Size(662, 239);
             this.listViewMRU.SmallImageList = this.imageListMRU;
             this.listViewMRU.TabIndex = 2;
             this.listViewMRU.UseCompatibleStateImageBehavior = false;
@@ -1491,39 +1501,15 @@
             this.imageListMRU.ImageSize = new System.Drawing.Size(32, 32);
             this.imageListMRU.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // btnEditPackage
+            // toolStripSeparator1
             // 
-            this.btnEditPackage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditPackage.Image = ((System.Drawing.Image)(resources.GetObject("btnEditPackage.Image")));
-            this.btnEditPackage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditPackage.Location = new System.Drawing.Point(10, 24);
-            this.btnEditPackage.Margin = new System.Windows.Forms.Padding(0);
-            this.btnEditPackage.Name = "btnEditPackage";
-            this.btnEditPackage.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.btnEditPackage.Size = new System.Drawing.Size(188, 34);
-            this.btnEditPackage.TabIndex = 10;
-            this.btnEditPackage.Text = "  Browse";
-            this.btnEditPackage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditPackage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEditPackage.UseVisualStyleBackColor = true;
-            this.btnEditPackage.Click += new System.EventHandler(this.btnEditPackage_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnNewPackage
+            // toolStripSeparator2
             // 
-            this.btnNewPackage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewPackage.Image = ((System.Drawing.Image)(resources.GetObject("btnNewPackage.Image")));
-            this.btnNewPackage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNewPackage.Location = new System.Drawing.Point(207, 20);
-            this.btnNewPackage.Margin = new System.Windows.Forms.Padding(0);
-            this.btnNewPackage.Name = "btnNewPackage";
-            this.btnNewPackage.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.btnNewPackage.Size = new System.Drawing.Size(188, 34);
-            this.btnNewPackage.TabIndex = 9;
-            this.btnNewPackage.Text = "  Create empty package";
-            this.btnNewPackage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNewPackage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNewPackage.UseVisualStyleBackColor = true;
-            this.btnNewPackage.Click += new System.EventHandler(this.btnNewPackage_Click);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // bottomPanel
             // 
@@ -1565,100 +1551,94 @@
             this.bkPanel.Size = new System.Drawing.Size(751, 506);
             this.bkPanel.TabIndex = 9;
             // 
-            // groupBox8
+            // fsAddBtn
             // 
-            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox8.Controls.Add(this.label9);
-            this.groupBox8.Controls.Add(this.listViewMRU);
-            this.groupBox8.Controls.Add(this.btnEditPackage);
-            this.groupBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox8.Location = new System.Drawing.Point(13, 77);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(681, 288);
-            this.groupBox8.TabIndex = 12;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Edit an existing virtual app";
+            this.fsAddBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddBtn.Image")));
+            this.fsAddBtn.ImageTransparentColor = System.Drawing.Color.Olive;
+            this.fsAddBtn.Name = "fsAddBtn";
+            this.fsAddBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsAddBtn.Text = "Add";
+            this.fsAddBtn.ToolTipText = "Add file";
             // 
-            // groupBox9
+            // fsAddDirBtn
             // 
-            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox9.Controls.Add(this.button2);
-            this.groupBox9.Controls.Add(this.btnNewPackage);
-            this.groupBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox9.Location = new System.Drawing.Point(13, 3);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(681, 68);
-            this.groupBox9.TabIndex = 13;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Capture software installation";
+            this.fsAddDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddDirBtn.Image")));
+            this.fsAddDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fsAddDirBtn.Name = "fsAddDirBtn";
+            this.fsAddDirBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsAddDirBtn.Text = "toolStripButton1";
+            this.fsAddDirBtn.ToolTipText = "Add folder";
             // 
-            // button2
+            // fsAddEmptyDirBtn
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(10, 20);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.button2.Size = new System.Drawing.Size(188, 34);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "  Capture installation";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = true;
+            this.fsAddEmptyDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddEmptyDirBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsAddEmptyDirBtn.Image")));
+            this.fsAddEmptyDirBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fsAddEmptyDirBtn.Name = "fsAddEmptyDirBtn";
+            this.fsAddEmptyDirBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsAddEmptyDirBtn.Text = "toolStripButton1";
+            this.fsAddEmptyDirBtn.ToolTipText = "Add empty folder";
             // 
-            // label9
+            // fsRemoveBtn
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(488, 41);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(184, 22);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Drag && drop apps to edit";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.fsRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsRemoveBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsRemoveBtn.Image")));
+            this.fsRemoveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fsRemoveBtn.Name = "fsRemoveBtn";
+            this.fsRemoveBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsRemoveBtn.Text = "Delete";
+            this.fsRemoveBtn.ToolTipText = "Remove file or folder";
             // 
-            // regFilesList
+            // fsSaveFileAsBtn
             // 
-            this.regFilesList.AllowColumnReorder = true;
-            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.regFilesList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.regFilesList.DoubleClickActivation = false;
-            this.regFilesList.FullRowSelect = true;
-            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.regFilesList.Location = new System.Drawing.Point(0, 25);
-            this.regFilesList.Name = "regFilesList";
-            this.regFilesList.Size = new System.Drawing.Size(509, 334);
-            this.regFilesList.TabIndex = 7;
-            this.regFilesList.UseCompatibleStateImageBehavior = false;
-            this.regFilesList.View = System.Windows.Forms.View.Details;
-            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+            this.fsSaveFileAsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsSaveFileAsBtn.Image = ((System.Drawing.Image)(resources.GetObject("fsSaveFileAsBtn.Image")));
+            this.fsSaveFileAsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fsSaveFileAsBtn.Name = "fsSaveFileAsBtn";
+            this.fsSaveFileAsBtn.Size = new System.Drawing.Size(23, 22);
+            this.fsSaveFileAsBtn.ToolTipText = "Save file as";
             // 
-            // columnHeader3
+            // regRemoveBtn
             // 
-            this.columnHeader3.Text = "File";
-            this.columnHeader3.Width = 144;
+            this.regRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.regRemoveBtn.Image = ((System.Drawing.Image)(resources.GetObject("regRemoveBtn.Image")));
+            this.regRemoveBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.regRemoveBtn.Name = "regRemoveBtn";
+            this.regRemoveBtn.Size = new System.Drawing.Size(23, 22);
+            this.regRemoveBtn.Text = "Delete";
+            this.regRemoveBtn.ToolTipText = "Remove key";
             // 
-            // columnHeader4
+            // regEditBtn
             // 
-            this.columnHeader4.Text = "Value";
-            this.columnHeader4.Width = 246;
+            this.regEditBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.regEditBtn.Image = ((System.Drawing.Image)(resources.GetObject("regEditBtn.Image")));
+            this.regEditBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.regEditBtn.Name = "regEditBtn";
+            this.regEditBtn.Size = new System.Drawing.Size(23, 22);
+            this.regEditBtn.ToolTipText = "Edit registry";
             // 
-            // columnHeader5
+            // regImportBtn
             // 
-            this.columnHeader5.Text = "Type";
-            this.columnHeader5.Width = 98;
+            this.regImportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.regImportBtn.Image = ((System.Drawing.Image)(resources.GetObject("regImportBtn.Image")));
+            this.regImportBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.regImportBtn.Name = "regImportBtn";
+            this.regImportBtn.Size = new System.Drawing.Size(23, 22);
+            this.regImportBtn.Text = "Import";
+            this.regImportBtn.ToolTipText = "Import a .reg file";
+            this.regImportBtn.Click += new System.EventHandler(this.regImportBtn_Click);
+            // 
+            // regExportBtn
+            // 
+            this.regExportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.regExportBtn.Image = ((System.Drawing.Image)(resources.GetObject("regExportBtn.Image")));
+            this.regExportBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.regExportBtn.Name = "regExportBtn";
+            this.regExportBtn.Size = new System.Drawing.Size(23, 22);
+            this.regExportBtn.ToolTipText = "Export selected registry key to a .reg file";
+            this.regExportBtn.Click += new System.EventHandler(this.regExportBtn_Click);
             // 
             // MainForm
             // 
@@ -1684,8 +1664,6 @@
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
             this.tabGeneral.PerformLayout();
@@ -1713,8 +1691,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.fileToolStrip.ResumeLayout(false);
-            this.fileToolStrip.PerformLayout();
             this.tabRegistry.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
@@ -1729,8 +1705,6 @@
             this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            this.regToolStrip.ResumeLayout(false);
-            this.regToolStrip.PerformLayout();
             this.tabAdvanced.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
@@ -1740,11 +1714,13 @@
             this.groupBox5.PerformLayout();
             this.tabWelcome.ResumeLayout(false);
             this.panelWelcome.ResumeLayout(false);
+            this.panelWelcome.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.groupBox8.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panel12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel11)).EndInit();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1871,8 +1847,6 @@
         private System.Windows.Forms.ColumnHeader columnFileN;
         private System.Windows.Forms.ImageList imageListMRU;
         private System.Windows.Forms.TabPage tabWelcome;
-        private System.Windows.Forms.Button btnEditPackage;
-        private System.Windows.Forms.Button btnNewPackage;
         private System.Windows.Forms.ToolStripButton regImportBtn;
         private System.Windows.Forms.ToolStripButton regExportBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -1883,9 +1857,11 @@
         private System.Windows.Forms.TextBox propertyFileVersion;
         private System.Windows.Forms.ColumnHeader columnFileType;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.LinkLabel lnkCapture;
+        private System.Windows.Forms.LinkLabel lnkPackageEdit;
+        private System.Windows.Forms.PictureBox pictureBox5;
 
     }
 }

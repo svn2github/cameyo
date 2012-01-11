@@ -60,9 +60,23 @@ namespace PackageEditor.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _038 {
+            get {
+                object obj = ResourceManager.GetObject("038", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap _106 {
             get {
                 object obj = ResourceManager.GetObject("106", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap _113 {
+            get {
+                object obj = ResourceManager.GetObject("113", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -91,13 +105,6 @@ namespace PackageEditor.Properties {
         internal static System.Drawing.Bitmap down {
             get {
                 object obj = ResourceManager.GetObject("down", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap dropbox_logo_home {
-            get {
-                object obj = ResourceManager.GetObject("dropbox_logo_home", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

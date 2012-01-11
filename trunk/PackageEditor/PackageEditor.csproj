@@ -45,7 +45,7 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -55,7 +55,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release2008|AnyCPU'">
@@ -221,6 +221,8 @@
   <ItemGroup>
     <Content Include="Package.ico" />
     <Content Include="PkgEdit.ico" />
+    <None Include="Resources\113.png" />
+    <None Include="Resources\038.png" />
     <None Include="Resources\106.png" />
     <None Include="Resources\PackedgeEditorBG_BottomClient.png" />
     <None Include="Resources\PackedgeEditorBG_BottomRight.png" />

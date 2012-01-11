@@ -273,7 +273,7 @@ namespace PackageEditor
             OpenFileDialog openFileDialog = new OpenFileDialog();
             //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo apps";
             openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "Virtual packages (*.virtual.exe;*.cameyo.exe)|*.virtual.exe;*.cameyo.exe|All files (*.*)|*.*";
+            openFileDialog.Filter = "Virtual app (*.virtual.exe;*.cameyo.exe)|*.virtual.exe;*.cameyo.exe|All files (*.*)|*.*";
             //openFileDialog.DefaultExt = "virtual.exe";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -290,14 +290,21 @@ namespace PackageEditor
             String message;
             if (!PackageCanSave(out message))
             {
-                MessageBox.Show(this, message, "Cant save the package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, message, "Cannot save package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Path.GetDirectoryName(virtPackage.openedFile);
-            saveFileDialog.FileName = Path.GetFileName(virtPackage.openedFile);
+            if (!String.IsNullOrEmpty(virtPackage.openedFile))
+            {
+                saveFileDialog.InitialDirectory = Path.GetDirectoryName(virtPackage.openedFile);
+                saveFileDialog.FileName = Path.GetFileName(virtPackage.openedFile);
+            }
+            else
+            {
+                saveFileDialog.FileName = "New app.cameyo.exe";
+            }
             saveFileDialog.AddExtension = true;
-            saveFileDialog.Filter = "Virtual packages (*.virtual.exe)|*.virtual.exe";
+            saveFileDialog.Filter = "Virtual app (*.virtual.exe;*.cameyo.exe)|*.virtual.exe;*.cameyo.exe";
             saveFileDialog.DefaultExt = "virtual.exe";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -464,7 +471,10 @@ namespace PackageEditor
                 }
             }
 
-            this.Text = "Package Editor" + " - " + virtPackage.openedFile;
+            if (!String.IsNullOrEmpty(virtPackage.openedFile))
+                this.Text = "Package Editor" + " - " + virtPackage.openedFile;
+            else
+                this.Text = "Package Editor";
             dirty = false;
         }
 
@@ -1162,6 +1172,20 @@ namespace PackageEditor
         private void fsFolderTree_ItemDrag(object sender, ItemDragEventArgs e)
         {
             fsEditor.DragDropFiles((FolderTreeNode)e.Item);
+        }
+
+        private void lnkCapture_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            int exitCode = 0;
+            if (!Cameyo.OpenSrc.Common.Utils.ExecProg(Path.Combine(Utils.MyPath(), "Packager.exe"), null, false, ref exitCode))
+                MessageBox.Show("Can't start the app packager");
+            else
+                Application.Exit();
+        }
+
+        private void lnkPackageEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            openToolStripMenuItem_Click(this, new EventArgs());
         }
     }
 
