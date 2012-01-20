@@ -273,7 +273,7 @@ namespace PackageEditor
             OpenFileDialog openFileDialog = new OpenFileDialog();
             //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo apps";
             openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "Virtual app (*.virtual.exe;*.cameyo.exe)|*.virtual.exe;*.cameyo.exe|All files (*.*)|*.*";
+            openFileDialog.Filter = "Virtual app (*.cameyo.exe;*.virtual.exe)|*.cameyo.exe;*.virtual.exe|All files (*.*)|*.*";
             //openFileDialog.DefaultExt = "virtual.exe";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -304,8 +304,8 @@ namespace PackageEditor
                 saveFileDialog.FileName = "New app.cameyo.exe";
             }
             saveFileDialog.AddExtension = true;
-            saveFileDialog.Filter = "Virtual app (*.virtual.exe;*.cameyo.exe)|*.virtual.exe;*.cameyo.exe";
-            saveFileDialog.DefaultExt = "virtual.exe";
+            saveFileDialog.Filter = "Virtual app (*.cameyo.exe;*.virtual.exe)|*.cameyo.exe;*.virtual.exe";
+            saveFileDialog.DefaultExt = "cameyo.exe";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -796,14 +796,14 @@ namespace PackageEditor
                 return;
             }
             //if (System.IO.Path.GetExtension(System.IO.Path.GetFileNameWithoutExtension(files[0]))
-            //         + System.IO.Path.GetExtension(files[0]) != ".virtual.exe")
+            //         + System.IO.Path.GetExtension(files[0]) != ".cameyo.exe")
             if (System.IO.Path.GetFileName(files[0]).IndexOf("AppVirtDll.", StringComparison.InvariantCultureIgnoreCase) != -1)
             {
                 String openedFile = "";
                 CloseAndReopen_Before(ref openedFile);
                 try
                 {
-                    // Syntax: myPath\Packager.exe -ChangeEngine AppName.virtual.exe AppVirtDll.dll
+                    // Syntax: myPath\Packager.exe -ChangeEngine AppName.cameyo.exe AppVirtDll.dll
                     string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
                     int exitCode = 0;
                     if (!ExecProg(openedFile, "-ChangeEngine \"" + files[0] + "\"", true, ref exitCode))
