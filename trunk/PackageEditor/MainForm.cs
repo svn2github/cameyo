@@ -156,16 +156,17 @@ namespace PackageEditor
         private bool PackageOpen(String packageExeFile)
         {
             VirtPackage.APIRET apiRet;
-            return PackageOpen(packageExeFile, out apiRet);
+            return PackageOpen(packageExeFile, true, out apiRet);
         }
 
-        private bool PackageOpen(String packageExeFile, out VirtPackage.APIRET apiRet)
+        private bool PackageOpen(String packageExeFile, bool displayWaitMsg, out VirtPackage.APIRET apiRet)
         {
             bool ret;
             apiRet = 0;
             if (virtPackage.opened && !PackageClose())      // User doesn't want to discard changes
                 return false;
-            PleaseWait.PleaseWaitBegin("Opening package", "Opening " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
+            if (displayWaitMsg)
+                PleaseWait.PleaseWaitBegin("Opening package", "Opening " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
             {
                 if (virtPackage.Open(packageExeFile, out apiRet))
                 {
@@ -193,12 +194,18 @@ namespace PackageEditor
                 else
                     ret = false;
             }
-            PleaseWait.PleaseWaitEnd();
+            if (displayWaitMsg)
+                PleaseWait.PleaseWaitEnd();
 
             return ret;
         }
 
         private bool PackageClose()
+        {
+            return PackageClose(true);
+        }
+
+        private bool PackageClose(bool disableControls)
         {
             if (virtPackage.opened == false)
                 return true;
@@ -218,7 +225,8 @@ namespace PackageEditor
             fsEditor.OnPackageClose();
             regEditor.OnPackageClose();
             virtPackage.Close();
-            EnableDisablePackageControls(false);
+            if (disableControls)
+                EnableDisablePackageControls(false);
             return true;
         }
 
@@ -258,12 +266,11 @@ namespace PackageEditor
                 this.dirty = false;
                 fsEditor.dirty = false;
                 regEditor.dirty = false;
-                MessageBox.Show("Package saved.");
                 return true;
             }
             else
             {
-                MessageBox.Show(String.Format("Cannot save file. Error:{0} ApiRet:{1}", ret, apiRet));
+                MessageBox.Show(String.Format("Cannot save file. ApiRet:{0} (step {1})", apiRet, ret));
                 return false;
             }
         }
@@ -278,7 +285,7 @@ namespace PackageEditor
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 VirtPackage.APIRET apiRet;
-                if (!PackageOpen(openFileDialog.FileName, out apiRet))
+                if (!PackageOpen(openFileDialog.FileName, true, out apiRet))
                 {
                     MessageBox.Show(String.Format("Failed to open package. API error:{0}", apiRet));
                 }
@@ -313,6 +320,7 @@ namespace PackageEditor
                 {
                     virtPackage.openedFile = saveFileDialog.FileName;
                     this.Text = "Package Editor" + " - " + saveFileDialog.FileName;
+                    MessageBox.Show("Package saved.");
                 }
             }
         }
@@ -423,6 +431,8 @@ namespace PackageEditor
             propertyIsolationDataMode.Checked = (isolationType == VirtPackage.ISOLATIONMODE_DATA);
             propertyIsolationIsolated.Checked = (isolationType == VirtPackage.ISOLATIONMODE_ISOLATED);
             propertyIsolationMerge.Checked = (isolationType == VirtPackage.ISOLATIONMODE_FULL_ACCESS);
+            if (propertyIsolationDataMode.Checked)
+                virtPackage.SetProperty("DataMode", "TRUE");   // Important to be able to switch to Isolated mode (to unisolate %Personal% etc)
 
             // Icon
             if (!String.IsNullOrEmpty(virtPackage.openedFile))
@@ -647,12 +657,21 @@ namespace PackageEditor
                 String packageExeFile = virtPackage.openedFile;
 
                 ThreadedRegLoadStop();
-                virtPackage.Close();
+                PackageClose(false);
+                //virtPackage.Close();
 
                 DeleteFile(packageExeFile);
-                if (!MoveFile(tmpFileName, packageExeFile))
+                bool ok;
+                ok = MoveFile(tmpFileName, packageExeFile);
+                VirtPackage.APIRET apiRet;
+                if (!PackageOpen(packageExeFile, false, out apiRet))
+                    MessageBox.Show(apiRet.ToString());
+                String property = virtPackage.GetProperty("AutoLaunch");
+                //virtPackage.Open(packageExeFile);
+                if (ok)
+                    MessageBox.Show("Package saved.");
+                else
                     MessageBox.Show("Cannot rename: " + tmpFileName + " to: " + packageExeFile);
-                virtPackage.Open(packageExeFile);
             }
             else
             {
@@ -738,11 +757,6 @@ namespace PackageEditor
                 if (virtPackage.GetProperty("AutoLaunch") != oldValue)
                     dirty = true;
             }
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
 
         // dragdrop function (DragEnter) to open a new file dropping it in the main form
