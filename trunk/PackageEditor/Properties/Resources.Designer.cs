@@ -116,6 +116,13 @@ namespace PackageEditor.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap logo_black {
+            get {
+                object obj = ResourceManager.GetObject("logo-black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap PackedgeEditorBG {
             get {
                 object obj = ResourceManager.GetObject("PackedgeEditorBG", resourceCulture);

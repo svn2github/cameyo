@@ -221,6 +221,7 @@
   <ItemGroup>
     <Content Include="Package.ico" />
     <Content Include="PkgEdit.ico" />
+    <None Include="Resources\logo-black.png" />
     <None Include="Resources\071.png" />
     <None Include="Resources\113.png" />
     <None Include="Resources\106.png" />
