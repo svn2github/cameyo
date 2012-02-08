@@ -1031,6 +1031,9 @@ namespace PackageEditor
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            ListViewHelper.EnableDoubleBuffer(listViewMRU);
+            Win32imports.SendMessage(listViewMRU.Handle, Win32imports.LVM_SETICONSPACING, (uint)410, (uint)410);
+
             foreach (MRUitem item in mru.GetItems())
             {
                 if (!File.Exists(item.file))

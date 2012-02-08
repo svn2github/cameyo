@@ -221,8 +221,8 @@
   <ItemGroup>
     <Content Include="Package.ico" />
     <Content Include="PkgEdit.ico" />
+    <None Include="Resources\071.png" />
     <None Include="Resources\113.png" />
-    <None Include="Resources\038.png" />
     <None Include="Resources\106.png" />
     <None Include="Resources\PackedgeEditorBG_BottomClient.png" />
     <None Include="Resources\PackedgeEditorBG_BottomRight.png" />
@@ -232,7 +232,6 @@
     <None Include="Resources\up.png" />
     <None Include="Resources\delete_16_h.png" />
     <None Include="Resources\delete_24.png" />
-    <None Include="Resources\dropbox_logo_home.png" />
     <None Include="Resources\folder_closed_16_h.png" />
   </ItemGroup>
   <ItemGroup>
