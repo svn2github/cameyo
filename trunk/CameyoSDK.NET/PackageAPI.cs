@@ -1559,6 +1559,13 @@ namespace VirtPackageAPI
         {
             if (!String.IsNullOrEmpty(m_EngineVersion))
                 return m_EngineVersion;
+
+            // EngineVersion property (available only on 2.0.713 and higher)
+            m_EngineVersion = (String)IniProperties["EngineVersion"];
+            if (!String.IsNullOrEmpty(m_EngineVersion))
+                return m_EngineVersion;
+
+            // No property (backward compatibility mode); try to find AppVirtDll
             String appVirtDll = m_BaseDirName + "\\AppVirtDll_" + m_AppID + ".dll";
             if (!File.Exists(appVirtDll))
                 return "";
