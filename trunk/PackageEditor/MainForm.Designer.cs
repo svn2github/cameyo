@@ -945,6 +945,13 @@
             // 
             // fileToolStrip
             // 
+            this.fileToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fsAddBtn,
+            this.fsAddDirBtn,
+            this.fsAddEmptyDirBtn,
+            this.fsRemoveBtn,
+            this.toolStripSeparator1,
+            this.fsSaveFileAsBtn});
             this.fileToolStrip.Location = new System.Drawing.Point(3, 3);
             this.fileToolStrip.Name = "fileToolStrip";
             this.fileToolStrip.Size = new System.Drawing.Size(766, 25);
@@ -1148,6 +1155,12 @@
             // 
             // regToolStrip
             // 
+            this.regToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.regRemoveBtn,
+            this.regEditBtn,
+            this.toolStripSeparator2,
+            this.regImportBtn,
+            this.regExportBtn});
             this.regToolStrip.Location = new System.Drawing.Point(0, 0);
             this.regToolStrip.Name = "regToolStrip";
             this.regToolStrip.Size = new System.Drawing.Size(713, 25);

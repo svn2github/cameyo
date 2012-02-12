@@ -649,8 +649,11 @@ namespace PackageEditor
                 return;
             }
             String newFolderName = "";
-            if (TreeHelper.InputBox("Add empty folder", "Folder name:", ref newFolderName) != DialogResult.OK)
+            if (TreeHelper.InputBox("Add empty folder", "Folder name:", ref newFolderName) != DialogResult.OK ||
+                string.IsNullOrEmpty(newFolderName))
+            {
                 return;
+            }
             if (newFolderName.Contains("\\"))
             {
                 MessageBox.Show("Folder must not contain '\\'. Please specify one folder at a time.");
