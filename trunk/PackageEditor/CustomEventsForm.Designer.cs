@@ -28,345 +28,264 @@
         /// </summary>
         private void InitializeComponent()
         {
-          this.panel1 = new System.Windows.Forms.Panel();
-          this.bottomPanel = new System.Windows.Forms.Panel();
-          this.panel12 = new System.Windows.Forms.Panel();
-          this.panel11 = new System.Windows.Forms.Panel();
-          this.bkPanel = new System.Windows.Forms.Panel();
-          this.panel8 = new System.Windows.Forms.Panel();
-          this.btnOk = new System.Windows.Forms.Button();
-          this.btnCancel = new System.Windows.Forms.Button();
-          this.panel2 = new System.Windows.Forms.Panel();
-          this.pictureBox1 = new System.Windows.Forms.PictureBox();
-          this.btnDown = new System.Windows.Forms.Button();
-          this.listBox = new System.Windows.Forms.ListBox();
-          this.comboBox = new System.Windows.Forms.ComboBox();
-          this.btnUp = new System.Windows.Forms.Button();
-          this.btnErase = new System.Windows.Forms.Button();
-          this.panel3 = new System.Windows.Forms.Panel();
-          this.label2 = new System.Windows.Forms.Label();
-          this.groupBox1 = new System.Windows.Forms.GroupBox();
-          this.txtCmd = new System.Windows.Forms.TextBox();
-          this.boxWait = new System.Windows.Forms.CheckBox();
-          this.btnBrowse = new System.Windows.Forms.Button();
-          this.panel4 = new System.Windows.Forms.Panel();
-          this.btnAddSave = new System.Windows.Forms.Button();
-          this.txtArgs = new System.Windows.Forms.TextBox();
-          this.label1 = new System.Windows.Forms.Label();
-          this.label4 = new System.Windows.Forms.Label();
-          this.panel5 = new System.Windows.Forms.Panel();
-          this.panel1.SuspendLayout();
-          this.bottomPanel.SuspendLayout();
-          this.panel8.SuspendLayout();
-          this.panel2.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-          this.panel3.SuspendLayout();
-          this.groupBox1.SuspendLayout();
-          this.panel4.SuspendLayout();
-          this.SuspendLayout();
-          // 
-          // panel1
-          // 
-          this.panel1.Controls.Add(this.bottomPanel);
-          this.panel1.Controls.Add(this.bkPanel);
-          this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.panel1.Location = new System.Drawing.Point(0, 0);
-          this.panel1.Name = "panel1";
-          this.panel1.Size = new System.Drawing.Size(580, 423);
-          this.panel1.TabIndex = 0;
-          // 
-          // bottomPanel
-          // 
-          this.bottomPanel.Controls.Add(this.panel12);
-          this.bottomPanel.Controls.Add(this.panel11);
-          this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-          this.bottomPanel.Location = new System.Drawing.Point(0, 376);
-          this.bottomPanel.Name = "bottomPanel";
-          this.bottomPanel.Size = new System.Drawing.Size(580, 47);
-          this.bottomPanel.TabIndex = 22;
-          // 
-          // panel12
-          // 
-          this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
-          this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.panel12.Location = new System.Drawing.Point(0, 0);
-          this.panel12.Name = "panel12";
-          this.panel12.Size = new System.Drawing.Size(424, 47);
-          this.panel12.TabIndex = 1;
-          // 
-          // panel11
-          // 
-          this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
-          this.panel11.Dock = System.Windows.Forms.DockStyle.Right;
-          this.panel11.Location = new System.Drawing.Point(424, 0);
-          this.panel11.Name = "panel11";
-          this.panel11.Size = new System.Drawing.Size(156, 47);
-          this.panel11.TabIndex = 0;
-          // 
-          // bkPanel
-          // 
-          this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
-          this.bkPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-          this.bkPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.bkPanel.Location = new System.Drawing.Point(0, 0);
-          this.bkPanel.Name = "bkPanel";
-          this.bkPanel.Size = new System.Drawing.Size(580, 423);
-          this.bkPanel.TabIndex = 23;
-          // 
-          // panel8
-          // 
-          this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-          this.panel8.Controls.Add(this.btnOk);
-          this.panel8.Controls.Add(this.btnCancel);
-          this.panel8.Controls.Add(this.panel2);
-          this.panel8.Location = new System.Drawing.Point(12, 12);
-          this.panel8.Name = "panel8";
-          this.panel8.Size = new System.Drawing.Size(556, 354);
-          this.panel8.TabIndex = 7;
-          // 
-          // btnOk
-          // 
-          this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-          this.btnOk.Location = new System.Drawing.Point(392, 312);
-          this.btnOk.Name = "btnOk";
-          this.btnOk.Size = new System.Drawing.Size(75, 35);
-          this.btnOk.TabIndex = 8;
-          this.btnOk.Text = "&OK";
-          this.btnOk.UseVisualStyleBackColor = true;
-          this.btnOk.Click += new System.EventHandler(this.btnSave_Click);
-          // 
-          // btnCancel
-          // 
-          this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-          this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-          this.btnCancel.Location = new System.Drawing.Point(473, 312);
-          this.btnCancel.Name = "btnCancel";
-          this.btnCancel.Size = new System.Drawing.Size(75, 35);
-          this.btnCancel.TabIndex = 10;
-          this.btnCancel.Text = "&Cancel";
-          this.btnCancel.UseVisualStyleBackColor = true;
-          this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-          // 
-          // panel2
-          // 
-          this.panel2.Controls.Add(this.pictureBox1);
-          this.panel2.Controls.Add(this.btnDown);
-          this.panel2.Controls.Add(this.listBox);
-          this.panel2.Controls.Add(this.comboBox);
-          this.panel2.Controls.Add(this.btnUp);
-          this.panel2.Controls.Add(this.btnErase);
-          this.panel2.Controls.Add(this.panel3);
-          this.panel2.Location = new System.Drawing.Point(0, 0);
-          this.panel2.Name = "panel2";
-          this.panel2.Size = new System.Drawing.Size(554, 306);
-          this.panel2.TabIndex = 5;
-          // 
-          // pictureBox1
-          // 
-          this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-          this.pictureBox1.Location = new System.Drawing.Point(3, 305);
-          this.pictureBox1.Name = "pictureBox1";
-          this.pictureBox1.Size = new System.Drawing.Size(556, 1);
-          this.pictureBox1.TabIndex = 11;
-          this.pictureBox1.TabStop = false;
-          // 
-          // btnDown
-          // 
-          this.btnDown.Image = global::PackageEditor.Properties.Resources.down;
-          this.btnDown.Location = new System.Drawing.Point(96, 265);
-          this.btnDown.Name = "btnDown";
-          this.btnDown.Size = new System.Drawing.Size(36, 32);
-          this.btnDown.TabIndex = 7;
-          this.btnDown.UseVisualStyleBackColor = true;
-          this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
-          // 
-          // listBox
-          // 
-          this.listBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)));
-          this.listBox.FormattingEnabled = true;
-          this.listBox.Location = new System.Drawing.Point(12, 34);
-          this.listBox.Name = "listBox";
-          this.listBox.Size = new System.Drawing.Size(171, 225);
-          this.listBox.TabIndex = 9;
-          this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
-          // 
-          // comboBox
-          // 
-          this.comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-          this.comboBox.FormattingEnabled = true;
-          this.comboBox.Items.AddRange(new object[] {
-            "On start (unvirtualized)",
-            "On start (virtualized)",
-            "On stop (virtualized)",
-            "On stop (unvirtualized)"});
-          this.comboBox.Location = new System.Drawing.Point(12, 7);
-          this.comboBox.Name = "comboBox";
-          this.comboBox.Size = new System.Drawing.Size(171, 21);
-          this.comboBox.TabIndex = 9;
-          this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-          // 
-          // btnUp
-          // 
-          this.btnUp.Image = global::PackageEditor.Properties.Resources.up;
-          this.btnUp.Location = new System.Drawing.Point(54, 265);
-          this.btnUp.Name = "btnUp";
-          this.btnUp.Size = new System.Drawing.Size(36, 32);
-          this.btnUp.TabIndex = 6;
-          this.btnUp.UseVisualStyleBackColor = true;
-          this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
-          // 
-          // btnErase
-          // 
-          this.btnErase.Image = global::PackageEditor.Properties.Resources.delete_16_h;
-          this.btnErase.Location = new System.Drawing.Point(12, 265);
-          this.btnErase.Name = "btnErase";
-          this.btnErase.Size = new System.Drawing.Size(36, 32);
-          this.btnErase.TabIndex = 5;
-          this.btnErase.UseVisualStyleBackColor = true;
-          this.btnErase.Click += new System.EventHandler(this.btnErase_Click);
-          // 
-          // panel3
-          // 
-          this.panel3.Controls.Add(this.label2);
-          this.panel3.Controls.Add(this.groupBox1);
-          this.panel3.Controls.Add(this.panel5);
-          this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-          this.panel3.Location = new System.Drawing.Point(195, 0);
-          this.panel3.Name = "panel3";
-          this.panel3.Size = new System.Drawing.Size(359, 306);
-          this.panel3.TabIndex = 1;
-          // 
-          // label2
-          // 
-          this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.label2.Location = new System.Drawing.Point(34, 2);
-          this.label2.Name = "label2";
-          this.label2.Size = new System.Drawing.Size(2, 337);
-          this.label2.TabIndex = 43;
-          // 
-          // groupBox1
-          // 
-          this.groupBox1.Controls.Add(this.txtCmd);
-          this.groupBox1.Controls.Add(this.boxWait);
-          this.groupBox1.Controls.Add(this.btnBrowse);
-          this.groupBox1.Controls.Add(this.panel4);
-          this.groupBox1.Controls.Add(this.txtArgs);
-          this.groupBox1.Controls.Add(this.label1);
-          this.groupBox1.Controls.Add(this.label4);
-          this.groupBox1.Location = new System.Drawing.Point(36, 0);
-          this.groupBox1.Name = "groupBox1";
-          this.groupBox1.Size = new System.Drawing.Size(323, 153);
-          this.groupBox1.TabIndex = 38;
-          this.groupBox1.TabStop = false;
-          // 
-          // txtCmd
-          // 
-          this.txtCmd.Location = new System.Drawing.Point(17, 30);
-          this.txtCmd.Name = "txtCmd";
-          this.txtCmd.Size = new System.Drawing.Size(262, 20);
-          this.txtCmd.TabIndex = 0;
-          // 
-          // boxWait
-          // 
-          this.boxWait.AutoSize = true;
-          this.boxWait.Location = new System.Drawing.Point(9, 95);
-          this.boxWait.Name = "boxWait";
-          this.boxWait.Size = new System.Drawing.Size(137, 17);
-          this.boxWait.TabIndex = 3;
-          this.boxWait.Text = "Wait until program ends";
-          this.boxWait.UseVisualStyleBackColor = true;
-          // 
-          // btnBrowse
-          // 
-          this.btnBrowse.Image = global::PackageEditor.Properties.Resources.folder_closed_16_h;
-          this.btnBrowse.Location = new System.Drawing.Point(282, 27);
-          this.btnBrowse.Name = "btnBrowse";
-          this.btnBrowse.Size = new System.Drawing.Size(25, 25);
-          this.btnBrowse.TabIndex = 1;
-          this.btnBrowse.UseVisualStyleBackColor = true;
-          this.btnBrowse.Visible = false;
-          // 
-          // panel4
-          // 
-          this.panel4.Controls.Add(this.btnAddSave);
-          this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-          this.panel4.Location = new System.Drawing.Point(3, 116);
-          this.panel4.Name = "panel4";
-          this.panel4.Size = new System.Drawing.Size(317, 34);
-          this.panel4.TabIndex = 36;
-          // 
-          // btnAddSave
-          // 
-          this.btnAddSave.Location = new System.Drawing.Point(239, 6);
-          this.btnAddSave.Name = "btnAddSave";
-          this.btnAddSave.Size = new System.Drawing.Size(75, 23);
-          this.btnAddSave.TabIndex = 4;
-          this.btnAddSave.Text = "&Add";
-          this.btnAddSave.UseVisualStyleBackColor = true;
-          this.btnAddSave.Click += new System.EventHandler(this.btnAddSave_Click);
-          // 
-          // txtArgs
-          // 
-          this.txtArgs.Location = new System.Drawing.Point(17, 69);
-          this.txtArgs.Name = "txtArgs";
-          this.txtArgs.Size = new System.Drawing.Size(290, 20);
-          this.txtArgs.TabIndex = 2;
-          // 
-          // label1
-          // 
-          this.label1.AutoSize = true;
-          this.label1.Location = new System.Drawing.Point(6, 14);
-          this.label1.Name = "label1";
-          this.label1.Size = new System.Drawing.Size(87, 13);
-          this.label1.TabIndex = 34;
-          this.label1.Text = "Command to run:";
-          // 
-          // label4
-          // 
-          this.label4.AutoSize = true;
-          this.label4.Location = new System.Drawing.Point(6, 53);
-          this.label4.Name = "label4";
-          this.label4.Size = new System.Drawing.Size(106, 13);
-          this.label4.TabIndex = 32;
-          this.label4.Text = "Arguments (optional):";
-          // 
-          // panel5
-          // 
-          this.panel5.Location = new System.Drawing.Point(0, 0);
-          this.panel5.Name = "panel5";
-          this.panel5.Size = new System.Drawing.Size(36, 335);
-          this.panel5.TabIndex = 0;
-          // 
-          // CustomEventsForm
-          // 
-          this.AcceptButton = this.btnOk;
-          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-          this.CancelButton = this.btnCancel;
-          this.ClientSize = new System.Drawing.Size(580, 423);
-          this.Controls.Add(this.panel8);
-          this.Controls.Add(this.panel1);
-          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-          this.MaximizeBox = false;
-          this.MinimizeBox = false;
-          this.Name = "CustomEventsForm";
-          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-          this.Text = "Custom events";
-          this.Load += new System.EventHandler(this.CustomEventsForm_Load);
-          this.panel1.ResumeLayout(false);
-          this.bottomPanel.ResumeLayout(false);
-          this.panel8.ResumeLayout(false);
-          this.panel2.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-          this.panel3.ResumeLayout(false);
-          this.groupBox1.ResumeLayout(false);
-          this.groupBox1.PerformLayout();
-          this.panel4.ResumeLayout(false);
-          this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomEventsForm));
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.bottomPanel = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.bkPanel = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.listBox = new System.Windows.Forms.ListBox();
+            this.comboBox = new System.Windows.Forms.ComboBox();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnErase = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtCmd = new System.Windows.Forms.TextBox();
+            this.boxWait = new System.Windows.Forms.CheckBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnAddSave = new System.Windows.Forms.Button();
+            this.txtArgs = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.bottomPanel.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.bottomPanel);
+            this.panel1.Controls.Add(this.bkPanel);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Controls.Add(this.panel12);
+            this.bottomPanel.Controls.Add(this.panel11);
+            resources.ApplyResources(this.bottomPanel, "bottomPanel");
+            this.bottomPanel.Name = "bottomPanel";
+            // 
+            // panel12
+            // 
+            this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
+            resources.ApplyResources(this.panel12, "panel12");
+            this.panel12.Name = "panel12";
+            // 
+            // panel11
+            // 
+            this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
+            resources.ApplyResources(this.panel11, "panel11");
+            this.panel11.Name = "panel11";
+            // 
+            // bkPanel
+            // 
+            this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
+            resources.ApplyResources(this.bkPanel, "bkPanel");
+            this.bkPanel.Name = "bkPanel";
+            // 
+            // panel8
+            // 
+            resources.ApplyResources(this.panel8, "panel8");
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.btnOk);
+            this.panel8.Controls.Add(this.btnCancel);
+            this.panel8.Controls.Add(this.panel2);
+            this.panel8.Name = "panel8";
+            // 
+            // btnOk
+            // 
+            resources.ApplyResources(this.btnOk, "btnOk");
+            this.btnOk.Name = "btnOk";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.btnDown);
+            this.panel2.Controls.Add(this.listBox);
+            this.panel2.Controls.Add(this.comboBox);
+            this.panel2.Controls.Add(this.btnUp);
+            this.panel2.Controls.Add(this.btnErase);
+            this.panel2.Controls.Add(this.panel3);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnDown
+            // 
+            this.btnDown.Image = global::PackageEditor.Properties.Resources.down;
+            resources.ApplyResources(this.btnDown, "btnDown");
+            this.btnDown.Name = "btnDown";
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
+            // listBox
+            // 
+            resources.ApplyResources(this.listBox, "listBox");
+            this.listBox.FormattingEnabled = true;
+            this.listBox.Name = "listBox";
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
+            // 
+            // comboBox
+            // 
+            this.comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox.FormattingEnabled = true;
+            this.comboBox.Items.AddRange(new object[] {
+            resources.GetString("comboBox.Items"),
+            resources.GetString("comboBox.Items1"),
+            resources.GetString("comboBox.Items2"),
+            resources.GetString("comboBox.Items3")});
+            resources.ApplyResources(this.comboBox, "comboBox");
+            this.comboBox.Name = "comboBox";
+            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            // 
+            // btnUp
+            // 
+            this.btnUp.Image = global::PackageEditor.Properties.Resources.up;
+            resources.ApplyResources(this.btnUp, "btnUp");
+            this.btnUp.Name = "btnUp";
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            // 
+            // btnErase
+            // 
+            this.btnErase.Image = global::PackageEditor.Properties.Resources.delete_16_h;
+            resources.ApplyResources(this.btnErase, "btnErase");
+            this.btnErase.Name = "btnErase";
+            this.btnErase.UseVisualStyleBackColor = true;
+            this.btnErase.Click += new System.EventHandler(this.btnErase_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.groupBox1);
+            this.panel3.Controls.Add(this.panel5);
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Name = "panel3";
+            // 
+            // label2
+            // 
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtCmd);
+            this.groupBox1.Controls.Add(this.boxWait);
+            this.groupBox1.Controls.Add(this.btnBrowse);
+            this.groupBox1.Controls.Add(this.panel4);
+            this.groupBox1.Controls.Add(this.txtArgs);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label4);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // txtCmd
+            // 
+            resources.ApplyResources(this.txtCmd, "txtCmd");
+            this.txtCmd.Name = "txtCmd";
+            // 
+            // boxWait
+            // 
+            resources.ApplyResources(this.boxWait, "boxWait");
+            this.boxWait.Name = "boxWait";
+            this.boxWait.UseVisualStyleBackColor = true;
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Image = global::PackageEditor.Properties.Resources.folder_closed_16_h;
+            resources.ApplyResources(this.btnBrowse, "btnBrowse");
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.btnAddSave);
+            resources.ApplyResources(this.panel4, "panel4");
+            this.panel4.Name = "panel4";
+            // 
+            // btnAddSave
+            // 
+            resources.ApplyResources(this.btnAddSave, "btnAddSave");
+            this.btnAddSave.Name = "btnAddSave";
+            this.btnAddSave.UseVisualStyleBackColor = true;
+            this.btnAddSave.Click += new System.EventHandler(this.btnAddSave_Click);
+            // 
+            // txtArgs
+            // 
+            resources.ApplyResources(this.txtArgs, "txtArgs");
+            this.txtArgs.Name = "txtArgs";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // panel5
+            // 
+            resources.ApplyResources(this.panel5, "panel5");
+            this.panel5.Name = "panel5";
+            // 
+            // CustomEventsForm
+            // 
+            this.AcceptButton = this.btnOk;
+            resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.panel8);
+            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "CustomEventsForm";
+            this.Load += new System.EventHandler(this.CustomEventsForm_Load);
+            this.panel1.ResumeLayout(false);
+            this.bottomPanel.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.ResumeLayout(false);
 
         }
 

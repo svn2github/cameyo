@@ -173,6 +173,12 @@
     <EmbeddedResource Include="ListViewEx.resx">
       <DependentUpon>ListViewEx.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.fr-FR.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.fr.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

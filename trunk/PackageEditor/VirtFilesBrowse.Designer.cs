@@ -43,52 +43,35 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 238);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(605, 35);
-            this.panel1.TabIndex = 19;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnOk);
             this.panel2.Controls.Add(this.btnCancel);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(405, 0);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 35);
-            this.panel2.TabIndex = 0;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(32, 6);
+            resources.ApplyResources(this.btnOk, "btnOk");
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 1;
-            this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(113, 6);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // fsFolderTree
             // 
-            this.fsFolderTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fsFolderTree.ImageIndex = 0;
+            resources.ApplyResources(this.fsFolderTree, "fsFolderTree");
             this.fsFolderTree.ImageList = this.imageList;
-            this.fsFolderTree.Location = new System.Drawing.Point(0, 0);
             this.fsFolderTree.Name = "fsFolderTree";
-            this.fsFolderTree.SelectedImageIndex = 0;
-            this.fsFolderTree.Size = new System.Drawing.Size(605, 238);
-            this.fsFolderTree.TabIndex = 20;
             // 
             // imageList
             // 
@@ -103,18 +86,14 @@
             // 
             // VirtFilesBrowse
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 273);
             this.Controls.Add(this.fsFolderTree);
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(200, 100);
             this.Name = "VirtFilesBrowse";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Browse";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);

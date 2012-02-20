@@ -117,11 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+    <value>pictureBox2</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+    <value>pictureBox1</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbFullPath.Name" xml:space="preserve">
+    <value>tbFullPath</value>
+  </data>
+  <data name="&gt;&gt;tbFullPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbFullPath.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;tbFullPath.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED.Name" xml:space="preserve">
+    <value>chkFileFlagDEPLOYED</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDELETED.Name" xml:space="preserve">
+    <value>chkFileFlagDELETED</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDELETED.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDELETED.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDELETED.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="groupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="groupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 78</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="groupBox.Text" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="&gt;&gt;groupBox.Name" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;groupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANf7bzMYAQAAACBjSFJNAABs
-        mwAAcm8AAPauAACFgwAAbvcAAOhBAAAxdAAAF2yhti2bAAAACXBIWXMAAAsSAAALEgHS3X78AAADPklE
+        mwAAcm8AAPauAACFgwAAbvcAAOhBAAAxdAAAF2yhti2bAAAACXBIWXMAAAsQAAALEAGtI711AAADPklE
         QVQ4T2VTa0uTYRge0Ycggr7WF/sJ+qEsc+bUjFh4SBM7GGVO23RuTtx04vYq2szDmvOYTVRmai7tg7k5
         NYan1BQlTxthTZ2kpgmxDELh6n7fSKxuuHmel+e5rue+r/t6eTyKmJiYqPArV55ci4x8q1KpvjP5DEZG
         huFyubDq8UCcmoqo69G4/yDRG3iJ7wgLD38SRRgWy8vJzXXzg4Jw9tw56A0GzM/NYXR0BHZ7L9Y/r2Nn
@@ -139,10 +228,31 @@
         SUVORK5CYII=
 </value>
   </data>
+  <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 55</value>
+  </data>
+  <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+    <value>pictureBox2</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANf7bzMYAQAAACBjSFJNAABs
-        mwAAcm8AAPauAACFgwAAbvcAAOhBAAAxdAAAF2yhti2bAAAACXBIWXMAAAsSAAALEgHS3X78AAAB4ElE
+        mwAAcm8AAPauAACFgwAAbvcAAOhBAAAxdAAAF2yhti2bAAAACXBIWXMAAAsQAAALEAGtI711AAAB4ElE
         QVQ4T2NgQAMd60P+48LoarHyW1YF/r/29Mj/2y9Ow/Gt5yf+d6wJ/U+UAQ1Lff4vP9bwf+2pDjhedbz5
         P0icKAOq57v9n3eg9P+Sw7VwvOhQ1X+QOFEGlMxw/D9tR+b/WXvz4XjGrpz/IHGiDMibZPW/Z1PM/wlb
         Ev9P3JIEpvs3x/8HiRNlQHq3yf+8uaYYGCSO1YDEZr0P6Z2G/5NbDf4D2f/Teg3+Z88wwsAgcZB8cpvB
@@ -153,5 +263,278 @@
         0IPD2Sac84WRJ7svkM8LEoPKgdSA1IL0wAFIgAuIBYBYEogVgFidU5jBDEjrALEaVEwCqoYTaggDAPrB
         G8IyJqFyAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 38</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+    <value>pictureBox1</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbFullPath.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbFullPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 19</value>
+  </data>
+  <data name="tbFullPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>421, 13</value>
+  </data>
+  <data name="tbFullPath.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;tbFullPath.Name" xml:space="preserve">
+    <value>tbFullPath</value>
+  </data>
+  <data name="&gt;&gt;tbFullPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbFullPath.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;tbFullPath.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="chkFileFlagDEPLOYED.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkFileFlagDEPLOYED.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 38</value>
+  </data>
+  <data name="chkFileFlagDEPLOYED.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 17</value>
+  </data>
+  <data name="chkFileFlagDEPLOYED.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="chkFileFlagDEPLOYED.Text" xml:space="preserve">
+    <value>Deployed: extracts immediately upon first execution</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED.Name" xml:space="preserve">
+    <value>chkFileFlagDEPLOYED</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="chkFileFlagDELETED.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkFileFlagDELETED.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 55</value>
+  </data>
+  <data name="chkFileFlagDELETED.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 17</value>
+  </data>
+  <data name="chkFileFlagDELETED.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chkFileFlagDELETED.Text" xml:space="preserve">
+    <value>Deleted: shown to virtual application as erased</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDELETED.Name" xml:space="preserve">
+    <value>chkFileFlagDELETED</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDELETED.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDELETED.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDELETED.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 97</value>
+  </data>
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 26</value>
+  </data>
+  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>358, 97</value>
+  </data>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 26</value>
+  </data>
+  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
+    <value>buttonCancel</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="chkFileFlagISFILE.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkFileFlagISFILE.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="chkFileFlagISFILE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 113</value>
+  </data>
+  <data name="chkFileFlagISFILE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 17</value>
+  </data>
+  <data name="chkFileFlagISFILE.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chkFileFlagISFILE.Text" xml:space="preserve">
+    <value>File (not directory)</value>
+  </data>
+  <data name="chkFileFlagISFILE.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagISFILE.Name" xml:space="preserve">
+    <value>chkFileFlagISFILE</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagISFILE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagISFILE.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagISFILE.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkFileFlagPKG_FILE.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkFileFlagPKG_FILE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 108</value>
+  </data>
+  <data name="chkFileFlagPKG_FILE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 17</value>
+  </data>
+  <data name="chkFileFlagPKG_FILE.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="chkFileFlagPKG_FILE.Text" xml:space="preserve">
+    <value>Part of the original package</value>
+  </data>
+  <data name="chkFileFlagPKG_FILE.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagPKG_FILE.Name" xml:space="preserve">
+    <value>chkFileFlagPKG_FILE</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagPKG_FILE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagPKG_FILE.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagPKG_FILE.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="chkFileFlagDISCONNECTED.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkFileFlagDISCONNECTED.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="chkFileFlagDISCONNECTED.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 104</value>
+  </data>
+  <data name="chkFileFlagDISCONNECTED.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 17</value>
+  </data>
+  <data name="chkFileFlagDISCONNECTED.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="chkFileFlagDISCONNECTED.Text" xml:space="preserve">
+    <value>On-disk file is modified from DB</value>
+  </data>
+  <data name="chkFileFlagDISCONNECTED.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDISCONNECTED.Name" xml:space="preserve">
+    <value>chkFileFlagDISCONNECTED</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDISCONNECTED.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDISCONNECTED.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDISCONNECTED.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>458, 130</value>
+  </data>
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>FileProperties</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FileProperties</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

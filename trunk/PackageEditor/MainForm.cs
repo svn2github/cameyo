@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using Microsoft.Win32;
-using VirtPackageAPI;
 using System.IO;
 using System.Collections;
 using System.Diagnostics;
 using System.Xml;
+using System.Resources;
+using System.Reflection;
+using Microsoft.Win32;
+using VirtPackageAPI;
 using PackageEditor.FilesEditing;
 using Delay;
 using Cameyo.OpenSrc.Common;
@@ -79,8 +81,10 @@ namespace PackageEditor
                     int pos = friendlyPath.ToUpper().IndexOf("\\DOCUMENTS\\");
                     if (pos == -1) pos = friendlyPath.ToUpper().IndexOf("\\MY DOCUMENTS\\");
                     if (pos != -1) friendlyPath = friendlyPath.Substring(pos + 1);
-                    packageBuiltNotify.Do("Package successfully created in:",
-                        packageExeFile, friendlyPath, "PackageBuiltNotify");
+
+                    System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+                    string msg = resources.GetString("packageBuiltOk");
+                    packageBuiltNotify.Do(msg, packageExeFile, friendlyPath, "PackageBuiltNotify");
                 }
             }
 
@@ -97,7 +101,7 @@ namespace PackageEditor
 #else
             dropboxLabel.Hide();
             dropboxButton.Hide();
-            resetCredLink.Hide();
+            //resetCredLink.Hide();
 #endif
         }
 
@@ -166,34 +170,39 @@ namespace PackageEditor
             if (virtPackage.opened && !PackageClose())      // User doesn't want to discard changes
                 return false;
             if (displayWaitMsg)
-                PleaseWait.PleaseWaitBegin("Opening package", "Opening " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
             {
-                if (virtPackage.Open(packageExeFile, out apiRet))
-                {
-                    regLoaded = false;
-                    dirty = false;
-                    this.OnPackageOpen();
-                    fsEditor.OnPackageOpen();
-
-                    // regEditor (threaded)
-                    regProgressBar.Visible = true;
-                    regToolStrip.Visible = false;
-                    regSplitContainer.Visible = false;
-                    regProgressTimer.Enabled = true;
-
-                    ThreadedRegLoadStop();
-                    regLoadThread = new Thread(ThreadedRegLoad);
-                    regLoadThread.Start();
-
-                    tabControl.SelectedIndex = 0;
-                    EnableDisablePackageControls(true);
-                    mru.AddFile(packageExeFile);
-
-                    ret = true;
-                }
-                else
-                    ret = false;
+                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+                string openingPackage = resources.GetString("openingPackage");
+                string opening = resources.GetString("opening");
+                PleaseWait.PleaseWaitBegin(openingPackage, opening + " " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
             }
+
+            if (virtPackage.Open(packageExeFile, out apiRet))
+            {
+                regLoaded = false;
+                dirty = false;
+                this.OnPackageOpen();
+                fsEditor.OnPackageOpen();
+
+                // regEditor (threaded)
+                regProgressBar.Visible = true;
+                regToolStrip.Visible = false;
+                regSplitContainer.Visible = false;
+                regProgressTimer.Enabled = true;
+
+                ThreadedRegLoadStop();
+                regLoadThread = new Thread(ThreadedRegLoad);
+                regLoadThread.Start();
+
+                tabControl.SelectedIndex = 0;
+                EnableDisablePackageControls(true);
+                mru.AddFile(packageExeFile);
+
+                ret = true;
+            }
+            else
+                ret = false;
+
             if (displayWaitMsg)
                 PleaseWait.PleaseWaitEnd();
 
@@ -211,11 +220,11 @@ namespace PackageEditor
                 return true;
             if (this.dirty || fsEditor.dirty || regEditor.dirty)
             {
-                if (MessageBox.Show("Your changes will be lost. Discard changes?", "Confirm",
-                    MessageBoxButtons.YesNo) != DialogResult.Yes)
-                {
+                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+                string discardChanges = resources.GetString("discardChanges");
+                string confirm = resources.GetString("confirm");
+                if (MessageBox.Show(discardChanges, confirm, MessageBoxButtons.YesNo) != DialogResult.Yes)
                     return false;
-                }
             }
 
             // If regLoadThread is working, wait for it to finish
@@ -243,16 +252,21 @@ namespace PackageEditor
 
         private bool PackageSave(String fileName)
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            string cannotSave = resources.GetString("cannotSave");
+            string savingPackage = resources.GetString("savingPackage");
+            string saving = resources.GetString("saving");
+
             String CantSaveBecause = "";
             if (!PackageCanSave(out CantSaveBecause))
             {
-                MessageBox.Show(this, CantSaveBecause, "Cannot save package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, CantSaveBecause, cannotSave, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             int ret = 0;
             VirtPackage.APIRET apiRet = 0;
-            PleaseWait.PleaseWaitBegin("Saving package", "Saving " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
+            PleaseWait.PleaseWaitBegin(savingPackage, saving + " " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
             {
                 ret = ret == 0 && !this.OnPackageSave() ? 1 : ret;
                 ret = ret == 0 && !fsEditor.OnPackageSave() ? 2 : ret;
@@ -270,7 +284,7 @@ namespace PackageEditor
             }
             else
             {
-                MessageBox.Show(String.Format("Cannot save file. ApiRet:{0} (step {1})", apiRet, ret));
+                MessageBox.Show(cannotSave + " ApiRet:" + apiRet + " (step " + ret + ")");
                 return false;
             }
         }
@@ -294,10 +308,15 @@ namespace PackageEditor
 
         private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            string packageEditor = resources.GetString("$this.Text");
+            string cannotSave = resources.GetString("cannotSave");
+            string packageSaved = resources.GetString("packageSaved");
+
             String message;
             if (!PackageCanSave(out message))
             {
-                MessageBox.Show(this, message, "Cannot save package.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, message, cannotSave, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -319,8 +338,8 @@ namespace PackageEditor
                 if (PackageSave(saveFileDialog.FileName))
                 {
                     virtPackage.openedFile = saveFileDialog.FileName;
-                    this.Text = "Package Editor" + " - " + saveFileDialog.FileName;
-                    MessageBox.Show("Package saved.");
+                    this.Text = packageEditor + " - " + saveFileDialog.FileName;
+                    MessageBox.Show(packageSaved);
                 }
             }
         }
@@ -411,6 +430,9 @@ namespace PackageEditor
 
         private void OnPackageOpen()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            string packageEditor = resources.GetString("$this.Text");
+
             // AppID
             propertyAppID.Text = virtPackage.GetProperty("AppID");
             //propertyAppID.TextChanged += PropertyChange;
@@ -482,9 +504,9 @@ namespace PackageEditor
             }
 
             if (!String.IsNullOrEmpty(virtPackage.openedFile))
-                this.Text = "Package Editor" + " - " + virtPackage.openedFile;
+                this.Text = packageEditor + " - " + virtPackage.openedFile;
             else
-                this.Text = "Package Editor";
+                this.Text = packageEditor;
             dirty = false;
         }
 
@@ -603,13 +625,16 @@ namespace PackageEditor
 
         private void OnPackageClose()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            string packageEditor = resources.GetString("$this.Text");
+
             propertyAppID.Text = "";
             propertyFriendlyName.Text = "";
             propertyAutoLaunch.Text = "";
             propertyIcon.Image = null;
             propertyStopInheritance.Text = "";
             //propertyCleanupOnExit.Checked = false;
-            this.Text = "Package Editor";
+            this.Text = packageEditor;
         }
 
         private bool DeleteFile(String FileName)
