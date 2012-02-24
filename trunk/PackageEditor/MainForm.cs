@@ -103,6 +103,12 @@ namespace PackageEditor
             dropboxButton.Hide();
             //resetCredLink.Hide();
 #endif
+
+            // Culture
+            englishMenuItem.Tag = "en-US";
+            frenchMenuItem.Tag = "fr-FR";
+            spanishMenuItem.Tag = "es-ES";
+            CurLanguageMenuItem().Checked = true;
         }
 
         private void ThreadedRegLoad()
@@ -1228,6 +1234,28 @@ namespace PackageEditor
         private void lnkPackageEdit_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             openToolStripMenuItem_Click(this, new EventArgs());
+        }
+
+        ToolStripMenuItem CurLanguageMenuItem()
+        {
+            string cultureStr = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+            foreach (ToolStripMenuItem item in langToolStripMenuItem.DropDownItems)
+            {
+                if (((string)item.Tag).Equals(cultureStr, StringComparison.InvariantCultureIgnoreCase))
+                    return item;
+            }
+            return englishMenuItem;
+        }
+
+        private void langMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            string cultureStr = ((string)item.Tag);
+            LangUtils.SaveCulture(cultureStr);
+
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            string changesWillTakeEffectOnNextStart = resources.GetString("changesWillTakeEffectOnNextStart");
+            MessageBox.Show(changesWillTakeEffectOnNextStart);
         }
     }
 

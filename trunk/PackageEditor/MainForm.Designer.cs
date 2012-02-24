@@ -156,6 +156,10 @@
             this.panel12 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.PictureBox();
             this.bkPanel = new System.Windows.Forms.Panel();
+            this.langToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frenchMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spanishMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -474,6 +478,7 @@
             this.saveToolStripMenuItem,
             this.saveasToolStripMenuItem,
             this.closeToolStripMenuItem,
+            this.langToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -1118,6 +1123,33 @@
             resources.ApplyResources(this.bkPanel, "bkPanel");
             this.bkPanel.Name = "bkPanel";
             // 
+            // langToolStripMenuItem
+            // 
+            this.langToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishMenuItem,
+            this.frenchMenuItem,
+            this.spanishMenuItem});
+            this.langToolStripMenuItem.Name = "langToolStripMenuItem";
+            resources.ApplyResources(this.langToolStripMenuItem, "langToolStripMenuItem");
+            // 
+            // englishMenuItem
+            // 
+            this.englishMenuItem.Name = "englishMenuItem";
+            resources.ApplyResources(this.englishMenuItem, "englishMenuItem");
+            this.englishMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
+            // 
+            // frenchMenuItem
+            // 
+            this.frenchMenuItem.Name = "frenchMenuItem";
+            resources.ApplyResources(this.frenchMenuItem, "frenchMenuItem");
+            this.frenchMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
+            // 
+            // spanishMenuItem
+            // 
+            this.spanishMenuItem.Name = "spanishMenuItem";
+            resources.ApplyResources(this.spanishMenuItem, "spanishMenuItem");
+            this.spanishMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1331,6 +1363,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ToolStripMenuItem langToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem frenchMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spanishMenuItem;
 
     }
 }

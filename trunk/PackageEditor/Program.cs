@@ -13,6 +13,7 @@ namespace PackageEditor
         [STAThread]
         static void Main(string[] args)
         {
+            Cameyo.OpenSrc.Common.LangUtils.LoadCulture();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             String param = "";

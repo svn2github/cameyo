@@ -391,4 +391,30 @@ namespace Cameyo.OpenSrc.Common
             SendMessage(control.Handle, (int)ListViewMessages.SetExtendedStyle, 0, (int)styles);
         }
     }
+
+    public class LangUtils
+    {
+        static public void LoadCulture()
+        {
+            try
+            {
+                Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software\\Cameyo", false);
+                string cultureStr = (string)regKey.GetValue("Culture");
+                System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture(cultureStr);
+                System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+                System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+            }
+            catch { }
+        }
+
+        static public void SaveCulture(string cultureStr)
+        {
+            try
+            {
+                Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software\\Cameyo");
+                regKey.SetValue("Culture", cultureStr);
+            }
+            catch { }
+        }
+    }
 }
