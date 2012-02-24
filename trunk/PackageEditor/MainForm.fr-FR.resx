@@ -235,7 +235,7 @@
     <value>Mode d'isolation</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Stockage de données :</value>
+    <value>Données :</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Icone</value>
@@ -349,13 +349,13 @@
     <value>Avancé</value>
   </data>
   <data name="tabFileSystem.Text" xml:space="preserve">
-    <value>Fichier</value>
+    <value>Fichiers</value>
   </data>
   <data name="tabGeneral.Text" xml:space="preserve">
     <value>Général</value>
   </data>
   <data name="tabRegistry.Text" xml:space="preserve">
-    <value>Enregistrement</value>
+    <value>Registry</value>
   </data>
   <data name="tabWelcome.Text" xml:space="preserve">
     <value>Bienvenue</value>
@@ -365,5 +365,11 @@
   </data>
   <data name="changesWillTakeEffectOnNextStart" xml:space="preserve">
     <value>Ce changement prendra effet lors du prochain démarrage du programme.</value>
+  </data>
+  <data name="fullAccess" xml:space="preserve">
+    <value>Accès total</value>
+  </data>
+  <data name="isolated" xml:space="preserve">
+    <value>Isolé</value>
   </data>
 </root>

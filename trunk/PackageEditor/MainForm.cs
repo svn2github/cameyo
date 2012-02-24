@@ -724,13 +724,18 @@ namespace PackageEditor
 
         private void DisplayBaseDirName()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataStorageForm));
+            string propertyLocalStorageDefault = resources.GetString("propertyLocalStorageDefault.Text");
+            string propertyLocalStorageExeDir = resources.GetString("propertyLocalStorageExeDir.Text");
+            string propertyLocalStorageCustom = resources.GetString("propertyLocalStorageCustom.Text");
+
             String baseDirName = virtPackage.GetProperty("BaseDirName");
             if (baseDirName == "")
-                propertyDataStorage.Text = "Use hard disk or USB drive (wherever application is launched from)";
+                propertyDataStorage.Text = propertyLocalStorageDefault;   // Use hard disk or USB drive (wherever application is launched from)
             else if (baseDirName.Equals("%ExeDir%\\%AppID%.cameyo.data", StringComparison.InvariantCultureIgnoreCase))
-                propertyDataStorage.Text = "Under the executable's directory";
+                propertyDataStorage.Text = propertyLocalStorageExeDir;   // "Under the executable's directory"
             else
-                propertyDataStorage.Text = "Custom: " + baseDirName;
+                propertyDataStorage.Text = propertyLocalStorageCustom + ": " + baseDirName;
         }
 
         private void PropertyChange(object sender, EventArgs e)
@@ -1249,12 +1254,12 @@ namespace PackageEditor
 
         private void langMenuItem_Click(object sender, EventArgs e)
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            string changesWillTakeEffectOnNextStart = resources.GetString("changesWillTakeEffectOnNextStart");
+
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
             string cultureStr = ((string)item.Tag);
             LangUtils.SaveCulture(cultureStr);
-
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            string changesWillTakeEffectOnNextStart = resources.GetString("changesWillTakeEffectOnNextStart");
             MessageBox.Show(changesWillTakeEffectOnNextStart);
         }
     }

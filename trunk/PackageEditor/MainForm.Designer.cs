@@ -71,6 +71,10 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.langToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frenchMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spanishMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
@@ -156,10 +160,6 @@
             this.panel12 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.PictureBox();
             this.bkPanel = new System.Windows.Forms.Panel();
-            this.langToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.englishMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.frenchMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.spanishMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -519,6 +519,33 @@
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             resources.ApplyResources(this.closeToolStripMenuItem, "closeToolStripMenuItem");
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // langToolStripMenuItem
+            // 
+            this.langToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.englishMenuItem,
+            this.frenchMenuItem,
+            this.spanishMenuItem});
+            this.langToolStripMenuItem.Name = "langToolStripMenuItem";
+            resources.ApplyResources(this.langToolStripMenuItem, "langToolStripMenuItem");
+            // 
+            // englishMenuItem
+            // 
+            this.englishMenuItem.Name = "englishMenuItem";
+            resources.ApplyResources(this.englishMenuItem, "englishMenuItem");
+            this.englishMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
+            // 
+            // frenchMenuItem
+            // 
+            this.frenchMenuItem.Name = "frenchMenuItem";
+            resources.ApplyResources(this.frenchMenuItem, "frenchMenuItem");
+            this.frenchMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
+            // 
+            // spanishMenuItem
+            // 
+            this.spanishMenuItem.Name = "spanishMenuItem";
+            resources.ApplyResources(this.spanishMenuItem, "spanishMenuItem");
+            this.spanishMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -1122,33 +1149,6 @@
             this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
             resources.ApplyResources(this.bkPanel, "bkPanel");
             this.bkPanel.Name = "bkPanel";
-            // 
-            // langToolStripMenuItem
-            // 
-            this.langToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.englishMenuItem,
-            this.frenchMenuItem,
-            this.spanishMenuItem});
-            this.langToolStripMenuItem.Name = "langToolStripMenuItem";
-            resources.ApplyResources(this.langToolStripMenuItem, "langToolStripMenuItem");
-            // 
-            // englishMenuItem
-            // 
-            this.englishMenuItem.Name = "englishMenuItem";
-            resources.ApplyResources(this.englishMenuItem, "englishMenuItem");
-            this.englishMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
-            // 
-            // frenchMenuItem
-            // 
-            this.frenchMenuItem.Name = "frenchMenuItem";
-            resources.ApplyResources(this.frenchMenuItem, "frenchMenuItem");
-            this.frenchMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
-            // 
-            // spanishMenuItem
-            // 
-            this.spanishMenuItem.Name = "spanishMenuItem";
-            resources.ApplyResources(this.spanishMenuItem, "spanishMenuItem");
-            this.spanishMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
             // 
             // MainForm
             // 

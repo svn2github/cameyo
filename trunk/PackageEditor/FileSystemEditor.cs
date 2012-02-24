@@ -61,6 +61,10 @@ namespace PackageEditor
             ToolStripButton fsAddBtn, ToolStripButton fsRemoveBtn, ToolStripButton fsAddEmptyDirBtn,
             ToolStripButton fsSaveFileAsBtn, ToolStripButton fsAddDirBtn)
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            string isolated = resources.GetString("isolated");
+            string fullAccess = resources.GetString("fullAccess");
+
             this.virtPackage = virtPackage;
             this.fsFolderTree = fsFolderTree;
             this.fsFilesList = fsFilesList;
@@ -74,8 +78,8 @@ namespace PackageEditor
 
             fsFolderInfoFullName.Text = "";
             fsFolderInfoIsolationCombo.Text = "";
-            fsFolderInfoIsolationCombo.Items.Add("Full access");
-            fsFolderInfoIsolationCombo.Items.Add("Isolated");
+            fsFolderInfoIsolationCombo.Items.Add(fullAccess);
+            fsFolderInfoIsolationCombo.Items.Add(isolated);
             fsFolderTree.AfterSelect += OnFolderTreeSelect;
             fsFolderInfoIsolationCombo.SelectionChangeCommitted += OnFolderSandboxChange;
             fsAddBtn.Click += OnAddBtnClick;
