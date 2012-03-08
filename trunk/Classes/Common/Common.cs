@@ -392,6 +392,62 @@ namespace Cameyo.OpenSrc.Common
         }
     }
 
+    public class LangItem
+    {
+        public string DisplayName;
+        public string ShortDisplayName;
+        public string Culture;
+
+        public LangItem(string displayName, string shortDisplayName, string culture)
+        {
+            this.DisplayName = displayName;
+            this.ShortDisplayName = shortDisplayName;
+            this.Culture = culture;
+        }
+
+        static public List<LangItem> SupportedLangs()
+        {
+            List<LangItem> langs = new List<LangItem>();
+            langs.Add(new LangItem("English", "EN", "en-US"));
+            langs.Add(new LangItem("Français", "FR", "fr-FR"));
+            langs.Add(new LangItem("Español", "ES", "es-ES"));
+            return langs;
+        }
+
+        static public LangItem FromDisplayName(string displayName)
+        {
+            List<LangItem> langs = SupportedLangs();
+            foreach (LangItem lang in langs)
+            {
+                if (lang.DisplayName.Equals(displayName, StringComparison.InvariantCulture))
+                    return lang;
+            }
+            return langs[0];
+        }
+
+        static public LangItem FromShortDisplayName(string shortDisplayName)
+        {
+            List<LangItem> langs = SupportedLangs();
+            foreach (LangItem lang in langs)
+            {
+                if (lang.ShortDisplayName.Equals(shortDisplayName, StringComparison.InvariantCulture))
+                    return lang;
+            }
+            return langs[0];
+        }
+
+        static public LangItem FromCulture(string culture)
+        {
+            List<LangItem> langs = SupportedLangs();
+            foreach (LangItem lang in langs)
+            {
+                if (lang.Culture.Equals(culture, StringComparison.InvariantCulture))
+                    return lang;
+            }
+            return langs[0];
+        }
+    }
+
     public class LangUtils
     {
         static public void LoadCulture()
