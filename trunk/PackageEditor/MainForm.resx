@@ -140,7 +140,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAi
-        HAAAAk1TRnQBSQFMAgEBBgEAAUQBBgFEAQYBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        HAAAAk1TRnQBSQFMAgEBBgEAAUwBBgFMAQYBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEgBgABIB4AAwQBBgMTARoDHwEsAyABLgMgAS8DIAEvAyABLgMeASsDEgEYAwQBBQ8A
         AQEDBAEGAwoBDgMNARIDFgEfAxoBJAMcASgDHwEsAx8BLQMeASsDGwEmAxgBIgMPARQDDAEQAwUBBwMA
         AQGIAAMCAQMDBQQHAQkDUwHxA4EB/wOBAf8DgQH/A4EB/wNTAfEDBgEIAwQBBgMBAQIQAAMEBAUBBwKB
@@ -1001,19 +1001,19 @@
     <value>&amp;Close</value>
   </data>
   <data name="englishMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="englishMenuItem.Text" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="frenchMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="frenchMenuItem.Text" xml:space="preserve">
     <value>Français</value>
   </data>
   <data name="spanishMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="spanishMenuItem.Text" xml:space="preserve">
     <value>Español</value>
@@ -2269,7 +2269,7 @@
     <value>NoControl</value>
   </data>
   <data name="propertyExpiration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 17</value>
+    <value>7, 19</value>
   </data>
   <data name="propertyExpiration.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 17</value>
@@ -2293,7 +2293,7 @@
     <value>0</value>
   </data>
   <data name="propertyExpirationDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 14</value>
+    <value>272, 16</value>
   </data>
   <data name="propertyExpirationDatePicker.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -2329,7 +2329,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 54</value>
+    <value>766, 48</value>
   </data>
   <data name="groupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>

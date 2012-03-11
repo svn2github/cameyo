@@ -318,9 +318,6 @@
   <data name="regExportBtn.ToolTipText" xml:space="preserve">
     <value>Exportar las claves seleccionadas del registro en un archivo.reg</value>
   </data>
-  <data name="regFolderInfoFullName.Text" xml:space="preserve">
-    <value>regFolderInfoFullName</value>
-  </data>
   <data name="regImportBtn.Text" xml:space="preserve">
     <value>Importar</value>
   </data>
@@ -371,5 +368,17 @@
   </data>
   <data name="isolated" xml:space="preserve">
     <value>Aislado</value>
+  </data>
+  <data name="englishMenuItem.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="frenchMenuItem.Text" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="langToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Idiomas</value>
+  </data>
+  <data name="spanishMenuItem.Text" xml:space="preserve">
+    <value>Español</value>
   </data>
 </root>
