@@ -409,6 +409,7 @@ namespace PackageEditor
 
         private void DisplayAutoLaunch()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             if (virtPackage.GetProperty("AutoLaunch").Contains(";"))
             {
                 String[] autoLaunches = virtPackage.GetProperty("AutoLaunch").Split(';');
@@ -422,7 +423,7 @@ namespace PackageEditor
                         propertyAutoLaunch.Text += ", ";
                     propertyAutoLaunch.Text += VirtPackage.FriendlyShortcutName(items[2]);
                 }
-                propertyAutoLaunch.Text = "Display menu: " + propertyAutoLaunch.Text;
+                propertyAutoLaunch.Text = resources.GetString("displayMenu") + ": " + propertyAutoLaunch.Text;
             }
             else
             {
@@ -1254,12 +1255,12 @@ namespace PackageEditor
 
         private void langMenuItem_Click(object sender, EventArgs e)
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            string changesWillTakeEffectOnNextStart = resources.GetString("changesWillTakeEffectOnNextStart");
-
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
             string cultureStr = ((string)item.Tag);
             LangUtils.SaveCulture(cultureStr);
+            LangUtils.LoadCulture();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            string changesWillTakeEffectOnNextStart = resources.GetString("changesWillTakeEffectOnNextStart");
             MessageBox.Show(changesWillTakeEffectOnNextStart);
         }
     }

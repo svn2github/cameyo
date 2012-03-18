@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnApply" xml:space="preserve">
+    <value>&amp;Apply</value>
+  </data>
   <data name="cannotSave" xml:space="preserve">
     <value>Cannot save package</value>
   </data>
@@ -129,11 +132,20 @@
   <data name="discardChanges" xml:space="preserve">
     <value>Your changes will be lost. Discard changes?</value>
   </data>
+  <data name="displayMenu" xml:space="preserve">
+    <value>Display menu</value>
+  </data>
   <data name="fullAccess" xml:space="preserve">
     <value>Full acces</value>
   </data>
   <data name="isolated" xml:space="preserve">
     <value>Isolated</value>
+  </data>
+  <data name="menuRequiresAtLeastTwo" xml:space="preserve">
+    <value>Menu requires at least two programs.</value>
+  </data>
+  <data name="menuRequiresAtLeastTwoTransform" xml:space="preserve">
+    <value>Menu requires at least two programs. Transform into a command?</value>
   </data>
   <data name="opening" xml:space="preserve">
     <value>Opening</value>

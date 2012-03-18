@@ -144,6 +144,9 @@
   <data name="comboBox.Items3" xml:space="preserve">
     <value>Al parada (no virtualizado)</value>
   </data>
+  <data name="enterCommand" xml:space="preserve">
+    <value>Por favor, introduzca un comando para ejecutar</value>
+  </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Comando para ejecutar:</value>
   </data>

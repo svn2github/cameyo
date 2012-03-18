@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="$this.Text" xml:space="preserve">
-    <value>Événements personnalisés</value>
+    <value>Evènements personnalisés</value>
   </data>
   <data name="boxWait.Text" xml:space="preserve">
     <value>Attendre que le programme se termine</value>
@@ -143,6 +143,9 @@
   </data>
   <data name="comboBox.Items3" xml:space="preserve">
     <value>A l'arrêt (non virtualisé)</value>
+  </data>
+  <data name="enterCommand" xml:space="preserve">
+    <value>Veuillez entrer une commande à exécuter</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Commande à exécuter:</value>

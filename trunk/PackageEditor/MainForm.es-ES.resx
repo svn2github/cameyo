@@ -190,7 +190,7 @@
     <value>Agregar una carpeta vacía</value>
   </data>
   <data name="fsFolderInfoIsolationLbl.Text" xml:space="preserve">
-    <value>Archivo de aislamiento:</value>
+    <value>Aislamiento:</value>
   </data>
   <data name="fsRemoveBtn.Text" xml:space="preserve">
     <value>Eliminar</value>
@@ -232,7 +232,7 @@
     <value>Aislamiento</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Modo de aislamiento</value>
+    <value>Aislamiento:</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Datos:</value>
@@ -247,7 +247,7 @@
     <value>Ejemplo: "iexplore.exe;myapp.exe"</value>
   </data>
   <data name="label9.Text" xml:space="preserve">
-    <value>Estudio</value>
+    <value>Studio</value>
   </data>
   <data name="lblAutoLaunch.Text" xml:space="preserve">
     <value>Inicio</value>
@@ -361,7 +361,7 @@
     <value>Exportar a un archivo.reg</value>
   </data>
   <data name="changesWillTakeEffectOnNextStart" xml:space="preserve">
-    <value>Changes will take effect next time the program is started.</value>
+    <value>Los cambios tendrán efecto la próxima vez que se inicia el programa.</value>
   </data>
   <data name="fullAccess" xml:space="preserve">
     <value>Acceso completo</value>
@@ -380,5 +380,17 @@
   </data>
   <data name="spanishMenuItem.Text" xml:space="preserve">
     <value>Español</value>
+  </data>
+  <data name="menuRequiresAtLeastTwo" xml:space="preserve">
+    <value>El menú requiere al menos dos programas.</value>
+  </data>
+  <data name="menuRequiresAtLeastTwoTransform" xml:space="preserve">
+    <value>El menú requiere al menos dos programas.</value>
+  </data>
+  <data name="btnApply" xml:space="preserve">
+    <value>Aplicar</value>
+  </data>
+  <data name="displayMenu" xml:space="preserve">
+    <value>Mostrar el menú</value>
   </data>
 </root>

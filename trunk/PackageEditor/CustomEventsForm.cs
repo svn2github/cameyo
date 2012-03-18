@@ -90,9 +90,10 @@ namespace PackageEditor
 
         private void btnAddSave_Click(object sender, EventArgs e)
         {
+            System.ComponentModel.ComponentResourceManager localResources = new System.ComponentModel.ComponentResourceManager(typeof(CustomEventsForm));
             if (txtCmd.Text == "")
             {
-                MessageBox.Show("Please enter a command to execute");
+                MessageBox.Show(localResources.GetString("enterCommand"));
                 return;
             }
             int selectedIndex = listBox.SelectedIndex;
@@ -115,15 +116,17 @@ namespace PackageEditor
 
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             if (listBox.SelectedIndex == -1)
             {
-                btnAddSave.Text = "&Add";
+                System.ComponentModel.ComponentResourceManager localResources = new System.ComponentModel.ComponentResourceManager(typeof(CustomEventsForm));
+                btnAddSave.Text = localResources.GetString("btnAddSave.Text");
                 txtCmd.Text = "";
                 txtArgs.Text = "";
                 boxWait.Checked = false;
                 return;
             }
-            btnAddSave.Text = "&Apply";
+            btnAddSave.Text = resources.GetString("btnApply");
             CustomEvent customEvent = curCustomEvents[listBox.SelectedIndex];
             txtCmd.Text = customEvent.cmd;
             txtArgs.Text = customEvent.args;

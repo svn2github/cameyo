@@ -190,7 +190,7 @@
     <value>Ajouter un dossier vide</value>
   </data>
   <data name="fsFolderInfoIsolationLbl.Text" xml:space="preserve">
-    <value>Dossier d'isolation :</value>
+    <value>Isolation:</value>
   </data>
   <data name="fsRemoveBtn.Text" xml:space="preserve">
     <value>Supprimer</value>
@@ -229,7 +229,7 @@
     <value>Description</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Isolation</value>
+    <value>Isolation:</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Mode d'isolation</value>
@@ -380,5 +380,17 @@
   </data>
   <data name="spanishMenuItem.Text" xml:space="preserve">
     <value>Español</value>
+  </data>
+  <data name="menuRequiresAtLeastTwo" xml:space="preserve">
+    <value>Le menu nécessite au moins deux commandes.</value>
+  </data>
+  <data name="menuRequiresAtLeastTwoTransform" xml:space="preserve">
+    <value>Le menu nécessite au moins deux commandes. Transformer en commande spécifique?</value>
+  </data>
+  <data name="btnApply" xml:space="preserve">
+    <value>&amp;Appliquer</value>
+  </data>
+  <data name="displayMenu" xml:space="preserve">
+    <value>Afficher menu</value>
   </data>
 </root>

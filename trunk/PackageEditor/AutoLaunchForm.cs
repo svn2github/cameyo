@@ -198,10 +198,16 @@ namespace PackageEditor
         private void btnOk_Click(object sender, EventArgs e)
         {
             // Validate menu (only if menu is selected)
-            if (propertyMenuRadio.Checked && propertyMenuLV.Items.Count < 2)
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            if (propertyMenuRadio.Checked && propertyMenuLV.Items.Count == 0)
             {
-                MessageBox.Show("Menu requires at least two programs");
+                MessageBox.Show(resources.GetString("menuRequiresAtLeastTwo"));
                 return;
+            }
+            if (propertyMenuRadio.Checked && propertyMenuLV.Items.Count == 1)
+            {
+                if (MessageBox.Show(resources.GetString("menuRequiresAtLeastTwoTransform"), "", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    return;
             }
 
             // Menu chosen
