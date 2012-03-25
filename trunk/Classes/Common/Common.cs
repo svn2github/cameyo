@@ -452,15 +452,19 @@ namespace Cameyo.OpenSrc.Common
     {
         static public void LoadCulture()
         {
+            System.Globalization.CultureInfo culture;
             try
             {
                 Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software\\Cameyo", false);
                 string cultureStr = (string)regKey.GetValue("Culture");
-                System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture(cultureStr);
-                System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
-                System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+                culture = System.Globalization.CultureInfo.CreateSpecificCulture(cultureStr);
             }
-            catch { }
+            catch 
+            {
+                culture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+            }
+            System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture;
         }
 
         static public void SaveCulture(string cultureStr)

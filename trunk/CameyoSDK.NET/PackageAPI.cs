@@ -1439,8 +1439,12 @@ namespace VirtPackageAPI
             // Add file sizes.
             FileInfo[] fis = d.GetFiles();
             foreach (FileInfo fi in fis) 
-            {      
-                Size += fi.Length;    
+            {
+                try
+                {
+                    Size += fi.Length;
+                }
+                catch { }
             }
             // Add subdirectory sizes.
             DirectoryInfo[] dis = d.GetDirectories();
