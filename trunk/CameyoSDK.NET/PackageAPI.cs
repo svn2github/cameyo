@@ -1264,7 +1264,9 @@ namespace VirtPackageAPI
             List<DeployedApp> deployedApps = new List<DeployedApp>();
             foreach (String appID in appIDs)
             {
-                deployedApps.Add(DeployedApp.FromAppID(appID));
+                DeployedApp deployedApp = DeployedApp.FromAppID(appID);
+                if (deployedApp != null)
+                    deployedApps.Add(deployedApp);
             }
             return deployedApps;
         }
