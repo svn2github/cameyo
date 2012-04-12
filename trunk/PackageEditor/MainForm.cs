@@ -866,6 +866,24 @@ namespace PackageEditor
                 }
                 return;
             }
+            else if (System.IO.Path.GetFileName(files[0]).EndsWith("Loader.exe", StringComparison.InvariantCultureIgnoreCase))
+            {
+                String openedFile = "";
+                CloseAndReopen_Before(ref openedFile);
+                try
+                {
+                    // Syntax: myPath\Packager.exe -ChangeLoader AppName.cameyo.exe Loader.exe
+                    string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                    int exitCode = 0;
+                    if (!ExecProg(openedFile, "-ChangeLoader \"" + files[0] + "\"", true, ref exitCode))
+                        MessageBox.Show("Could not execute: " + Path.Combine(myPath, "Packager.exe"));
+                }
+                finally
+                {
+                    CloseAndReopn_After(openedFile);
+                }
+                return;
+            }
             else if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
             {
                 MessageBox.Show("You can only open files with .exe extension");
