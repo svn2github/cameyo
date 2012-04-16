@@ -36,8 +36,8 @@ namespace VirtPackageAPI
     [Flags]
     public enum VIRT_PROCESS_FLAGS
     {
-        VINTEGRATE_DESKTOP_ONLY = 1,
-        VINTEGRATE_FULL = 2
+        VINTEGRATE_PROCESS_ONLY = 1,
+        VINTEGRATE_RECURSIVE = 2
     }
 
     public class VirtPackage
@@ -766,7 +766,7 @@ namespace VirtPackageAPI
             {
                 int vintegration = 0;
                 foreach (VirtPackage.VIRT_PROCESS process in this.Processes)
-                    vintegration |= ((int)process.Flags & ((int)VIRT_PROCESS_FLAGS.VINTEGRATE_DESKTOP_ONLY | (int)VIRT_PROCESS_FLAGS.VINTEGRATE_FULL));
+                    vintegration |= ((int)process.Flags & ((int)VIRT_PROCESS_FLAGS.VINTEGRATE_PROCESS_ONLY | (int)VIRT_PROCESS_FLAGS.VINTEGRATE_RECURSIVE));
                 return vintegration;
             }
 
