@@ -59,8 +59,8 @@ namespace VirtPackageAPI
             INSUFFICIENT_BUFFER = 13,
         }
 
-        public const int SANDBOXFLAGS_MERGE = 1;
-        public const int SANDBOXFLAGS_WRITE_COPY = 2;
+        public const int SANDBOXFLAGS_PASSTHROUGH = 1;
+        public const int SANDBOXFLAGS_COPY_ON_WRITE = 2;
         public const int SANDBOXFLAGS_FULL_ISOLATION = 3;
 
         // UI isolation constants:
@@ -1294,17 +1294,17 @@ namespace VirtPackageAPI
         public int GetIsolationMode()
         {
             // Isolation. Note: it is allowed to have no checkbox selected at all.
-            if (GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
-                GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
-                GetFileSandbox("%Personal%") == VirtPackage.SANDBOXFLAGS_MERGE &&
-                GetFileSandbox("%Desktop%") == VirtPackage.SANDBOXFLAGS_MERGE &&
-                GetFileSandbox("UNC") == VirtPackage.SANDBOXFLAGS_MERGE)
+            if (GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE &&
+                GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE &&
+                GetFileSandbox("%Personal%") == VirtPackage.SANDBOXFLAGS_PASSTHROUGH &&
+                GetFileSandbox("%Desktop%") == VirtPackage.SANDBOXFLAGS_PASSTHROUGH &&
+                GetFileSandbox("UNC") == VirtPackage.SANDBOXFLAGS_PASSTHROUGH)
                 return ISOLATIONMODE_DATA;
-            else if (GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY &&
-                GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_WRITE_COPY)
+            else if (GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE &&
+                GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE)
                 return ISOLATIONMODE_ISOLATED;
-            else if (GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_MERGE &&
-                GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_MERGE)
+            else if (GetFileSandbox("") == VirtPackage.SANDBOXFLAGS_PASSTHROUGH &&
+                GetRegistrySandbox("") == VirtPackage.SANDBOXFLAGS_PASSTHROUGH)
                 return ISOLATIONMODE_FULL_ACCESS;
             else
                 return ISOLATIONMODE_CUSTOM;
@@ -1314,9 +1314,9 @@ namespace VirtPackageAPI
         {
             uint sandboxMode = 0;
             if (IsolationMode == ISOLATIONMODE_ISOLATED || IsolationMode == ISOLATIONMODE_DATA)
-                sandboxMode = VirtPackage.SANDBOXFLAGS_WRITE_COPY;
+                sandboxMode = VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE;
             else if (IsolationMode == ISOLATIONMODE_FULL_ACCESS)
-                sandboxMode = VirtPackage.SANDBOXFLAGS_MERGE;
+                sandboxMode = VirtPackage.SANDBOXFLAGS_PASSTHROUGH;
             if (sandboxMode != 0)
             {
                 SetFileSandbox("", sandboxMode);
@@ -1327,9 +1327,9 @@ namespace VirtPackageAPI
             if (IsolationMode == ISOLATIONMODE_DATA)
             {
                 SetProperty("DataMode", "TRUE");
-                SetFileSandbox("%Personal%", VirtPackage.SANDBOXFLAGS_MERGE);
-                SetFileSandbox("%Desktop%", VirtPackage.SANDBOXFLAGS_MERGE);
-                SetFileSandbox("UNC", VirtPackage.SANDBOXFLAGS_MERGE);
+                SetFileSandbox("%Personal%", VirtPackage.SANDBOXFLAGS_PASSTHROUGH);
+                SetFileSandbox("%Desktop%", VirtPackage.SANDBOXFLAGS_PASSTHROUGH);
+                SetFileSandbox("UNC", VirtPackage.SANDBOXFLAGS_PASSTHROUGH);
             }
             else
             {

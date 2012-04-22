@@ -176,21 +176,21 @@ Public Function GetIsolationMode() As Long
 Dim ret As Long
 
 ' Isolation. Note: it is allowed to have no checkbox selected at all.
-If (GetFileSandbox("") = SANDBOXFLAGS_WRITE_COPY And _
-GetRegistrySandbox("") = SANDBOXFLAGS_WRITE_COPY And _
-GetFileSandbox("%Personal%") = SANDBOXFLAGS_MERGE And _
-GetFileSandbox("%Desktop%") = SANDBOXFLAGS_MERGE And _
-GetFileSandbox("UNC") = SANDBOXFLAGS_MERGE) Then
+If (GetFileSandbox("") = SANDBOXFLAGS_COPY_ON_WRITE And _
+GetRegistrySandbox("") = SANDBOXFLAGS_COPY_ON_WRITE And _
+GetFileSandbox("%Personal%") = SANDBOXFLAGS_PASSTHROUGH And _
+GetFileSandbox("%Desktop%") = SANDBOXFLAGS_PASSTHROUGH And _
+GetFileSandbox("UNC") = SANDBOXFLAGS_PASSTHROUGH) Then
 
 ret = ISOLATIONMODE_DATA
 
-ElseIf (GetFileSandbox("") = SANDBOXFLAGS_WRITE_COPY And _
-GetRegistrySandbox("") = SANDBOXFLAGS_WRITE_COPY) Then
+ElseIf (GetFileSandbox("") = SANDBOXFLAGS_COPY_ON_WRITE And _
+GetRegistrySandbox("") = SANDBOXFLAGS_COPY_ON_WRITE) Then
 
 ret = ISOLATIONMODE_ISOLATED
 
-ElseIf (GetFileSandbox("") = SANDBOXFLAGS_MERGE And _
-GetRegistrySandbox("") = SANDBOXFLAGS_MERGE) Then
+ElseIf (GetFileSandbox("") = SANDBOXFLAGS_PASSTHROUGH And _
+GetRegistrySandbox("") = SANDBOXFLAGS_PASSTHROUGH) Then
 
 ret = ISOLATIONMODE_FULL_ACCESS
 
@@ -209,9 +209,9 @@ Dim SandboxMode As Long
 SandboxMode = 0
 
 If (IsolationMode = ISOLATIONMODE_ISOLATED Or IsolationMode = ISOLATIONMODE_DATA) Then
-SandboxMode = SANDBOXFLAGS_WRITE_COPY
+SandboxMode = SANDBOXFLAGS_COPY_ON_WRITE
 ElseIf (IsolationMode = ISOLATIONMODE_FULL_ACCESS) Then
-SandboxMode = SANDBOXFLAGS_MERGE
+SandboxMode = SANDBOXFLAGS_PASSTHROUGH
 End If
 
 If (SandboxMode <> 0) Then
@@ -222,9 +222,9 @@ End If
 ' Do / undo special folders newly / previously set by Data Isolation mode
 If (IsolationMode = ISOLATIONMODE_DATA) Then
 Call SetProperty("DataMode", "TRUE")
-Call SetFileSandbox("%Personal%", SANDBOXFLAGS_MERGE)
-Call SetFileSandbox("%Desktop%", SANDBOXFLAGS_MERGE)
-Call SetFileSandbox("UNC", SANDBOXFLAGS_MERGE)
+Call SetFileSandbox("%Personal%", SANDBOXFLAGS_PASSTHROUGH)
+Call SetFileSandbox("%Desktop%", SANDBOXFLAGS_PASSTHROUGH)
+Call SetFileSandbox("UNC", SANDBOXFLAGS_PASSTHROUGH)
 Else
 If (GetProperty("DataMode") = "TRUE") Then ' Need to undo special dirs changed by Data Isolation mode (as opposed to set by user)
 Call SetProperty("DataMode", "FALSE")

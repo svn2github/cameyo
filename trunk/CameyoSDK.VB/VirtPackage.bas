@@ -5,8 +5,8 @@ Option Explicit
 ' VirtPackage.bas
 
 '' Sandbox flags
-Public Const SANDBOXFLAGS_MERGE As Long = 1
-Public Const SANDBOXFLAGS_WRITE_COPY As Long = 2
+Public Const SANDBOXFLAGS_PASSTHROUGH As Long = 1
+Public Const SANDBOXFLAGS_COPY_ON_WRITE As Long = 2
 Public Const SANDBOXFLAGS_FULL_ISOLATION As Long = 3
 
 '' API return codes

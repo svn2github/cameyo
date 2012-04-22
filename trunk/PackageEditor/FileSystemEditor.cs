@@ -247,7 +247,7 @@ namespace PackageEditor
                         newNode.deleted = false;
                         newNode.addedEmpty = false;
                         treeHelper.SetFolderNodeImage(newNode, newNode.deleted, newNode.sandboxFlags);
-                        //if (newNode.sandboxFlags == SANDBOXFLAGS_WRITE_COPY) newNode.ImageIndex = 3;
+                        //if (newNode.sandboxFlags == SANDBOXFLAGS_COPY_ON_WRITE) newNode.ImageIndex = 3;
                         if (curParent != null)
                             curParent.Nodes.Add(newNode);
                         else
@@ -938,9 +938,9 @@ namespace PackageEditor
         {
             switch (SandboxFlags)
             {
-                case VirtPackage.SANDBOXFLAGS_MERGE:
+                case VirtPackage.SANDBOXFLAGS_PASSTHROUGH:
                     return 0;
-                case VirtPackage.SANDBOXFLAGS_WRITE_COPY:
+                case VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE:
                     return 1;
                 /*case VirtPackage.SANDBOXFLAGS_FULL_ISOLATION:
                     return 2;*/
@@ -954,9 +954,9 @@ namespace PackageEditor
             switch (ComboIndex)
             {
                 case 0:
-                    return VirtPackage.SANDBOXFLAGS_MERGE;
+                    return VirtPackage.SANDBOXFLAGS_PASSTHROUGH;
                 case 1:
-                    return VirtPackage.SANDBOXFLAGS_WRITE_COPY;
+                    return VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE;
                 /*case 2:
                     return VirtPackage.SANDBOXFLAGS_FULL_ISOLATION;*/
                 default:
@@ -972,10 +972,10 @@ namespace PackageEditor
             {
                 switch (sandboxFlags)
                 {
-                    case VirtPackage.SANDBOXFLAGS_MERGE:
+                    case VirtPackage.SANDBOXFLAGS_PASSTHROUGH:
                         node.ImageIndex = node.SelectedImageIndex = 0;
                         break;
-                    case VirtPackage.SANDBOXFLAGS_WRITE_COPY:
+                    case VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE:
                         node.ImageIndex = node.SelectedImageIndex = 1;
                         break;
                     default:
