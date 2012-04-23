@@ -97,17 +97,17 @@ namespace PackageEditor
             ICloudDirectoryEntry dir = null;
             try
             {
-                dir = storage.GetFolder(@"/Cameyo apps");
+                dir = storage.GetFolder(@"/Cameyo Apps");
             }
             catch
             {
                 try
                 {
-                    dir = storage.CreateFolder(@"/Cameyo apps");
+                    dir = storage.CreateFolder(@"/Cameyo Apps");
                 }
                 catch
                 {
-                    MessageBox.Show("Unable to create \"Dropbox/Cameyo apps\" folder");
+                    MessageBox.Show("Unable to create \"Dropbox/Cameyo Apps\" folder");
                     return;
                 }
             }
