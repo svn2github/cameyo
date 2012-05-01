@@ -857,7 +857,8 @@ namespace PackageEditor
                     // Syntax: myPath\Packager.exe -ChangeEngine AppName.cameyo.exe AppVirtDll.dll
                     string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
                     int exitCode = 0;
-                    if (!ExecProg(openedFile, "-ChangeEngine \"" + files[0] + "\"", true, ref exitCode))
+                    if (!ExecProg(Path.Combine(myPath, "Packager.exe"), "-ChangeEngine \"" + openedFile + "\" "+
+                        "\"" + files[0] + "\"", true, ref exitCode))
                         MessageBox.Show("Could not execute: " + Path.Combine(myPath, "Packager.exe"));
                 }
                 finally
