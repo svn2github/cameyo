@@ -734,6 +734,38 @@ namespace VirtPackageAPI
             return Is32Bit() ? RunningAppEnum32(Callback, ref Data) : RunningAppEnum64(Callback, ref Data);
         }
 
+        // RunningAppEnumKeepAlive
+        [DllImport(DLL32, EntryPoint = "RunningAppEnumKeepAlive", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int RunningAppEnumKeepAlive32(
+            ref IntPtr Context,
+            RUNNINGAPP_ENUM_CALLBACK Callback,
+            ref Object Data);
+        [DllImport(DLL64, EntryPoint = "RunningAppEnumKeepAlive", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int RunningAppEnumKeepAlive64(
+            ref IntPtr Context,
+            RUNNINGAPP_ENUM_CALLBACK Callback,
+            ref Object Data);
+        private static int RunningAppEnumKeepAlive(
+            ref IntPtr Context,
+            RUNNINGAPP_ENUM_CALLBACK Callback,
+            ref Object Data)
+        {
+            return Is32Bit() ? RunningAppEnumKeepAlive32(ref Context, Callback, ref Data) : RunningAppEnumKeepAlive64(ref Context, Callback, ref Data);
+        }
+
+        // RunningAppEnumKeepAliveFree
+        [DllImport(DLL32, EntryPoint = "RunningAppEnumKeepAliveFree", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int RunningAppEnumKeepAliveFree32(
+            IntPtr Context);
+        [DllImport(DLL64, EntryPoint = "RunningAppEnumKeepAliveFree", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int RunningAppEnumKeepAliveFree64(
+            IntPtr Context);
+        private static int RunningAppEnumKeepAliveFree(
+            IntPtr Context)
+        {
+            return Is32Bit() ? RunningAppEnumKeepAliveFree32(Context) : RunningAppEnumKeepAliveFree64(Context);
+        }
+
         [StructLayout(LayoutKind.Sequential)]
         private struct RUNNING_APP
         {
@@ -772,7 +804,7 @@ namespace VirtPackageAPI
 
             public static RunningApp FromAppID(String AppID)
             {
-                List<RunningApp> runningApps = RunningApps();
+                List<RunningApp> runningApps = GetRunningApps();
                 foreach (RunningApp runningApp in runningApps)
                 {
                     if (runningApp.AppID.Equals(AppID, StringComparison.InvariantCultureIgnoreCase))
@@ -1213,7 +1245,7 @@ namespace VirtPackageAPI
             return true;
         }
 
-        static public List<RunningApp> RunningApps()
+        static public List<RunningApp> GetRunningApps()
         {
             RUNNINGAPP_ENUM_CALLBACK Callback = new RUNNINGAPP_ENUM_CALLBACK(EnumRunningAppsCallback);
             List<RunningApp> list = new List<RunningApp>();
@@ -1226,7 +1258,7 @@ namespace VirtPackageAPI
 
         static public RunningApp FindRunningApp(string appID)
         {
-            List<RunningApp> list = RunningApps();
+            List<RunningApp> list = GetRunningApps();
             if (list == null)
                 return null;
             foreach (RunningApp app in list)
@@ -1385,6 +1417,27 @@ namespace VirtPackageAPI
             catch
             {
                 return null;
+            }
+        }
+
+        public class RunningAppsEnumerator
+        {
+            IntPtr Context = IntPtr.Zero;
+
+            public List<RunningApp> GetRunningApps()
+            {
+                RUNNINGAPP_ENUM_CALLBACK Callback = new RUNNINGAPP_ENUM_CALLBACK(EnumRunningAppsCallback);
+                List<RunningApp> list = new List<RunningApp>();
+                Object data = list;
+                if ((APIRET)RunningAppEnumKeepAlive(ref Context, Callback, ref data) == APIRET.SUCCESS)
+                    return list;
+                else
+                    return null;
+            }
+
+            ~RunningAppsEnumerator()
+            {
+                RunningAppEnumKeepAliveFree(Context);
             }
         }
     }
