@@ -794,11 +794,17 @@ namespace VirtPackageAPI
             public UInt32 StartTickTime;
             public String FriendlyName;
 
-            public int GetVintegrationMode()
+            public int GetVintegrationMode(out bool anyVirtProcessRunning)
             {
                 int vintegration = 0;
+                anyVirtProcessRunning = false;
                 foreach (VirtPackage.VIRT_PROCESS process in this.Processes)
-                    vintegration |= ((int)process.Flags & ((int)VIRT_PROCESS_FLAGS.VINTEGRATE_PROCESS_ONLY | (int)VIRT_PROCESS_FLAGS.VINTEGRATE_RECURSIVE));
+                {
+                    if (((int)process.Flags & ((int)VIRT_PROCESS_FLAGS.VINTEGRATE_PROCESS_ONLY | (int)VIRT_PROCESS_FLAGS.VINTEGRATE_RECURSIVE)) != 0)
+                        vintegration |= (int)process.Flags;
+                    else
+                        anyVirtProcessRunning = true;
+                }
                 return vintegration;
             }
 
@@ -1476,6 +1482,8 @@ namespace VirtPackageAPI
         public String m_Shortcuts;
         public String StopInheritance { get { return GetStopInheritance(); } }
         public String m_StopInheritance;
+        public List<String> IntegratedComponents { get { return GetIntegratedComponents(); } }
+        public List<String> m_IntegratedComponents;
 
         public System.Collections.Hashtable IniProperties { get { return m_IniProperties; } }
         internal System.Collections.Hashtable m_IniProperties;
@@ -1580,6 +1588,28 @@ namespace VirtPackageAPI
                 return m_StopInheritance;
             m_StopInheritance = (String)IniProperties["StopInheritance"];
             return m_StopInheritance;
+        }
+
+        // Returns a list of integrated components, or null if not integrated
+        private List<String> GetIntegratedComponents()
+        {
+            if (m_IntegratedComponents != null)   // Result already cached?
+                return (m_IntegratedComponents.Count == 0 ? null : m_IntegratedComponents);
+
+            // Not cached yet (first time). Perform.
+            m_IntegratedComponents = new List<string>();   // Leaving it empty if no integration, so as to indicate: 'cached'
+            try
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\VOS\\" + this.AppID + "\\Integrated", false);
+                if (key != null)
+                {
+                    foreach (string keyName in key.GetSubKeyNames())
+                        m_IntegratedComponents.Add(keyName);
+                }
+                key.Close();
+            }
+            catch { }
+            return (m_IntegratedComponents.Count == 0 ? null : m_IntegratedComponents);
         }
 
         public static long GetOccuppiedAppSize(string BaseDirName)
