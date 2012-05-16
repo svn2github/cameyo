@@ -146,7 +146,6 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.panel13 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.listViewMRU = new System.Windows.Forms.ListView();
@@ -196,7 +195,6 @@
             this.panel15.SuspendLayout();
             this.panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel9.SuspendLayout();
@@ -1022,30 +1020,20 @@
             resources.ApplyResources(this.panel14, "panel14");
             this.panel14.Controls.Add(this.pictureBox2);
             this.panel14.Controls.Add(this.label9);
-            this.panel14.Controls.Add(this.pictureBox6);
             this.panel14.Name = "panel14";
             // 
             // pictureBox2
             // 
             resources.ApplyResources(this.pictureBox2, "pictureBox2");
             this.pictureBox2.Image = global::PackageEditor.Properties.Resources._071;
-            this.pictureBox2.MaximumSize = new System.Drawing.Size(383, 344);
-            this.pictureBox2.MinimumSize = new System.Drawing.Size(383, 344);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
-            this.label9.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label9.ForeColor = System.Drawing.Color.Black;
             this.label9.Name = "label9";
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = global::PackageEditor.Properties.Resources.logo_black;
-            resources.ApplyResources(this.pictureBox6, "pictureBox6");
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.TabStop = false;
             // 
             // panel13
             // 
@@ -1221,7 +1209,6 @@
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.panel13.ResumeLayout(false);
             this.panel13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -1361,7 +1348,6 @@
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ToolStripMenuItem langToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishMenuItem;
