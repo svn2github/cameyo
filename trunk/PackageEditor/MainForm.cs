@@ -30,12 +30,6 @@ namespace PackageEditor
         private MRU mru;
         public bool dirty;
         private bool dragging;
-        private string CleanupOnExitExe = "%MyExe%";
-        private string CleanupOnExitOptionQuiet = "-Quiet";
-        private string CleanupOnExitOptionConfirm = "-Confirm";
-        private string CleanupOnExitOptionRemove = "-Remove";
-        private string CleanupOnExitOptionRemoveReg = "-Remove:Reg";
-
         private Control[] Editors;
 
         // creation of delegate for PackageOpen
@@ -439,6 +433,7 @@ namespace PackageEditor
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             string packageEditor = resources.GetString("$this.Text");
+            String command;
 
             // AppID
             propertyAppID.Text = virtPackage.GetProperty("AppID");
@@ -476,17 +471,27 @@ namespace PackageEditor
             // StopInheritance
             propertyStopInheritance.Text = virtPackage.GetProperty("StopInheritance");
 
-            // CleanupOnExit
-            String cleanupCommand = GetCleanUpStopCommand();
-            if (cleanupCommand == "")
-            {
-                rdbCleanNone.Checked = true;
-            }
+            // Integrate
+            command = GetIntegrateStartCommand();
+            if (command == "")
+                rdbIntegrateNone.Checked = true;
             else
             {
-                chkCleanAsk.Checked = cleanupCommand.Contains(CleanupOnExitOptionConfirm);
-                chkCleanDoneDialog.Checked = !cleanupCommand.Contains(CleanupOnExitOptionQuiet);
-                if (cleanupCommand.EndsWith(CleanupOnExitOptionRemoveReg))
+                if (command.EndsWith("-Integrate"))
+                    rdbIntegrateStandard.Checked = true;
+                else if (command.EndsWith("-Vintegrate"))
+                    rdbIntegrateVirtual.Checked = true;
+            }
+
+            // CleanupOnExit
+            command = GetCleanupStopCommand();
+            if (command == "")
+                rdbCleanNone.Checked = true;
+            else
+            {
+                chkCleanAsk.Checked = command.Contains("-Confirm");
+                chkCleanDoneDialog.Checked = !command.Contains("-Quiet");
+                if (command.EndsWith("-Remove:Reg"))
                     rdbCleanRegOnly.Checked = true;
                 else
                     rdbCleanAll.Checked = true;
@@ -524,23 +529,44 @@ namespace PackageEditor
                 str = newStr.Remove(0, value.Length);
         }
 
-        private string GetCleanUpStopCommand()
+        private string GetIntegrateStartCommand()
+        {
+            String[] OnStartUnvirtualized = virtPackage.GetProperty("OnStartUnvirtualized").Split(';');
+            foreach (String command in OnStartUnvirtualized)
+            {
+                if (command.StartsWith("%MyExe%" + '>') && (command.EndsWith("-Integrate") || command.EndsWith("-Vintegrate")))
+                {
+                    String checkNoRemains = command;
+                    RemoveIfStartswith(ref checkNoRemains, "%MyExe%");
+                    RemoveIfStartswith(ref checkNoRemains, ">");
+                    RemoveIfStartswith(ref checkNoRemains, "-Quiet");
+
+                    RemoveIfStartswith(ref checkNoRemains, "-Integrate");
+                    RemoveIfStartswith(ref checkNoRemains, "-Vintegrate");
+                    if (checkNoRemains == "")
+                        return command;
+                }
+            }
+            return "";
+        }
+
+        private string GetCleanupStopCommand()
         {
             String[] OnStopUnvirtualized = virtPackage.GetProperty("OnStopUnvirtualized").Split(';');
-            foreach (String stopCommand in OnStopUnvirtualized)
+            foreach (String command in OnStopUnvirtualized)
             {
-                if (stopCommand.StartsWith(CleanupOnExitExe + '>') && (stopCommand.EndsWith(CleanupOnExitOptionRemove) || stopCommand.EndsWith(CleanupOnExitOptionRemoveReg)))
+                if (command.StartsWith("%MyExe%" + '>') && (command.EndsWith("-Remove") || command.EndsWith("-Remove:Reg")))
                 {
-                    String checkNoRemains = stopCommand;
-                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitExe);
+                    String checkNoRemains = command;
+                    RemoveIfStartswith(ref checkNoRemains, "%MyExe%");
                     RemoveIfStartswith(ref checkNoRemains, ">");
-                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionConfirm);
-                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionQuiet);
+                    RemoveIfStartswith(ref checkNoRemains, "-Confirm");
+                    RemoveIfStartswith(ref checkNoRemains, "-Quiet");
 
-                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionRemoveReg);
-                    RemoveIfStartswith(ref checkNoRemains, CleanupOnExitOptionRemove);
+                    RemoveIfStartswith(ref checkNoRemains, "-Remove:Reg");
+                    RemoveIfStartswith(ref checkNoRemains, "-Remove");
                     if (checkNoRemains == "")
-                        return stopCommand;
+                        return command;
                 }
             }
             return "";
@@ -554,6 +580,7 @@ namespace PackageEditor
         public bool OnPackageSave()
         {
             bool Ret = true;
+            String str, oldCommand, newCommand;
 
             // AppID + AutoLaunch
             Ret &= virtPackage.SetProperty("AppID", propertyAppID.Text);
@@ -564,30 +591,55 @@ namespace PackageEditor
             else
                 Ret &= virtPackage.SetProperty("Expiration", "");
 
-            // propertyCleanupOnExit
-            String str = virtPackage.GetProperty("OnStopUnvirtualized");
-            String oldCleanupCommand = GetCleanUpStopCommand();
-            String newCleanupCommand = "";
-            if (!rdbCleanNone.Checked)
+            // propertyIntegrate, propertyVintegrate
+            str = virtPackage.GetProperty("OnStartUnvirtualized");
+            oldCommand = GetIntegrateStartCommand();
+            newCommand = "";
+            if (!rdbIntegrateNone.Checked)
             {
-                if (chkCleanAsk.Checked)
-                    newCleanupCommand += ' ' + CleanupOnExitOptionConfirm;
-                if (!chkCleanDoneDialog.Checked)
-                    newCleanupCommand += ' ' + CleanupOnExitOptionQuiet;
+                newCommand += ' ' + "-Quiet";
+                if (rdbIntegrateStandard.Checked)
+                    newCommand += ' ' + "-Integrate";
+                if (rdbIntegrateVirtual.Checked)
+                    newCommand += ' ' + "-Virtual";
 
-                if (rdbCleanRegOnly.Checked)
-                    newCleanupCommand += ' ' + CleanupOnExitOptionRemoveReg;
-                if (rdbCleanAll.Checked)
-                    newCleanupCommand += ' ' + CleanupOnExitOptionRemove;
-
-                newCleanupCommand = CleanupOnExitExe + '>' + newCleanupCommand.Trim();
+                newCommand = "%MyExe%" + '>' + newCommand.Trim();
             }
-            if (oldCleanupCommand == "")
-                str += ";" + newCleanupCommand;
+            if (oldCommand == "")
+                str += ";" + newCommand;
             else
             {
                 str = ";" + str + ";";
-                str = str.Replace(";" + oldCleanupCommand + ";", ";" + newCleanupCommand + ";");
+                str = str.Replace(";" + oldCommand + ";", ";" + newCommand + ";");
+                str = str.Replace(";;", ";");
+                str = str.Trim(';');
+            }
+            Ret &= virtPackage.SetProperty("OnStartUnvirtualized", str);
+
+            // propertyCleanupOnExit
+            str = virtPackage.GetProperty("OnStopUnvirtualized");
+            oldCommand = GetCleanupStopCommand();
+            newCommand = "";
+            if (!rdbCleanNone.Checked)
+            {
+                if (chkCleanAsk.Checked)
+                    newCommand += ' ' + "-Confirm";
+                if (!chkCleanDoneDialog.Checked)
+                    newCommand += ' ' + "-Quiet";
+
+                if (rdbCleanRegOnly.Checked)
+                    newCommand += ' ' + "-Remove:Reg";
+                if (rdbCleanAll.Checked)
+                    newCommand += ' ' + "-Remove";
+
+                newCommand = "%MyExe%" + '>' + newCommand.Trim();
+            }
+            if (oldCommand == "")
+                str += ";" + newCommand;
+            else
+            {
+                str = ";" + str + ";";
+                str = str.Replace(";" + oldCommand + ";", ";" + newCommand + ";");
                 str = str.Replace(";;", ";");
                 str = str.Trim(';');
             }
@@ -1148,6 +1200,10 @@ namespace PackageEditor
             fsEditor.OnPackageOpen();
             regEditor.OnPackageOpenBeforeUI();
             tabControl.SelectedIndex = 0;
+
+            rdbIntegrateNone.Checked = true;
+            rdbIntegrateStandard.Checked = false;
+            rdbIntegrateVirtual.Checked = false;
 
             rdbCleanNone.Checked = true;
             rdbCleanRegOnly.Checked = false;

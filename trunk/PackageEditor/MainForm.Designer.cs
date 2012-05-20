@@ -159,6 +159,10 @@
             this.panel12 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.PictureBox();
             this.bkPanel = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rdbIntegrateNone = new System.Windows.Forms.RadioButton();
+            this.rdbIntegrateStandard = new System.Windows.Forms.RadioButton();
+            this.rdbIntegrateVirtual = new System.Windows.Forms.RadioButton();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -201,6 +205,7 @@
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel11)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -888,6 +893,7 @@
             // 
             // tabAdvanced
             // 
+            this.tabAdvanced.Controls.Add(this.groupBox4);
             this.tabAdvanced.Controls.Add(this.groupBox6);
             this.tabAdvanced.Controls.Add(this.groupBox7);
             this.tabAdvanced.Controls.Add(this.groupBox5);
@@ -1026,6 +1032,8 @@
             // 
             resources.ApplyResources(this.pictureBox2, "pictureBox2");
             this.pictureBox2.Image = global::PackageEditor.Properties.Resources._071;
+            this.pictureBox2.MaximumSize = new System.Drawing.Size(383, 344);
+            this.pictureBox2.MinimumSize = new System.Drawing.Size(383, 344);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
@@ -1138,6 +1146,36 @@
             resources.ApplyResources(this.bkPanel, "bkPanel");
             this.bkPanel.Name = "bkPanel";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rdbIntegrateVirtual);
+            this.groupBox4.Controls.Add(this.rdbIntegrateStandard);
+            this.groupBox4.Controls.Add(this.rdbIntegrateNone);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
+            // rdbIntegrateNone
+            // 
+            resources.ApplyResources(this.rdbIntegrateNone, "rdbIntegrateNone");
+            this.rdbIntegrateNone.Name = "rdbIntegrateNone";
+            this.rdbIntegrateNone.TabStop = true;
+            this.rdbIntegrateNone.UseVisualStyleBackColor = true;
+            // 
+            // rdbIntegrateStandard
+            // 
+            resources.ApplyResources(this.rdbIntegrateStandard, "rdbIntegrateStandard");
+            this.rdbIntegrateStandard.Name = "rdbIntegrateStandard";
+            this.rdbIntegrateStandard.TabStop = true;
+            this.rdbIntegrateStandard.UseVisualStyleBackColor = true;
+            // 
+            // rdbIntegrateVirtual
+            // 
+            resources.ApplyResources(this.rdbIntegrateVirtual, "rdbIntegrateVirtual");
+            this.rdbIntegrateVirtual.Name = "rdbIntegrateVirtual";
+            this.rdbIntegrateVirtual.TabStop = true;
+            this.rdbIntegrateVirtual.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1217,6 +1255,8 @@
             this.bottomPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panel12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel11)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1353,6 +1393,10 @@
         private System.Windows.Forms.ToolStripMenuItem englishMenuItem;
         private System.Windows.Forms.ToolStripMenuItem frenchMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spanishMenuItem;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton rdbIntegrateVirtual;
+        private System.Windows.Forms.RadioButton rdbIntegrateStandard;
+        private System.Windows.Forms.RadioButton rdbIntegrateNone;
 
     }
 }
