@@ -126,6 +126,10 @@
             this.regImportBtn = new System.Windows.Forms.ToolStripButton();
             this.regExportBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rdbIntegrateVirtual = new System.Windows.Forms.RadioButton();
+            this.rdbIntegrateStandard = new System.Windows.Forms.RadioButton();
+            this.rdbIntegrateNone = new System.Windows.Forms.RadioButton();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.propertyExpiration = new System.Windows.Forms.CheckBox();
             this.propertyExpirationDatePicker = new System.Windows.Forms.DateTimePicker();
@@ -144,8 +148,8 @@
             this.panelWelcome = new System.Windows.Forms.Panel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel13 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.listViewMRU = new System.Windows.Forms.ListView();
@@ -159,10 +163,6 @@
             this.panel12 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.PictureBox();
             this.bkPanel = new System.Windows.Forms.Panel();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rdbIntegrateNone = new System.Windows.Forms.RadioButton();
-            this.rdbIntegrateStandard = new System.Windows.Forms.RadioButton();
-            this.rdbIntegrateVirtual = new System.Windows.Forms.RadioButton();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -191,6 +191,7 @@
             this.panel7.SuspendLayout();
             this.regToolStrip.SuspendLayout();
             this.tabAdvanced.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -205,7 +206,6 @@
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel11)).BeginInit();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -893,13 +893,43 @@
             // 
             // tabAdvanced
             // 
-            this.tabAdvanced.Controls.Add(this.groupBox4);
+            this.tabAdvanced.Controls.Add(this.groupBox5);
             this.tabAdvanced.Controls.Add(this.groupBox6);
             this.tabAdvanced.Controls.Add(this.groupBox7);
-            this.tabAdvanced.Controls.Add(this.groupBox5);
+            this.tabAdvanced.Controls.Add(this.groupBox4);
             resources.ApplyResources(this.tabAdvanced, "tabAdvanced");
             this.tabAdvanced.Name = "tabAdvanced";
             this.tabAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rdbIntegrateVirtual);
+            this.groupBox4.Controls.Add(this.rdbIntegrateStandard);
+            this.groupBox4.Controls.Add(this.rdbIntegrateNone);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
+            // rdbIntegrateVirtual
+            // 
+            resources.ApplyResources(this.rdbIntegrateVirtual, "rdbIntegrateVirtual");
+            this.rdbIntegrateVirtual.Name = "rdbIntegrateVirtual";
+            this.rdbIntegrateVirtual.TabStop = true;
+            this.rdbIntegrateVirtual.UseVisualStyleBackColor = true;
+            // 
+            // rdbIntegrateStandard
+            // 
+            resources.ApplyResources(this.rdbIntegrateStandard, "rdbIntegrateStandard");
+            this.rdbIntegrateStandard.Name = "rdbIntegrateStandard";
+            this.rdbIntegrateStandard.TabStop = true;
+            this.rdbIntegrateStandard.UseVisualStyleBackColor = true;
+            // 
+            // rdbIntegrateNone
+            // 
+            resources.ApplyResources(this.rdbIntegrateNone, "rdbIntegrateNone");
+            this.rdbIntegrateNone.Name = "rdbIntegrateNone";
+            this.rdbIntegrateNone.TabStop = true;
+            this.rdbIntegrateNone.UseVisualStyleBackColor = true;
             // 
             // groupBox6
             // 
@@ -1024,9 +1054,15 @@
             // panel14
             // 
             resources.ApplyResources(this.panel14, "panel14");
-            this.panel14.Controls.Add(this.pictureBox2);
             this.panel14.Controls.Add(this.label9);
+            this.panel14.Controls.Add(this.pictureBox2);
             this.panel14.Name = "panel14";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.ForeColor = System.Drawing.Color.Gray;
+            this.label9.Name = "label9";
             // 
             // pictureBox2
             // 
@@ -1036,12 +1072,6 @@
             this.pictureBox2.MinimumSize = new System.Drawing.Size(383, 344);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Name = "label9";
             // 
             // panel13
             // 
@@ -1146,36 +1176,6 @@
             resources.ApplyResources(this.bkPanel, "bkPanel");
             this.bkPanel.Name = "bkPanel";
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.rdbIntegrateVirtual);
-            this.groupBox4.Controls.Add(this.rdbIntegrateStandard);
-            this.groupBox4.Controls.Add(this.rdbIntegrateNone);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
-            // 
-            // rdbIntegrateNone
-            // 
-            resources.ApplyResources(this.rdbIntegrateNone, "rdbIntegrateNone");
-            this.rdbIntegrateNone.Name = "rdbIntegrateNone";
-            this.rdbIntegrateNone.TabStop = true;
-            this.rdbIntegrateNone.UseVisualStyleBackColor = true;
-            // 
-            // rdbIntegrateStandard
-            // 
-            resources.ApplyResources(this.rdbIntegrateStandard, "rdbIntegrateStandard");
-            this.rdbIntegrateStandard.Name = "rdbIntegrateStandard";
-            this.rdbIntegrateStandard.TabStop = true;
-            this.rdbIntegrateStandard.UseVisualStyleBackColor = true;
-            // 
-            // rdbIntegrateVirtual
-            // 
-            resources.ApplyResources(this.rdbIntegrateVirtual, "rdbIntegrateVirtual");
-            this.rdbIntegrateVirtual.Name = "rdbIntegrateVirtual";
-            this.rdbIntegrateVirtual.TabStop = true;
-            this.rdbIntegrateVirtual.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1235,6 +1235,8 @@
             this.regToolStrip.ResumeLayout(false);
             this.regToolStrip.PerformLayout();
             this.tabAdvanced.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
@@ -1255,8 +1257,6 @@
             this.bottomPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panel12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel11)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -477,7 +477,7 @@ namespace PackageEditor
                 rdbIntegrateNone.Checked = true;
             else
             {
-                if (command.EndsWith("-Integrate"))
+                if (command.EndsWith("-Integrate:once"))
                     rdbIntegrateStandard.Checked = true;
                 else if (command.EndsWith("-Vintegrate"))
                     rdbIntegrateVirtual.Checked = true;
@@ -534,14 +534,14 @@ namespace PackageEditor
             String[] OnStartUnvirtualized = virtPackage.GetProperty("OnStartUnvirtualized").Split(';');
             foreach (String command in OnStartUnvirtualized)
             {
-                if (command.StartsWith("%MyExe%" + '>') && (command.EndsWith("-Integrate") || command.EndsWith("-Vintegrate")))
+                if (command.StartsWith("%MyExe%" + '>') && (command.EndsWith("-Integrate:once") || command.EndsWith("-Vintegrate")))
                 {
                     String checkNoRemains = command;
                     RemoveIfStartswith(ref checkNoRemains, "%MyExe%");
                     RemoveIfStartswith(ref checkNoRemains, ">");
                     RemoveIfStartswith(ref checkNoRemains, "-Quiet");
 
-                    RemoveIfStartswith(ref checkNoRemains, "-Integrate");
+                    RemoveIfStartswith(ref checkNoRemains, "-Integrate:once");
                     RemoveIfStartswith(ref checkNoRemains, "-Vintegrate");
                     if (checkNoRemains == "")
                         return command;
@@ -599,9 +599,9 @@ namespace PackageEditor
             {
                 newCommand += ' ' + "-Quiet";
                 if (rdbIntegrateStandard.Checked)
-                    newCommand += ' ' + "-Integrate";
+                    newCommand += ' ' + "-Integrate:once";
                 if (rdbIntegrateVirtual.Checked)
-                    newCommand += ' ' + "-Virtual";
+                    newCommand += ' ' + "-Vintegrate";
 
                 newCommand = "%MyExe%" + '>' + newCommand.Trim();
             }
