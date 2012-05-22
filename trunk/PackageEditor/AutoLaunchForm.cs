@@ -201,12 +201,12 @@ namespace PackageEditor
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             if (propertyMenuRadio.Checked && propertyMenuLV.Items.Count == 0)
             {
-                MessageBox.Show(resources.GetString("menuRequiresAtLeastTwo"));
+                MessageBox.Show(PackageEditor.Messages.Messages.menuRequiresAtLeastTwo);
                 return;
             }
             if (propertyMenuRadio.Checked && propertyMenuLV.Items.Count == 1)
             {
-                if (MessageBox.Show(resources.GetString("menuRequiresAtLeastTwoTransform"), "", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (MessageBox.Show(PackageEditor.Messages.Messages.menuRequiresAtLeastTwoTransform, "", MessageBoxButtons.YesNo) != DialogResult.Yes)
                     return;
             }
 

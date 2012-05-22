@@ -62,8 +62,6 @@ namespace PackageEditor
             ToolStripButton fsSaveFileAsBtn, ToolStripButton fsAddDirBtn)
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            string isolated = resources.GetString("isolated");
-            string fullAccess = resources.GetString("fullAccess");
 
             this.virtPackage = virtPackage;
             this.fsFolderTree = fsFolderTree;
@@ -78,8 +76,8 @@ namespace PackageEditor
 
             fsFolderInfoFullName.Text = "";
             fsFolderInfoIsolationCombo.Text = "";
-            fsFolderInfoIsolationCombo.Items.Add(fullAccess);
-            fsFolderInfoIsolationCombo.Items.Add(isolated);
+            fsFolderInfoIsolationCombo.Items.Add(PackageEditor.Messages.Messages.fullAccess);
+            fsFolderInfoIsolationCombo.Items.Add(PackageEditor.Messages.Messages.isolated);
             fsFolderTree.AfterSelect += OnFolderTreeSelect;
             fsFolderInfoIsolationCombo.SelectionChangeCommitted += OnFolderSandboxChange;
             fsAddBtn.Click += OnAddBtnClick;

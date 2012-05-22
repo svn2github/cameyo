@@ -104,11 +104,10 @@
       <DependentUpon>FileProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="FilesEditing\VirtualFileDataObject.cs" />
-    <Compile Include="Messages.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Messages.Designer.cs">
-      <DependentUpon>Messages.cs</DependentUpon>
+    <Compile Include="Messages\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="ModForm.cs">
       <SubType>Form</SubType>
@@ -224,10 +223,6 @@
     <EmbeddedResource Include="ListViewEx.resx">
       <DependentUpon>ListViewEx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.en-US.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.es-ES.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -244,8 +239,11 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Messages.resx">
-      <DependentUpon>Messages.cs</DependentUpon>
+    <EmbeddedResource Include="Messages\Messages.es-ES.resx" />
+    <EmbeddedResource Include="Messages\Messages.fr-FR.resx" />
+    <EmbeddedResource Include="Messages\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ModForm.resx">
       <DependentUpon>ModForm.cs</DependentUpon>

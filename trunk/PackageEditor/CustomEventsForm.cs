@@ -126,7 +126,7 @@ namespace PackageEditor
                 boxWait.Checked = false;
                 return;
             }
-            btnAddSave.Text = resources.GetString("btnApply");
+            btnAddSave.Text = PackageEditor.Messages.Messages.btnApply;
             CustomEvent customEvent = curCustomEvents[listBox.SelectedIndex];
             txtCmd.Text = customEvent.cmd;
             txtArgs.Text = customEvent.args;

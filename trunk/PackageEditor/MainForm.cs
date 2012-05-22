@@ -77,8 +77,7 @@ namespace PackageEditor
                     if (pos != -1) friendlyPath = friendlyPath.Substring(pos + 1);
 
                     System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-                    string msg = resources.GetString("packageBuiltOk");
-                    packageBuiltNotify.Do(msg, packageExeFile, friendlyPath, "PackageBuiltNotify");
+                    packageBuiltNotify.Do(PackageEditor.Messages.Messages.packageBuiltOk, packageExeFile, friendlyPath, "PackageBuiltNotify");
                 }
             }
 
@@ -172,9 +171,7 @@ namespace PackageEditor
             if (displayWaitMsg)
             {
                 System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-                string openingPackage = resources.GetString("openingPackage");
-                string opening = resources.GetString("opening");
-                PleaseWait.PleaseWaitBegin(openingPackage, opening + " " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
+                PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.openingPackage, PackageEditor.Messages.Messages.opening + " " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
             }
 
             if (virtPackage.Open(packageExeFile, out apiRet))
@@ -221,9 +218,7 @@ namespace PackageEditor
             if (this.dirty || fsEditor.dirty || regEditor.dirty)
             {
                 System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-                string discardChanges = resources.GetString("discardChanges");
-                string confirm = resources.GetString("confirm");
-                if (MessageBox.Show(discardChanges, confirm, MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (MessageBox.Show(PackageEditor.Messages.Messages.discardChanges, PackageEditor.Messages.Messages.confirm, MessageBoxButtons.YesNo) != DialogResult.Yes)
                     return false;
             }
 
@@ -253,20 +248,18 @@ namespace PackageEditor
         private bool PackageSave(String fileName)
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            string cannotSave = resources.GetString("cannotSave");
-            string savingPackage = resources.GetString("savingPackage");
-            string saving = resources.GetString("saving");
 
             String CantSaveBecause = "";
             if (!PackageCanSave(out CantSaveBecause))
             {
-                MessageBox.Show(this, CantSaveBecause, cannotSave, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, CantSaveBecause, PackageEditor.Messages.Messages.cannotSave, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             int ret = 0;
             VirtPackage.APIRET apiRet = 0;
-            PleaseWait.PleaseWaitBegin(savingPackage, saving + " " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
+            PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.savingPackage, 
+                PackageEditor.Messages.Messages.saving + " " + System.IO.Path.GetFileName(fileName) + "...", virtPackage.openedFile);
             {
                 ret = ret == 0 && !this.OnPackageSave() ? 1 : ret;
                 ret = ret == 0 && !fsEditor.OnPackageSave() ? 2 : ret;
@@ -284,7 +277,7 @@ namespace PackageEditor
             }
             else
             {
-                MessageBox.Show(cannotSave + " ApiRet:" + apiRet + " (step " + ret + ")");
+                MessageBox.Show(PackageEditor.Messages.Messages.cannotSave + " ApiRet:" + apiRet + " (step " + ret + ")");
                 return false;
             }
         }
@@ -310,13 +303,11 @@ namespace PackageEditor
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             string packageEditor = resources.GetString("$this.Text");
-            string cannotSave = resources.GetString("cannotSave");
-            string packageSaved = resources.GetString("packageSaved");
 
             String message;
             if (!PackageCanSave(out message))
             {
-                MessageBox.Show(this, message, cannotSave, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, message, PackageEditor.Messages.Messages.cannotSave, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -339,7 +330,7 @@ namespace PackageEditor
                 {
                     virtPackage.openedFile = saveFileDialog.FileName;
                     this.Text = packageEditor + " - " + saveFileDialog.FileName;
-                    MessageBox.Show(packageSaved);
+                    MessageBox.Show(PackageEditor.Messages.Messages.packageSaved);
                 }
             }
         }
@@ -417,7 +408,7 @@ namespace PackageEditor
                         propertyAutoLaunch.Text += ", ";
                     propertyAutoLaunch.Text += VirtPackage.FriendlyShortcutName(items[2]);
                 }
-                propertyAutoLaunch.Text = resources.GetString("displayMenu") + ": " + propertyAutoLaunch.Text;
+                propertyAutoLaunch.Text = PackageEditor.Messages.Messages.displayMenu + ": " + propertyAutoLaunch.Text;
             }
             else
             {
@@ -1335,8 +1326,7 @@ namespace PackageEditor
             LangUtils.SaveCulture(cultureStr);
             LangUtils.LoadCulture();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            string changesWillTakeEffectOnNextStart = resources.GetString("changesWillTakeEffectOnNextStart");
-            MessageBox.Show(changesWillTakeEffectOnNextStart);
+            MessageBox.Show(PackageEditor.Messages.Messages.changesWillTakeEffectOnNextStart);
         }
     }
 
