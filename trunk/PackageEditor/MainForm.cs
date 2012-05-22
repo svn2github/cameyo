@@ -1125,6 +1125,7 @@ namespace PackageEditor
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            lblLogoTitle.Text = "Package Editor";   // Don't let this be localized!
             //MainForm_Resize(null, null);
         }
 

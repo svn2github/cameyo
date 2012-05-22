@@ -126,10 +126,11 @@
             this.regImportBtn = new System.Windows.Forms.ToolStripButton();
             this.regExportBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rdbIntegrateVirtual = new System.Windows.Forms.RadioButton();
-            this.rdbIntegrateStandard = new System.Windows.Forms.RadioButton();
-            this.rdbIntegrateNone = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
+            this.propertyStopInheritance = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.propertyExpiration = new System.Windows.Forms.CheckBox();
             this.propertyExpirationDatePicker = new System.Windows.Forms.DateTimePicker();
@@ -139,16 +140,15 @@
             this.chkCleanAsk = new System.Windows.Forms.CheckBox();
             this.rdbCleanAll = new System.Windows.Forms.RadioButton();
             this.rdbCleanRegOnly = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
-            this.propertyStopInheritance = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rdbIntegrateVirtual = new System.Windows.Forms.RadioButton();
+            this.rdbIntegrateStandard = new System.Windows.Forms.RadioButton();
+            this.rdbIntegrateNone = new System.Windows.Forms.RadioButton();
             this.tabWelcome = new System.Windows.Forms.TabPage();
             this.panelWelcome = new System.Windows.Forms.Panel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblLogoTitle = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel13 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -191,10 +191,10 @@
             this.panel7.SuspendLayout();
             this.regToolStrip.SuspendLayout();
             this.tabAdvanced.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.tabWelcome.SuspendLayout();
             this.panelWelcome.SuspendLayout();
             this.panel15.SuspendLayout();
@@ -901,35 +901,37 @@
             this.tabAdvanced.Name = "tabAdvanced";
             this.tabAdvanced.UseVisualStyleBackColor = true;
             // 
-            // groupBox4
+            // groupBox5
             // 
-            this.groupBox4.Controls.Add(this.rdbIntegrateVirtual);
-            this.groupBox4.Controls.Add(this.rdbIntegrateStandard);
-            this.groupBox4.Controls.Add(this.rdbIntegrateNone);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Controls.Add(this.label7);
+            this.groupBox5.Controls.Add(this.lnkCustomEvents);
+            this.groupBox5.Controls.Add(this.propertyStopInheritance);
+            resources.ApplyResources(this.groupBox5, "groupBox5");
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.TabStop = false;
             // 
-            // rdbIntegrateVirtual
+            // label8
             // 
-            resources.ApplyResources(this.rdbIntegrateVirtual, "rdbIntegrateVirtual");
-            this.rdbIntegrateVirtual.Name = "rdbIntegrateVirtual";
-            this.rdbIntegrateVirtual.TabStop = true;
-            this.rdbIntegrateVirtual.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
             // 
-            // rdbIntegrateStandard
+            // label7
             // 
-            resources.ApplyResources(this.rdbIntegrateStandard, "rdbIntegrateStandard");
-            this.rdbIntegrateStandard.Name = "rdbIntegrateStandard";
-            this.rdbIntegrateStandard.TabStop = true;
-            this.rdbIntegrateStandard.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
             // 
-            // rdbIntegrateNone
+            // lnkCustomEvents
             // 
-            resources.ApplyResources(this.rdbIntegrateNone, "rdbIntegrateNone");
-            this.rdbIntegrateNone.Name = "rdbIntegrateNone";
-            this.rdbIntegrateNone.TabStop = true;
-            this.rdbIntegrateNone.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.lnkCustomEvents, "lnkCustomEvents");
+            this.lnkCustomEvents.Name = "lnkCustomEvents";
+            this.lnkCustomEvents.TabStop = true;
+            this.lnkCustomEvents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomEvents_LinkClicked);
+            // 
+            // propertyStopInheritance
+            // 
+            resources.ApplyResources(this.propertyStopInheritance, "propertyStopInheritance");
+            this.propertyStopInheritance.Name = "propertyStopInheritance";
             // 
             // groupBox6
             // 
@@ -997,37 +999,35 @@
             this.rdbCleanRegOnly.UseVisualStyleBackColor = true;
             this.rdbCleanRegOnly.CheckedChanged += new System.EventHandler(this.rdb_CheckedChanged);
             // 
-            // groupBox5
+            // groupBox4
             // 
-            this.groupBox5.Controls.Add(this.label8);
-            this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Controls.Add(this.lnkCustomEvents);
-            this.groupBox5.Controls.Add(this.propertyStopInheritance);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.TabStop = false;
+            this.groupBox4.Controls.Add(this.rdbIntegrateVirtual);
+            this.groupBox4.Controls.Add(this.rdbIntegrateStandard);
+            this.groupBox4.Controls.Add(this.rdbIntegrateNone);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
             // 
-            // label8
+            // rdbIntegrateVirtual
             // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
+            resources.ApplyResources(this.rdbIntegrateVirtual, "rdbIntegrateVirtual");
+            this.rdbIntegrateVirtual.Name = "rdbIntegrateVirtual";
+            this.rdbIntegrateVirtual.TabStop = true;
+            this.rdbIntegrateVirtual.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // rdbIntegrateStandard
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
+            resources.ApplyResources(this.rdbIntegrateStandard, "rdbIntegrateStandard");
+            this.rdbIntegrateStandard.Name = "rdbIntegrateStandard";
+            this.rdbIntegrateStandard.TabStop = true;
+            this.rdbIntegrateStandard.UseVisualStyleBackColor = true;
             // 
-            // lnkCustomEvents
+            // rdbIntegrateNone
             // 
-            resources.ApplyResources(this.lnkCustomEvents, "lnkCustomEvents");
-            this.lnkCustomEvents.Name = "lnkCustomEvents";
-            this.lnkCustomEvents.TabStop = true;
-            this.lnkCustomEvents.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCustomEvents_LinkClicked);
-            // 
-            // propertyStopInheritance
-            // 
-            resources.ApplyResources(this.propertyStopInheritance, "propertyStopInheritance");
-            this.propertyStopInheritance.Name = "propertyStopInheritance";
+            resources.ApplyResources(this.rdbIntegrateNone, "rdbIntegrateNone");
+            this.rdbIntegrateNone.Name = "rdbIntegrateNone";
+            this.rdbIntegrateNone.TabStop = true;
+            this.rdbIntegrateNone.UseVisualStyleBackColor = true;
             // 
             // tabWelcome
             // 
@@ -1054,22 +1054,20 @@
             // panel14
             // 
             resources.ApplyResources(this.panel14, "panel14");
-            this.panel14.Controls.Add(this.label9);
+            this.panel14.Controls.Add(this.lblLogoTitle);
             this.panel14.Controls.Add(this.pictureBox2);
             this.panel14.Name = "panel14";
             // 
-            // label9
+            // lblLogoTitle
             // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.ForeColor = System.Drawing.Color.Gray;
-            this.label9.Name = "label9";
+            resources.ApplyResources(this.lblLogoTitle, "lblLogoTitle");
+            this.lblLogoTitle.ForeColor = System.Drawing.Color.Gray;
+            this.lblLogoTitle.Name = "lblLogoTitle";
             // 
             // pictureBox2
             // 
             resources.ApplyResources(this.pictureBox2, "pictureBox2");
             this.pictureBox2.Image = global::PackageEditor.Properties.Resources._071;
-            this.pictureBox2.MaximumSize = new System.Drawing.Size(383, 344);
-            this.pictureBox2.MinimumSize = new System.Drawing.Size(383, 344);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
@@ -1235,14 +1233,14 @@
             this.regToolStrip.ResumeLayout(false);
             this.regToolStrip.PerformLayout();
             this.tabAdvanced.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.tabWelcome.ResumeLayout(false);
             this.panelWelcome.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
@@ -1387,7 +1385,7 @@
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblLogoTitle;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ToolStripMenuItem langToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishMenuItem;
