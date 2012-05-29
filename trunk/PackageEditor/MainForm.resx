@@ -132,15 +132,15 @@
   <data name="fsFolderTree.ImageIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <metadata name="imageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="imageList.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>131, 16</value>
-  </metadata>
+  </data>
   <data name="imageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAi
-        HAAAAk1TRnQBSQFMAgEBBgEAAZQBBgGUAQYBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        HAAAAk1TRnQBSQFMAgEBBgEAAZwBBgGcAQYBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEgBgABIB4AAwQBBgMTARoDHwEsAyABLgMgAS8DIAEvAyABLgMeASsDEgEYAwQBBQ8A
         AQEDBAEGAwoBDgMNARIDFgEfAxoBJAMcASgDHwEsAx8BLQMeASsDGwEmAxgBIgMPARQDDAEQAwUBBwMA
         AQGIAAMCAQMDBQQHAQkDUwHxA4EB/wOBAf8DgQH/A4EB/wNTAfEDBgEIAwQBBgMBAQIQAAMEBAUBBwKB
@@ -314,9 +314,9 @@
   <data name="columnFileType.Text" xml:space="preserve">
     <value>Type</value>
   </data>
-  <metadata name="fileContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="fileContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>242, 22</value>
-  </metadata>
+  </data>
   <data name="fileContextMenuDelete.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 22</value>
   </data>
@@ -561,9 +561,9 @@
   <data name="regSplitContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <metadata name="ContextMenuStripRegistryFolder.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="ContextMenuStripRegistryFolder.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>440, 25</value>
-  </metadata>
+  </data>
   <data name="toolStripMenuItemExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 22</value>
   </data>
@@ -958,9 +958,9 @@
   <data name="&gt;&gt;regSplitContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>8, 3</value>
-  </metadata>
+  </data>
   <data name="openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 22</value>
   </data>
@@ -1001,25 +1001,25 @@
     <value>&amp;Close</value>
   </data>
   <data name="englishMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="englishMenuItem.Text" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="frenchMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="frenchMenuItem.Text" xml:space="preserve">
     <value>Français</value>
   </data>
   <data name="spanishMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="spanishMenuItem.Text" xml:space="preserve">
     <value>Español</value>
   </data>
   <data name="chineseSimplifiedToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="chineseSimplifiedToolStripMenuItem.Text" xml:space="preserve">
     <value>Chinese</value>
@@ -1066,12 +1066,12 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="regProgressTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="regProgressTimer.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>814, 16</value>
-  </metadata>
-  <metadata name="itemHoverTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  </data>
+  <data name="itemHoverTimer.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 92</value>
-  </metadata>
+  </data>
   <data name="tabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -1825,9 +1825,9 @@
   <data name="&gt;&gt;panel5.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="fileToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="fileToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>242, 3</value>
-  </metadata>
+  </data>
   <data name="fsAddBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -2064,9 +2064,9 @@
   <data name="&gt;&gt;regProgressBar.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="regToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="regToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>438, 3</value>
-  </metadata>
+  </data>
   <data name="regRemoveBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -3036,9 +3036,9 @@
         bG95ZWRBcHBzR3JvdXAL
 </value>
   </data>
-  <metadata name="imageListMRU.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="imageListMRU.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>648, 20</value>
-  </metadata>
+  </data>
   <data name="imageListMRU.ImageSize" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
   </data>
@@ -3375,12 +3375,12 @@
   <data name="&gt;&gt;bkPanel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>92</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -9321,9 +9321,6 @@
         rEEAAKxBAACsQf//rEE=
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>600, 500</value>
   </data>
@@ -9331,7 +9328,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Browse</value>
+    <value>Package Editor</value>
   </data>
   <data name="&gt;&gt;imageList.Name" xml:space="preserve">
     <value>imageList</value>
@@ -9380,6 +9377,24 @@
   </data>
   <data name="&gt;&gt;deleteToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
+    <value>columnHeader3</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
+    <value>columnHeader4</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
+    <value>columnHeader5</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
     <value>fileToolStripMenuItem</value>
@@ -9445,6 +9460,12 @@
     <value>spanishMenuItem</value>
   </data>
   <data name="&gt;&gt;spanishMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chineseSimplifiedToolStripMenuItem.Name" xml:space="preserve">
+    <value>chineseSimplifiedToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;chineseSimplifiedToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
@@ -9548,30 +9569,6 @@
   </data>
   <data name="&gt;&gt;imageListMRU.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chineseSimplifiedToolStripMenuItem.Name" xml:space="preserve">
-    <value>chineseSimplifiedToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;chineseSimplifiedToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
-    <value>columnHeader3</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
-    <value>columnHeader4</value>
-  </data>
-  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
-    <value>columnHeader5</value>
-  </data>
-  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

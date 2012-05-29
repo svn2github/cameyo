@@ -150,15 +150,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AutoLaunchEditItemForm.es-ES.resx">
       <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchEditItemForm.fr-FR.resx">
       <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchEditItemForm.resx">
       <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchEditItemForm.zh-CN.resx">
       <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchForm.es-ES.resx">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
@@ -168,33 +172,43 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchForm.resx">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchForm.zh-CN.resx">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomEventsForm.es-ES.resx">
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomEventsForm.fr-FR.resx">
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomEventsForm.resx">
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomEventsForm.zh-CN.resx">
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataStorageForm.es-ES.resx">
       <DependentUpon>DataStorageForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataStorageForm.fr-FR.resx">
       <DependentUpon>DataStorageForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataStorageForm.resx">
       <DependentUpon>DataStorageForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DataStorageForm.zh-CN.resx">
       <DependentUpon>DataStorageForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FilesEditing\FileProperties.es-ES.resx">
       <DependentUpon>FileProperties.cs</DependentUpon>
@@ -210,6 +224,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ListViewEx.resx">
       <DependentUpon>ListViewEx.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.es-ES.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -236,18 +251,23 @@
     <EmbeddedResource Include="Messages\Messages.zh-CN.resx" />
     <EmbeddedResource Include="ModForm.resx">
       <DependentUpon>ModForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PackageBuiltNotify.es-ES.resx">
       <DependentUpon>PackageBuiltNotify.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PackageBuiltNotify.fr-FR.resx">
       <DependentUpon>PackageBuiltNotify.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PackageBuiltNotify.resx">
       <DependentUpon>PackageBuiltNotify.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PackageBuiltNotify.zh-CN.resx">
       <DependentUpon>PackageBuiltNotify.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -256,12 +276,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VirtFilesBrowse.es-ES.resx">
       <DependentUpon>VirtFilesBrowse.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="VirtFilesBrowse.fr-FR.resx">
       <DependentUpon>VirtFilesBrowse.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="VirtFilesBrowse.resx">
       <DependentUpon>VirtFilesBrowse.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -270,6 +293,7 @@
     </Compile>
     <EmbeddedResource Include="VirtFilesBrowse.zh-CN.resx">
       <DependentUpon>VirtFilesBrowse.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -63,7 +63,6 @@
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
-            this.label1.MaximumSize = new System.Drawing.Size(350, 0);
             this.label1.Name = "label1";
             // 
             // pictureBox1
