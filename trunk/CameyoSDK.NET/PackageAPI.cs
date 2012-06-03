@@ -1663,6 +1663,52 @@ namespace VirtPackageAPI
             return m_EngineVersion;
         }
 
+        delegate bool DirectoryExistsDelegate(string folder);
+        static bool DirectoryExistsTimeout(string path, int millisecondsTimeout)
+        {
+            try
+            {
+                DirectoryExistsDelegate callback = new DirectoryExistsDelegate(Directory.Exists);
+                IAsyncResult result = callback.BeginInvoke(path, null, null);
+                if (result.AsyncWaitHandle.WaitOne(millisecondsTimeout, false))
+                {
+                    return callback.EndInvoke(result);
+                }
+                else
+                {
+                    //callback.EndInvoke(result);   // Problem: this seems to make the current thread block for response!
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        delegate bool FileExistsDelegate(string file);
+        static bool FileExistsTimeout(string path, int millisecondsTimeout)
+        {
+            try
+            {
+                FileExistsDelegate callback = new FileExistsDelegate(File.Exists);
+                IAsyncResult result = callback.BeginInvoke(path, null, null);
+                if (result.AsyncWaitHandle.WaitOne(millisecondsTimeout, false))
+                {
+                    return callback.EndInvoke(result);
+                }
+                else
+                {
+                    //callback.EndInvoke(result);   // Problem: this seems to make the current thread block for response!
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         static public DeployedApp FromAppID(String appID)
         {
             try
@@ -1672,6 +1718,12 @@ namespace VirtPackageAPI
                     return null;
                 String baseDirName = (String)key.GetValue("BaseDirName");
                 String carrierExeName = (String)key.GetValue("CarrierExeName");
+                System.Diagnostics.Debug.WriteLine(appID);
+
+                // Detect & avoid disconnected shares / mapped drives, as their I/O can take a long time before failing..
+                if (!FileExistsTimeout(carrierExeName, 1000)) //|| !DirectoryExistsTimeout(baseDirName, 1000))
+                    return null;
+
                 return new DeployedApp(appID, baseDirName, carrierExeName);
             }
             catch
