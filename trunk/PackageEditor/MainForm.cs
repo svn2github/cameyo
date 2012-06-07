@@ -99,8 +99,13 @@ namespace PackageEditor
 
             // Culture
             englishMenuItem.Tag = "en-US";
+            englishMenuItem.Text = "English";
             frenchMenuItem.Tag = "fr-FR";
+            frenchMenuItem.Text = "Français";
             spanishMenuItem.Tag = "es-ES";
+            spanishMenuItem.Text = "Español";
+            chineseMenuItem.Tag = "zh-CN";
+            chineseMenuItem.Text = "Chinese";
             CurLanguageMenuItem().Checked = true;
         }
 

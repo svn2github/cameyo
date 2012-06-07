@@ -75,7 +75,7 @@
             this.englishMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.frenchMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spanishMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chineseSimplifiedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chineseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regProgressTimer = new System.Windows.Forms.Timer(this.components);
@@ -530,7 +530,7 @@
             this.englishMenuItem,
             this.frenchMenuItem,
             this.spanishMenuItem,
-            this.chineseSimplifiedToolStripMenuItem});
+            this.chineseMenuItem});
             this.langToolStripMenuItem.Name = "langToolStripMenuItem";
             resources.ApplyResources(this.langToolStripMenuItem, "langToolStripMenuItem");
             // 
@@ -552,11 +552,11 @@
             resources.ApplyResources(this.spanishMenuItem, "spanishMenuItem");
             this.spanishMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
             // 
-            // chineseSimplifiedToolStripMenuItem
+            // chineseMenuItem
             // 
-            this.chineseSimplifiedToolStripMenuItem.Name = "chineseSimplifiedToolStripMenuItem";
-            resources.ApplyResources(this.chineseSimplifiedToolStripMenuItem, "chineseSimplifiedToolStripMenuItem");
-            this.chineseSimplifiedToolStripMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
+            this.chineseMenuItem.Name = "chineseMenuItem";
+            resources.ApplyResources(this.chineseMenuItem, "chineseMenuItem");
+            this.chineseMenuItem.Click += new System.EventHandler(this.langMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -1403,7 +1403,7 @@
         private System.Windows.Forms.RadioButton rdbIntegrateVirtual;
         private System.Windows.Forms.RadioButton rdbIntegrateStandard;
         private System.Windows.Forms.RadioButton rdbIntegrateNone;
-        private System.Windows.Forms.ToolStripMenuItem chineseSimplifiedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chineseMenuItem;
 
     }
 }
