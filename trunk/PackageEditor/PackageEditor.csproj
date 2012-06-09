@@ -156,6 +156,9 @@
       <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="AutoLaunchEditItemForm.id-ID.resx">
+      <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchEditItemForm.resx">
       <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -168,6 +171,9 @@
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchForm.fr-FR.resx">
+      <DependentUpon>AutoLaunchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoLaunchForm.id-ID.resx">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchForm.resx">
@@ -186,6 +192,9 @@
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomEventsForm.id-ID.resx">
+      <DependentUpon>CustomEventsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomEventsForm.resx">
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -202,6 +211,9 @@
       <DependentUpon>DataStorageForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataStorageForm.id-ID.resx">
+      <DependentUpon>DataStorageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataStorageForm.resx">
       <DependentUpon>DataStorageForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -210,10 +222,16 @@
       <DependentUpon>DataStorageForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FilesEditing\FileProperties.de-DE.resx">
+      <DependentUpon>FileProperties.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FilesEditing\FileProperties.es-ES.resx">
       <DependentUpon>FileProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FilesEditing\FileProperties.fr-FR.resx">
+      <DependentUpon>FileProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilesEditing\FileProperties.id-ID.resx">
       <DependentUpon>FileProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FilesEditing\FileProperties.resx">
@@ -234,6 +252,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.id-ID.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -242,6 +263,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Messages.Messages.id-ID.resx" />
     <EmbeddedResource Include="Messages\Messages.es-ES.resx" />
     <EmbeddedResource Include="Messages\Messages.fr-FR.resx" />
     <EmbeddedResource Include="Messages\Messages.resx">
@@ -260,6 +282,9 @@
     <EmbeddedResource Include="PackageBuiltNotify.fr-FR.resx">
       <DependentUpon>PackageBuiltNotify.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PackageBuiltNotify.id-ID.resx">
+      <DependentUpon>PackageBuiltNotify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PackageBuiltNotify.resx">
       <DependentUpon>PackageBuiltNotify.cs</DependentUpon>
@@ -281,6 +306,9 @@
     <EmbeddedResource Include="VirtFilesBrowse.fr-FR.resx">
       <DependentUpon>VirtFilesBrowse.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VirtFilesBrowse.id-ID.resx">
+      <DependentUpon>VirtFilesBrowse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VirtFilesBrowse.resx">
       <DependentUpon>VirtFilesBrowse.cs</DependentUpon>

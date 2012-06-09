@@ -98,14 +98,14 @@ namespace PackageEditor
 #endif
 
             // Culture
-            englishMenuItem.Tag = "en-US";
-            englishMenuItem.Text = "English";
-            frenchMenuItem.Tag = "fr-FR";
-            frenchMenuItem.Text = "Français";
-            spanishMenuItem.Tag = "es-ES";
-            spanishMenuItem.Text = "Español";
-            chineseMenuItem.Tag = "zh-CN";
-            chineseMenuItem.Text = "Chinese";
+            langToolStripMenuItem.DropDownItems.Clear();
+            ToolStripMenuItem item;
+            foreach (Cameyo.OpenSrc.Common.LangItem lang in Cameyo.OpenSrc.Common.LangItem.SupportedLangs())
+            {
+                item = new ToolStripMenuItem(lang.DisplayName) { Tag = lang.Culture };
+                item.Click += langMenuItem_Click;
+                langToolStripMenuItem.DropDownItems.Add(item);
+            }
             CurLanguageMenuItem().Checked = true;
         }
 
