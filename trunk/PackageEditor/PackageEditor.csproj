@@ -148,6 +148,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AutoLaunchEditItemForm.de-DE.resx">
+      <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchEditItemForm.es-ES.resx">
       <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -167,6 +170,9 @@
       <DependentUpon>AutoLaunchEditItemForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="AutoLaunchForm.de-DE.resx">
+      <DependentUpon>AutoLaunchForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AutoLaunchForm.es-ES.resx">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,6 +189,9 @@
     <EmbeddedResource Include="AutoLaunchForm.zh-CN.resx">
       <DependentUpon>AutoLaunchForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomEventsForm.de-DE.resx">
+      <DependentUpon>CustomEventsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomEventsForm.es-ES.resx">
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
@@ -202,6 +211,9 @@
     <EmbeddedResource Include="CustomEventsForm.zh-CN.resx">
       <DependentUpon>CustomEventsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataStorageForm.de-DE.resx">
+      <DependentUpon>DataStorageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataStorageForm.es-ES.resx">
       <DependentUpon>DataStorageForm.cs</DependentUpon>
@@ -244,6 +256,9 @@
       <DependentUpon>ListViewEx.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.de-DE.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.es-ES.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -263,6 +278,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Messages.Messages.de-DE.resx" />
     <EmbeddedResource Include="Messages.Messages.id-ID.resx" />
     <EmbeddedResource Include="Messages\Messages.es-ES.resx" />
     <EmbeddedResource Include="Messages\Messages.fr-FR.resx" />
@@ -274,6 +290,9 @@
     <EmbeddedResource Include="ModForm.resx">
       <DependentUpon>ModForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PackageBuiltNotify.de-DE.resx">
+      <DependentUpon>PackageBuiltNotify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PackageBuiltNotify.es-ES.resx">
       <DependentUpon>PackageBuiltNotify.cs</DependentUpon>
@@ -298,6 +317,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VirtFilesBrowse.de-DE.resx">
+      <DependentUpon>VirtFilesBrowse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VirtFilesBrowse.es-ES.resx">
       <DependentUpon>VirtFilesBrowse.cs</DependentUpon>
