@@ -145,7 +145,7 @@
     <value>数据</value>
   </data>
   <data name="columnHeader5.Text" xml:space="preserve">
-    <value />
+    <value>类型</value>
   </data>
   <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
     <value>删除</value>
@@ -338,5 +338,17 @@
   </data>
   <data name="toolStripMenuItemExport.Text" xml:space="preserve">
     <value>导出为注册表文件(&amp;E)</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>集成</value>
+  </data>
+  <data name="rdbIntegrateNone.Text" xml:space="preserve">
+    <value>不集成</value>
+  </data>
+  <data name="rdbIntegrateStandard.Text" xml:space="preserve">
+    <value>重建快捷方式和关联</value>
+  </data>
+  <data name="rdbIntegrateVirtual.Text" xml:space="preserve">
+    <value>虚拟集成：添加虚拟层到Windows资源管理器</value>
   </data>
 </root>

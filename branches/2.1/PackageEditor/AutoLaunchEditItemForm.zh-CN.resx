@@ -124,7 +124,7 @@
     <value>确定</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>姓名：</value>
+    <value>标题：</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>目标：</value>

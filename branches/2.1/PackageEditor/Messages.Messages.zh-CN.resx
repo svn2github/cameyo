@@ -117,43 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="$this.Text" xml:space="preserve">
-    <value>自动启动</value>
+  <data name="btnApply" xml:space="preserve">
+    <value>应用(&amp;A)</value>
   </data>
-  <data name="btnAdd.Text" xml:space="preserve">
-    <value>添加(&amp;A)</value>
+  <data name="cannotSave" xml:space="preserve">
+    <value>无法保存</value>
   </data>
-  <data name="btnCancel.Text" xml:space="preserve">
-    <value>取消</value>
+  <data name="changesWillTakeEffectOnNextStart" xml:space="preserve">
+    <value>该变更将在下一次启动时生效</value>
   </data>
-  <data name="btnModify.Text" xml:space="preserve">
-    <value>修改(&amp;M)</value>
+  <data name="confirm" xml:space="preserve">
+    <value>确认</value>
   </data>
-  <data name="btnOk.Text" xml:space="preserve">
-    <value>确定</value>
+  <data name="discardChanges" xml:space="preserve">
+    <value>刚才做的更改将会丢失，确定放弃更改？</value>
   </data>
-  <data name="btnRemove.Text" xml:space="preserve">
-    <value>删除(&amp;R)</value>
+  <data name="displayMenu" xml:space="preserve">
+    <value>显示菜单</value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value>标题</value>
+  <data name="fullAccess" xml:space="preserve">
+    <value>完全访问</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>命令</value>
+  <data name="isolated" xml:space="preserve">
+    <value>隔离</value>
   </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
-    <value>说明</value>
+  <data name="menuRequiresAtLeastTwo" xml:space="preserve">
+    <value>至少需要两个菜单项</value>
   </data>
-  <data name="columnHeader4.Text" xml:space="preserve">
-    <value>参数</value>
+  <data name="menuRequiresAtLeastTwoTransform" xml:space="preserve">
+    <value>至少需要两个菜单项，是否转换成单独命令？</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>参数(可选)</value>
+  <data name="opening" xml:space="preserve">
+    <value>正在打开</value>
   </data>
-  <data name="propertyCmdRadio.Text" xml:space="preserve">
-    <value>自定义命令</value>
+  <data name="openingPackage" xml:space="preserve">
+    <value>正在打开虚拟包</value>
   </data>
-  <data name="propertyMenuRadio.Text" xml:space="preserve">
-    <value>显示以下菜单</value>
+  <data name="packageBuiltOk" xml:space="preserve">
+    <value>虚拟包建立成功</value>
+  </data>
+  <data name="packageSaved" xml:space="preserve">
+    <value>已保存</value>
+  </data>
+  <data name="saving" xml:space="preserve">
+    <value>保存(&amp;S)</value>
+  </data>
+  <data name="savingPackage" xml:space="preserve">
+    <value>正在保存</value>
   </data>
 </root>
