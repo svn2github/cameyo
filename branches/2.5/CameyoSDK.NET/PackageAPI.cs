@@ -1728,7 +1728,7 @@ namespace VirtPackageAPI
                     return null;
                 String baseDirName = (String)key.GetValue("BaseDirName");
                 String carrierExeName = (String)key.GetValue("CarrierExeName");
-                System.Diagnostics.Debug.WriteLine(appID);
+                System.Diagnostics.Debug.WriteLine(appID + ": " + carrierExeName);
 
                 // Detect & avoid disconnected shares / mapped drives, as their I/O can take a long time before failing..
                 if (!FileExistsTimeout(carrierExeName, 1000)) //|| !DirectoryExistsTimeout(baseDirName, 1000))
