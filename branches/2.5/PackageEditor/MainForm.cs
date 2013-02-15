@@ -648,7 +648,7 @@ namespace PackageEditor
             if (propertyVirtModeRam.Checked)
                 Ret &= virtPackage.SetProperty("VirtMode", "RAM");
             else
-                Ret &= virtPackage.SetProperty("VirtMode", "");
+                Ret &= virtPackage.SetProperty("VirtMode", "DISK");
 
             // propertyIntegrate, propertyVintegrate
             str = virtPackage.GetProperty("OnStartUnvirtualized");
