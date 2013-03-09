@@ -1170,6 +1170,13 @@ namespace PackageEditor
             customEventsForm.Dispose();
         }
 
+        private void lnkAutoUpdate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AutoUpdateForm form = new AutoUpdateForm();
+            form.ShowDialog();
+            form.Dispose();
+        }
+
         private void regFilesList_SubItemClicked(object sender, SubItemEventArgs e)
         {
             //Mario:ToDo Bugfixes:regFilesList.StartEditing(Editors[e.SubItem], e.Item, e.SubItem);

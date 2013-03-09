@@ -167,6 +167,7 @@
             this.panel12 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.PictureBox();
             this.bkPanel = new System.Windows.Forms.Panel();
+            this.lnkAutoUpdate = new System.Windows.Forms.LinkLabel();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -949,6 +950,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.lnkAutoUpdate);
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Controls.Add(this.label7);
             this.groupBox5.Controls.Add(this.lnkCustomEvents);
@@ -1214,6 +1216,13 @@
             resources.ApplyResources(this.bkPanel, "bkPanel");
             this.bkPanel.Name = "bkPanel";
             // 
+            // lnkAutoUpdate
+            // 
+            resources.ApplyResources(this.lnkAutoUpdate, "lnkAutoUpdate");
+            this.lnkAutoUpdate.Name = "lnkAutoUpdate";
+            this.lnkAutoUpdate.TabStop = true;
+            this.lnkAutoUpdate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAutoUpdate_LinkClicked);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1440,6 +1449,7 @@
         private System.Windows.Forms.RadioButton propertyVirtModeDisk;
         private System.Windows.Forms.RadioButton propertyVirtModeRam;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.LinkLabel lnkAutoUpdate;
 
     }
 }
