@@ -1172,7 +1172,7 @@ namespace PackageEditor
 
         private void lnkAutoUpdate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AutoUpdateForm form = new AutoUpdateForm();
+            AutoUpdateForm form = new AutoUpdateForm(virtPackage);
             form.ShowDialog();
             form.Dispose();
         }

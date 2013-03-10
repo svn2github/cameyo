@@ -481,7 +481,6 @@
   <ItemGroup>
     <Content Include="Package.ico" />
     <Content Include="PkgEdit.ico" />
-    <None Include="Resources\AutoUpdateWizardSidebar1.png" />
     <None Include="Resources\AutoUpdateWizardSidebar.png" />
     <None Include="Resources\logo-black.png" />
     <None Include="Resources\071.png" />
