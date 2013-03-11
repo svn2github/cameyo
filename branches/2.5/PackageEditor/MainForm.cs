@@ -31,16 +31,37 @@ namespace PackageEditor
         public bool dirty;
         private bool dragging;
         private Control[] Editors;
+        string helpVirtModeDisk, helpVirtModeRam;
+        string helpIsolationModeData, helpIsolationModeIsolated, helpIsolationModeFull;
 
         // creation of delegate for PackageOpen
         private delegate bool DelegatePackageOpen(String path);
         DelegatePackageOpen Del_Open;
+
+        void SplitTextHelp(RadioButton radio, out string helpText)
+        {
+            helpText = radio.Text;
+            helpText = helpText.Substring(helpText.IndexOf(':'));
+            radio.Text = radio.Text.Substring(0, radio.Text.Length - helpText.Length);
+            helpText = helpText.Trim(':', ' ');
+            helpText = char.ToUpper(helpText[0]) + helpText.Substring(1) + ".";
+        }
 
         public MainForm(string packageExeFile, bool notifyPackageBuilt)
         {
             InitializeComponent();
             dragging = false;
 
+            // helpVirtMode
+            SplitTextHelp(propertyVirtModeRam, out helpVirtModeRam);
+            SplitTextHelp(propertyVirtModeDisk, out helpVirtModeDisk);
+
+            // helpIsolationMode
+            SplitTextHelp(propertyIsolationDataMode, out helpIsolationModeData);
+            SplitTextHelp(propertyIsolationIsolated, out helpIsolationModeIsolated);
+            SplitTextHelp(propertyIsolationMerge, out helpIsolationModeFull);
+
+            // panelWelcome
             panelWelcome.Parent = this;
             panelWelcome.BringToFront();
             panelWelcome.Dock = DockStyle.None;
@@ -488,8 +509,9 @@ namespace PackageEditor
             propertyAppID.Text = virtPackage.GetProperty("AppID");
             //propertyAppID.TextChanged += PropertyChange;
 
-            // FriendlyName
+            // FriendlyName, Version
             propertyFriendlyName.Text = virtPackage.GetProperty("FriendlyName");
+            propertyFileVersion.Text = virtPackage.GetProperty("Version");
             //propertyFriendlyName.TextChanged += PropertyChange;
 
             // AutoLaunch
@@ -504,6 +526,7 @@ namespace PackageEditor
                 propertyVirtModeRam.Checked = true;
             else
                 propertyVirtModeDisk.Checked = true;
+            propertyVirtMode_CheckedChanged(this, null);
 
             // Isolation
             int isolationType = virtPackage.GetIsolationMode();
@@ -512,6 +535,7 @@ namespace PackageEditor
             propertyIsolationMerge.Checked = (isolationType == VirtPackage.ISOLATIONMODE_FULL_ACCESS);
             if (propertyIsolationDataMode.Checked)
                 virtPackage.SetProperty("DataMode", "TRUE");   // Important to be able to switch to Isolated mode (to unisolate %Personal% etc)
+            propertyIsolationMode_CheckedChanged(this, null);
 
             // Icon
             if (!String.IsNullOrEmpty(virtPackage.openedFile))
@@ -640,6 +664,7 @@ namespace PackageEditor
             // AppID + AutoLaunch
             Ret &= virtPackage.SetProperty("AppID", propertyAppID.Text);
             Ret &= virtPackage.SetProperty("FriendlyName", propertyFriendlyName.Text);
+            Ret &= virtPackage.SetProperty("Version", propertyFileVersion.Text);
             Ret &= virtPackage.SetProperty("StopInheritance", propertyStopInheritance.Text);
             if (propertyExpiration.Checked)
                 Ret &= virtPackage.SetProperty("Expiration", propertyExpirationDatePicker.Value.ToString("dd/MM/yyyy"));
@@ -748,6 +773,7 @@ namespace PackageEditor
 
             propertyAppID.Text = "";
             propertyFriendlyName.Text = "";
+            propertyFileVersion.Text = "";
             propertyAutoLaunch.Text = "";
             propertyIcon.Image = null;
             propertyStopInheritance.Text = "";
@@ -1409,6 +1435,41 @@ namespace PackageEditor
             LangUtils.LoadCulture();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             MessageBox.Show(PackageEditor.Messages.Messages.changesWillTakeEffectOnNextStart);
+        }
+
+        private void propertyVirtMode_CheckedChanged(object sender, EventArgs e)
+        {
+            picRAM.Visible = picDisk.Visible = false;
+            if (propertyVirtModeRam.Checked)
+            {
+                helpVirtMode.Text = helpVirtModeRam;
+                picRAM.Visible = true;
+            }
+            else if (propertyVirtModeDisk.Checked)
+            {
+                helpVirtMode.Text = helpVirtModeDisk;
+                picDisk.Visible = true;
+            }
+        }
+
+        private void propertyIsolationMode_CheckedChanged(object sender, EventArgs e)
+        {
+            picDataMode.Visible = picIsolatedMode.Visible = picFullAccess.Visible = false;
+            if (propertyIsolationDataMode.Checked)
+            {
+                helpIsolationMode.Text = helpIsolationModeData;
+                picDataMode.Visible = true;
+            }
+            else if (propertyIsolationIsolated.Checked)
+            {
+                helpIsolationMode.Text = helpIsolationModeIsolated;
+                picIsolatedMode.Visible = true;
+            }
+            else if (propertyIsolationMerge.Checked)
+            {
+                helpIsolationMode.Text = helpIsolationModeFull;
+                picFullAccess.Visible = true;
+            }
         }
     }
 

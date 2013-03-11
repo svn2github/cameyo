@@ -63,6 +63,26 @@ namespace PackageEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _032 {
+            get {
+                object obj = ResourceManager.GetObject("032", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _033 {
+            get {
+                object obj = ResourceManager.GetObject("033", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _071 {
             get {
                 object obj = ResourceManager.GetObject("071", resourceCulture);
@@ -113,6 +133,16 @@ namespace PackageEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DataMode {
+            get {
+                object obj = ResourceManager.GetObject("DataMode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete_16_h {
             get {
                 object obj = ResourceManager.GetObject("delete_16_h", resourceCulture);
@@ -133,6 +163,16 @@ namespace PackageEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Disk {
+            get {
+                object obj = ResourceManager.GetObject("Disk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap down {
             get {
                 object obj = ResourceManager.GetObject("down", resourceCulture);
@@ -146,6 +186,16 @@ namespace PackageEditor.Properties {
         internal static System.Drawing.Bitmap folder_closed_16_h {
             get {
                 object obj = ResourceManager.GetObject("folder_closed_16_h", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HardDisk {
+            get {
+                object obj = ResourceManager.GetObject("HardDisk", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -196,6 +246,16 @@ namespace PackageEditor.Properties {
         internal static System.Drawing.Bitmap PackedgeEditorBG_Client {
             get {
                 object obj = ResourceManager.GetObject("PackedgeEditorBG_Client", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RAM {
+            get {
+                object obj = ResourceManager.GetObject("RAM", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
