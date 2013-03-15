@@ -177,6 +177,7 @@ namespace PackageEditor
         {
             tabControl.Visible = enable;
             panelWelcome.Visible = !enable;
+            exportXmlToolStripMenuItem.Enabled = enable;
             saveToolStripMenuItem.Enabled = enable;
             saveasToolStripMenuItem.Enabled = enable;
             closeToolStripMenuItem.Enabled = enable;
@@ -414,12 +415,75 @@ namespace PackageEditor
             }
         }
 
-        private void exportAsZeroInstallerXmlToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BlueprintFilesRecurse(XmlTextWriter xmlOut, TreeNodeCollection folderNodes)
+        {
+            foreach (FolderTreeNode curFolder in folderNodes)
+            {
+                if (curFolder.deleted)
+                    continue;
+                if (curFolder.childFiles != null)
+                {
+                    foreach (FileData file in curFolder.childFiles)
+                    {
+                        if (file.deleted)
+                            continue;
+                        xmlOut.WriteStartElement("File");
+                        xmlOut.WriteAttributeString("source", file.virtFsNode.FileName);
+                        xmlOut.WriteAttributeString("targetdir", Path.GetDirectoryName(file.virtFsNode.FileName));
+                        xmlOut.WriteEndElement();
+                    }
+                }
+                BlueprintFilesRecurse(xmlOut, curFolder.Nodes);
+            }
+        }
+
+        private void BlueprintRegKeysRecurse(XmlTextWriter xmlOut, RegistryKey regKey, string curKeyName, string curKeyPortion)
+        {
+            if (!string.IsNullOrEmpty(curKeyPortion))
+            {
+                xmlOut.WriteStartElement("Key");
+                xmlOut.WriteAttributeString("path", curKeyPortion);
+            }
+
+            // Save values
+            foreach (var value in regKey.GetValueNames())
+            {
+                var type = regKey.GetValueKind(value);
+                xmlOut.WriteStartElement("Value");
+                xmlOut.WriteAttributeString("name", value);
+                switch (type)
+                {
+                    case RegistryValueKind.String:
+                        xmlOut.WriteAttributeString("string", (string)regKey.GetValue(value));
+                        break;
+                    case RegistryValueKind.DWord:
+                        xmlOut.WriteAttributeString("dword", ((Int32)regKey.GetValue(value)).ToString());
+                        break;
+                    case RegistryValueKind.Binary:
+                        byte[] bin = (byte[])regKey.GetValue(value);
+                        xmlOut.WriteAttributeString("bin", Utils.HexDump(bin));
+                        break;
+                }
+                xmlOut.WriteEndElement();
+            }
+
+            // Recurse on subkeys
+            foreach (var key in regKey.GetSubKeyNames())
+            {
+                RegistryKey subRegKey = regKey.OpenSubKey(key);
+                BlueprintRegKeysRecurse(xmlOut, subRegKey, Path.Combine(curKeyName, key), key);
+            }
+
+            if (!string.IsNullOrEmpty(curKeyPortion))
+                xmlOut.WriteEndElement();
+        }
+
+        private void exportXmlToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // TODO:piba,ZeroInstaller, exportAsZeroInstallerXml
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.AddExtension = true;
-            saveFileDialog.Filter = "ZeroInstaller configuration file (*.xml)|*.xml";
+            saveFileDialog.Filter = "Cameyo Blueprint (*.xml)|*.xml";
             saveFileDialog.DefaultExt = "xml";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -428,38 +492,54 @@ namespace PackageEditor
                 xmlOut.WriteStartDocument();
                 xmlOut.WriteStartElement("ZeroInstallerXml");
 
+                // Properties
                 xmlOut.WriteStartElement("Properties");
-                xmlOut.WriteStartElement("Property");
-                xmlOut.WriteAttributeString("AppID", "TestApp");
-                xmlOut.WriteEndElement();
-                xmlOut.WriteStartElement("Property");
-                xmlOut.WriteAttributeString("Version", "1.0");
-                xmlOut.WriteEndElement();
-                xmlOut.WriteStartElement("Property");
-                xmlOut.WriteAttributeString("IconFile", "Icon.exe");
-                xmlOut.WriteEndElement();
-                xmlOut.WriteStartElement("Property");
-                xmlOut.WriteAttributeString("StopInheritance", "");
-                xmlOut.WriteEndElement();
-                xmlOut.WriteStartElement("Property");
-                xmlOut.WriteAttributeString("BuildOutput", "[AppID].exe");
-                xmlOut.WriteEndElement();
+                {
+                    xmlOut.WriteStartElement("Property");
+                    xmlOut.WriteAttributeString("AppID", "TestApp");
+                    xmlOut.WriteEndElement();
+                    xmlOut.WriteStartElement("Property");
+                    xmlOut.WriteAttributeString("Version", "1.0");
+                    xmlOut.WriteEndElement();
+                    xmlOut.WriteStartElement("Property");
+                    xmlOut.WriteAttributeString("IconFile", "Icon.exe");
+                    xmlOut.WriteEndElement();
+                    xmlOut.WriteStartElement("Property");
+                    xmlOut.WriteAttributeString("StopInheritance", "");
+                    xmlOut.WriteEndElement();
+                    xmlOut.WriteStartElement("Property");
+                    xmlOut.WriteAttributeString("BuildOutput", "[AppID].exe");
+                    xmlOut.WriteEndElement();
+                }
                 xmlOut.WriteEndElement();
 
+                // FileSystem
                 xmlOut.WriteStartElement("FileSystem");
+                if (fsFolderTree.Nodes.Count != 0 && fsFolderTree.Nodes[0].Nodes.Count != 0)
+                {
+                    BlueprintFilesRecurse(xmlOut, fsFolderTree.Nodes[0].Nodes);
+                }
                 xmlOut.WriteEndElement();
 
+                // Registry
                 xmlOut.WriteStartElement("Registry");
+                if (regEditor.workKey != null)
+                {
+                    BlueprintRegKeysRecurse(xmlOut, regEditor.workKey, "", "");
+                }
                 xmlOut.WriteEndElement();
 
+                // Sandbox
                 xmlOut.WriteStartElement("Sandbox");
-                xmlOut.WriteStartElement("FileSystem");
-                xmlOut.WriteAttributeString("access", "Full");
-                xmlOut.WriteEndElement();
+                {
+                    xmlOut.WriteStartElement("FileSystem");
+                    xmlOut.WriteAttributeString("access", "Full");
+                    xmlOut.WriteEndElement();
 
-                xmlOut.WriteStartElement("Registry");
-                xmlOut.WriteAttributeString("access", "Full");
-                xmlOut.WriteEndElement();
+                    xmlOut.WriteStartElement("Registry");
+                    xmlOut.WriteAttributeString("access", "Full");
+                    xmlOut.WriteEndElement();
+                }
                 xmlOut.WriteEndElement();
 
                 xmlOut.WriteEndElement();
@@ -546,6 +626,9 @@ namespace PackageEditor
                     propertyIcon.Image = icon.ToBitmap();
                 }
             }
+
+            // DataDirName
+            propertyDataDirName.Text = virtPackage.GetProperty("DataDirName");
 
             // StopInheritance
             propertyStopInheritance.Text = virtPackage.GetProperty("StopInheritance");
@@ -665,6 +748,7 @@ namespace PackageEditor
             Ret &= virtPackage.SetProperty("AppID", propertyAppID.Text);
             Ret &= virtPackage.SetProperty("FriendlyName", propertyFriendlyName.Text);
             Ret &= virtPackage.SetProperty("Version", propertyFileVersion.Text);
+            Ret &= virtPackage.SetProperty("DataDirName", propertyDataDirName.Text);
             Ret &= virtPackage.SetProperty("StopInheritance", propertyStopInheritance.Text);
             if (propertyExpiration.Checked)
                 Ret &= virtPackage.SetProperty("Expiration", propertyExpirationDatePicker.Value.ToString("dd/MM/yyyy"));
@@ -776,6 +860,7 @@ namespace PackageEditor
             propertyFileVersion.Text = "";
             propertyAutoLaunch.Text = "";
             propertyIcon.Image = null;
+            propertyDataDirName.Text = "";
             propertyStopInheritance.Text = "";
             //propertyCleanupOnExit.Checked = false;
             this.Text = packageEditor;
@@ -867,13 +952,13 @@ namespace PackageEditor
             string propertyLocalStorageExeDir = resources.GetString("propertyLocalStorageExeDir.Text");
             string propertyLocalStorageCustom = resources.GetString("propertyLocalStorageCustom.Text");
 
-            String baseDirName = virtPackage.GetProperty("BaseDirName");
+            string baseDirName = virtPackage.GetProperty("BaseDirName");
             if (baseDirName == "")
                 propertyDataStorage.Text = propertyLocalStorageDefault;   // Use hard disk or USB drive (wherever application is launched from)
-            else if (baseDirName.Equals("%ExeDir%\\%AppID%.cameyo.data", StringComparison.InvariantCultureIgnoreCase))
+            else if (baseDirName.Equals("%ExeDir%\\%AppID%.cameyo.files", StringComparison.InvariantCultureIgnoreCase))
                 propertyDataStorage.Text = propertyLocalStorageExeDir;   // "Under the executable's directory"
             else
-                propertyDataStorage.Text = propertyLocalStorageCustom + ": " + baseDirName;
+                propertyDataStorage.Text = propertyLocalStorageCustom + " " + baseDirName;
         }
 
         private void PropertyChange(object sender, EventArgs e)

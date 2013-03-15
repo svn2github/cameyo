@@ -54,6 +54,16 @@ namespace Cameyo.OpenSrc.Common
                 return -1;
             }
         }
+
+        static public String HexDump(byte[] bytes)
+        {
+            string hexString = "";
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hexString += bytes[i].ToString("X2");
+            }
+            return hexString;
+        }
     }
 
     public class Win32Function
