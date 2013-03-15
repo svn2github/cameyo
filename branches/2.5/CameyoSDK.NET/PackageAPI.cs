@@ -66,6 +66,8 @@ namespace VirtPackageAPI
             CANCELLED = 20,
             INJECTION_FAILED = 21,
             OLD_VERSION = 22,
+            PASSWORD_REQUIRED = 23,
+            PASSWORD_MISMATCH = 24,
         }
 
         public const int SANDBOXFLAGS_PASSTHROUGH = 1;
@@ -241,6 +243,28 @@ namespace VirtPackageAPI
             String FileName)
         {
             return Is32Bit() ? PackageSetIconFile32(hPkg, FileName) : PackageSetIconFile64(hPkg, FileName);
+        }
+
+        // PackageSetProtection
+        [DllImport(DLL32, EntryPoint = "PackageSetProtection", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageSetProtection32(
+            IntPtr hPkg,
+            [MarshalAs(UnmanagedType.LPStr)] String Password,
+            Int32 ProtectedActions,
+            String RequireCertificate);
+        [DllImport(DLL64, EntryPoint = "PackageSetProtection", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackageSetProtection64(
+            IntPtr hPkg,
+            [MarshalAs(UnmanagedType.LPStr)] String Password,
+            Int32 ProtectedActions,
+            String RequireCertificate);
+        private static int PackageSetProtection(
+            IntPtr hPkg,
+            [MarshalAs(UnmanagedType.LPStr)] String Password,
+            Int32 ProtectedActions,
+            String RequireCertificate)
+        {
+            return Is32Bit() ? PackageSetProtection32(hPkg, Password, ProtectedActions, RequireCertificate) : PackageSetProtection64(hPkg, Password, ProtectedActions, RequireCertificate);
         }
 
         //
@@ -969,6 +993,17 @@ namespace VirtPackageAPI
         public bool SetProperty(String Name, String Value)
         {
             APIRET Ret = (APIRET)PackageSetProperty(hPkg, Name, Value);
+            if (Ret == APIRET.SUCCESS)
+                return true;
+            else if (Ret == APIRET.FILE_CREATE_ERROR)
+                return false;
+            else
+                return false;
+        }
+
+        public bool SetProtection(String Password, int ProtectedActions, String RequireCertificate)
+        {
+            APIRET Ret = (APIRET)PackageSetProtection(hPkg, Password, ProtectedActions, RequireCertificate);
             if (Ret == APIRET.SUCCESS)
                 return true;
             else if (Ret == APIRET.FILE_CREATE_ERROR)
