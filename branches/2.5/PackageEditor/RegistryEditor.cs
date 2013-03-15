@@ -21,7 +21,7 @@ namespace PackageEditor
         private ToolStripButton regRemoveBtn;
         private ToolStripButton regEditBtn;
         private TreeHelper treeHelper;
-        private RegistryKey workKey;
+        public RegistryKey workKey;
         public bool dirty;
         private string masterkey;
         private ArrayList currentkey;
