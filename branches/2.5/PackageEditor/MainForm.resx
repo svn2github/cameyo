@@ -140,7 +140,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAi
-        HAAAAk1TRnQBSQFMAgEBBgEAAXQBCAF0AQgBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        HAAAAk1TRnQBSQFMAgEBBgEAAcQBCAHEAQgBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEgBgABIB4AAwQBBgMTARoDHwEsAyABLgMgAS8DIAEvAyABLgMeASsDEgEYAwQBBQ8A
         AQEDBAEGAwoBDgMNARIDFgEfAxoBJAMcASgDHwEsAx8BLQMeASsDGwEmAxgBIgMPARQDDAEQAwUBBwMA
         AQGIAAMCAQMDBQQHAQkDUwHxA4EB/wOBAf8DgQH/A4EB/wNTAfEDBgEIAwQBBgMBAQIQAAMEBAUBBwKB
@@ -270,7 +270,7 @@
     <value>0</value>
   </data>
   <data name="fsFolderTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 311</value>
+    <value>214, 319</value>
   </data>
   <data name="fsFolderTree.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -379,7 +379,7 @@
     <value>0, 25</value>
   </data>
   <data name="fsFilesList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 286</value>
+    <value>548, 294</value>
   </data>
   <data name="fsFilesList.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -535,7 +535,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 311</value>
+    <value>766, 319</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>214</value>
@@ -598,7 +598,7 @@
     <value>0</value>
   </data>
   <data name="regFolderTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 315</value>
+    <value>214, 323</value>
   </data>
   <data name="regFolderTree.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -782,7 +782,7 @@
     <value>0, 25</value>
   </data>
   <data name="regFilesList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 290</value>
+    <value>548, 298</value>
   </data>
   <data name="regFilesList.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -938,7 +938,7 @@
     <value>1</value>
   </data>
   <data name="regSplitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 315</value>
+    <value>766, 323</value>
   </data>
   <data name="regSplitContainer.SplitterDistance" type="System.Int32, mscorlib">
     <value>214</value>
@@ -973,14 +973,11 @@
   <data name="newToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;New empty virtual package</value>
   </data>
-  <data name="exportAsZeroInstallerXmlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="exportXmlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 22</value>
   </data>
-  <data name="exportAsZeroInstallerXmlToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Export as ZeroInstaller xml</value>
-  </data>
-  <data name="exportAsZeroInstallerXmlToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="exportXmlToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Export Blueprint XML</value>
   </data>
   <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 22</value>
@@ -1138,14 +1135,11 @@
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="propertyFileVersion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="propertyFileVersion.Location" type="System.Drawing.Point, System.Drawing">
     <value>117, 65</value>
   </data>
   <data name="propertyFileVersion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 20</value>
+    <value>111, 20</value>
   </data>
   <data name="propertyFileVersion.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -1161,6 +1155,39 @@
   </data>
   <data name="&gt;&gt;propertyFileVersion.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="lnkChangeIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lnkChangeIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lnkChangeIcon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>657, 51</value>
+  </data>
+  <data name="lnkChangeIcon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 14</value>
+  </data>
+  <data name="lnkChangeIcon.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lnkChangeIcon.Text" xml:space="preserve">
+    <value>Change icon</value>
+  </data>
+  <data name="lnkChangeIcon.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;lnkChangeIcon.Name" xml:space="preserve">
+    <value>lnkChangeIcon</value>
+  </data>
+  <data name="&gt;&gt;lnkChangeIcon.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lnkChangeIcon.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;lnkChangeIcon.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1190,7 +1217,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="propertyFriendlyName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1199,7 +1226,7 @@
     <value>117, 39</value>
   </data>
   <data name="propertyFriendlyName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>641, 20</value>
+    <value>538, 20</value>
   </data>
   <data name="propertyFriendlyName.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1214,7 +1241,37 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;propertyFriendlyName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="propertyIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="propertyIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="propertyIcon.Location" type="System.Drawing.Point, System.Drawing">
+    <value>716, 16</value>
+  </data>
+  <data name="propertyIcon.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 32</value>
+  </data>
+  <data name="propertyIcon.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
+  </data>
+  <data name="propertyIcon.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;propertyIcon.Name" xml:space="preserve">
+    <value>propertyIcon</value>
+  </data>
+  <data name="&gt;&gt;propertyIcon.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;propertyIcon.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;propertyIcon.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="propertyAppID.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1223,7 +1280,7 @@
     <value>117, 13</value>
   </data>
   <data name="propertyAppID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>641, 20</value>
+    <value>538, 20</value>
   </data>
   <data name="propertyAppID.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1238,7 +1295,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;propertyAppID.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1268,13 +1325,13 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="groupBox3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 250</value>
+    <value>3, 219</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>766, 94</value>
@@ -1299,6 +1356,9 @@
   </data>
   <data name="groupBox1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="groupBox11.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="lnkAutoLaunch.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1366,39 +1426,6 @@
   <data name="&gt;&gt;lnkChangeDataStorage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lnkChangeIcon.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="lnkChangeIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lnkChangeIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 50</value>
-  </data>
-  <data name="lnkChangeIcon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 14</value>
-  </data>
-  <data name="lnkChangeIcon.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lnkChangeIcon.Text" xml:space="preserve">
-    <value>Change icon</value>
-  </data>
-  <data name="lnkChangeIcon.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopRight</value>
-  </data>
-  <data name="&gt;&gt;lnkChangeIcon.Name" xml:space="preserve">
-    <value>lnkChangeIcon</value>
-  </data>
-  <data name="&gt;&gt;lnkChangeIcon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lnkChangeIcon.Parent" xml:space="preserve">
-    <value>groupBox11</value>
-  </data>
-  <data name="&gt;&gt;lnkChangeIcon.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="propertyAutoLaunch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1421,34 +1448,7 @@
     <value>groupBox11</value>
   </data>
   <data name="&gt;&gt;propertyAutoLaunch.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="propertyIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="propertyIcon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 50</value>
-  </data>
-  <data name="propertyIcon.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 32</value>
-  </data>
-  <data name="propertyIcon.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>CenterImage</value>
-  </data>
-  <data name="propertyIcon.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;propertyIcon.Name" xml:space="preserve">
-    <value>propertyIcon</value>
-  </data>
-  <data name="&gt;&gt;propertyIcon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;propertyIcon.Parent" xml:space="preserve">
-    <value>groupBox11</value>
-  </data>
-  <data name="&gt;&gt;propertyIcon.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="propertyDataStorage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1478,13 +1478,13 @@
     <value>groupBox11</value>
   </data>
   <data name="&gt;&gt;propertyDataStorage.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="groupBox11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 137</value>
+    <value>117, 140</value>
   </data>
   <data name="groupBox11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>640, 91</value>
+    <value>640, 57</value>
   </data>
   <data name="groupBox11.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -2029,36 +2029,6 @@
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 188</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 13</value>
-  </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Icon:</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2066,7 +2036,7 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 170</value>
+    <value>7, 173</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
@@ -2087,7 +2057,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2117,7 +2087,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lblAutoLaunch.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2126,7 +2096,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAutoLaunch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 150</value>
+    <value>7, 156</value>
   </data>
   <data name="lblAutoLaunch.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -2147,7 +2117,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;lblAutoLaunch.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2156,7 +2126,7 @@
     <value>3, 3</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 247</value>
+    <value>766, 216</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2213,7 +2183,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 342</value>
+    <value>772, 350</value>
   </data>
   <data name="tabGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2240,7 +2210,7 @@
     <value>3, 28</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 311</value>
+    <value>766, 319</value>
   </data>
   <data name="panel5.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2419,7 +2389,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabFileSystem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 342</value>
+    <value>772, 350</value>
   </data>
   <data name="tabFileSystem.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2446,7 +2416,7 @@
     <value>0, 21</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 315</value>
+    <value>766, 323</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2656,7 +2626,7 @@
     <value>3, 3</value>
   </data>
   <data name="panel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 336</value>
+    <value>766, 344</value>
   </data>
   <data name="panel8.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2680,7 +2650,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabRegistry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 342</value>
+    <value>772, 350</value>
   </data>
   <data name="tabRegistry.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2700,6 +2670,93 @@
   <data name="&gt;&gt;tabRegistry.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>572, 50</value>
+  </data>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 13</value>
+  </data>
+  <data name="label13.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>empty: DATA subfolder</value>
+  </data>
+  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+    <value>label13</value>
+  </data>
+  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="propertyDataDirName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="propertyDataDirName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 47</value>
+  </data>
+  <data name="propertyDataDirName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 20</value>
+  </data>
+  <data name="propertyDataDirName.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;propertyDataDirName.Name" xml:space="preserve">
+    <value>propertyDataDirName</value>
+  </data>
+  <data name="&gt;&gt;propertyDataDirName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;propertyDataDirName.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;propertyDataDirName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 50</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>Changes location:</value>
+  </data>
+  <data name="&gt;&gt;label12.Name" xml:space="preserve">
+    <value>label12</value>
+  </data>
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="lnkAutoUpdate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2707,7 +2764,7 @@
     <value>NoControl</value>
   </data>
   <data name="lnkAutoUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 32</value>
+    <value>7, 16</value>
   </data>
   <data name="lnkAutoUpdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -2728,7 +2785,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lnkAutoUpdate.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2740,7 +2797,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>588, 67</value>
+    <value>572, 74</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 13</value>
@@ -2761,7 +2818,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2770,7 +2827,7 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 49</value>
+    <value>7, 74</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 13</value>
@@ -2791,7 +2848,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="lnkCustomEvents.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2800,7 +2857,7 @@
     <value>NoControl</value>
   </data>
   <data name="lnkCustomEvents.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 16</value>
+    <value>7, 32</value>
   </data>
   <data name="lnkCustomEvents.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
@@ -2821,16 +2878,16 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lnkCustomEvents.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="propertyStopInheritance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="propertyStopInheritance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 46</value>
+    <value>272, 71</value>
   </data>
   <data name="propertyStopInheritance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>488, 20</value>
+    <value>294, 20</value>
   </data>
   <data name="propertyStopInheritance.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2845,16 +2902,16 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;propertyStopInheritance.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="groupBox5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 240</value>
+    <value>3, 233</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 83</value>
+    <value>766, 104</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2932,7 +2989,7 @@
     <value>Top</value>
   </data>
   <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 192</value>
+    <value>3, 187</value>
   </data>
   <data name="groupBox6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -2941,7 +2998,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 48</value>
+    <value>766, 46</value>
   </data>
   <data name="groupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -3121,7 +3178,7 @@
     <value>3, 85</value>
   </data>
   <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 107</value>
+    <value>766, 102</value>
   </data>
   <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3265,7 +3322,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabAdvanced.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 342</value>
+    <value>772, 350</value>
   </data>
   <data name="tabAdvanced.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3685,7 +3742,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabWelcome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 342</value>
+    <value>772, 350</value>
   </data>
   <data name="tabWelcome.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3709,7 +3766,7 @@
     <value>12, 37</value>
   </data>
   <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>780, 368</value>
+    <value>780, 376</value>
   </data>
   <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3784,7 +3841,7 @@
     <value>Bottom</value>
   </data>
   <data name="bottomPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 415</value>
+    <value>0, 423</value>
   </data>
   <data name="bottomPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>804, 47</value>
@@ -3814,7 +3871,7 @@
     <value>0, 0</value>
   </data>
   <data name="bkPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>804, 462</value>
+    <value>804, 470</value>
   </data>
   <data name="bkPanel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3844,7 +3901,7 @@
     <value>Stretch</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>804, 462</value>
+    <value>804, 470</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -9834,6 +9891,24 @@
   <data name="&gt;&gt;deleteToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
+    <value>columnHeader3</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
+    <value>columnHeader4</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
+    <value>columnHeader5</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
     <value>fileToolStripMenuItem</value>
   </data>
@@ -9852,10 +9927,10 @@
   <data name="&gt;&gt;newToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;exportAsZeroInstallerXmlToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportAsZeroInstallerXmlToolStripMenuItem</value>
+  <data name="&gt;&gt;exportXmlToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportXmlToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;exportAsZeroInstallerXmlToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;exportXmlToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;saveToolStripMenuItem.Name" xml:space="preserve">
@@ -9929,6 +10004,18 @@
   </data>
   <data name="&gt;&gt;itemHoverTimer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lineShape1.Name" xml:space="preserve">
+    <value>lineShape1</value>
+  </data>
+  <data name="&gt;&gt;lineShape1.Type" xml:space="preserve">
+    <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;lineShape2.Name" xml:space="preserve">
+    <value>lineShape2</value>
+  </data>
+  <data name="&gt;&gt;lineShape2.Type" xml:space="preserve">
+    <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;fsAddBtn.Name" xml:space="preserve">
     <value>fsAddBtn</value>
@@ -10008,41 +10095,11 @@
   <data name="&gt;&gt;imageListMRU.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lineShape1.Name" xml:space="preserve">
-    <value>lineShape1</value>
-  </data>
-  <data name="&gt;&gt;lineShape1.Type" xml:space="preserve">
-    <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="&gt;&gt;lineShape2.Name" xml:space="preserve">
-    <value>lineShape2</value>
-  </data>
-  <data name="&gt;&gt;lineShape2.Type" xml:space="preserve">
-    <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="&gt;&gt;lineShape3.Name" xml:space="preserve">
     <value>lineShape3</value>
   </data>
   <data name="&gt;&gt;lineShape3.Type" xml:space="preserve">
     <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
-    <value>columnHeader3</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
-    <value>columnHeader4</value>
-  </data>
-  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
-    <value>columnHeader5</value>
-  </data>
-  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
