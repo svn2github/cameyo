@@ -24,7 +24,7 @@ namespace PackageEditor
             propertyLocalStorageCustomDir.Text = "";
             if (oldValue == "")
                 propertyLocalStorageDefault.Checked = true;
-            else if (oldValue.Equals("%ExeDir%\\%AppID%.cameyo.data", StringComparison.InvariantCultureIgnoreCase))
+            else if (oldValue.Equals("%ExeDir%\\%AppID%.cameyo.files", StringComparison.InvariantCultureIgnoreCase))
                 propertyLocalStorageExeDir.Checked = true;
             else
             {
@@ -36,7 +36,7 @@ namespace PackageEditor
                 if (propertyLocalStorageDefault.Checked)
                     newValue = "";
                 else if (propertyLocalStorageExeDir.Checked)
-                    newValue = "%ExeDir%\\%AppID%.cameyo.data";
+                    newValue = "%ExeDir%\\%AppID%.cameyo.files";
                 else
                     newValue = propertyLocalStorageCustomDir.Text;
                 if (newValue != oldValue)
