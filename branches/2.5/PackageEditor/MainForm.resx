@@ -140,7 +140,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAi
-        HAAAAk1TRnQBSQFMAgEBBgEAAcQBCAHEAQgBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        HAAAAk1TRnQBSQFMAgEBBgEAAdwBCAHcAQgBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEgBgABIB4AAwQBBgMTARoDHwEsAyABLgMgAS8DIAEvAyABLgMeASsDEgEYAwQBBQ8A
         AQEDBAEGAwoBDgMNARIDFgEfAxoBJAMcASgDHwEsAx8BLQMeASsDGwEmAxgBIgMPARQDDAEQAwUBBwMA
         AQGIAAMCAQMDBQQHAQkDUwHxA4EB/wOBAf8DgQH/A4EB/wNTAfEDBgEIAwQBBgMBAQIQAAMEBAUBBwKB
@@ -270,7 +270,7 @@
     <value>0</value>
   </data>
   <data name="fsFolderTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 319</value>
+    <value>214, 329</value>
   </data>
   <data name="fsFolderTree.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -379,7 +379,7 @@
     <value>0, 25</value>
   </data>
   <data name="fsFilesList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 294</value>
+    <value>548, 304</value>
   </data>
   <data name="fsFilesList.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -535,7 +535,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 319</value>
+    <value>766, 329</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>214</value>
@@ -598,7 +598,7 @@
     <value>0</value>
   </data>
   <data name="regFolderTree.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 323</value>
+    <value>214, 333</value>
   </data>
   <data name="regFolderTree.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -782,7 +782,7 @@
     <value>0, 25</value>
   </data>
   <data name="regFilesList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 298</value>
+    <value>548, 308</value>
   </data>
   <data name="regFilesList.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -938,7 +938,7 @@
     <value>1</value>
   </data>
   <data name="regSplitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 323</value>
+    <value>766, 333</value>
   </data>
   <data name="regSplitContainer.SplitterDistance" type="System.Int32, mscorlib">
     <value>214</value>
@@ -1511,7 +1511,7 @@
     <value>NoControl</value>
   </data>
   <data name="picFullAccess.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 13</value>
+    <value>136, 13</value>
   </data>
   <data name="picFullAccess.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 51</value>
@@ -1541,7 +1541,7 @@
     <value>NoControl</value>
   </data>
   <data name="picIsolatedMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 13</value>
+    <value>136, 13</value>
   </data>
   <data name="picIsolatedMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 51</value>
@@ -1571,7 +1571,7 @@
     <value>NoControl</value>
   </data>
   <data name="helpIsolationMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 14</value>
+    <value>184, 14</value>
   </data>
   <data name="helpIsolationMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>431, 49</value>
@@ -1601,7 +1601,7 @@
     <value>NoControl</value>
   </data>
   <data name="picDataMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 13</value>
+    <value>136, 13</value>
   </data>
   <data name="picDataMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 51</value>
@@ -1631,10 +1631,10 @@
     <value>0, 0, 0, 0</value>
   </data>
   <metadata name="lineShape1.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>141, 0, 0, 42</value>
+    <value>125, 0, 0, 42</value>
   </metadata>
   <metadata name="lineShape1.Location" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>141, 0</value>
+    <value>125, 0</value>
   </metadata>
   <metadata name="lineShape1.Size" type="System.Drawing.Size, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 42</value>
@@ -1643,10 +1643,10 @@
     <value>224, 224, 224</value>
   </data>
   <data name="lineShape1.X1" type="System.Int32, mscorlib">
-    <value>141</value>
+    <value>125</value>
   </data>
   <data name="lineShape1.X2" type="System.Int32, mscorlib">
-    <value>141</value>
+    <value>125</value>
   </data>
   <data name="lineShape1.Y1" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1793,7 +1793,7 @@
     <value>NoControl</value>
   </data>
   <data name="helpVirtMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 14</value>
+    <value>184, 14</value>
   </data>
   <data name="helpVirtMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>428, 32</value>
@@ -1820,7 +1820,7 @@
     <value>NoControl</value>
   </data>
   <data name="picRAM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 8</value>
+    <value>136, 8</value>
   </data>
   <data name="picRAM.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 43</value>
@@ -1847,7 +1847,7 @@
     <value>NoControl</value>
   </data>
   <data name="picDisk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 8</value>
+    <value>136, 8</value>
   </data>
   <data name="picDisk.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 43</value>
@@ -1877,10 +1877,10 @@
     <value>0, 0, 0, 0</value>
   </data>
   <metadata name="lineShape2.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>141, -10, 0, 38</value>
+    <value>125, -10, 0, 38</value>
   </metadata>
   <metadata name="lineShape2.Location" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>141, -10</value>
+    <value>125, -10</value>
   </metadata>
   <metadata name="lineShape2.Size" type="System.Drawing.Size, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 38</value>
@@ -1889,10 +1889,10 @@
     <value>224, 224, 224</value>
   </data>
   <data name="lineShape2.X1" type="System.Int32, mscorlib">
-    <value>141</value>
+    <value>125</value>
   </data>
   <data name="lineShape2.X2" type="System.Int32, mscorlib">
-    <value>141</value>
+    <value>125</value>
   </data>
   <data name="lineShape2.Y1" type="System.Int32, mscorlib">
     <value>-10</value>
@@ -2183,7 +2183,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 350</value>
+    <value>772, 360</value>
   </data>
   <data name="tabGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2210,7 +2210,7 @@
     <value>3, 28</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 319</value>
+    <value>766, 329</value>
   </data>
   <data name="panel5.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2389,7 +2389,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabFileSystem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 350</value>
+    <value>772, 360</value>
   </data>
   <data name="tabFileSystem.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2416,7 +2416,7 @@
     <value>0, 21</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 323</value>
+    <value>766, 333</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2626,7 +2626,7 @@
     <value>3, 3</value>
   </data>
   <data name="panel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 344</value>
+    <value>766, 354</value>
   </data>
   <data name="panel8.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2650,7 +2650,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabRegistry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 350</value>
+    <value>772, 360</value>
   </data>
   <data name="tabRegistry.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2669,6 +2669,36 @@
   </data>
   <data name="&gt;&gt;tabRegistry.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="cbDatFile.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbDatFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cbDatFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 97</value>
+  </data>
+  <data name="cbDatFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 17</value>
+  </data>
+  <data name="cbDatFile.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="cbDatFile.Text" xml:space="preserve">
+    <value>Save package as .DAT, separately from executable (recommended for apps over 2 GB)</value>
+  </data>
+  <data name="&gt;&gt;cbDatFile.Name" xml:space="preserve">
+    <value>cbDatFile</value>
+  </data>
+  <data name="&gt;&gt;cbDatFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbDatFile.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;cbDatFile.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2701,7 +2731,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="propertyDataDirName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2725,7 +2755,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;propertyDataDirName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2755,7 +2785,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lnkAutoUpdate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2785,7 +2815,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lnkAutoUpdate.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2818,7 +2848,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2848,7 +2878,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lnkCustomEvents.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2878,7 +2908,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lnkCustomEvents.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="propertyStopInheritance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2902,7 +2932,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;propertyStopInheritance.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="groupBox5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2911,7 +2941,7 @@
     <value>3, 233</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 104</value>
+    <value>766, 121</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2938,7 +2968,7 @@
     <value>NoControl</value>
   </data>
   <data name="propertyExpiration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
+    <value>10, 19</value>
   </data>
   <data name="propertyExpiration.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 17</value>
@@ -3058,7 +3088,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbCleanNone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
+    <value>10, 19</value>
   </data>
   <data name="rdbCleanNone.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 17</value>
@@ -3088,7 +3118,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkCleanAsk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 74</value>
+    <value>10, 74</value>
   </data>
   <data name="chkCleanAsk.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 17</value>
@@ -3118,7 +3148,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbCleanAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 54</value>
+    <value>10, 54</value>
   </data>
   <data name="rdbCleanAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 17</value>
@@ -3148,7 +3178,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbCleanRegOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 36</value>
+    <value>10, 36</value>
   </data>
   <data name="rdbCleanRegOnly.Size" type="System.Drawing.Size, System.Drawing">
     <value>324, 17</value>
@@ -3205,7 +3235,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbIntegrateVirtual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 54</value>
+    <value>10, 54</value>
   </data>
   <data name="rdbIntegrateVirtual.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 17</value>
@@ -3235,7 +3265,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbIntegrateStandard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 36</value>
+    <value>10, 36</value>
   </data>
   <data name="rdbIntegrateStandard.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 17</value>
@@ -3265,7 +3295,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdbIntegrateNone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
+    <value>10, 19</value>
   </data>
   <data name="rdbIntegrateNone.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 17</value>
@@ -3322,7 +3352,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabAdvanced.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 350</value>
+    <value>772, 360</value>
   </data>
   <data name="tabAdvanced.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3742,7 +3772,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabWelcome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 350</value>
+    <value>772, 360</value>
   </data>
   <data name="tabWelcome.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3766,7 +3796,7 @@
     <value>12, 37</value>
   </data>
   <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>780, 376</value>
+    <value>780, 386</value>
   </data>
   <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3841,7 +3871,7 @@
     <value>Bottom</value>
   </data>
   <data name="bottomPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 423</value>
+    <value>0, 433</value>
   </data>
   <data name="bottomPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>804, 47</value>
@@ -3871,7 +3901,7 @@
     <value>0, 0</value>
   </data>
   <data name="bkPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>804, 470</value>
+    <value>804, 480</value>
   </data>
   <data name="bkPanel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3901,7 +3931,7 @@
     <value>Stretch</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>804, 470</value>
+    <value>804, 480</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -9834,6 +9864,9 @@
         rEEAAKxBAACsQf//rEE=
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>600, 500</value>
   </data>
@@ -9890,24 +9923,6 @@
   </data>
   <data name="&gt;&gt;deleteToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
-    <value>columnHeader3</value>
-  </data>
-  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
-    <value>columnHeader4</value>
-  </data>
-  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
-    <value>columnHeader5</value>
-  </data>
-  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
     <value>fileToolStripMenuItem</value>
@@ -10100,6 +10115,24 @@
   </data>
   <data name="&gt;&gt;lineShape3.Type" xml:space="preserve">
     <value>Microsoft.VisualBasic.PowerPacks.LineShape, Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Name" xml:space="preserve">
+    <value>columnHeader3</value>
+  </data>
+  <data name="&gt;&gt;columnHeader3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
+    <value>columnHeader4</value>
+  </data>
+  <data name="&gt;&gt;columnHeader4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Name" xml:space="preserve">
+    <value>columnHeader5</value>
+  </data>
+  <data name="&gt;&gt;columnHeader5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

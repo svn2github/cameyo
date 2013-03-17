@@ -367,10 +367,15 @@ namespace PackageEditor
             OpenFileDialog openFileDialog = new OpenFileDialog();
             //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo apps";
             openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "Virtual app (*.cameyo.exe;*.virtual.exe)|*.cameyo.exe;*.virtual.exe|All files (*.*)|*.*";
-            //openFileDialog.DefaultExt = "virtual.exe";
+            openFileDialog.Filter = "Virtual app (*.cameyo.exe;*.cameyo.dat)|*.cameyo.exe;*.cameyo.dat|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                if (Path.GetExtension(openFileDialog.FileName).Equals(".exe", StringComparison.InvariantCultureIgnoreCase) &&
+                    File.Exists(Path.ChangeExtension(virtPackage.openedFile, ".dat")) &&
+                    Utils.GetFileSize(openFileDialog.FileName) < 2 * 1024 * 1024)   // Looks like Loader.exe
+                {
+                    openFileDialog.FileName = Path.ChangeExtension(virtPackage.openedFile, ".dat");
+                }
                 VirtPackage.APIRET apiRet;
                 if (!PackageOpen(openFileDialog.FileName, true, out apiRet))
                 {
@@ -395,23 +400,104 @@ namespace PackageEditor
             {
                 saveFileDialog.InitialDirectory = Path.GetDirectoryName(virtPackage.openedFile);
                 saveFileDialog.FileName = Path.GetFileName(virtPackage.openedFile);
+
+                // cbDatFile: correct open file's name
+                if (cbDatFile.Checked && Path.GetExtension(virtPackage.openedFile).Equals(".exe", StringComparison.InvariantCultureIgnoreCase))
+                    saveFileDialog.FileName = Path.ChangeExtension(virtPackage.openedFile, ".dat");
+                if (!cbDatFile.Checked && Path.GetExtension(virtPackage.openedFile).Equals(".dat", StringComparison.InvariantCultureIgnoreCase))
+                    saveFileDialog.FileName = Path.ChangeExtension(virtPackage.openedFile, ".exe");
             }
             else
             {
-                saveFileDialog.FileName = "New app.cameyo.exe";
+                saveFileDialog.FileName = (cbDatFile.Checked ? "New app.cameyo.dat" : "New app.cameyo.exe");
             }
             saveFileDialog.AddExtension = true;
-            saveFileDialog.Filter = "Virtual app (*.cameyo.exe;*.virtual.exe)|*.cameyo.exe;*.virtual.exe";
-            saveFileDialog.DefaultExt = "cameyo.exe";
-
+            saveFileDialog.Filter = (cbDatFile.Checked ? "Virtual app (*.cameyo.dat)|*.cameyo.dat" : "Virtual app (*.cameyo.exe)|*.cameyo.exe");
+            saveFileDialog.DefaultExt = (cbDatFile.Checked ? "cameyo.dat" : "cameyo.exe");
+reask:
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
+                if (cbDatFile.Checked && !Path.GetExtension(saveFileDialog.FileName).Equals(".dat", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MessageBox.Show("Must have .dat extension");
+                    goto reask;
+                }
+                if (!cbDatFile.Checked && !Path.GetExtension(saveFileDialog.FileName).Equals(".exe", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    MessageBox.Show("Must have .exe extension");
+                    goto reask;
+                }
                 if (PackageSave(saveFileDialog.FileName))
                 {
+                    // cbDatFile: Loader.exe
+                    if (cbDatFile.Checked)
+                    {
+                        if (!TryCopyFile(Path.Combine(Utils.MyPath(), "Loader.exe"), Path.ChangeExtension(saveFileDialog.FileName, ".exe"), true))
+                        {
+                            MessageBox.Show("Cannot copy Loader.exe to: " + Path.ChangeExtension(saveFileDialog.FileName, ".exe"));
+                            return;
+                        }
+                    }
+
                     virtPackage.openedFile = saveFileDialog.FileName;
                     this.Text = packageEditor + " - " + saveFileDialog.FileName;
                     MessageBox.Show(PackageEditor.Messages.Messages.packageSaved);
                 }
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(virtPackage.openedFile))
+            {
+                // This is a new package.. so save as to get a filename.
+                saveasToolStripMenuItem_Click(sender, e);
+                return;
+            }
+
+            // cbDatFile: correct open file's name if cbDatFile was checked/unchecked during this editing session
+            string packageExeFile = virtPackage.openedFile;
+            if (cbDatFile.Checked/* && Path.GetExtension(packageExeFile).Equals(".exe", StringComparison.InvariantCultureIgnoreCase)*/)
+                packageExeFile = Path.ChangeExtension(packageExeFile, ".dat");
+            if (!cbDatFile.Checked/* && Path.GetExtension(packageExeFile).Equals(".dat", StringComparison.InvariantCultureIgnoreCase)*/)
+                packageExeFile = Path.ChangeExtension(packageExeFile, ".exe");
+
+            String tmpFileName = packageExeFile + ".new";
+            TryDeleteFile(tmpFileName);
+            //DeleteFile(packageExeFile + ".bak");
+            if (PackageSave(tmpFileName))
+            {
+                // Release (close) original file, and delete it (otherwise it won't be erasable)
+                ThreadedRegLoadStop();
+                PackageClose(false);
+                //virtPackage.Close();
+
+                // cbDatFile: Loader.exe
+                if (cbDatFile.Checked)
+                {
+                    if (!TryCopyFile(Path.Combine(Utils.MyPath(), "Loader.exe"), Path.ChangeExtension(packageExeFile, ".exe"), true))
+                    {
+                        MessageBox.Show("Cannot copy Loader.exe to: " + Path.ChangeExtension(packageExeFile, ".exe"));
+                        return;
+                    }
+                }
+
+                TryDeleteFile(packageExeFile);
+                bool ok = TryMoveFile(tmpFileName, packageExeFile);
+                VirtPackage.APIRET apiRet;
+                if (!PackageOpen(packageExeFile, false, out apiRet))
+                    MessageBox.Show(apiRet.ToString());
+                String property = virtPackage.GetProperty("AutoLaunch");
+                //virtPackage.Open(packageExeFile);
+                if (ok)
+                    MessageBox.Show("Package saved.");
+                else
+                    MessageBox.Show("Cannot rename: " + tmpFileName + " to: " + packageExeFile);
+            }
+            else
+            {
+                // Save failed. Delete .new file.
+                System.IO.File.Delete(packageExeFile + ".new");
             }
         }
 
@@ -659,6 +745,8 @@ namespace PackageEditor
                     rdbCleanAll.Checked = true;
             }
 
+            // DatFile 
+            cbDatFile.Checked = Path.GetExtension(virtPackage.openedFile).Equals(".dat", StringComparison.InvariantCultureIgnoreCase);
 
             // Expiration
             String expiration = virtPackage.GetProperty("Expiration");
@@ -866,7 +954,7 @@ namespace PackageEditor
             this.Text = packageEditor;
         }
 
-        private bool DeleteFile(String FileName)
+        private bool TryDeleteFile(String FileName)
         {
             bool ret = true;
             try
@@ -880,7 +968,7 @@ namespace PackageEditor
             return ret;
         }
 
-        private bool MoveFile(String srcFileName, String destFileName)
+        private bool TryMoveFile(String srcFileName, String destFileName)
         {
             bool ret = true;
             try
@@ -894,44 +982,18 @@ namespace PackageEditor
             return ret;
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private bool TryCopyFile(String srcFileName, String destFileName, bool overwrite)
         {
-            if (String.IsNullOrEmpty(virtPackage.openedFile))
+            bool ret = true;
+            try
             {
-                // Its a new package.. so save as to get a filename.
-                saveasToolStripMenuItem_Click(sender, e);
-                return;
+                System.IO.File.Copy(srcFileName, destFileName, overwrite);
             }
-            String tmpFileName = virtPackage.openedFile + ".new";
-            DeleteFile(tmpFileName);
-            //DeleteFile(virtPackage.openedFile + ".bak");
-            if (PackageSave(tmpFileName))
+            catch
             {
-                // Release (close) original file, and delete it (otherwise it won't be erasable)
-                String packageExeFile = virtPackage.openedFile;
-
-                ThreadedRegLoadStop();
-                PackageClose(false);
-                //virtPackage.Close();
-
-                DeleteFile(packageExeFile);
-                bool ok;
-                ok = MoveFile(tmpFileName, packageExeFile);
-                VirtPackage.APIRET apiRet;
-                if (!PackageOpen(packageExeFile, false, out apiRet))
-                    MessageBox.Show(apiRet.ToString());
-                String property = virtPackage.GetProperty("AutoLaunch");
-                //virtPackage.Open(packageExeFile);
-                if (ok)
-                    MessageBox.Show("Package saved.");
-                else
-                    MessageBox.Show("Cannot rename: " + tmpFileName + " to: " + packageExeFile);
+                ret = false;
             }
-            else
-            {
-                // Save failed. Delete .new file.
-                System.IO.File.Delete(virtPackage.openedFile + ".new");
-            }
+            return ret;
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1103,7 +1165,7 @@ namespace PackageEditor
                 try
                 {
                     // Syntax: myPath\Packager.exe -ChangeLoader AppName.cameyo.exe Loader.exe
-                    string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                    //string myPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
                     int exitCode = 0;
                     if (!ExecProg(openedFile, "-ChangeLoader \"" + files[0] + "\"", true, ref exitCode))
                         MessageBox.Show("Could not execute: " + PackagerExe());
