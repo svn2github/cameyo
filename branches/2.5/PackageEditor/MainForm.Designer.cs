@@ -54,6 +54,10 @@
             this.tbValue = new System.Windows.Forms.TextBox();
             this.tbSize = new System.Windows.Forms.TextBox();
             this.tbFile = new System.Windows.Forms.TextBox();
+            this.regFilesList = new PackageEditor.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -94,16 +98,6 @@
             this.lnkChangeDataStorage = new System.Windows.Forms.LinkLabel();
             this.propertyAutoLaunch = new System.Windows.Forms.Label();
             this.propertyDataStorage = new System.Windows.Forms.Label();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.picFullAccess = new System.Windows.Forms.PictureBox();
-            this.picIsolatedMode = new System.Windows.Forms.PictureBox();
-            this.helpIsolationMode = new System.Windows.Forms.Label();
-            this.picDataMode = new System.Windows.Forms.PictureBox();
-            this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.propertyIsolationDataMode = new System.Windows.Forms.RadioButton();
-            this.propertyIsolationIsolated = new System.Windows.Forms.RadioButton();
-            this.propertyIsolationMerge = new System.Windows.Forms.RadioButton();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.helpVirtMode = new System.Windows.Forms.Label();
             this.picRAM = new System.Windows.Forms.PictureBox();
@@ -116,6 +110,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblAutoLaunch = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.picFullAccess = new System.Windows.Forms.PictureBox();
+            this.picIsolatedMode = new System.Windows.Forms.PictureBox();
+            this.helpIsolationMode = new System.Windows.Forms.Label();
+            this.picDataMode = new System.Windows.Forms.PictureBox();
+            this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.propertyIsolationDataMode = new System.Windows.Forms.RadioButton();
+            this.propertyIsolationIsolated = new System.Windows.Forms.RadioButton();
+            this.propertyIsolationMerge = new System.Windows.Forms.RadioButton();
             this.dropboxButton = new System.Windows.Forms.Button();
             this.tabFileSystem = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -149,6 +153,9 @@
             this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
             this.propertyStopInheritance = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lblPasswordWarning = new System.Windows.Forms.Label();
+            this.propertyProtPassword = new System.Windows.Forms.TextBox();
+            this.propertyProt = new System.Windows.Forms.CheckBox();
             this.propertyExpiration = new System.Windows.Forms.CheckBox();
             this.propertyExpirationDatePicker = new System.Windows.Forms.DateTimePicker();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -180,10 +187,6 @@
             this.panel12 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.PictureBox();
             this.bkPanel = new System.Windows.Forms.Panel();
-            this.regFilesList = new PackageEditor.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -203,13 +206,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.propertyIcon)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox11.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picRAM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDisk)).BeginInit();
             this.groupBox10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picFullAccess)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picIsolatedMode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDataMode)).BeginInit();
-            this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picRAM)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDisk)).BeginInit();
             this.tabFileSystem.SuspendLayout();
             this.panel5.SuspendLayout();
             this.fileToolStrip.SuspendLayout();
@@ -429,6 +432,38 @@
             resources.ApplyResources(this.tbFile, "tbFile");
             this.tbFile.Name = "tbFile";
             this.tbFile.ReadOnly = true;
+            // 
+            // regFilesList
+            // 
+            this.regFilesList.AllowColumnReorder = true;
+            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            resources.ApplyResources(this.regFilesList, "regFilesList");
+            this.regFilesList.DoubleClickActivation = false;
+            this.regFilesList.FullRowSelect = true;
+            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
+            this.regFilesList.Name = "regFilesList";
+            this.regFilesList.UseCompatibleStateImageBehavior = false;
+            this.regFilesList.View = System.Windows.Forms.View.Details;
+            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+            // 
+            // columnHeader3
+            // 
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
+            // 
+            // columnHeader4
+            // 
+            resources.ApplyResources(this.columnHeader4, "columnHeader4");
+            // 
+            // columnHeader5
+            // 
+            resources.ApplyResources(this.columnHeader5, "columnHeader5");
             // 
             // panel4
             // 
@@ -663,12 +698,12 @@
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.groupBox11);
-            this.groupBox1.Controls.Add(this.groupBox10);
             this.groupBox1.Controls.Add(this.groupBox9);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.lblAutoLaunch);
+            this.groupBox1.Controls.Add(this.groupBox10);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -705,86 +740,6 @@
             // 
             resources.ApplyResources(this.propertyDataStorage, "propertyDataStorage");
             this.propertyDataStorage.Name = "propertyDataStorage";
-            // 
-            // groupBox10
-            // 
-            resources.ApplyResources(this.groupBox10, "groupBox10");
-            this.groupBox10.Controls.Add(this.picFullAccess);
-            this.groupBox10.Controls.Add(this.picIsolatedMode);
-            this.groupBox10.Controls.Add(this.helpIsolationMode);
-            this.groupBox10.Controls.Add(this.picDataMode);
-            this.groupBox10.Controls.Add(this.shapeContainer2);
-            this.groupBox10.Controls.Add(this.propertyIsolationDataMode);
-            this.groupBox10.Controls.Add(this.propertyIsolationIsolated);
-            this.groupBox10.Controls.Add(this.propertyIsolationMerge);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.TabStop = false;
-            // 
-            // picFullAccess
-            // 
-            resources.ApplyResources(this.picFullAccess, "picFullAccess");
-            this.picFullAccess.Image = global::PackageEditor.Properties.Resources._033;
-            this.picFullAccess.Name = "picFullAccess";
-            this.picFullAccess.TabStop = false;
-            // 
-            // picIsolatedMode
-            // 
-            resources.ApplyResources(this.picIsolatedMode, "picIsolatedMode");
-            this.picIsolatedMode.Image = global::PackageEditor.Properties.Resources._032;
-            this.picIsolatedMode.Name = "picIsolatedMode";
-            this.picIsolatedMode.TabStop = false;
-            // 
-            // helpIsolationMode
-            // 
-            resources.ApplyResources(this.helpIsolationMode, "helpIsolationMode");
-            this.helpIsolationMode.Name = "helpIsolationMode";
-            // 
-            // picDataMode
-            // 
-            resources.ApplyResources(this.picDataMode, "picDataMode");
-            this.picDataMode.Image = global::PackageEditor.Properties.Resources.DataMode;
-            this.picDataMode.Name = "picDataMode";
-            this.picDataMode.TabStop = false;
-            // 
-            // shapeContainer2
-            // 
-            resources.ApplyResources(this.shapeContainer2, "shapeContainer2");
-            this.shapeContainer2.Name = "shapeContainer2";
-            this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineShape1});
-            this.shapeContainer2.TabStop = false;
-            // 
-            // lineShape1
-            // 
-            resources.ApplyResources(this.lineShape1, "lineShape1");
-            this.lineShape1.Name = "lineShape1";
-            // 
-            // propertyIsolationDataMode
-            // 
-            resources.ApplyResources(this.propertyIsolationDataMode, "propertyIsolationDataMode");
-            this.propertyIsolationDataMode.Name = "propertyIsolationDataMode";
-            this.propertyIsolationDataMode.TabStop = true;
-            this.propertyIsolationDataMode.UseVisualStyleBackColor = true;
-            this.propertyIsolationDataMode.CheckedChanged += new System.EventHandler(this.propertyIsolationMode_CheckedChanged);
-            this.propertyIsolationDataMode.Click += new System.EventHandler(this.IsolationChanged);
-            // 
-            // propertyIsolationIsolated
-            // 
-            resources.ApplyResources(this.propertyIsolationIsolated, "propertyIsolationIsolated");
-            this.propertyIsolationIsolated.Name = "propertyIsolationIsolated";
-            this.propertyIsolationIsolated.TabStop = true;
-            this.propertyIsolationIsolated.UseVisualStyleBackColor = true;
-            this.propertyIsolationIsolated.CheckedChanged += new System.EventHandler(this.propertyIsolationMode_CheckedChanged);
-            this.propertyIsolationIsolated.Click += new System.EventHandler(this.IsolationChanged);
-            // 
-            // propertyIsolationMerge
-            // 
-            resources.ApplyResources(this.propertyIsolationMerge, "propertyIsolationMerge");
-            this.propertyIsolationMerge.Name = "propertyIsolationMerge";
-            this.propertyIsolationMerge.TabStop = true;
-            this.propertyIsolationMerge.UseVisualStyleBackColor = true;
-            this.propertyIsolationMerge.CheckedChanged += new System.EventHandler(this.propertyIsolationMode_CheckedChanged);
-            this.propertyIsolationMerge.Click += new System.EventHandler(this.IsolationChanged);
             // 
             // groupBox9
             // 
@@ -866,6 +821,86 @@
             // 
             resources.ApplyResources(this.lblAutoLaunch, "lblAutoLaunch");
             this.lblAutoLaunch.Name = "lblAutoLaunch";
+            // 
+            // groupBox10
+            // 
+            resources.ApplyResources(this.groupBox10, "groupBox10");
+            this.groupBox10.Controls.Add(this.picFullAccess);
+            this.groupBox10.Controls.Add(this.picIsolatedMode);
+            this.groupBox10.Controls.Add(this.helpIsolationMode);
+            this.groupBox10.Controls.Add(this.picDataMode);
+            this.groupBox10.Controls.Add(this.shapeContainer2);
+            this.groupBox10.Controls.Add(this.propertyIsolationDataMode);
+            this.groupBox10.Controls.Add(this.propertyIsolationIsolated);
+            this.groupBox10.Controls.Add(this.propertyIsolationMerge);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.TabStop = false;
+            // 
+            // picFullAccess
+            // 
+            resources.ApplyResources(this.picFullAccess, "picFullAccess");
+            this.picFullAccess.Image = global::PackageEditor.Properties.Resources._033;
+            this.picFullAccess.Name = "picFullAccess";
+            this.picFullAccess.TabStop = false;
+            // 
+            // picIsolatedMode
+            // 
+            resources.ApplyResources(this.picIsolatedMode, "picIsolatedMode");
+            this.picIsolatedMode.Image = global::PackageEditor.Properties.Resources._032;
+            this.picIsolatedMode.Name = "picIsolatedMode";
+            this.picIsolatedMode.TabStop = false;
+            // 
+            // helpIsolationMode
+            // 
+            resources.ApplyResources(this.helpIsolationMode, "helpIsolationMode");
+            this.helpIsolationMode.Name = "helpIsolationMode";
+            // 
+            // picDataMode
+            // 
+            resources.ApplyResources(this.picDataMode, "picDataMode");
+            this.picDataMode.Image = global::PackageEditor.Properties.Resources.DataMode;
+            this.picDataMode.Name = "picDataMode";
+            this.picDataMode.TabStop = false;
+            // 
+            // shapeContainer2
+            // 
+            resources.ApplyResources(this.shapeContainer2, "shapeContainer2");
+            this.shapeContainer2.Name = "shapeContainer2";
+            this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineShape1});
+            this.shapeContainer2.TabStop = false;
+            // 
+            // lineShape1
+            // 
+            resources.ApplyResources(this.lineShape1, "lineShape1");
+            this.lineShape1.Name = "lineShape1";
+            // 
+            // propertyIsolationDataMode
+            // 
+            resources.ApplyResources(this.propertyIsolationDataMode, "propertyIsolationDataMode");
+            this.propertyIsolationDataMode.Name = "propertyIsolationDataMode";
+            this.propertyIsolationDataMode.TabStop = true;
+            this.propertyIsolationDataMode.UseVisualStyleBackColor = true;
+            this.propertyIsolationDataMode.CheckedChanged += new System.EventHandler(this.propertyIsolationMode_CheckedChanged);
+            this.propertyIsolationDataMode.Click += new System.EventHandler(this.IsolationChanged);
+            // 
+            // propertyIsolationIsolated
+            // 
+            resources.ApplyResources(this.propertyIsolationIsolated, "propertyIsolationIsolated");
+            this.propertyIsolationIsolated.Name = "propertyIsolationIsolated";
+            this.propertyIsolationIsolated.TabStop = true;
+            this.propertyIsolationIsolated.UseVisualStyleBackColor = true;
+            this.propertyIsolationIsolated.CheckedChanged += new System.EventHandler(this.propertyIsolationMode_CheckedChanged);
+            this.propertyIsolationIsolated.Click += new System.EventHandler(this.IsolationChanged);
+            // 
+            // propertyIsolationMerge
+            // 
+            resources.ApplyResources(this.propertyIsolationMerge, "propertyIsolationMerge");
+            this.propertyIsolationMerge.Name = "propertyIsolationMerge";
+            this.propertyIsolationMerge.TabStop = true;
+            this.propertyIsolationMerge.UseVisualStyleBackColor = true;
+            this.propertyIsolationMerge.CheckedChanged += new System.EventHandler(this.propertyIsolationMode_CheckedChanged);
+            this.propertyIsolationMerge.Click += new System.EventHandler(this.IsolationChanged);
             // 
             // dropboxButton
             // 
@@ -1090,11 +1125,31 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.lblPasswordWarning);
+            this.groupBox6.Controls.Add(this.propertyProtPassword);
+            this.groupBox6.Controls.Add(this.propertyProt);
             this.groupBox6.Controls.Add(this.propertyExpiration);
             this.groupBox6.Controls.Add(this.propertyExpirationDatePicker);
             resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
+            // 
+            // lblPasswordWarning
+            // 
+            resources.ApplyResources(this.lblPasswordWarning, "lblPasswordWarning");
+            this.lblPasswordWarning.Name = "lblPasswordWarning";
+            // 
+            // propertyProtPassword
+            // 
+            resources.ApplyResources(this.propertyProtPassword, "propertyProtPassword");
+            this.propertyProtPassword.Name = "propertyProtPassword";
+            // 
+            // propertyProt
+            // 
+            resources.ApplyResources(this.propertyProt, "propertyProt");
+            this.propertyProt.Name = "propertyProt";
+            this.propertyProt.UseVisualStyleBackColor = true;
+            this.propertyProt.CheckedChanged += new System.EventHandler(this.propertyProt_CheckedChanged);
             // 
             // propertyExpiration
             // 
@@ -1330,38 +1385,6 @@
             resources.ApplyResources(this.bkPanel, "bkPanel");
             this.bkPanel.Name = "bkPanel";
             // 
-            // regFilesList
-            // 
-            this.regFilesList.AllowColumnReorder = true;
-            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            resources.ApplyResources(this.regFilesList, "regFilesList");
-            this.regFilesList.DoubleClickActivation = false;
-            this.regFilesList.FullRowSelect = true;
-            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
-            this.regFilesList.Name = "regFilesList";
-            this.regFilesList.UseCompatibleStateImageBehavior = false;
-            this.regFilesList.View = System.Windows.Forms.View.Details;
-            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-            // 
-            // columnHeader3
-            // 
-            resources.ApplyResources(this.columnHeader3, "columnHeader3");
-            // 
-            // columnHeader4
-            // 
-            resources.ApplyResources(this.columnHeader4, "columnHeader4");
-            // 
-            // columnHeader5
-            // 
-            resources.ApplyResources(this.columnHeader5, "columnHeader5");
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1407,15 +1430,15 @@
             this.groupBox1.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picRAM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDisk)).EndInit();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picFullAccess)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picIsolatedMode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDataMode)).EndInit();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picRAM)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDisk)).EndInit();
             this.tabFileSystem.ResumeLayout(false);
             this.tabFileSystem.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -1612,6 +1635,9 @@
         private System.Windows.Forms.TextBox propertyDataDirName;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox cbDatFile;
+        private System.Windows.Forms.TextBox propertyProtPassword;
+        private System.Windows.Forms.CheckBox propertyProt;
+        private System.Windows.Forms.Label lblPasswordWarning;
 
     }
 }

@@ -946,7 +946,11 @@ namespace VirtPackageAPI
             if (apiRet == APIRET.SUCCESS)
             {
                 opened = true;
-                openedFile = PackageExeFile;
+                int passwordPos = PackageExeFile.IndexOf('|');
+                if (passwordPos == -1)
+                    openedFile = PackageExeFile;
+                else
+                    openedFile = PackageExeFile.Substring(0, passwordPos);
                 return true;
             }
             else

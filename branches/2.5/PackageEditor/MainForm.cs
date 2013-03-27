@@ -202,7 +202,31 @@ namespace PackageEditor
                 PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.openingPackage, PackageEditor.Messages.Messages.opening + " " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
             }
 
+            // virtPackage.Open
             ret = virtPackage.Open(packageExeFile, out apiRet);
+            if (apiRet == VirtPackage.APIRET.PASSWORD_REQUIRED)
+            {
+                string password = "";
+                while (string.IsNullOrEmpty(password))
+                {
+                    if (displayWaitMsg)
+                    {
+                        PleaseWait.PleaseWaitEnd();     // Otherwise it'll hide our below MessageBox
+                        displayWaitMsg = false;
+                    }
+                    var passwordInput = new PasswordInput();
+                    if (passwordInput.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                        return false;
+                    password = passwordInput.tbPassword.Text;
+                    ret = virtPackage.Open(packageExeFile + "|" + password, out apiRet);
+                    if (apiRet == VirtPackage.APIRET.PASSWORD_MISMATCH)
+                    {
+                        MessageBox.Show("Incorrect password");
+                        password = "";
+                    }
+                }
+
+            }
 
             // OLD_VERSION conversion
             if (!ret && apiRet == VirtPackage.APIRET.OLD_VERSION)
@@ -321,7 +345,8 @@ namespace PackageEditor
                 message += "- AppID is a required field to save a package.\r\n";
             if (String.IsNullOrEmpty(virtPackage.GetProperty("AutoLaunch")))
                 message += "- The package does not have any program(s) selected to launch.\r\nPlease select a program to launch on the tab:General > Panel:Basics > Item:Startup.";
-
+            if (propertyProt.Checked && string.IsNullOrEmpty(propertyProtPassword.Text))
+                message += "- No password specified.";
             return message == "";
         }
 
@@ -359,28 +384,6 @@ namespace PackageEditor
             {
                 MessageBox.Show(PackageEditor.Messages.Messages.cannotSave + " ApiRet:" + apiRet + " (step " + ret + ")");
                 return false;
-            }
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo apps";
-            openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "Virtual app (*.cameyo.exe;*.cameyo.dat)|*.cameyo.exe;*.cameyo.dat|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                if (Path.GetExtension(openFileDialog.FileName).Equals(".exe", StringComparison.InvariantCultureIgnoreCase) &&
-                    File.Exists(Path.ChangeExtension(virtPackage.openedFile, ".dat")) &&
-                    Utils.GetFileSize(openFileDialog.FileName) < 2 * 1024 * 1024)   // Looks like Loader.exe
-                {
-                    openFileDialog.FileName = Path.ChangeExtension(virtPackage.openedFile, ".dat");
-                }
-                VirtPackage.APIRET apiRet;
-                if (!PackageOpen(openFileDialog.FileName, true, out apiRet))
-                {
-                    MessageBox.Show(String.Format("Failed to open package. API error: {0}", apiRet));
-                }
             }
         }
 
@@ -486,7 +489,12 @@ reask:
                 bool ok = TryMoveFile(tmpFileName, packageExeFile);
                 VirtPackage.APIRET apiRet;
                 if (!PackageOpen(packageExeFile, false, out apiRet))
+                {
                     MessageBox.Show(apiRet.ToString());
+                    closeToolStripMenuItem_Click(sender, e);
+                    virtPackage.opened = false;
+                    return;
+                }
                 String property = virtPackage.GetProperty("AutoLaunch");
                 //virtPackage.Open(packageExeFile);
                 if (ok)
@@ -498,6 +506,28 @@ reask:
             {
                 // Save failed. Delete .new file.
                 System.IO.File.Delete(packageExeFile + ".new");
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo apps";
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Virtual app (*.cameyo.exe;*.cameyo.dat)|*.cameyo.exe;*.cameyo.dat|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (Path.GetExtension(openFileDialog.FileName).Equals(".exe", StringComparison.InvariantCultureIgnoreCase) &&
+                    File.Exists(Path.ChangeExtension(virtPackage.openedFile, ".dat")) &&
+                    Utils.GetFileSize(openFileDialog.FileName) < 2 * 1024 * 1024)   // Looks like Loader.exe
+                {
+                    openFileDialog.FileName = Path.ChangeExtension(virtPackage.openedFile, ".dat");
+                }
+                VirtPackage.APIRET apiRet;
+                if (!PackageOpen(openFileDialog.FileName, true, out apiRet))
+                {
+                    MessageBox.Show(String.Format("Failed to open package. API error: {0}", apiRet));
+                }
             }
         }
 
@@ -765,6 +795,13 @@ reask:
                 }
             }
 
+            // Package protection
+            propertyProt.Checked = !string.IsNullOrEmpty(virtPackage.GetProperty("PkgProtActions"));
+            if (string.IsNullOrEmpty(virtPackage.GetProperty("PkgProtPassword")))
+                propertyProtPassword.Text = "";
+            else
+                propertyProtPassword.Text = "[UNCHANGED]";
+
             if (!String.IsNullOrEmpty(virtPackage.openedFile))
                 this.Text = packageEditor + " - " + virtPackage.openedFile;
             else
@@ -846,6 +883,9 @@ reask:
                 Ret &= virtPackage.SetProperty("VirtMode", "RAM");
             else
                 Ret &= virtPackage.SetProperty("VirtMode", "DISK");
+
+            // Package protection
+            Ret &= virtPackage.SetProtection(propertyProtPassword.Text, (propertyProt.Checked ? 3 : 0), null);
 
             // propertyIntegrate, propertyVintegrate
             str = virtPackage.GetProperty("OnStartUnvirtualized");
@@ -1617,6 +1657,11 @@ reask:
                 helpIsolationMode.Text = helpIsolationModeFull;
                 picFullAccess.Visible = true;
             }
+        }
+
+        private void propertyProt_CheckedChanged(object sender, EventArgs e)
+        {
+            lblPasswordWarning.Visible = propertyProt.Checked;
         }
     }
 
