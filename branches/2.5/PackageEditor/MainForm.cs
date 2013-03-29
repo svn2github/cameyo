@@ -31,6 +31,7 @@ namespace PackageEditor
         public bool dirty;
         private bool dragging;
         private Control[] Editors;
+        private string memorizedPassword;
         string helpVirtModeDisk, helpVirtModeRam;
         string helpIsolationModeData, helpIsolationModeIsolated, helpIsolationModeFull;
 
@@ -203,8 +204,11 @@ namespace PackageEditor
             }
 
             // virtPackage.Open
-            ret = virtPackage.Open(packageExeFile, out apiRet);
-            if (apiRet == VirtPackage.APIRET.PASSWORD_REQUIRED)
+            if (!string.IsNullOrEmpty(memorizedPassword))
+                ret = virtPackage.Open(packageExeFile + "|" + memorizedPassword, out apiRet);
+            else
+                ret = virtPackage.Open(packageExeFile, out apiRet);
+            if (apiRet == VirtPackage.APIRET.PASSWORD_REQUIRED || apiRet == VirtPackage.APIRET.PASSWORD_MISMATCH)
             {
                 string password = "";
                 while (string.IsNullOrEmpty(password))
@@ -219,6 +223,8 @@ namespace PackageEditor
                         return false;
                     password = passwordInput.tbPassword.Text;
                     ret = virtPackage.Open(packageExeFile + "|" + password, out apiRet);
+                    if (apiRet == VirtPackage.APIRET.SUCCESS)
+                        memorizedPassword = password;
                     if (apiRet == VirtPackage.APIRET.PASSWORD_MISMATCH)
                     {
                         MessageBox.Show("Incorrect password");
@@ -517,6 +523,7 @@ reask:
             openFileDialog.Filter = "Virtual app (*.cameyo.exe;*.cameyo.dat)|*.cameyo.exe;*.cameyo.dat|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                memorizedPassword = "";
                 if (Path.GetExtension(openFileDialog.FileName).Equals(".exe", StringComparison.InvariantCultureIgnoreCase) &&
                     File.Exists(Path.ChangeExtension(virtPackage.openedFile, ".dat")) &&
                     Utils.GetFileSize(openFileDialog.FileName) < 2 * 1024 * 1024)   // Looks like Loader.exe
@@ -886,6 +893,8 @@ reask:
 
             // Package protection
             Ret &= virtPackage.SetProtection(propertyProtPassword.Text, (propertyProt.Checked ? 3 : 0), null);
+            if (!string.IsNullOrEmpty(propertyProtPassword.Text) && propertyProtPassword.Text != "[UNCHANGED]")
+                memorizedPassword = propertyProtPassword.Text;
 
             // propertyIntegrate, propertyVintegrate
             str = virtPackage.GetProperty("OnStartUnvirtualized");
@@ -1038,6 +1047,7 @@ reask:
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            memorizedPassword = "";
             PackageClose();
         }
 
@@ -1662,6 +1672,12 @@ reask:
         private void propertyProt_CheckedChanged(object sender, EventArgs e)
         {
             lblPasswordWarning.Visible = propertyProt.Checked;
+        }
+
+        private void propertyProtPassword_Enter(object sender, EventArgs e)
+        {
+            if (propertyProtPassword.Text == "[UNCHANGED]")
+                propertyProtPassword.Text = "";
         }
     }
 

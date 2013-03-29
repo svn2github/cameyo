@@ -1143,6 +1143,7 @@
             // 
             resources.ApplyResources(this.propertyProtPassword, "propertyProtPassword");
             this.propertyProtPassword.Name = "propertyProtPassword";
+            this.propertyProtPassword.Enter += new System.EventHandler(this.propertyProtPassword_Enter);
             // 
             // propertyProt
             // 
