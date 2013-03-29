@@ -751,7 +751,7 @@ reask:
             }
 
             // DataDirName
-            propertyDataDirName.Text = virtPackage.GetProperty("DataDirName");
+            //propertyDataDirName.Text = virtPackage.GetProperty("DataDirName");
 
             // StopInheritance
             propertyStopInheritance.Text = virtPackage.GetProperty("StopInheritance");
@@ -803,7 +803,7 @@ reask:
             }
 
             // Package protection
-            propertyProt.Checked = !string.IsNullOrEmpty(virtPackage.GetProperty("PkgProtActions"));
+            propertyProt.Checked = !string.IsNullOrEmpty(virtPackage.GetProperty("PkgProtActions")) && virtPackage.GetProperty("PkgProtActions") != "0";
             if (string.IsNullOrEmpty(virtPackage.GetProperty("PkgProtPassword")))
                 propertyProtPassword.Text = "";
             else
@@ -880,7 +880,7 @@ reask:
             Ret &= virtPackage.SetProperty("AppID", propertyAppID.Text);
             Ret &= virtPackage.SetProperty("FriendlyName", propertyFriendlyName.Text);
             Ret &= virtPackage.SetProperty("Version", propertyFileVersion.Text);
-            Ret &= virtPackage.SetProperty("DataDirName", propertyDataDirName.Text);
+            //Ret &= virtPackage.SetProperty("DataDirName", propertyDataDirName.Text);
             Ret &= virtPackage.SetProperty("StopInheritance", propertyStopInheritance.Text);
             if (propertyExpiration.Checked)
                 Ret &= virtPackage.SetProperty("Expiration", propertyExpirationDatePicker.Value.ToString("dd/MM/yyyy"));
@@ -973,7 +973,7 @@ reask:
 
             // AutoLaunch (and SaveAutoLaunchCmd + SaveAutoLaunchMenu) already set by AutoLaunchForm
 
-            // BaseDirName already set by SetProperty
+            // BaseDirName & DataDirName already set by SetProperty
 
             // Isolation. Note: it is allowed to have no checkbox selected at all.
             virtPackage.SetIsolationMode(
@@ -997,7 +997,7 @@ reask:
             propertyFileVersion.Text = "";
             propertyAutoLaunch.Text = "";
             propertyIcon.Image = null;
-            propertyDataDirName.Text = "";
+            //propertyDataDirName.Text = "";
             propertyStopInheritance.Text = "";
             //propertyCleanupOnExit.Checked = false;
             this.Text = packageEditor;
@@ -1669,14 +1669,15 @@ reask:
             }
         }
 
-        private void propertyProt_CheckedChanged(object sender, EventArgs e)
-        {
-            lblPasswordWarning.Visible = propertyProt.Checked;
-        }
-
         private void propertyProtPassword_Enter(object sender, EventArgs e)
         {
             if (propertyProtPassword.Text == "[UNCHANGED]")
+                propertyProtPassword.Text = "";
+        }
+
+        private void propertyProt_CheckedChanged(object sender, EventArgs e)
+        {
+            if (propertyProtPassword.Text == "[UNCHANGED]" && propertyProt.Checked)
                 propertyProtPassword.Text = "";
         }
     }

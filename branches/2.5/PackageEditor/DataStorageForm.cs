@@ -21,6 +21,8 @@ namespace PackageEditor
         {
             String oldValue = virtPackage.GetProperty("BaseDirName");
             String newValue;
+
+            // BaseDirName
             propertyLocalStorageCustomDir.Text = "";
             if (oldValue == "")
                 propertyLocalStorageDefault.Checked = true;
@@ -31,8 +33,15 @@ namespace PackageEditor
                 propertyLocalStorageCustom.Checked = true;
                 propertyLocalStorageCustomDir.Text = oldValue;
             }
+
+            // DataDirName
+            propertyDataDirName.Text = virtPackage.GetProperty("DataDirName").Trim();
+            propertyDataDir.Checked = !string.IsNullOrEmpty(propertyDataDirName.Text);
+            propertyDataDir_CheckedChanged(null, null);
+
             if (ShowDialog() == DialogResult.OK)
             {
+                // BaseDirName
                 if (propertyLocalStorageDefault.Checked)
                     newValue = "";
                 else if (propertyLocalStorageExeDir.Checked)
@@ -44,6 +53,10 @@ namespace PackageEditor
                     virtPackage.SetProperty("BaseDirName", newValue);
                     dirty = true;
                 }
+
+                // DataDirName
+                virtPackage.SetProperty("DataDirName", propertyDataDirName.Text.Trim());
+
                 return true;
             }
             else
@@ -58,6 +71,11 @@ namespace PackageEditor
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void propertyDataDir_CheckedChanged(object sender, EventArgs e)
+        {
+            propertyDataDirName.Enabled = propertyDataDir.Checked;
         }
     }
 }

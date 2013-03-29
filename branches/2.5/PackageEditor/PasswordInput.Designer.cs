@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PasswordInput));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -45,15 +45,15 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // tbPassword
-            // 
-            resources.ApplyResources(this.tbPassword, "tbPassword");
-            this.tbPassword.Name = "tbPassword";
-            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            // 
+            // tbPassword
+            // 
+            resources.ApplyResources(this.tbPassword, "tbPassword");
+            this.tbPassword.Name = "tbPassword";
             // 
             // btnCancel
             // 

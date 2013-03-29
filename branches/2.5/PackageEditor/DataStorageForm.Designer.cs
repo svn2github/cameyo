@@ -39,6 +39,8 @@
             this.propertyLocalStorageCustomDir = new System.Windows.Forms.TextBox();
             this.propertyLocalStorageCustom = new System.Windows.Forms.RadioButton();
             this.propertyLocalStorageDefault = new System.Windows.Forms.RadioButton();
+            this.propertyDataDirName = new System.Windows.Forms.TextBox();
+            this.propertyDataDir = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -81,6 +83,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.propertyDataDir);
+            this.groupBox1.Controls.Add(this.propertyDataDirName);
             this.groupBox1.Controls.Add(this.propertyLocalStorageExeDir);
             this.groupBox1.Controls.Add(this.propertyLocalStorageCustomDir);
             this.groupBox1.Controls.Add(this.propertyLocalStorageCustom);
@@ -115,6 +119,18 @@
             this.propertyLocalStorageDefault.TabStop = true;
             this.propertyLocalStorageDefault.UseVisualStyleBackColor = true;
             // 
+            // propertyDataDirName
+            // 
+            resources.ApplyResources(this.propertyDataDirName, "propertyDataDirName");
+            this.propertyDataDirName.Name = "propertyDataDirName";
+            // 
+            // propertyDataDir
+            // 
+            resources.ApplyResources(this.propertyDataDir, "propertyDataDir");
+            this.propertyDataDir.Name = "propertyDataDir";
+            this.propertyDataDir.UseVisualStyleBackColor = true;
+            this.propertyDataDir.CheckedChanged += new System.EventHandler(this.propertyDataDir_CheckedChanged);
+            // 
             // DataStorageForm
             // 
             this.AcceptButton = this.btnOk;
@@ -147,5 +163,7 @@
         private System.Windows.Forms.RadioButton propertyLocalStorageCustom;
         private System.Windows.Forms.RadioButton propertyLocalStorageDefault;
         private System.Windows.Forms.RadioButton propertyLocalStorageExeDir;
+        private System.Windows.Forms.CheckBox propertyDataDir;
+        private System.Windows.Forms.TextBox propertyDataDirName;
     }
 }

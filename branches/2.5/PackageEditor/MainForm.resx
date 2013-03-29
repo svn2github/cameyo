@@ -140,7 +140,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAi
-        HAAAAk1TRnQBSQFMAgEBBgEAAfwBCAH8AQgBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        HAAAAk1TRnQBSQFMAgEBBgEAARwBCQEcAQkBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEgBgABIB4AAwQBBgMTARoDHwEsAyABLgMgAS8DIAEvAyABLgMeASsDEgEYAwQBBQ8A
         AQEDBAEGAwoBDgMNARIDFgEfAxoBJAMcASgDHwEsAx8BLQMeASsDGwEmAxgBIgMPARQDDAEQAwUBBwMA
         AQGIAAMCAQMDBQQHAQkDUwHxA4EB/wOBAf8DgQH/A4EB/wNTAfEDBgEIAwQBBgMBAQIQAAMEBAUBBwKB
@@ -1219,14 +1219,11 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="propertyFriendlyName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="propertyFriendlyName.Location" type="System.Drawing.Point, System.Drawing">
     <value>117, 39</value>
   </data>
   <data name="propertyFriendlyName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 20</value>
+    <value>263, 20</value>
   </data>
   <data name="propertyFriendlyName.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1273,14 +1270,11 @@
   <data name="&gt;&gt;propertyIcon.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="propertyAppID.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="propertyAppID.Location" type="System.Drawing.Point, System.Drawing">
     <value>117, 13</value>
   </data>
   <data name="propertyAppID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 20</value>
+    <value>263, 20</value>
   </data>
   <data name="propertyAppID.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2677,7 +2671,7 @@
     <value>NoControl</value>
   </data>
   <data name="cbDatFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 97</value>
+    <value>10, 76</value>
   </data>
   <data name="cbDatFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>438, 17</value>
@@ -2699,93 +2693,6 @@
   </data>
   <data name="&gt;&gt;cbDatFile.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>572, 50</value>
-  </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 13</value>
-  </data>
-  <data name="label13.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>empty: DATA subfolder</value>
-  </data>
-  <data name="&gt;&gt;label13.Name" xml:space="preserve">
-    <value>label13</value>
-  </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="propertyDataDirName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="propertyDataDirName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 47</value>
-  </data>
-  <data name="propertyDataDirName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 20</value>
-  </data>
-  <data name="propertyDataDirName.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;propertyDataDirName.Name" xml:space="preserve">
-    <value>propertyDataDirName</value>
-  </data>
-  <data name="&gt;&gt;propertyDataDirName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;propertyDataDirName.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;propertyDataDirName.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 50</value>
-  </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
-  </data>
-  <data name="label12.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>Changes location:</value>
-  </data>
-  <data name="&gt;&gt;label12.Name" xml:space="preserve">
-    <value>label12</value>
-  </data>
-  <data name="&gt;&gt;label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
-    <value>groupBox5</value>
-  </data>
-  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="lnkAutoUpdate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2815,7 +2722,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lnkAutoUpdate.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="label8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2827,7 +2734,7 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>572, 74</value>
+    <value>572, 53</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 13</value>
@@ -2848,7 +2755,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2857,7 +2764,7 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 74</value>
+    <value>7, 53</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 13</value>
@@ -2878,7 +2785,7 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>3</value>
   </data>
   <data name="lnkCustomEvents.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2908,13 +2815,13 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;lnkCustomEvents.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>4</value>
   </data>
   <data name="propertyStopInheritance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="propertyStopInheritance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 71</value>
+    <value>272, 50</value>
   </data>
   <data name="propertyStopInheritance.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 20</value>
@@ -2932,16 +2839,16 @@
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;propertyStopInheritance.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>5</value>
   </data>
   <data name="groupBox5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 276</value>
+    <value>3, 252</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 121</value>
+    <value>766, 102</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2959,42 +2866,6 @@
     <value>tabAdvanced</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblPasswordWarning.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="lblPasswordWarning.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblPasswordWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblPasswordWarning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 63</value>
-  </data>
-  <data name="lblPasswordWarning.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 13</value>
-  </data>
-  <data name="lblPasswordWarning.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="lblPasswordWarning.Text" xml:space="preserve">
-    <value>Attention: as soon as you Save the package, you will be asked for password. Passwords are not recoverable.</value>
-  </data>
-  <data name="lblPasswordWarning.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lblPasswordWarning.Name" xml:space="preserve">
-    <value>lblPasswordWarning</value>
-  </data>
-  <data name="&gt;&gt;lblPasswordWarning.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblPasswordWarning.Parent" xml:space="preserve">
-    <value>groupBox6</value>
-  </data>
-  <data name="&gt;&gt;lblPasswordWarning.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="propertyProtPassword.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -3022,7 +2893,7 @@
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;propertyProtPassword.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="propertyProt.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3052,7 +2923,7 @@
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;propertyProt.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="propertyExpiration.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3082,7 +2953,7 @@
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;propertyExpiration.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="propertyExpirationDatePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>272, 16</value>
@@ -3106,7 +2977,7 @@
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;propertyExpirationDatePicker.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="groupBox6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -3121,7 +2992,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 89</value>
+    <value>766, 65</value>
   </data>
   <data name="groupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -3445,7 +3316,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabAdvanced.Size" type="System.Drawing.Size, System.Drawing">
-    <value>772, 405</value>
+    <value>772, 370</value>
   </data>
   <data name="tabAdvanced.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3889,7 +3760,7 @@
     <value>12, 37</value>
   </data>
   <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>780, 431</value>
+    <value>780, 396</value>
   </data>
   <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3964,7 +3835,7 @@
     <value>Bottom</value>
   </data>
   <data name="bottomPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 478</value>
+    <value>0, 443</value>
   </data>
   <data name="bottomPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>804, 47</value>
@@ -3994,7 +3865,7 @@
     <value>0, 0</value>
   </data>
   <data name="bkPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>804, 525</value>
+    <value>804, 490</value>
   </data>
   <data name="bkPanel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -4024,7 +3895,7 @@
     <value>Stretch</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>804, 525</value>
+    <value>804, 490</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

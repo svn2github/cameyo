@@ -144,16 +144,12 @@
             this.tabAdvanced = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cbDatFile = new System.Windows.Forms.CheckBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.propertyDataDirName = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.lnkAutoUpdate = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
             this.propertyStopInheritance = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.lblPasswordWarning = new System.Windows.Forms.Label();
             this.propertyProtPassword = new System.Windows.Forms.TextBox();
             this.propertyProt = new System.Windows.Forms.CheckBox();
             this.propertyExpiration = new System.Windows.Forms.CheckBox();
@@ -1061,9 +1057,6 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.cbDatFile);
-            this.groupBox5.Controls.Add(this.label13);
-            this.groupBox5.Controls.Add(this.propertyDataDirName);
-            this.groupBox5.Controls.Add(this.label12);
             this.groupBox5.Controls.Add(this.lnkAutoUpdate);
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Controls.Add(this.label7);
@@ -1078,21 +1071,6 @@
             resources.ApplyResources(this.cbDatFile, "cbDatFile");
             this.cbDatFile.Name = "cbDatFile";
             this.cbDatFile.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            resources.ApplyResources(this.label13, "label13");
-            this.label13.Name = "label13";
-            // 
-            // propertyDataDirName
-            // 
-            resources.ApplyResources(this.propertyDataDirName, "propertyDataDirName");
-            this.propertyDataDirName.Name = "propertyDataDirName";
-            // 
-            // label12
-            // 
-            resources.ApplyResources(this.label12, "label12");
-            this.label12.Name = "label12";
             // 
             // lnkAutoUpdate
             // 
@@ -1125,7 +1103,6 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.lblPasswordWarning);
             this.groupBox6.Controls.Add(this.propertyProtPassword);
             this.groupBox6.Controls.Add(this.propertyProt);
             this.groupBox6.Controls.Add(this.propertyExpiration);
@@ -1133,11 +1110,6 @@
             resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
-            // 
-            // lblPasswordWarning
-            // 
-            resources.ApplyResources(this.lblPasswordWarning, "lblPasswordWarning");
-            this.lblPasswordWarning.Name = "lblPasswordWarning";
             // 
             // propertyProtPassword
             // 
@@ -1632,13 +1604,9 @@
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer3;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape3;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox propertyDataDirName;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox cbDatFile;
         private System.Windows.Forms.TextBox propertyProtPassword;
         private System.Windows.Forms.CheckBox propertyProt;
-        private System.Windows.Forms.Label lblPasswordWarning;
 
     }
 }
