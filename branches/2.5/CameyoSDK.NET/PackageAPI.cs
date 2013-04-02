@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Collections;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
 
@@ -626,7 +627,7 @@ namespace VirtPackageAPI
         }
 
         // QuickReadIniValues (wrapper)
-        public static System.Collections.Hashtable QuickReadIniValues(string PacakgeExeFile)
+        public static Hashtable QuickReadIniValues(string PacakgeExeFile)
         {
             StringBuilder sb = new StringBuilder(16384);
             VirtPackage.QuickReadIni(PacakgeExeFile, sb, 16384);
@@ -698,6 +699,7 @@ namespace VirtPackageAPI
             catch { }
             return ret;
         }
+
 
         //
         // DeployedApp imports
@@ -1430,12 +1432,12 @@ namespace VirtPackageAPI
             }
         }
 
-        static public System.Collections.Hashtable ReadIniSettingsBuf(String iniBuf)
+        static public Hashtable ReadIniSettingsBuf(String iniBuf)
         {
             try
             {
                 String[] lines = iniBuf.Split('\r', '\n');
-                System.Collections.Hashtable values = new System.Collections.Hashtable();
+                var values = new Hashtable(StringComparer.InvariantCultureIgnoreCase);
                 for (int i = 0; i < lines.Length; i++)
                 {
                     if (String.IsNullOrEmpty(lines[i]))
@@ -1458,7 +1460,7 @@ namespace VirtPackageAPI
             }
         }
 
-        static public System.Collections.Hashtable ReadIniSettings(String IniFile)
+        static public Hashtable ReadIniSettings(String IniFile)
         {
             if (!File.Exists(IniFile))
                 return null;
@@ -1534,8 +1536,8 @@ namespace VirtPackageAPI
         public List<String> IntegratedComponents { get { return GetIntegratedComponents(); } }
         public List<String> m_IntegratedComponents;
 
-        public System.Collections.Hashtable IniProperties { get { return m_IniProperties; } }
-        internal System.Collections.Hashtable m_IniProperties;
+        public Hashtable IniProperties { get { return m_IniProperties; } }
+        internal Hashtable m_IniProperties;
 
         public DeployedApp(String appID, String baseDirName, String carrierExeName)
         {
@@ -1795,6 +1797,80 @@ namespace VirtPackageAPI
             {
                 return false;
             }
+        }
+    }
+
+    //
+    // Packager command line functions
+    public class PackagerCmdLine
+    {
+        static public Hashtable ReadIni(string appExe, string packagerExe)
+        {
+            string tempFile = Path.GetTempFileName();
+            try { System.IO.File.Delete(tempFile); }
+            catch { }
+
+            int exitCode = -1;
+            string args = string.Format("-Quiet -ExtractIni \"{0}\" \"{1}\"", appExe, tempFile);
+            bool execOk = ExecProg(packagerExe, args, true, ref exitCode);
+            if (!execOk)
+                return null;
+            if (!File.Exists(tempFile))
+                return null;
+            try   // finally
+            {
+                if (exitCode != (int)VirtPackageAPI.VirtPackage.APIRET.SUCCESS)
+                    return null;
+                return VirtPackage.ReadIniSettings(tempFile);
+            }
+            finally
+            {
+                try { System.IO.File.Delete(tempFile); }
+                catch { }
+            }
+        }
+
+        static public bool SetProperties(string appExe, Hashtable values, string packagerExe)
+        {
+            int exitCode = -1;
+            string properties = "";
+            foreach (DictionaryEntry value in values)
+            {
+                if (!string.IsNullOrEmpty(properties))
+                    properties += ",,";
+                properties += value.Key + "=" + value.Value;
+            }
+            string args = string.Format("-Quiet \"-SetProperties:{0}\" {1}", properties, appExe);
+            bool execOk = ExecProg(packagerExe, args, true, ref exitCode);
+            return (execOk && exitCode == (int)VirtPackageAPI.VirtPackage.APIRET.SUCCESS);
+        }
+
+        static public string PackagerExe()
+        {
+            return Path.Combine(Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName), "Packager.exe");
+        }
+
+        static private bool ExecProg(String fileName, String args, bool wait, ref int exitCode)
+        {
+            try
+            {
+                System.Diagnostics.ProcessStartInfo procStartInfo =
+                    new System.Diagnostics.ProcessStartInfo(fileName, args);
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                procStartInfo.CreateNoWindow = true;
+                procStartInfo.UseShellExecute = false;
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+                if (wait)
+                {
+                    proc.WaitForExit();
+                    exitCode = proc.ExitCode;
+                }
+                return true;
+            }
+            catch { }
+            return false;
         }
     }
 }
