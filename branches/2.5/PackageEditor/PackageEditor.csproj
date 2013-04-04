@@ -492,6 +492,11 @@
   <ItemGroup>
     <Content Include="Package.ico" />
     <Content Include="PkgEdit.ico" />
+    <None Include="Resources\058.png" />
+    <None Include="Resources\029.png" />
+    <None Include="Resources\1131.png" />
+    <None Include="Resources\115.png" />
+    <None Include="Resources\078.png" />
     <None Include="Resources\033.png" />
     <None Include="Resources\032.png" />
     <None Include="Resources\DataMode.png" />
