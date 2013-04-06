@@ -1550,22 +1550,32 @@ namespace VirtPackageAPI
         public static long RecursiveDirSize(DirectoryInfo d) 
         {    
             long Size = 0;    
+            
             // Add file sizes.
-            FileInfo[] fis = d.GetFiles();
-            foreach (FileInfo fi in fis) 
+            try
             {
-                try
+                FileInfo[] fis = d.GetFiles();
+                foreach (FileInfo fi in fis)
                 {
-                    Size += fi.Length;
+                    try
+                    {
+                        Size += fi.Length;
+                    }
+                    catch { }
                 }
-                catch { }
             }
+            catch { }
+
             // Add subdirectory sizes.
-            DirectoryInfo[] dis = d.GetDirectories();
-            foreach (DirectoryInfo di in dis) 
+            try
             {
-                Size += RecursiveDirSize(di);   
+                DirectoryInfo[] dis = d.GetDirectories();
+                foreach (DirectoryInfo di in dis)
+                {
+                    Size += RecursiveDirSize(di);
+                }
             }
+            catch { }
             return(Size);  
         }
 
