@@ -1206,7 +1206,7 @@ namespace VirtPackageAPI
         public bool SaveRegWorkKey()
         {
             APIRET Ret = (APIRET)VirtRegSaveWorkKey(hPkg);
-            OutputDebugString("SaveRegWorkKey() ret=" + (int)Ret + "\n");
+            OutputDebugString("SaveRegWorkKey() ret=" + (int)Ret + " LE=" + Marshal.GetLastWin32Error() + "\n");
             if (Ret == APIRET.SUCCESS)
                 return true;
             else if (Ret == APIRET.INVALID_PARAMETER)
