@@ -1199,10 +1199,14 @@ namespace VirtPackageAPI
         {
             return GetRegWorkKeyEx(null);
         }
+        
+        [DllImport("kernel32.dll")]
+        static extern void OutputDebugString(string lpOutputString);
 
         public bool SaveRegWorkKey()
         {
             APIRET Ret = (APIRET)VirtRegSaveWorkKey(hPkg);
+            OutputDebugString("SaveRegWorkKey() ret=" + (int)Ret + "\n");
             if (Ret == APIRET.SUCCESS)
                 return true;
             else if (Ret == APIRET.INVALID_PARAMETER)
