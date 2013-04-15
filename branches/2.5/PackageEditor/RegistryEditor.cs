@@ -144,7 +144,8 @@ namespace PackageEditor
 
         public bool OnPackageSave()
         {
-            return (virtPackage.SaveRegWorkKey());
+            //return (virtPackage.SaveRegWorkKey());
+            return true;
         }
 
         private void PopulateSubKeys(RegistryKey parentKey, String subKeyName, TreeNode curNode)

@@ -461,7 +461,7 @@ namespace VirtPackageAPI
         }
 
         // VirtRegSaveWorkKey
-        [DllImport(DLL32, EntryPoint="VirtRegSaveWorkKey", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        /*[DllImport(DLL32, EntryPoint="VirtRegSaveWorkKey", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         private extern static int VirtRegSaveWorkKey32(
             IntPtr hPkg);
         [DllImport(DLL64, EntryPoint = "VirtRegSaveWorkKey", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
@@ -471,7 +471,7 @@ namespace VirtPackageAPI
             IntPtr hPkg)
         {
             return Is32Bit() ? VirtRegSaveWorkKey32(hPkg) : VirtRegSaveWorkKey64(hPkg);
-        }
+        }*/
 
 
         //
@@ -1203,7 +1203,7 @@ namespace VirtPackageAPI
         [DllImport("kernel32.dll")]
         static extern void OutputDebugString(string lpOutputString);
 
-        public bool SaveRegWorkKey()
+        /*public bool SaveRegWorkKey()
         {
             APIRET Ret = (APIRET)VirtRegSaveWorkKey(hPkg);
             OutputDebugString("SaveRegWorkKey() ret=" + (int)Ret + " LE=" + Marshal.GetLastWin32Error() + "\n");
@@ -1213,7 +1213,7 @@ namespace VirtPackageAPI
                 return false;
             else
                 return false;
-        }
+        }*/
 
         //
         // Sandbox functions
