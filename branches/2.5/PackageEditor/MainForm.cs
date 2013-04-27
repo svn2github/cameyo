@@ -193,15 +193,14 @@ namespace PackageEditor
 
         private bool PackageOpen(String packageExeFile, bool displayWaitMsg, out VirtPackage.APIRET apiRet)
         {
-            bool ret;
+          retry:
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            bool ret = false;
             apiRet = 0;
             if (virtPackage.opened && !PackageClose())      // User doesn't want to discard changes
                 return false;
             if (displayWaitMsg)
-            {
-                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
                 PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.openingPackage, PackageEditor.Messages.Messages.opening + " " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
-            }
 
             // virtPackage.Open
             if (!string.IsNullOrEmpty(memorizedPassword))
@@ -213,11 +212,8 @@ namespace PackageEditor
                 string password = "";
                 while (string.IsNullOrEmpty(password))
                 {
-                    if (displayWaitMsg)
-                    {
-                        PleaseWait.PleaseWaitEnd();     // Otherwise it'll hide our below MessageBox
-                        displayWaitMsg = false;
-                    }
+                    if (displayWaitMsg)   // Hide progress window
+                        PleaseWait.PleaseWaitEnd();   // Otherwise it'll hide our below MessageBox
                     var passwordInput = new PasswordInput();
                     if (passwordInput.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                         return false;
@@ -230,6 +226,8 @@ namespace PackageEditor
                         MessageBox.Show("Incorrect password");
                         password = "";
                     }
+                    if (displayWaitMsg)   // Restore progress window
+                        PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.openingPackage, PackageEditor.Messages.Messages.opening + " " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
                 }
 
             }
@@ -237,13 +235,18 @@ namespace PackageEditor
             // OLD_VERSION conversion
             if (!ret && apiRet == VirtPackage.APIRET.OLD_VERSION)
             {
-                if (displayWaitMsg)
+                if (displayWaitMsg)   // Hide progress window
                     PleaseWait.PleaseWaitEnd();     // Otherwise it'll hide our below MessageBox
                 if (MessageBox.Show("This package was built with an older version and needs to be converted.\nConvert now?",
                     "Conversion required", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     int exitCode = 0;
-                    if (ExecProg(PackagerExe(),"-Quiet -ConvertOldPkg \"" + packageExeFile + "\"", true, ref exitCode) && exitCode == 0)
+                    if (displayWaitMsg)   // Restore progress window
+                        PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.openingPackage, "Converting " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
+                    bool convertedOk = (ExecProg(PackagerExe(), "-Quiet -ConvertOldPkg \"" + packageExeFile + "\"", true, ref exitCode) && exitCode == 0);
+                    if (displayWaitMsg)   // Hide progress window
+                        PleaseWait.PleaseWaitEnd();   // Otherwise it'll hide our below MessageBox
+                    if (convertedOk)
                     {
                         string newPkgFile = packageExeFile, oldPkgFile = packageExeFile;
                         int pos = newPkgFile.LastIndexOf('.');
@@ -271,8 +274,9 @@ namespace PackageEditor
                         }
                         if (!trouble)
                         {
-                            ret = virtPackage.Open(packageExeFile, out apiRet);
+                            //ret = virtPackage.Open(packageExeFile, out apiRet);
                             MessageBox.Show("Package was successfully converted. Your old package was saved in:\n" + oldPkgFile);
+                            goto retry;   // Takes care of password etc
                         }
                     }
                     else
