@@ -139,6 +139,8 @@
             this.regExportBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.propertyProtPassword = new System.Windows.Forms.TextBox();
+            this.propertyProt = new System.Windows.Forms.CheckBox();
             this.cbDatFile = new System.Windows.Forms.CheckBox();
             this.lnkAutoUpdate = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
@@ -146,8 +148,9 @@
             this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
             this.propertyStopInheritance = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.propertyProtPassword = new System.Windows.Forms.TextBox();
-            this.propertyProt = new System.Windows.Forms.CheckBox();
+            this.propertyTtlResistRemove = new System.Windows.Forms.CheckBox();
+            this.propertyTtlDaysValue = new System.Windows.Forms.NumericUpDown();
+            this.propertyTtlDays = new System.Windows.Forms.CheckBox();
             this.propertyExpiration = new System.Windows.Forms.CheckBox();
             this.propertyExpirationDatePicker = new System.Windows.Forms.DateTimePicker();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -173,11 +176,11 @@
             this.lnkPackageEdit = new System.Windows.Forms.LinkLabel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
+            this.line = new System.Windows.Forms.GroupBox();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.PictureBox();
             this.bkPanel = new System.Windows.Forms.Panel();
-            this.line = new System.Windows.Forms.GroupBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -215,6 +218,7 @@
             this.tabAdvanced.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.propertyTtlDaysValue)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabWelcome.SuspendLayout();
@@ -1027,6 +1031,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.propertyProtPassword);
+            this.groupBox5.Controls.Add(this.propertyProt);
             this.groupBox5.Controls.Add(this.cbDatFile);
             this.groupBox5.Controls.Add(this.lnkAutoUpdate);
             this.groupBox5.Controls.Add(this.label8);
@@ -1036,6 +1042,19 @@
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            // 
+            // propertyProtPassword
+            // 
+            resources.ApplyResources(this.propertyProtPassword, "propertyProtPassword");
+            this.propertyProtPassword.Name = "propertyProtPassword";
+            this.propertyProtPassword.Enter += new System.EventHandler(this.propertyProtPassword_Enter);
+            // 
+            // propertyProt
+            // 
+            resources.ApplyResources(this.propertyProt, "propertyProt");
+            this.propertyProt.Name = "propertyProt";
+            this.propertyProt.UseVisualStyleBackColor = true;
+            this.propertyProt.CheckedChanged += new System.EventHandler(this.propertyProt_CheckedChanged);
             // 
             // cbDatFile
             // 
@@ -1074,26 +1093,31 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.propertyProtPassword);
-            this.groupBox6.Controls.Add(this.propertyProt);
+            this.groupBox6.Controls.Add(this.propertyTtlResistRemove);
+            this.groupBox6.Controls.Add(this.propertyTtlDaysValue);
+            this.groupBox6.Controls.Add(this.propertyTtlDays);
             this.groupBox6.Controls.Add(this.propertyExpiration);
             this.groupBox6.Controls.Add(this.propertyExpirationDatePicker);
             resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
             // 
-            // propertyProtPassword
+            // propertyTtlResistRemove
             // 
-            resources.ApplyResources(this.propertyProtPassword, "propertyProtPassword");
-            this.propertyProtPassword.Name = "propertyProtPassword";
-            this.propertyProtPassword.Enter += new System.EventHandler(this.propertyProtPassword_Enter);
+            resources.ApplyResources(this.propertyTtlResistRemove, "propertyTtlResistRemove");
+            this.propertyTtlResistRemove.Name = "propertyTtlResistRemove";
+            this.propertyTtlResistRemove.UseVisualStyleBackColor = true;
             // 
-            // propertyProt
+            // propertyTtlDaysValue
             // 
-            resources.ApplyResources(this.propertyProt, "propertyProt");
-            this.propertyProt.Name = "propertyProt";
-            this.propertyProt.UseVisualStyleBackColor = true;
-            this.propertyProt.CheckedChanged += new System.EventHandler(this.propertyProt_CheckedChanged);
+            resources.ApplyResources(this.propertyTtlDaysValue, "propertyTtlDaysValue");
+            this.propertyTtlDaysValue.Name = "propertyTtlDaysValue";
+            // 
+            // propertyTtlDays
+            // 
+            resources.ApplyResources(this.propertyTtlDays, "propertyTtlDays");
+            this.propertyTtlDays.Name = "propertyTtlDays";
+            this.propertyTtlDays.UseVisualStyleBackColor = true;
             // 
             // propertyExpiration
             // 
@@ -1289,6 +1313,12 @@
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
             // 
+            // line
+            // 
+            resources.ApplyResources(this.line, "line");
+            this.line.Name = "line";
+            this.line.TabStop = false;
+            // 
             // bottomPanel
             // 
             this.bottomPanel.Controls.Add(this.panel12);
@@ -1315,12 +1345,6 @@
             this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
             resources.ApplyResources(this.bkPanel, "bkPanel");
             this.bkPanel.Name = "bkPanel";
-            // 
-            // line
-            // 
-            resources.ApplyResources(this.line, "line");
-            this.line.Name = "line";
-            this.line.TabStop = false;
             // 
             // MainForm
             // 
@@ -1394,6 +1418,7 @@
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.propertyTtlDaysValue)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1566,6 +1591,9 @@
         private System.Windows.Forms.TextBox propertyProtPassword;
         private System.Windows.Forms.CheckBox propertyProt;
         private System.Windows.Forms.GroupBox line;
+        private System.Windows.Forms.CheckBox propertyTtlResistRemove;
+        private System.Windows.Forms.NumericUpDown propertyTtlDaysValue;
+        private System.Windows.Forms.CheckBox propertyTtlDays;
 
     }
 }

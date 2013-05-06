@@ -806,6 +806,14 @@ reask:
                 }
             }
 
+            // TTL
+            String ttlDays = virtPackage.GetProperty("TtlDays");
+            int ttlDaysVal;
+            try { ttlDaysVal = Convert.ToInt32(ttlDays); }
+            catch { ttlDaysVal = 0; }
+            propertyTtlDays.Checked = !String.IsNullOrEmpty(ttlDays);
+            propertyTtlDaysValue.Value = ttlDaysVal;
+
             // Package protection
             propertyProt.Checked = !string.IsNullOrEmpty(virtPackage.GetProperty("PkgProtActions")) && virtPackage.GetProperty("PkgProtActions") != "0";
             if (string.IsNullOrEmpty(virtPackage.GetProperty("PkgProtPassword")))
@@ -890,6 +898,10 @@ reask:
                 Ret &= virtPackage.SetProperty("Expiration", propertyExpirationDatePicker.Value.ToString("dd/MM/yyyy"));
             else
                 Ret &= virtPackage.SetProperty("Expiration", "");
+            if (propertyTtlDays.Checked)
+                Ret &= virtPackage.SetProperty("TtlDays", propertyTtlDaysValue.Value.ToString());
+            else
+                Ret &= virtPackage.SetProperty("TtlDays", "");
             if (propertyVirtModeRam.Checked)
                 Ret &= virtPackage.SetProperty("VirtMode", "RAM");
             else

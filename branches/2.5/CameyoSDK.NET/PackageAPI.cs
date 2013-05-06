@@ -1796,22 +1796,6 @@ namespace VirtPackageAPI
                 return null;
             }
         }
-
-        static public bool RunningInfoDword(string appID, string item, ref int ret)
-        {
-            try
-            {
-                RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\VOS\\" + appID + "\\RunningInfo", false);
-                if (key == null)
-                    return false;
-                ret = (int)key.GetValue(item);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 
     //
