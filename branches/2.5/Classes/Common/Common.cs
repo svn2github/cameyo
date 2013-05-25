@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 //using System.Linq;
 using System.Text;
@@ -428,6 +428,7 @@ namespace Cameyo.OpenSrc.Common
             langs.Add(new LangItem("Polish", "PL", "pl-PL"));
             langs.Add(new LangItem("Arabic", "AR", "ar-SA"));
             langs.Add(new LangItem("Indonesian", "ID", "id-ID"));
+            langs.Add(new LangItem("Afrikaans", "ZA", "af-ZA"));
             return langs;
         }
 
