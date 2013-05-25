@@ -357,4 +357,7 @@
   <data name="toolStripMenuItemExport.Text" xml:space="preserve">
     <value>.reg &amp;dosyasına çıkar</value>
   </data>
+  <data name="chineseMenuItem.Text" xml:space="preserve">
+    <value>Çince</value>
+  </data>
 </root>

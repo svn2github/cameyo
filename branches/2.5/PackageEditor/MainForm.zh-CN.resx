@@ -351,4 +351,13 @@
   <data name="rdbIntegrateVirtual.Text" xml:space="preserve">
     <value>虚拟集成：添加虚拟层到Windows资源管理器</value>
   </data>
+  <data name="chineseMenuItem.Text" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="propertyVirtModeDisk.Text" xml:space="preserve">
+    <value>磁盘模式: 提取所需要的文件到磁盘上,建议经常使用或大程序使用,速度比较快.</value>
+  </data>
+  <data name="propertyVirtModeRam.Text" xml:space="preserve">
+    <value>内存模式: 直接从内存运行,不释放文件到硬盘上.</value>
+  </data>
 </root>

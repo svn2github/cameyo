@@ -165,4 +165,7 @@
   <data name="savingPackage" xml:space="preserve">
     <value>正在保存</value>
   </data>
+  <data name="saveChanges" xml:space="preserve">
+    <value>是否保存?</value>
+  </data>
 </root>

@@ -420,4 +420,13 @@
   <data name="rdbIntegrateVirtual.Text" xml:space="preserve">
     <value>Integracion virtual: añadir capa virtual en el Explorador de Windows</value>
   </data>
+  <data name="cbDatFile.Text" xml:space="preserve">
+    <value>Guardar el package como .DAT, separado del ejecutable (recomendado para aplicaciones de más de 2 GB)</value>
+  </data>
+  <data name="exportXmlToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Exportar modelo de XML</value>
+  </data>
+  <data name="lnkAutoUpdate.Text" xml:space="preserve">
+    <value>Actualización automática</value>
+  </data>
 </root>
