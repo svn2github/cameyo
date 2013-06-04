@@ -65,6 +65,18 @@ namespace PackageEditor
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            if (!propertyLocalStorageDefault.Checked && !propertyLocalStorageExeDir.Checked && propertyLocalStorageCustomDir.Text.Length < 5)
+            {
+                if (MessageBox.Show("It is not recommended to provide a root path such as \"d:\\\". Would you still like to proceed?", "Storage dir",
+                    MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes)
+                    return;
+            }
+            if (propertyDataDir.Checked && propertyDataDirName.Text.Length < 5)
+            {
+                if (MessageBox.Show("It is not recommended to provide a root path such as \"d:\\\". Would you still like to proceed?", "Data dir",
+                    MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes)
+                    return;
+            }
             DialogResult = DialogResult.OK;
         }
 

@@ -42,9 +42,19 @@ namespace PackageEditor
         void SplitTextHelp(RadioButton radio, out string helpText)
         {
             helpText = radio.Text;
-            helpText = helpText.Substring(helpText.IndexOf(':'));
+
+            int index = helpText.IndexOf(':');
+            if (index == -1)
+                index = helpText.IndexOf((char)0xff1a);   // Chinese ':'
+            if (index == -1)
+            {
+                helpText = "";
+                return;
+            }
+
+            helpText = helpText.Substring(index);
             radio.Text = radio.Text.Substring(0, radio.Text.Length - helpText.Length);
-            helpText = helpText.Trim(':', ' ');
+            helpText = helpText.Trim(':', ' ', (char)0xff1a);
             helpText = char.ToUpper(helpText[0]) + helpText.Substring(1) + ".";
         }
 
@@ -138,12 +148,18 @@ namespace PackageEditor
             regLoadThread = null;
         }
 
-        private void ThreadedRegLoadStop()
+        private void ThreadedRegLoadStop(int timeout)
         {
             regEditor.threadedRegLoadStop();
             if (regLoadThread != null)
             {
-                regLoadThread.Join();
+                if (timeout == -1)
+                    regLoadThread.Join();
+                else
+                {
+                    regLoadThread.Join(timeout);
+                    regLoadThread.Abort();
+                }
                 regLoadThread = null;
             }
         }
@@ -297,7 +313,7 @@ namespace PackageEditor
                 regSplitContainer.Visible = false;
                 regProgressTimer.Enabled = true;
 
-                ThreadedRegLoadStop();
+                ThreadedRegLoadStop(-1);
                 regLoadThread = new Thread(ThreadedRegLoad);
                 regLoadThread.Start();
 
@@ -337,7 +353,7 @@ namespace PackageEditor
             }
 
             // If regLoadThread is working, wait for it to finish
-            ThreadedRegLoadStop();
+            ThreadedRegLoadStop(3 * 1000);
 
             this.OnPackageClose();
             fsEditor.OnPackageClose();
@@ -481,7 +497,7 @@ reask:
             if (PackageSave(tmpFileName))
             {
                 // Release (close) original file, and delete it (otherwise it won't be erasable)
-                ThreadedRegLoadStop();
+                ThreadedRegLoadStop(-1);
                 PackageClose(false);
                 //virtPackage.Close();
 
@@ -1131,7 +1147,7 @@ reask:
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ThreadedRegLoadStop();
+            ThreadedRegLoadStop(3 * 1000);
         }
 
         private void lnkAutoLaunch_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
