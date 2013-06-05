@@ -35,12 +35,12 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.propertyDataDir = new System.Windows.Forms.CheckBox();
+            this.propertyDataDirName = new System.Windows.Forms.TextBox();
             this.propertyLocalStorageExeDir = new System.Windows.Forms.RadioButton();
             this.propertyLocalStorageCustomDir = new System.Windows.Forms.TextBox();
             this.propertyLocalStorageCustom = new System.Windows.Forms.RadioButton();
             this.propertyLocalStorageDefault = new System.Windows.Forms.RadioButton();
-            this.propertyDataDirName = new System.Windows.Forms.TextBox();
-            this.propertyDataDir = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -93,6 +93,18 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
+            // propertyDataDir
+            // 
+            resources.ApplyResources(this.propertyDataDir, "propertyDataDir");
+            this.propertyDataDir.Name = "propertyDataDir";
+            this.propertyDataDir.UseVisualStyleBackColor = true;
+            this.propertyDataDir.CheckedChanged += new System.EventHandler(this.propertyDataDir_CheckedChanged);
+            // 
+            // propertyDataDirName
+            // 
+            resources.ApplyResources(this.propertyDataDirName, "propertyDataDirName");
+            this.propertyDataDirName.Name = "propertyDataDirName";
+            // 
             // propertyLocalStorageExeDir
             // 
             resources.ApplyResources(this.propertyLocalStorageExeDir, "propertyLocalStorageExeDir");
@@ -111,6 +123,7 @@
             this.propertyLocalStorageCustom.Name = "propertyLocalStorageCustom";
             this.propertyLocalStorageCustom.TabStop = true;
             this.propertyLocalStorageCustom.UseVisualStyleBackColor = true;
+            this.propertyLocalStorageCustom.CheckedChanged += new System.EventHandler(this.propertyLocalStorageCustom_CheckedChanged);
             // 
             // propertyLocalStorageDefault
             // 
@@ -118,18 +131,6 @@
             this.propertyLocalStorageDefault.Name = "propertyLocalStorageDefault";
             this.propertyLocalStorageDefault.TabStop = true;
             this.propertyLocalStorageDefault.UseVisualStyleBackColor = true;
-            // 
-            // propertyDataDirName
-            // 
-            resources.ApplyResources(this.propertyDataDirName, "propertyDataDirName");
-            this.propertyDataDirName.Name = "propertyDataDirName";
-            // 
-            // propertyDataDir
-            // 
-            resources.ApplyResources(this.propertyDataDir, "propertyDataDir");
-            this.propertyDataDir.Name = "propertyDataDir";
-            this.propertyDataDir.UseVisualStyleBackColor = true;
-            this.propertyDataDir.CheckedChanged += new System.EventHandler(this.propertyDataDir_CheckedChanged);
             // 
             // DataStorageForm
             // 

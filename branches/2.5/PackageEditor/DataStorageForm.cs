@@ -12,6 +12,9 @@ namespace PackageEditor
 {
     public partial class DataStorageForm : Form
     {
+        private const string DefaultBaseDir = @"%AppData%\VOS\%AppID%";
+        private const string DefaultDataDir = DefaultBaseDir + @"\CHANGES";
+
         public DataStorageForm()
         {
             InitializeComponent();
@@ -25,7 +28,10 @@ namespace PackageEditor
             // BaseDirName
             propertyLocalStorageCustomDir.Text = "";
             if (oldValue == "")
+            {
                 propertyLocalStorageDefault.Checked = true;
+                propertyLocalStorageCustomDir.Text = DefaultBaseDir;   // Show user how to build this path
+            }
             else if (oldValue.Equals("%ExeDir%\\%AppID%.cameyo.files", StringComparison.InvariantCultureIgnoreCase))
                 propertyLocalStorageExeDir.Checked = true;
             else
@@ -37,11 +43,30 @@ namespace PackageEditor
             // DataDirName
             propertyDataDirName.Text = virtPackage.GetProperty("DataDirName").Trim();
             propertyDataDir.Checked = !string.IsNullOrEmpty(propertyDataDirName.Text);
+            if (propertyDataDirName.Text == "") 
+                propertyDataDirName.Text = DefaultDataDir;   // Show user how to build this path
             propertyDataDir_CheckedChanged(null, null);
+            propertyLocalStorageCustom_CheckedChanged(null, null);
 
+retry:
             if (ShowDialog() == DialogResult.OK)
             {
+                propertyLocalStorageCustomDir.Text = propertyLocalStorageCustomDir.Text.Trim();
+                propertyDataDirName.Text = propertyDataDirName.Text.Trim();
+
+                // Validate
+                if (propertyLocalStorageCustom.Checked && propertyLocalStorageCustomDir.Text.Trim('\\').IndexOf('\\') == -1 &&
+                    MessageBox.Show(PackageEditor.Messages.Messages.storageDirSubdirWarning + "\n" + propertyLocalStorageCustomDir.Text, 
+                    "", MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes)
+                    goto retry;
+                if (propertyDataDir.Checked && propertyDataDirName.Text.Trim('\\').IndexOf('\\') == -1 &&
+                    MessageBox.Show(PackageEditor.Messages.Messages.storageDirSubdirWarning + "\n" + propertyDataDirName.Text,
+                    "", MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes)
+                    goto retry;
+
                 // BaseDirName
+                if (propertyLocalStorageCustomDir.Text.Equals(DefaultBaseDir, StringComparison.InvariantCultureIgnoreCase))
+                    propertyLocalStorageCustomDir.Text = "";
                 if (propertyLocalStorageDefault.Checked)
                     newValue = "";
                 else if (propertyLocalStorageExeDir.Checked)
@@ -55,7 +80,9 @@ namespace PackageEditor
                 }
 
                 // DataDirName
-                virtPackage.SetProperty("DataDirName", propertyDataDirName.Text.Trim());
+                if (propertyDataDirName.Text.Equals(DefaultDataDir, StringComparison.InvariantCultureIgnoreCase))
+                    propertyDataDirName.Text = "";
+                virtPackage.SetProperty("DataDirName", propertyDataDirName.Text);
 
                 return true;
             }
@@ -88,6 +115,11 @@ namespace PackageEditor
         private void propertyDataDir_CheckedChanged(object sender, EventArgs e)
         {
             propertyDataDirName.Enabled = propertyDataDir.Checked;
+        }
+
+        private void propertyLocalStorageCustom_CheckedChanged(object sender, EventArgs e)
+        {
+            propertyLocalStorageCustomDir.Enabled = propertyLocalStorageCustom.Checked;
         }
     }
 }

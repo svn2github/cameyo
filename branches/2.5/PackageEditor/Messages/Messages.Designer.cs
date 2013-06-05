@@ -212,5 +212,14 @@ namespace PackageEditor.Messages {
                 return ResourceManager.GetString("savingPackage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have specified a path with no sub-directories. The application files will be directly extracted into this folder. Are you sure you want to proceed?.
+        /// </summary>
+        internal static string storageDirSubdirWarning {
+            get {
+                return ResourceManager.GetString("storageDirSubdirWarning", resourceCulture);
+            }
+        }
     }
 }

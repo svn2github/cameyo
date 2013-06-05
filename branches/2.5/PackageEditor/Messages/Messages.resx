@@ -168,4 +168,7 @@
   <data name="savingPackage" xml:space="preserve">
     <value>Saving package</value>
   </data>
+  <data name="storageDirSubdirWarning" xml:space="preserve">
+    <value>You have specified a path with no sub-directories. The application files will be directly extracted into this folder. Are you sure you want to proceed?</value>
+  </data>
 </root>
