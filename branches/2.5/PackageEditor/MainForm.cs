@@ -829,6 +829,7 @@ reask:
             catch { ttlDaysVal = 0; }
             propertyTtlDays.Checked = !String.IsNullOrEmpty(ttlDays);
             propertyTtlDaysValue.Value = ttlDaysVal;
+            propertyTtlResistRemove.Checked = virtPackage.GetProperty("TtlResistRemove") == "1";
 
             // Package protection
             propertyProt.Checked = !string.IsNullOrEmpty(virtPackage.GetProperty("PkgProtActions")) && virtPackage.GetProperty("PkgProtActions") != "0";
@@ -918,6 +919,7 @@ reask:
                 Ret &= virtPackage.SetProperty("TtlDays", propertyTtlDaysValue.Value.ToString());
             else
                 Ret &= virtPackage.SetProperty("TtlDays", "");
+            Ret &= virtPackage.SetProperty("TtlResistRemove", propertyTtlResistRemove.Checked ? "1" : "0");
             if (propertyVirtModeRam.Checked)
                 Ret &= virtPackage.SetProperty("VirtMode", "RAM");
             else

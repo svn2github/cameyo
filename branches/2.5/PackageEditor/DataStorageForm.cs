@@ -80,7 +80,7 @@ retry:
                 }
 
                 // DataDirName
-                if (propertyDataDirName.Text.Equals(DefaultDataDir, StringComparison.InvariantCultureIgnoreCase))
+                if (propertyDataDirName.Text.Equals(DefaultDataDir, StringComparison.InvariantCultureIgnoreCase) || !propertyDataDir.Checked)
                     propertyDataDirName.Text = "";
                 virtPackage.SetProperty("DataDirName", propertyDataDirName.Text);
 
