@@ -838,6 +838,10 @@ reask:
             else
                 propertyProtPassword.Text = "[UNCHANGED]";
 
+            // DisplayLogo
+            propertyDisplayLogo.Checked = !virtPackage.GetProperty("Branding").Equals("None");
+
+            // Open
             if (!String.IsNullOrEmpty(virtPackage.openedFile))
                 this.Text = packageEditor + " - " + virtPackage.openedFile;
             else
@@ -929,6 +933,9 @@ reask:
             Ret &= virtPackage.SetProtection(propertyProtPassword.Text, (propertyProt.Checked ? 3 : 0), null);
             if (!string.IsNullOrEmpty(propertyProtPassword.Text) && propertyProtPassword.Text != "[UNCHANGED]")
                 memorizedPassword = propertyProtPassword.Text;
+
+            // DisplayLogo
+            Ret &= propertyDisplayLogo.Checked ? virtPackage.SetProperty("Branding", "") : virtPackage.SetProperty("Branding", "None");
 
             // propertyIntegrate, propertyVintegrate
             str = virtPackage.GetProperty("OnStartUnvirtualized");

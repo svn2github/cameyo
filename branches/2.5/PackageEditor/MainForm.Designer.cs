@@ -139,6 +139,7 @@
             this.regExportBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.propertyDisplayLogo = new System.Windows.Forms.CheckBox();
             this.propertyProtPassword = new System.Windows.Forms.TextBox();
             this.propertyProt = new System.Windows.Forms.CheckBox();
             this.cbDatFile = new System.Windows.Forms.CheckBox();
@@ -1031,6 +1032,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.propertyDisplayLogo);
             this.groupBox5.Controls.Add(this.propertyProtPassword);
             this.groupBox5.Controls.Add(this.propertyProt);
             this.groupBox5.Controls.Add(this.cbDatFile);
@@ -1042,6 +1044,12 @@
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            // 
+            // propertyDisplayLogo
+            // 
+            resources.ApplyResources(this.propertyDisplayLogo, "propertyDisplayLogo");
+            this.propertyDisplayLogo.Name = "propertyDisplayLogo";
+            this.propertyDisplayLogo.UseVisualStyleBackColor = true;
             // 
             // propertyProtPassword
             // 
@@ -1594,6 +1602,7 @@
         private System.Windows.Forms.CheckBox propertyTtlResistRemove;
         private System.Windows.Forms.NumericUpDown propertyTtlDaysValue;
         private System.Windows.Forms.CheckBox propertyTtlDays;
+        private System.Windows.Forms.CheckBox propertyDisplayLogo;
 
     }
 }
