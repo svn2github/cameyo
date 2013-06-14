@@ -128,6 +128,10 @@ namespace PackageEditor
             dropboxButton.Hide();
             //resetCredLink.Hide();
 #endif
+            // Display logo
+            string branding = "";
+            try { Environment.GetEnvironmentVariable("CAMEYO_RO_PROPERTY_BRANDING"); } catch { }
+            propertyDisplayLogo.Visible = !string.IsNullOrEmpty(branding);   // Freeware Cameyo does not have this feature
 
             // Culture
             langToolStripMenuItem.DropDownItems.Clear();
