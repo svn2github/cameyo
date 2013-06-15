@@ -268,10 +268,13 @@
             this.imageList.TransparentColor = System.Drawing.Color.Red;
             this.imageList.Images.SetKeyName(0, "folder_fullaccess.png");
             this.imageList.Images.SetKeyName(1, "folder");
-            this.imageList.Images.SetKeyName(2, "folder_opened");
-            this.imageList.Images.SetKeyName(3, "new_document");
-            this.imageList.Images.SetKeyName(4, "add");
-            this.imageList.Images.SetKeyName(5, "remove");
+            this.imageList.Images.SetKeyName(2, "folder_strictlyisolated.png");
+            this.imageList.Images.SetKeyName(3, "remove");
+            this.imageList.Images.SetKeyName(4, "058.png");
+            this.imageList.Images.SetKeyName(5, "folder_opened");
+            this.imageList.Images.SetKeyName(6, "new_document");
+            this.imageList.Images.SetKeyName(7, "078b.png");
+            this.imageList.Images.SetKeyName(8, "add");
             // 
             // fsFilesList
             // 

@@ -101,7 +101,7 @@ namespace PackageEditor
             fsFolderTree.Nodes.Clear();
             TreeNode rootNode = new TreeNode("Registry");
             treeHelper.SetFolderNodeImage(rootNode,
-                false, virtPackage.GetRegistrySandbox("", false));
+                false, false, virtPackage.GetRegistrySandbox("", false));
             fsFolderTree.Nodes.Add(rootNode);
             if (workKey != null)
                 PopulateSubKeys(workKey, "", rootNode);
@@ -166,7 +166,7 @@ namespace PackageEditor
                 // Update image
                 String fullName = treeHelper.GetFullNodeName(newNode);
                 UInt32 sandboxFlags = virtPackage.GetRegistrySandbox(fullName, false);
-                treeHelper.SetFolderNodeImage(newNode, false, sandboxFlags);
+                treeHelper.SetFolderNodeImage(newNode, false, false, sandboxFlags);
 
                 // Recurse
                 PopulateSubKeys(curKey, subKey, newNode);
@@ -300,7 +300,7 @@ namespace PackageEditor
             UInt32 sandboxFlags = virtPackage.GetRegistrySandbox(fullName, false);
             if (iteration == 0)
             {
-                treeHelper.SetFolderNodeImage(curNode, false, sandboxFlags);
+                treeHelper.SetFolderNodeImage(curNode, false, false, sandboxFlags);
                 if (curNode.Nodes.Count > 0)
                     RefreshFolderNodeRecursively(curNode.Nodes[0], iteration + 1);
             }
@@ -308,7 +308,7 @@ namespace PackageEditor
             {
                 while (curNode != null)
                 {
-                    treeHelper.SetFolderNodeImage(curNode, false, sandboxFlags);
+                    treeHelper.SetFolderNodeImage(curNode, false, false, sandboxFlags);
                     if (curNode.Nodes.Count > 0)
                         RefreshFolderNodeRecursively(curNode.Nodes[0], iteration + 1);
                     curNode = curNode.NextNode;

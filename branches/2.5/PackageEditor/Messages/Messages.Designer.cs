@@ -221,5 +221,14 @@ namespace PackageEditor.Messages {
                 return ResourceManager.GetString("storageDirSubdirWarning", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strictly isolated.
+        /// </summary>
+        internal static string strictlyIsolated {
+            get {
+                return ResourceManager.GetString("strictlyIsolated", resourceCulture);
+            }
+        }
     }
 }
