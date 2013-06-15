@@ -26,12 +26,10 @@ namespace PackageEditor
             String newValue;
 
             // BaseDirName
-            propertyLocalStorageCustomDir.Text = "";
+            //propertyLocalStorageCustomDir.Text = "";
+            propertyLocalStorageCustomDir.Text = DefaultBaseDir;   // Shows user how to build this path
             if (oldValue == "")
-            {
                 propertyLocalStorageDefault.Checked = true;
-                propertyLocalStorageCustomDir.Text = DefaultBaseDir;   // Show user how to build this path
-            }
             else if (oldValue.Equals("%ExeDir%\\%AppID%.cameyo.files", StringComparison.InvariantCultureIgnoreCase))
                 propertyLocalStorageExeDir.Checked = true;
             else

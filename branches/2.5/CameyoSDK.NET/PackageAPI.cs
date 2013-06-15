@@ -73,7 +73,7 @@ namespace VirtPackageAPI
 
         public const int SANDBOXFLAGS_PASSTHROUGH = 1;
         public const int SANDBOXFLAGS_COPY_ON_WRITE = 2;
-        public const int SANDBOXFLAGS_FULL_ISOLATION = 3;
+        public const int SANDBOXFLAGS_STRICTLY_ISOLATED = 3;
 
         // UI isolation constants:
         public const int ISOLATIONMODE_CUSTOM = 0;

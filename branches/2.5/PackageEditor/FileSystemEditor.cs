@@ -940,8 +940,8 @@ namespace PackageEditor
                     return 0;
                 case VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE:
                     return 1;
-                /*case VirtPackage.SANDBOXFLAGS_FULL_ISOLATION:
-                    return 2;*/
+                case VirtPackage.SANDBOXFLAGS_STRICTLY_ISOLATED:
+                    return 2;
                 default:
                     return 0;
             }
@@ -955,8 +955,8 @@ namespace PackageEditor
                     return VirtPackage.SANDBOXFLAGS_PASSTHROUGH;
                 case 1:
                     return VirtPackage.SANDBOXFLAGS_COPY_ON_WRITE;
-                /*case 2:
-                    return VirtPackage.SANDBOXFLAGS_FULL_ISOLATION;*/
+                case 2:
+                    return VirtPackage.SANDBOXFLAGS_STRICTLY_ISOLATED;
                 default:
                     return 0;
             }
