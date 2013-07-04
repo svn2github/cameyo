@@ -231,9 +231,13 @@ namespace Cameyo.OpenSrc.Common
                 dialog.ClientSize = new Size(Math.Max(msg.Width + 100, 250), 70);
                 msg.Location = new Point(dialog.ClientSize.Width / 2 - msg.Width / 2, 12);
                 dialog.Show(null);
-                EventWaitHandle pleaseWaitDialogEvent = AutoResetEvent.OpenExisting("pleaseWaitDialogEvent");
-                while (!pleaseWaitDialogEvent.WaitOne(10, false))
-                    Application.DoEvents();
+                try
+                {
+                    EventWaitHandle pleaseWaitDialogEvent = AutoResetEvent.OpenExisting("pleaseWaitDialogEvent");
+                    while (!pleaseWaitDialogEvent.WaitOne(10, false))
+                        Application.DoEvents();
+                }
+                catch { }
             }
         }
         #endregion
@@ -257,8 +261,12 @@ namespace Cameyo.OpenSrc.Common
 
         static public void PleaseWaitEnd()
         {
-            EventWaitHandle pleaseWaitDialogEvent = EventWaitHandle.OpenExisting("pleaseWaitDialogEvent");
-            pleaseWaitDialogEvent.Set();
+            try
+            {
+                EventWaitHandle pleaseWaitDialogEvent = EventWaitHandle.OpenExisting("pleaseWaitDialogEvent");
+                pleaseWaitDialogEvent.Set();
+            }
+            catch { }
         }
     }
 
