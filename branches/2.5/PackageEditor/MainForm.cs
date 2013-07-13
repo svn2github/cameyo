@@ -26,7 +26,7 @@ namespace PackageEditor
         private FileSystemEditor fsEditor;
         private RegistryEditor regEditor;
         private bool regLoaded;
-        private Thread regLoadThread;
+        private Thread regLoadThread = null;
         private MRU mru;
         public bool dirty;
         private bool dragging;
@@ -161,8 +161,11 @@ namespace PackageEditor
                     regLoadThread.Join();
                 else
                 {
-                    regLoadThread.Join(timeout);
-                    regLoadThread.Abort();
+                    if (regLoadThread.IsAlive)
+                    {
+                        regLoadThread.Join(timeout);
+                        regLoadThread.Abort();
+                    }
                 }
                 regLoadThread = null;
             }
@@ -191,7 +194,14 @@ namespace PackageEditor
             else if (tabControl.SelectedTab == tabFileSystem)
                 fsEditor.OnTabActivate();
             else if (tabControl.SelectedTab == tabRegistry)
+            {
+                if (regEditor.workKey == null && (regLoadThread == null || !regLoadThread.IsAlive))
+                {
+                    regLoadThread = new Thread(ThreadedRegLoad);   // 2:5 moved to here
+                    regLoadThread.Start();   // 2:5 moved to here
+                }
                 regEditor.OnTabActivate();
+            }
         }
 
         private void EnableDisablePackageControls(bool enable)
@@ -318,8 +328,8 @@ namespace PackageEditor
                 regProgressTimer.Enabled = true;
 
                 ThreadedRegLoadStop(-1);
-                regLoadThread = new Thread(ThreadedRegLoad);
-                regLoadThread.Start();
+                //2.5:was here:regLoadThread = new Thread(ThreadedRegLoad);
+                //2.5:was here:regLoadThread.Start();
 
                 tabControl.SelectedIndex = 0;
                 EnableDisablePackageControls(true);
@@ -670,10 +680,10 @@ reask:
 
                 // Registry
                 xmlOut.WriteStartElement("Registry");
+                if (regEditor.workKey == null)
+                    ThreadedRegLoad();   // If registry isn't loaded yet, load it now (synchronously)
                 if (regEditor.workKey != null)
-                {
                     BlueprintRegKeysRecurse(xmlOut, regEditor.workKey, "", "");
-                }
                 xmlOut.WriteEndElement();
 
                 // Sandbox
