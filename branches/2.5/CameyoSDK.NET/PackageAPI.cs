@@ -802,6 +802,22 @@ namespace VirtPackageAPI
             return Is32Bit() ? RunningAppEnumKeepAliveFree32(Context) : RunningAppEnumKeepAliveFree64(Context);
         }
 
+        // PackUtils_CopyIconsFromExeToExe
+        [DllImport(DLL32, EntryPoint = "PackUtils_CopyIconsFromExeToExe", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackUtils_CopyIconsFromExeToExe32(
+            String SrcFile,
+            String TgtFile);
+        [DllImport(DLL64, EntryPoint = "PackUtils_CopyIconsFromExeToExe", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int PackUtils_CopyIconsFromExeToExe64(
+            String SrcFile,
+            String TgtFile);
+        public static int PackUtils_CopyIconsFromExeToExe(
+            String SrcFile,
+            String TgtFile)
+        {
+            return Is32Bit() ? PackUtils_CopyIconsFromExeToExe32(SrcFile, TgtFile) : PackUtils_CopyIconsFromExeToExe64(SrcFile, TgtFile);
+        }
+
         [StructLayout(LayoutKind.Sequential)]
         private struct RUNNING_APP
         {

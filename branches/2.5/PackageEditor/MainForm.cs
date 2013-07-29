@@ -480,7 +480,13 @@ reask:
                             MessageBox.Show("Cannot copy Loader.exe to: " + Path.ChangeExtension(saveFileDialog.FileName, ".exe"));
                             return;
                         }
+
                     }
+
+                    // Copy icon .dat -> .exe
+                    VirtPackage.PackUtils_CopyIconsFromExeToExe(
+                        Path.ChangeExtension(saveFileDialog.FileName, ".dat"), 
+                        Path.ChangeExtension(saveFileDialog.FileName, ".exe"));
 
                     virtPackage.openedFile = saveFileDialog.FileName;
                     this.Text = packageEditor + " - " + saveFileDialog.FileName;
@@ -572,7 +578,7 @@ reask:
             }
         }
 
-        private void BlueprintFilesRecurse(XmlTextWriter xmlOut, TreeNodeCollection folderNodes)
+        private void BlueprintFilesRecurse(XmlWriter xmlOut, TreeNodeCollection folderNodes, string outFilesDir)
         {
             foreach (FolderTreeNode curFolder in folderNodes)
             {
@@ -587,14 +593,19 @@ reask:
                         xmlOut.WriteStartElement("File");
                         xmlOut.WriteAttributeString("source", file.virtFsNode.FileName);
                         xmlOut.WriteAttributeString("targetdir", Path.GetDirectoryName(file.virtFsNode.FileName));
+                        //todo: if (autoLaunchFiles >>>>> )
+                        //    xmlOut.WriteAttributeString("autoLaunch", autoLaunchFiles);
                         xmlOut.WriteEndElement();
+
+                        virtPackage.ExtractFile(file.virtFsNode.FileName,
+                            Path.Combine(outFilesDir, Path.GetDirectoryName(file.virtFsNode.FileName)));
                     }
                 }
-                BlueprintFilesRecurse(xmlOut, curFolder.Nodes);
+                BlueprintFilesRecurse(xmlOut, curFolder.Nodes, outFilesDir);
             }
         }
 
-        private void BlueprintRegKeysRecurse(XmlTextWriter xmlOut, RegistryKey regKey, string curKeyName, string curKeyPortion)
+        private void BlueprintRegKeysRecurse(XmlWriter xmlOut, RegistryKey regKey, string curKeyName, string curKeyPortion)
         {
             if (!string.IsNullOrEmpty(curKeyPortion))
             {
@@ -637,74 +648,125 @@ reask:
 
         private void exportXmlToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO:piba,ZeroInstaller, exportAsZeroInstallerXml
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            // TODO: require password
+            FolderBrowserDialog saveFileDialog = new FolderBrowserDialog();
+            saveFileDialog.ShowNewFolderButton = true;
+            /*SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.AddExtension = true;
             saveFileDialog.Filter = "Cameyo Blueprint (*.xml)|*.xml";
-            saveFileDialog.DefaultExt = "xml";
+            saveFileDialog.DefaultExt = "xml";*/
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                XmlTextWriter xmlOut = new XmlTextWriter(saveFileDialog.FileName, Encoding.Default);
-                xmlOut.Formatting = Formatting.Indented;
-                xmlOut.WriteStartDocument();
-                xmlOut.WriteStartElement("ZeroInstallerXml");
-
-                // Properties
-                xmlOut.WriteStartElement("Properties");
+                string appID = virtPackage.GetProperty("AppID");
+                string outDir = Path.Combine(saveFileDialog.SelectedPath, appID + ".Blueprint");
+                if (Directory.Exists(outDir))
                 {
-                    xmlOut.WriteStartElement("Property");
-                    xmlOut.WriteAttributeString("AppID", "TestApp");
-                    xmlOut.WriteEndElement();
-                    xmlOut.WriteStartElement("Property");
-                    xmlOut.WriteAttributeString("Version", "1.0");
-                    xmlOut.WriteEndElement();
-                    xmlOut.WriteStartElement("Property");
-                    xmlOut.WriteAttributeString("IconFile", "Icon.exe");
-                    xmlOut.WriteEndElement();
-                    xmlOut.WriteStartElement("Property");
-                    xmlOut.WriteAttributeString("StopInheritance", "");
-                    xmlOut.WriteEndElement();
-                    xmlOut.WriteStartElement("Property");
-                    xmlOut.WriteAttributeString("BuildOutput", "[AppID].exe");
-                    xmlOut.WriteEndElement();
+                    if (MessageBox.Show(outDir + "\nalready exists. Continue?", "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                        return;
                 }
-                xmlOut.WriteEndElement();
-
-                // FileSystem
-                xmlOut.WriteStartElement("FileSystem");
-                if (fsFolderTree.Nodes.Count != 0 && fsFolderTree.Nodes[0].Nodes.Count != 0)
+                else
                 {
-                    BlueprintFilesRecurse(xmlOut, fsFolderTree.Nodes[0].Nodes);
+                    try
+                    {
+                        if (Directory.CreateDirectory(outDir) == null)
+                            throw new Exception("Cannot create directory " + outDir);
+                    }
+                    catch 
+                    {
+                        MessageBox.Show("Cannot create directory: " + outDir);
+                        return;
+                    }
                 }
-                xmlOut.WriteEndElement();
 
-                // Registry
-                xmlOut.WriteStartElement("Registry");
-                if (regEditor.workKey == null)
-                    ThreadedRegLoad();   // If registry isn't loaded yet, load it now (synchronously)
-                if (regEditor.workKey != null)
-                    BlueprintRegKeysRecurse(xmlOut, regEditor.workKey, "", "");
-                xmlOut.WriteEndElement();
-
-                // Sandbox
-                xmlOut.WriteStartElement("Sandbox");
+                XmlWriterSettings writerSettings = new XmlWriterSettings();
+                writerSettings.OmitXmlDeclaration = true;
+                writerSettings.Indent = true;
+                using (XmlWriter xmlOut = XmlWriter.Create(Path.Combine(outDir, appID + ".xml"), writerSettings))
                 {
+                    string outFilesDir = outDir;
+                    xmlOut.WriteStartDocument();
+                    xmlOut.WriteStartElement("ZeroInstallerXml");
+
+                    // Properties
+                    string autoLaunch = virtPackage.GetProperty("AutoLaunch");
+                    xmlOut.WriteStartElement("Properties");
+                    {
+                        xmlOut.WriteStartElement("Property");
+                        xmlOut.WriteAttributeString("AppID", virtPackage.GetProperty("AppID"));
+                        xmlOut.WriteEndElement();
+                        xmlOut.WriteStartElement("Property");
+                        xmlOut.WriteAttributeString("Version", virtPackage.GetProperty("Version"));
+                        xmlOut.WriteEndElement();
+                        xmlOut.WriteStartElement("Property");
+                        xmlOut.WriteAttributeString("BaseDirName", virtPackage.GetProperty("BaseDirName"));
+                        xmlOut.WriteEndElement();
+                        //xmlOut.WriteStartElement("Property");
+                        //xmlOut.WriteAttributeString("IconFile", "Icon.exe");
+                        //xmlOut.WriteEndElement();
+                        xmlOut.WriteStartElement("Property");
+                        xmlOut.WriteAttributeString("StopInheritance", virtPackage.GetProperty("StopInheritance"));
+                        xmlOut.WriteEndElement();
+                        xmlOut.WriteStartElement("Property");
+                        xmlOut.WriteAttributeString("BuildOutput", "[AppID].exe");
+                        xmlOut.WriteEndElement();
+                        // AutoLaunch
+                        if (!string.IsNullOrEmpty(autoLaunch))
+                        {
+                            xmlOut.WriteStartElement("Property");
+                            xmlOut.WriteAttributeString("AutoLaunch", autoLaunch);
+                            xmlOut.WriteEndElement();
+                        }
+                    }
+                    xmlOut.WriteEndElement();
+
+                    // AutoLaunch property -> autoLaunchFiles list
+                    var autoLaunchFiles = new List<string>();
+                    /*todo:string[] autoLaunches = autoLaunch.Split(';');
+                    foreach (string item in autoLaunches)
+                    {
+                        string[] elements = item.Split('>');
+                        if (elements.Length > 0)
+                            autoLaunchFiles.Add(elements[0]);
+                    }*/
+
+                    // FileSystem
                     xmlOut.WriteStartElement("FileSystem");
-                    xmlOut.WriteAttributeString("access", "Full");
+                    if (fsFolderTree.Nodes.Count != 0 && fsFolderTree.Nodes[0].Nodes.Count != 0)
+                    {
+                        BlueprintFilesRecurse(xmlOut, fsFolderTree.Nodes[0].Nodes, outFilesDir);
+                    }
                     xmlOut.WriteEndElement();
 
+                    // Registry
                     xmlOut.WriteStartElement("Registry");
-                    xmlOut.WriteAttributeString("access", "Full");
+                    if (regEditor.workKey == null)
+                        ThreadedRegLoad();   // If registry isn't loaded yet, load it now (synchronously)
+                    if (regEditor.workKey != null)
+                        BlueprintRegKeysRecurse(xmlOut, regEditor.workKey, "", "");
                     xmlOut.WriteEndElement();
+
+                    // Sandbox
+                    xmlOut.WriteStartElement("Sandbox");
+                    {
+                        xmlOut.WriteStartElement("FileSystem");
+                        xmlOut.WriteAttributeString("access", "Full");
+                        xmlOut.WriteEndElement();
+
+                        xmlOut.WriteStartElement("Registry");
+                        xmlOut.WriteAttributeString("access", "Full");
+                        xmlOut.WriteEndElement();
+                    }
+                    xmlOut.WriteEndElement();
+
+                    xmlOut.WriteEndElement();
+                    xmlOut.WriteEndDocument();
+                    xmlOut.Flush();
+                    xmlOut.Close();
+
+                    xmlOut.Close();
+
+                    MessageBox.Show("Created in:\n" + outDir);
                 }
-                xmlOut.WriteEndElement();
-
-                xmlOut.WriteEndElement();
-                xmlOut.WriteEndDocument();
-                xmlOut.Flush();
-                xmlOut.Close();
-
-                xmlOut.Close();
             }
         }
 
