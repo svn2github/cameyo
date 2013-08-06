@@ -1552,6 +1552,7 @@ reask:
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            listViewMRU.ShowItemToolTips = true;
             ListViewHelper.EnableDoubleBuffer(listViewMRU);
             Win32imports.SendMessage(listViewMRU.Handle, Win32imports.LVM_SETICONSPACING, (uint)410, (uint)410);
 
@@ -1569,6 +1570,7 @@ reask:
                 ListViewItem lvItem = listViewMRU.Items.Add(fileName);
                 lvItem.ImageIndex = imageId;
                 lvItem.Tag = item.file;
+                lvItem.ToolTipText = item.file;
                 lvItem.Group = listViewMRU.Groups["recentlyEditedGroup"];
             }
 

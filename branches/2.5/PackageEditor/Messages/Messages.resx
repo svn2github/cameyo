@@ -129,6 +129,12 @@
   <data name="confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="customEventsCount" xml:space="preserve">
+    <value>{0} custom events</value>
+  </data>
+  <data name="customEventsNone" xml:space="preserve">
+    <value>No custom events</value>
+  </data>
   <data name="discardChanges" xml:space="preserve">
     <value>Your changes will be lost. Discard changes?</value>
   </data>

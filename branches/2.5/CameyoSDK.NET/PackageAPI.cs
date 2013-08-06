@@ -823,13 +823,13 @@ namespace VirtPackageAPI
         {
             public UInt32 Version;
             public UInt32 SerialId;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_PATH * 4 * 2)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_PATH * 2 * 2)]
             public char[] CarrierExeName;
             public UInt32 CarrierPID;
             public UInt32 StartTickTime;
             public UInt32 SyncStreamingDuration;
             public UInt32 TotalPIDs;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2048)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
             public VIRT_PROCESS[] Processes;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_APPID_LENGTH * 2)]
             public char[] AppID;
@@ -1305,11 +1305,18 @@ namespace VirtPackageAPI
 
         //
         // RunningApp functions
+        static private void Dbg(string msg)
+        {
+            OutputDebugString("CameyoMenu: " + msg + "\r\n");
+        }
+
         static private bool EnumRunningAppsCallback(
             ref Object Data,
             ref RUNNING_APP RunningAppRaw)
         {
-            RunningApp runningApp = new RunningApp() {
+            Dbg("EnumRunningAppsCallback: in, sizeof(RunningApp)=" + Marshal.SizeOf(RunningAppRaw));
+            RunningApp runningApp = new RunningApp()
+            {
                 AppID = LPWStrToString(RunningAppRaw.AppID),
                 CarrierExeName = LPWStrToString(RunningAppRaw.CarrierExeName),
                 FriendlyName = LPWStrToString(RunningAppRaw.FriendlyName),
@@ -1319,6 +1326,7 @@ namespace VirtPackageAPI
                 Processes = ArrayToList(RunningAppRaw.Processes, RunningAppRaw.TotalPIDs)
             };
             ((List<RunningApp>)Data).Add(runningApp);
+            Dbg("EnumRunningAppsCallback: out");
             return true;
         }
 
@@ -1328,9 +1336,15 @@ namespace VirtPackageAPI
             List<RunningApp> list = new List<RunningApp>();
             Object data = list;
             if ((APIRET)RunningAppEnum(Callback, ref data) == APIRET.SUCCESS)
+            {
+                Dbg("GetRunningApps: out");
                 return list;
+            }
             else
+            {
+                Dbg("GetRunningApps: out (null)");
                 return null;
+            }
         }
 
         static public RunningApp FindRunningApp(string appID)
@@ -1506,6 +1520,7 @@ namespace VirtPackageAPI
                 RUNNINGAPP_ENUM_CALLBACK Callback = new RUNNINGAPP_ENUM_CALLBACK(EnumRunningAppsCallback);
                 List<RunningApp> list = new List<RunningApp>();
                 Object data = list;
+                Dbg("GetRunningApps");
                 if ((APIRET)RunningAppEnumKeepAlive(ref Context, Callback, ref data) == APIRET.SUCCESS)
                     return list;
                 else

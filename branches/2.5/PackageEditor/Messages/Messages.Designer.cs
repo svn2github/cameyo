@@ -97,6 +97,24 @@ namespace PackageEditor.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} custom events.
+        /// </summary>
+        internal static string customEventsCount {
+            get {
+                return ResourceManager.GetString("customEventsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No custom events.
+        /// </summary>
+        internal static string customEventsNone {
+            get {
+                return ResourceManager.GetString("customEventsNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your changes will be lost. Discard changes?.
         /// </summary>
         internal static string discardChanges {
