@@ -13,7 +13,6 @@ namespace PackageEditor
     public partial class DataStorageForm : Form
     {
         private const string DefaultBaseDir = @"%AppData%\VOS\%AppID%";
-        private const string DefaultDataDir = DefaultBaseDir + @"\CHANGES";
 
         public DataStorageForm()
         {
@@ -39,10 +38,11 @@ namespace PackageEditor
             }
 
             // DataDirName
+            string DefaultDataDirName = System.IO.Path.Combine(propertyLocalStorageCustomDir.Text, "CHANGES");
             propertyDataDirName.Text = virtPackage.GetProperty("DataDirName").Trim();
             propertyDataDir.Checked = !string.IsNullOrEmpty(propertyDataDirName.Text);
             if (propertyDataDirName.Text == "") 
-                propertyDataDirName.Text = DefaultDataDir;   // Show user how to build this path
+                propertyDataDirName.Text = DefaultDataDirName;   // Show user how to build this path
             propertyDataDir_CheckedChanged(null, null);
             propertyLocalStorageCustom_CheckedChanged(null, null);
 
@@ -78,7 +78,7 @@ retry:
                 }
 
                 // DataDirName
-                if (propertyDataDirName.Text.Equals(DefaultDataDir, StringComparison.InvariantCultureIgnoreCase) || !propertyDataDir.Checked)
+                if (!propertyDataDir.Checked) // Causes bug (Tom Ferratt case): || propertyDataDirName.Text.Equals(DefaultDataDirName, StringComparison.InvariantCultureIgnoreCase))
                     propertyDataDirName.Text = "";
                 virtPackage.SetProperty("DataDirName", propertyDataDirName.Text);
 
