@@ -144,6 +144,9 @@
   <data name="fullAccess" xml:space="preserve">
     <value>Full access</value>
   </data>
+  <data name="incorrectRootDir" xml:space="preserve">
+    <value>Root directories must include a driver letter, i.e: "C_", "%Program Files%". The path you entered looks incorrect.\n Would you still like to proceed?</value>
+  </data>
   <data name="isolated" xml:space="preserve">
     <value>Isolated</value>
   </data>

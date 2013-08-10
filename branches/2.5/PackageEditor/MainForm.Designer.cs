@@ -54,10 +54,6 @@
             this.tbValue = new System.Windows.Forms.TextBox();
             this.tbSize = new System.Windows.Forms.TextBox();
             this.tbFile = new System.Windows.Forms.TextBox();
-            this.regFilesList = new PackageEditor.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -89,7 +85,6 @@
             this.lnkChangeIcon = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.propertyFriendlyName = new System.Windows.Forms.TextBox();
-            this.propertyIcon = new System.Windows.Forms.PictureBox();
             this.propertyAppID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -100,8 +95,6 @@
             this.propertyDataStorage = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.helpVirtMode = new System.Windows.Forms.Label();
-            this.picRAM = new System.Windows.Forms.PictureBox();
-            this.picDisk = new System.Windows.Forms.PictureBox();
             this.propertyVirtModeRam = new System.Windows.Forms.RadioButton();
             this.propertyVirtModeDisk = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
@@ -109,10 +102,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblAutoLaunch = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.picFullAccess = new System.Windows.Forms.PictureBox();
-            this.picIsolatedMode = new System.Windows.Forms.PictureBox();
             this.helpIsolationMode = new System.Windows.Forms.Label();
-            this.picDataMode = new System.Windows.Forms.PictureBox();
             this.propertyIsolationDataMode = new System.Windows.Forms.RadioButton();
             this.propertyIsolationIsolated = new System.Windows.Forms.RadioButton();
             this.propertyIsolationMerge = new System.Windows.Forms.RadioButton();
@@ -120,23 +110,13 @@
             this.tabFileSystem = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.fileToolStrip = new System.Windows.Forms.ToolStrip();
-            this.fsAddBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsAddDirBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsAddEmptyDirBtn = new System.Windows.Forms.ToolStripButton();
-            this.fsRemoveBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.fsSaveFileAsBtn = new System.Windows.Forms.ToolStripButton();
             this.tabRegistry = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.regProgressBar = new System.Windows.Forms.ProgressBar();
             this.regToolStrip = new System.Windows.Forms.ToolStrip();
-            this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
-            this.regEditBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.regImportBtn = new System.Windows.Forms.ToolStripButton();
-            this.regExportBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.propertyDisplayLogo = new System.Windows.Forms.CheckBox();
@@ -168,9 +148,7 @@
             this.panelWelcome = new System.Windows.Forms.Panel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.panel14 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.listViewMRU = new System.Windows.Forms.ListView();
             this.columnFileN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageListMRU = new System.Windows.Forms.ImageList(this.components);
@@ -181,7 +159,30 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.PictureBox();
+            this.propertyIcon = new System.Windows.Forms.PictureBox();
+            this.picRAM = new System.Windows.Forms.PictureBox();
+            this.picDisk = new System.Windows.Forms.PictureBox();
+            this.picFullAccess = new System.Windows.Forms.PictureBox();
+            this.picIsolatedMode = new System.Windows.Forms.PictureBox();
+            this.picDataMode = new System.Windows.Forms.PictureBox();
+            this.fsAddBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsAddDirBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsAddEmptyDirBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsRemoveBtn = new System.Windows.Forms.ToolStripButton();
+            this.fsSaveFileAsBtn = new System.Windows.Forms.ToolStripButton();
+            this.regRemoveBtn = new System.Windows.Forms.ToolStripButton();
+            this.regEditBtn = new System.Windows.Forms.ToolStripButton();
+            this.regImportBtn = new System.Windows.Forms.ToolStripButton();
+            this.regExportBtn = new System.Windows.Forms.ToolStripButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.bkPanel = new System.Windows.Forms.Panel();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.regFilesList = new PackageEditor.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -198,16 +199,10 @@
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.propertyIcon)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picRAM)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDisk)).BeginInit();
             this.groupBox10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picFullAccess)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picIsolatedMode)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDataMode)).BeginInit();
             this.tabFileSystem.SuspendLayout();
             this.panel5.SuspendLayout();
             this.fileToolStrip.SuspendLayout();
@@ -226,13 +221,19 @@
             this.panelWelcome.SuspendLayout();
             this.panel15.SuspendLayout();
             this.panel14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel9.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.propertyIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRAM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDisk)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFullAccess)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picIsolatedMode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDataMode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -431,38 +432,6 @@
             resources.ApplyResources(this.tbFile, "tbFile");
             this.tbFile.Name = "tbFile";
             this.tbFile.ReadOnly = true;
-            // 
-            // regFilesList
-            // 
-            this.regFilesList.AllowColumnReorder = true;
-            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            resources.ApplyResources(this.regFilesList, "regFilesList");
-            this.regFilesList.DoubleClickActivation = false;
-            this.regFilesList.FullRowSelect = true;
-            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
-            this.regFilesList.Name = "regFilesList";
-            this.regFilesList.UseCompatibleStateImageBehavior = false;
-            this.regFilesList.View = System.Windows.Forms.View.Details;
-            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-            // 
-            // columnHeader3
-            // 
-            resources.ApplyResources(this.columnHeader3, "columnHeader3");
-            // 
-            // columnHeader4
-            // 
-            resources.ApplyResources(this.columnHeader4, "columnHeader4");
-            // 
-            // columnHeader5
-            // 
-            resources.ApplyResources(this.columnHeader5, "columnHeader5");
             // 
             // panel4
             // 
@@ -676,12 +645,6 @@
             this.propertyFriendlyName.Name = "propertyFriendlyName";
             this.propertyFriendlyName.TextChanged += new System.EventHandler(this.PropertyChange);
             // 
-            // propertyIcon
-            // 
-            resources.ApplyResources(this.propertyIcon, "propertyIcon");
-            this.propertyIcon.Name = "propertyIcon";
-            this.propertyIcon.TabStop = false;
-            // 
             // propertyAppID
             // 
             resources.ApplyResources(this.propertyAppID, "propertyAppID");
@@ -756,20 +719,6 @@
             resources.ApplyResources(this.helpVirtMode, "helpVirtMode");
             this.helpVirtMode.Name = "helpVirtMode";
             // 
-            // picRAM
-            // 
-            this.picRAM.Image = global::PackageEditor.Properties.Resources.RAM;
-            resources.ApplyResources(this.picRAM, "picRAM");
-            this.picRAM.Name = "picRAM";
-            this.picRAM.TabStop = false;
-            // 
-            // picDisk
-            // 
-            this.picDisk.Image = global::PackageEditor.Properties.Resources.HardDisk;
-            resources.ApplyResources(this.picDisk, "picDisk");
-            this.picDisk.Name = "picDisk";
-            this.picDisk.TabStop = false;
-            // 
             // propertyVirtModeRam
             // 
             resources.ApplyResources(this.propertyVirtModeRam, "propertyVirtModeRam");
@@ -820,31 +769,10 @@
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.TabStop = false;
             // 
-            // picFullAccess
-            // 
-            resources.ApplyResources(this.picFullAccess, "picFullAccess");
-            this.picFullAccess.Image = global::PackageEditor.Properties.Resources._033;
-            this.picFullAccess.Name = "picFullAccess";
-            this.picFullAccess.TabStop = false;
-            // 
-            // picIsolatedMode
-            // 
-            resources.ApplyResources(this.picIsolatedMode, "picIsolatedMode");
-            this.picIsolatedMode.Image = global::PackageEditor.Properties.Resources._032;
-            this.picIsolatedMode.Name = "picIsolatedMode";
-            this.picIsolatedMode.TabStop = false;
-            // 
             // helpIsolationMode
             // 
             resources.ApplyResources(this.helpIsolationMode, "helpIsolationMode");
             this.helpIsolationMode.Name = "helpIsolationMode";
-            // 
-            // picDataMode
-            // 
-            resources.ApplyResources(this.picDataMode, "picDataMode");
-            this.picDataMode.Image = global::PackageEditor.Properties.Resources.DataMode;
-            this.picDataMode.Name = "picDataMode";
-            this.picDataMode.TabStop = false;
             // 
             // propertyIsolationDataMode
             // 
@@ -898,52 +826,14 @@
             // 
             this.fileToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fsAddBtn,
-            this.fsAddDirBtn,
             this.fsAddEmptyDirBtn,
+            this.toolStripSeparator3,
             this.fsRemoveBtn,
-            this.toolStripSeparator1,
+            this.toolStripSeparator4,
+            this.fsAddDirBtn,
             this.fsSaveFileAsBtn});
             resources.ApplyResources(this.fileToolStrip, "fileToolStrip");
             this.fileToolStrip.Name = "fileToolStrip";
-            // 
-            // fsAddBtn
-            // 
-            this.fsAddBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddBtn.Image = global::PackageEditor.Properties.Resources._078;
-            resources.ApplyResources(this.fsAddBtn, "fsAddBtn");
-            this.fsAddBtn.Name = "fsAddBtn";
-            // 
-            // fsAddDirBtn
-            // 
-            this.fsAddDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddDirBtn.Image = global::PackageEditor.Properties.Resources._115;
-            resources.ApplyResources(this.fsAddDirBtn, "fsAddDirBtn");
-            this.fsAddDirBtn.Name = "fsAddDirBtn";
-            // 
-            // fsAddEmptyDirBtn
-            // 
-            this.fsAddEmptyDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddEmptyDirBtn.Image = global::PackageEditor.Properties.Resources._1131;
-            resources.ApplyResources(this.fsAddEmptyDirBtn, "fsAddEmptyDirBtn");
-            this.fsAddEmptyDirBtn.Name = "fsAddEmptyDirBtn";
-            // 
-            // fsRemoveBtn
-            // 
-            this.fsRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsRemoveBtn.Image = global::PackageEditor.Properties.Resources._058;
-            resources.ApplyResources(this.fsRemoveBtn, "fsRemoveBtn");
-            this.fsRemoveBtn.Name = "fsRemoveBtn";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // fsSaveFileAsBtn
-            // 
-            this.fsSaveFileAsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.fsSaveFileAsBtn, "fsSaveFileAsBtn");
-            this.fsSaveFileAsBtn.Name = "fsSaveFileAsBtn";
             // 
             // tabRegistry
             // 
@@ -992,36 +882,10 @@
             resources.ApplyResources(this.regToolStrip, "regToolStrip");
             this.regToolStrip.Name = "regToolStrip";
             // 
-            // regRemoveBtn
-            // 
-            this.regRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.regRemoveBtn, "regRemoveBtn");
-            this.regRemoveBtn.Name = "regRemoveBtn";
-            // 
-            // regEditBtn
-            // 
-            this.regEditBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.regEditBtn, "regEditBtn");
-            this.regEditBtn.Name = "regEditBtn";
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // regImportBtn
-            // 
-            this.regImportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.regImportBtn, "regImportBtn");
-            this.regImportBtn.Name = "regImportBtn";
-            this.regImportBtn.Click += new System.EventHandler(this.regImportBtn_Click);
-            // 
-            // regExportBtn
-            // 
-            this.regExportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.regExportBtn, "regExportBtn");
-            this.regExportBtn.Name = "regExportBtn";
-            this.regExportBtn.Click += new System.EventHandler(this.regExportBtn_Click);
             // 
             // tabAdvanced
             // 
@@ -1247,13 +1111,6 @@
             this.panel14.Controls.Add(this.pictureBox2);
             this.panel14.Name = "panel14";
             // 
-            // pictureBox2
-            // 
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Image = global::PackageEditor.Properties.Resources._071;
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
-            // 
             // panel13
             // 
             resources.ApplyResources(this.panel13, "panel13");
@@ -1263,14 +1120,6 @@
             this.panel13.Controls.Add(this.lnkPackageEdit);
             this.panel13.Controls.Add(this.panel9);
             this.panel13.Name = "panel13";
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.pictureBox5, "pictureBox5");
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.btnEditPackage_Click);
             // 
             // listViewMRU
             // 
@@ -1351,11 +1200,169 @@
             this.panel11.Name = "panel11";
             this.panel11.TabStop = false;
             // 
+            // propertyIcon
+            // 
+            resources.ApplyResources(this.propertyIcon, "propertyIcon");
+            this.propertyIcon.Name = "propertyIcon";
+            this.propertyIcon.TabStop = false;
+            // 
+            // picRAM
+            // 
+            this.picRAM.Image = global::PackageEditor.Properties.Resources.RAM;
+            resources.ApplyResources(this.picRAM, "picRAM");
+            this.picRAM.Name = "picRAM";
+            this.picRAM.TabStop = false;
+            // 
+            // picDisk
+            // 
+            this.picDisk.Image = global::PackageEditor.Properties.Resources.HardDisk;
+            resources.ApplyResources(this.picDisk, "picDisk");
+            this.picDisk.Name = "picDisk";
+            this.picDisk.TabStop = false;
+            // 
+            // picFullAccess
+            // 
+            resources.ApplyResources(this.picFullAccess, "picFullAccess");
+            this.picFullAccess.Image = global::PackageEditor.Properties.Resources._033;
+            this.picFullAccess.Name = "picFullAccess";
+            this.picFullAccess.TabStop = false;
+            // 
+            // picIsolatedMode
+            // 
+            resources.ApplyResources(this.picIsolatedMode, "picIsolatedMode");
+            this.picIsolatedMode.Image = global::PackageEditor.Properties.Resources._032;
+            this.picIsolatedMode.Name = "picIsolatedMode";
+            this.picIsolatedMode.TabStop = false;
+            // 
+            // picDataMode
+            // 
+            resources.ApplyResources(this.picDataMode, "picDataMode");
+            this.picDataMode.Image = global::PackageEditor.Properties.Resources.DataMode;
+            this.picDataMode.Name = "picDataMode";
+            this.picDataMode.TabStop = false;
+            // 
+            // fsAddBtn
+            // 
+            this.fsAddBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddBtn.Image = global::PackageEditor.Properties.Resources._078;
+            resources.ApplyResources(this.fsAddBtn, "fsAddBtn");
+            this.fsAddBtn.Name = "fsAddBtn";
+            // 
+            // fsAddDirBtn
+            // 
+            this.fsAddDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddDirBtn.Image = global::PackageEditor.Properties.Resources._019;
+            resources.ApplyResources(this.fsAddDirBtn, "fsAddDirBtn");
+            this.fsAddDirBtn.Name = "fsAddDirBtn";
+            // 
+            // fsAddEmptyDirBtn
+            // 
+            this.fsAddEmptyDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsAddEmptyDirBtn.Image = global::PackageEditor.Properties.Resources._115;
+            resources.ApplyResources(this.fsAddEmptyDirBtn, "fsAddEmptyDirBtn");
+            this.fsAddEmptyDirBtn.Name = "fsAddEmptyDirBtn";
+            // 
+            // fsRemoveBtn
+            // 
+            this.fsRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.fsRemoveBtn.Image = global::PackageEditor.Properties.Resources._058;
+            resources.ApplyResources(this.fsRemoveBtn, "fsRemoveBtn");
+            this.fsRemoveBtn.Name = "fsRemoveBtn";
+            // 
+            // fsSaveFileAsBtn
+            // 
+            this.fsSaveFileAsBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.fsSaveFileAsBtn, "fsSaveFileAsBtn");
+            this.fsSaveFileAsBtn.Name = "fsSaveFileAsBtn";
+            // 
+            // regRemoveBtn
+            // 
+            this.regRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.regRemoveBtn, "regRemoveBtn");
+            this.regRemoveBtn.Name = "regRemoveBtn";
+            // 
+            // regEditBtn
+            // 
+            this.regEditBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.regEditBtn, "regEditBtn");
+            this.regEditBtn.Name = "regEditBtn";
+            // 
+            // regImportBtn
+            // 
+            this.regImportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.regImportBtn, "regImportBtn");
+            this.regImportBtn.Name = "regImportBtn";
+            this.regImportBtn.Click += new System.EventHandler(this.regImportBtn_Click);
+            // 
+            // regExportBtn
+            // 
+            this.regExportBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.regExportBtn, "regExportBtn");
+            this.regExportBtn.Name = "regExportBtn";
+            this.regExportBtn.Click += new System.EventHandler(this.regExportBtn_Click);
+            // 
+            // pictureBox2
+            // 
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Image = global::PackageEditor.Properties.Resources._071;
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.pictureBox5, "pictureBox5");
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.btnEditPackage_Click);
+            // 
             // bkPanel
             // 
             this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
             resources.ApplyResources(this.bkPanel, "bkPanel");
             this.bkPanel.Name = "bkPanel";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
+            // 
+            // regFilesList
+            // 
+            this.regFilesList.AllowColumnReorder = true;
+            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            resources.ApplyResources(this.regFilesList, "regFilesList");
+            this.regFilesList.DoubleClickActivation = false;
+            this.regFilesList.FullRowSelect = true;
+            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
+            this.regFilesList.Name = "regFilesList";
+            this.regFilesList.UseCompatibleStateImageBehavior = false;
+            this.regFilesList.View = System.Windows.Forms.View.Details;
+            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+            // 
+            // columnHeader3
+            // 
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
+            // 
+            // columnHeader4
+            // 
+            resources.ApplyResources(this.columnHeader4, "columnHeader4");
+            // 
+            // columnHeader5
+            // 
+            resources.ApplyResources(this.columnHeader5, "columnHeader5");
             // 
             // MainForm
             // 
@@ -1397,20 +1404,14 @@
             this.tabGeneral.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.propertyIcon)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picRAM)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDisk)).EndInit();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picFullAccess)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picIsolatedMode)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picDataMode)).EndInit();
             this.tabFileSystem.ResumeLayout(false);
             this.tabFileSystem.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -1438,15 +1439,21 @@
             this.panelWelcome.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel13.ResumeLayout(false);
             this.panel13.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.bottomPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panel12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.propertyIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRAM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDisk)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFullAccess)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picIsolatedMode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picDataMode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1503,7 +1510,6 @@
         private System.Windows.Forms.ToolStripButton fsAddBtn;
         private System.Windows.Forms.ToolStripButton fsAddDirBtn;
         private System.Windows.Forms.ToolStripButton fsRemoveBtn;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton fsAddEmptyDirBtn;
         private System.Windows.Forms.ToolStripButton fsSaveFileAsBtn;
         private System.Windows.Forms.TabPage tabRegistry;
@@ -1606,6 +1612,8 @@
         private System.Windows.Forms.NumericUpDown propertyTtlDaysValue;
         private System.Windows.Forms.CheckBox propertyTtlDays;
         private System.Windows.Forms.CheckBox propertyDisplayLogo;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 
     }
 }

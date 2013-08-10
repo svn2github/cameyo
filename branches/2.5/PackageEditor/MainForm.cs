@@ -597,8 +597,21 @@ reask:
                         //    xmlOut.WriteAttributeString("autoLaunch", autoLaunchFiles);
                         xmlOut.WriteEndElement();
 
-                        virtPackage.ExtractFile(file.virtFsNode.FileName,
-                            Path.Combine(outFilesDir, Path.GetDirectoryName(file.virtFsNode.FileName)));
+                        // Copy actual file itself
+                        string targetFile = Path.Combine(outFilesDir, file.virtFsNode.FileName);
+                        if (!string.IsNullOrEmpty(file.addedFrom))
+                        {
+                            try
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(targetFile));
+                                File.Copy(file.addedFrom, targetFile);
+                            }
+                            catch { }
+                        }
+                        else
+                        {
+                            virtPackage.ExtractFile(file.virtFsNode.FileName, Path.GetDirectoryName(targetFile));
+                        }
                     }
                 }
                 BlueprintFilesRecurse(xmlOut, curFolder.Nodes, outFilesDir);

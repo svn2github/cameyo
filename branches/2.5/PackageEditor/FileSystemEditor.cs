@@ -651,12 +651,26 @@ namespace PackageEditor
                 MessageBox.Show("Folder was deleted");
                 return;
             }
+retry_input:
             String newFolderName = "";
             if (TreeHelper.InputBox("Add empty folder", "Folder name:", ref newFolderName) != DialogResult.OK ||
                 string.IsNullOrEmpty(newFolderName))
             {
                 return;
             }
+
+            // Help user: don't let them allow root dirs such as "SomeDir". Instead, force "C_" or "%Program Files%" for root nodes.
+            if (parentNode.Parent == null)   // Adding to root dir
+            {
+                if ((newFolderName.Length < 2) || 
+                    (newFolderName.Length == 2 && newFolderName[1] != '_') || 
+                    (newFolderName.Length > 2 && newFolderName[0] != '%'))
+                {
+                    if (MessageBox.Show(Messages.Messages.incorrectRootDir, "Warning", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                        goto retry_input;
+                }
+            }
+
             if (newFolderName.Contains("\\"))
             {
                 MessageBox.Show("Folder must not contain '\\'. Please specify one folder at a time.");
