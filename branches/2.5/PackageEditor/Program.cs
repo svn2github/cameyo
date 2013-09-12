@@ -29,9 +29,7 @@ namespace PackageEditor
                     param = args[1];
                 }
                 else if (args.Length == 2 && args[0].Equals("/edit", StringComparison.InvariantCultureIgnoreCase))
-                {
                     param = args[1];
-                }
                 else
                     param = args[0];
             }

@@ -514,9 +514,8 @@ reask:
             if (!cbDatFile.Checked/* && Path.GetExtension(packageExeFile).Equals(".dat", StringComparison.InvariantCultureIgnoreCase)*/)
                 packageExeFile = Path.ChangeExtension(packageExeFile, ".exe");
 
-            String tmpFileName = packageExeFile + ".new";
-            TryDeleteFile(tmpFileName);
-            //DeleteFile(packageExeFile + ".bak");
+            String tmpFileName = packageExeFile;//.new: +".new";
+            //.new:TryDeleteFile(tmpFileName);
             if (PackageSave(tmpFileName))
             {
                 // Release (close) original file, and delete it (otherwise it won't be erasable)
@@ -534,8 +533,8 @@ reask:
                     }
                 }
 
-                TryDeleteFile(packageExeFile);
-                bool ok = TryMoveFile(tmpFileName, packageExeFile);
+                //.new:TryDeleteFile(packageExeFile);
+                //.new:bool ok = TryMoveFile(tmpFileName, packageExeFile);
                 VirtPackage.APIRET apiRet;
                 if (!PackageOpen(packageExeFile, false, out apiRet))
                 {
@@ -546,15 +545,15 @@ reask:
                 }
                 String property = virtPackage.GetProperty("AutoLaunch");
                 //virtPackage.Open(packageExeFile);
-                if (ok)
+                //.new:if (ok)
                     MessageBox.Show("Package saved.");
-                else
-                    MessageBox.Show("Cannot rename: " + tmpFileName + " to: " + packageExeFile);
+                /*.new:else
+                    MessageBox.Show("Cannot rename: " + tmpFileName + " to: " + packageExeFile);*/
             }
             else
             {
                 // Save failed. Delete .new file.
-                System.IO.File.Delete(packageExeFile + ".new");
+                //.new:System.IO.File.Delete(packageExeFile + ".new");
             }
         }
 
