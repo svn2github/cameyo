@@ -223,6 +223,9 @@ namespace PackageEditor
 
         private bool PackageOpen(String packageExeFile, bool displayWaitMsg, out VirtPackage.APIRET apiRet)
         {
+            if (File.Exists(Path.ChangeExtension(packageExeFile, ".dat")))
+                packageExeFile = Path.ChangeExtension(packageExeFile, ".dat");
+
           retry:
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             bool ret = false;
@@ -1356,7 +1359,8 @@ reask:
                 }
                 return;
             }
-            else if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe")
+            else if (System.IO.Path.GetExtension(files[0]).ToLower() != ".exe" &&
+                System.IO.Path.GetExtension(files[0]).ToLower() != ".dat")
             {
                 MessageBox.Show("You can only open files with .exe extension");
                 return;
