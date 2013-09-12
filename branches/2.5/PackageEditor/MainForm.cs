@@ -28,7 +28,7 @@ namespace PackageEditor
         private bool regLoaded;
         private Thread regLoadThread = null;
         private MRU mru;
-        public bool dirty;
+        public bool dirty, dirtyIcon;
         private bool dragging;
         private Control[] Editors;
         private string memorizedPassword;
@@ -85,7 +85,7 @@ namespace PackageEditor
             tabControl.Visible = false;
             panelWelcome.Visible = !tabControl.Visible;
             regLoaded = false;
-            dirty = false;
+            dirty = dirtyIcon = false;
             virtPackage = new VirtPackage();
             mru = new MRU("Software\\Cameyo\\Packager\\MRU");
 
@@ -320,7 +320,7 @@ namespace PackageEditor
             if (ret)
             {
                 regLoaded = false;
-                dirty = false;
+                dirty = dirtyIcon = false;
                 this.OnPackageOpen();
                 fsEditor.OnPackageOpen();
 
@@ -418,7 +418,7 @@ namespace PackageEditor
 
             if (ret == 0)
             {
-                this.dirty = false;
+                dirty = dirtyIcon = false;
                 fsEditor.dirty = false;
                 regEditor.dirty = false;
                 return true;
@@ -473,23 +473,30 @@ reask:
                     MessageBox.Show("Must have .exe extension");
                     goto reask;
                 }
+
+                // cbDatFile: Loader.exe
+                // Must be copied before PackageSave, as it will apply hPkg->IconSrcFile (if any) onto Loader.exe
+                if (cbDatFile.Checked)
+                {
+                    if (!TryCopyFile(Path.Combine(Utils.MyPath(), "Loader.exe"), Path.ChangeExtension(saveFileDialog.FileName, ".exe"), true))
+                    {
+                        MessageBox.Show("Cannot copy Loader.exe to: " + Path.ChangeExtension(saveFileDialog.FileName, ".exe"));
+                        return;
+                    }
+                }
+
+                bool _dirtyIcon = this.dirtyIcon;   // Save this before PackageSave resets it
                 if (PackageSave(saveFileDialog.FileName))
                 {
-                    // cbDatFile: Loader.exe
-                    if (cbDatFile.Checked)
+                    // Copy icon .dat -> .exe, only if icon wasn't dirty.
+                    // Because if it was dirty, it means PackageSave has already taken care 
+                    // of applying it to the accompanying Loader.exe.
+                    if (!_dirtyIcon)
                     {
-                        if (!TryCopyFile(Path.Combine(Utils.MyPath(), "Loader.exe"), Path.ChangeExtension(saveFileDialog.FileName, ".exe"), true))
-                        {
-                            MessageBox.Show("Cannot copy Loader.exe to: " + Path.ChangeExtension(saveFileDialog.FileName, ".exe"));
-                            return;
-                        }
-
+                        VirtPackage.PackUtils_CopyIconsFromExeToExe(
+                            Path.ChangeExtension(saveFileDialog.FileName, ".dat"),
+                            Path.ChangeExtension(saveFileDialog.FileName, ".exe"));
                     }
-
-                    // Copy icon .dat -> .exe
-                    VirtPackage.PackUtils_CopyIconsFromExeToExe(
-                        Path.ChangeExtension(saveFileDialog.FileName, ".dat"), 
-                        Path.ChangeExtension(saveFileDialog.FileName, ".exe"));
 
                     virtPackage.openedFile = saveFileDialog.FileName;
                     this.Text = packageEditor + " - " + saveFileDialog.FileName;
@@ -514,24 +521,37 @@ reask:
             if (!cbDatFile.Checked/* && Path.GetExtension(packageExeFile).Equals(".dat", StringComparison.InvariantCultureIgnoreCase)*/)
                 packageExeFile = Path.ChangeExtension(packageExeFile, ".exe");
 
-            String tmpFileName = packageExeFile;//.new: +".new";
+            string tmpFileName = packageExeFile; //.new: +".new";
             //.new:TryDeleteFile(tmpFileName);
+
+            // cbDatFile: Loader.exe
+            // Must be copied before PackageSave, as it will apply hPkg->IconSrcFile (if any) onto Loader.exe
+            if (cbDatFile.Checked)
+            {
+                if (!TryCopyFile(Path.Combine(Utils.MyPath(), "Loader.exe"), Path.ChangeExtension(tmpFileName, ".exe"), true))
+                {
+                    MessageBox.Show("Cannot copy Loader.exe to: " + Path.ChangeExtension(tmpFileName, ".exe"));
+                    return;
+                }
+            }
+
+            bool _dirtyIcon = this.dirtyIcon;   // Save this before PackageSave resets it
             if (PackageSave(tmpFileName))
             {
+                // Copy icon .dat -> .exe, only if icon wasn't dirty.
+                // Because if it was dirty, it means PackageSave has already taken care 
+                // of applying it to the accompanying Loader.exe.
+                if (!_dirtyIcon)
+                {
+                    VirtPackage.PackUtils_CopyIconsFromExeToExe(
+                        Path.ChangeExtension(tmpFileName, ".dat"),
+                        Path.ChangeExtension(tmpFileName, ".exe"));
+                }
+
                 // Release (close) original file, and delete it (otherwise it won't be erasable)
                 ThreadedRegLoadStop(-1);
                 PackageClose(false);
                 //virtPackage.Close();
-
-                // cbDatFile: Loader.exe
-                if (cbDatFile.Checked)
-                {
-                    if (!TryCopyFile(Path.Combine(Utils.MyPath(), "Loader.exe"), Path.ChangeExtension(packageExeFile, ".exe"), true))
-                    {
-                        MessageBox.Show("Cannot copy Loader.exe to: " + Path.ChangeExtension(packageExeFile, ".exe"));
-                        return;
-                    }
-                }
 
                 //.new:TryDeleteFile(packageExeFile);
                 //.new:bool ok = TryMoveFile(tmpFileName, packageExeFile);
@@ -937,7 +957,7 @@ reask:
                 this.Text = packageEditor + " - " + virtPackage.openedFile;
             else
                 this.Text = packageEditor;
-            dirty = false;
+            dirty = dirtyIcon = false;
         }
 
         private void RemoveIfStartswith(ref String str, String value)
@@ -1237,6 +1257,7 @@ reask:
                     {
                         propertyIcon.Image = ico.ToBitmap();
                         //propertyNewIconFileName.Text = openFileDialog.FileName;
+                        dirtyIcon = true;
                         dirty = true;
                     }
                     else
