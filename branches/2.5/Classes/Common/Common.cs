@@ -42,6 +42,43 @@ namespace Cameyo.OpenSrc.Common
             return false;
         }
 
+        static public bool ShellExec(string cmd, string args, ref int exitCode, bool wait)
+        {
+            try
+            {
+                System.Diagnostics.ProcessStartInfo procStartInfo =
+                    new System.Diagnostics.ProcessStartInfo(cmd, args);
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                procStartInfo.CreateNoWindow = true;
+                procStartInfo.UseShellExecute = true;
+                proc.StartInfo = procStartInfo;
+                if (!proc.Start())
+                    return false;
+                if (wait)
+                {
+                    proc.WaitForExit();
+                    exitCode = proc.ExitCode;
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        static public bool ShellExec(string cmd, string args)
+        {
+            int exitCode = 0;
+            return ShellExec(cmd, args, ref exitCode, false);
+        }
+
+        static public bool ShellExec(string cmd)
+        {
+            return ShellExec(cmd, null);
+        }
+
         static public long GetFileSize(String fileName)
         {
             try

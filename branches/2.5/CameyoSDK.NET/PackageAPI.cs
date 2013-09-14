@@ -92,6 +92,9 @@ namespace VirtPackageAPI
         private const int MAX_PATH = 260;
         public const int MAX_APPID_LENGTH = 128;
 
+        public const int LICENSETYPE_PRO = 2;
+        public const int LICENSETYPE_DEV = 3;
+
         [StructLayout(LayoutKind.Sequential)]
         private struct SYSTEMTIME
         {
@@ -697,6 +700,22 @@ namespace VirtPackageAPI
             byte[] ret = File.ReadAllBytes(outputFile);
             try { File.Delete(outputFile); }
             catch { }
+            return ret;
+        }
+
+        // LicDataLoadFromFile (reserved for internal use)
+        [DllImport(DLL32, EntryPoint = "LicDataLoadFromFile", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int LicDataLoadFromFile32(
+            String FileName);
+        [DllImport(DLL64, EntryPoint = "LicDataLoadFromFile", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        private extern static int LicDataLoadFromFile64(
+            String FileName);
+        public static int LicDataLoadFromFile(
+            String FileName)
+        {
+            int ret = Is32Bit()
+                ? LicDataLoadFromFile32(FileName)
+                : LicDataLoadFromFile64(FileName);
             return ret;
         }
 
