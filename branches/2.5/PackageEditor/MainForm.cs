@@ -212,6 +212,18 @@ namespace PackageEditor
             saveToolStripMenuItem.Enabled = enable;
             saveasToolStripMenuItem.Enabled = enable;
             closeToolStripMenuItem.Enabled = enable;
+
+            // Developers, please respect copyright restrictions!
+            int licenseType = VirtPackage.LicDataLoadFromFile(null);
+            if (licenseType < VirtPackage.LICENSETYPE_DEV)
+            {
+                groupConstraints.Visible = false;
+                lnkAutoUpdate.Visible = false;
+            }
+            if (licenseType < VirtPackage.LICENSETYPE_PRO)
+                lnkCustomEvents.Visible = false;
+            lblNotCommercial.Visible = (licenseType < VirtPackage.LICENSETYPE_DEV);   // "Not for commercial use"
+            lnkUpgrade.Visible = (licenseType < VirtPackage.LICENSETYPE_PRO);         // "Upgrade"
         }
 
         private bool PackageOpen(String packageExeFile)
@@ -1201,6 +1213,7 @@ reask:
         {
             memorizedPassword = "";
             PackageClose();
+            DisplayMRU();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1246,6 +1259,7 @@ reask:
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Executable files (*.exe)|*.exe;All file types|(*.*)";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 if (openFileDialog.FileName.EndsWith(".ico", StringComparison.InvariantCultureIgnoreCase))
@@ -1587,12 +1601,9 @@ reask:
             //MainForm_Resize(null, null);
         }
 
-        private void MainForm_Shown(object sender, EventArgs e)
+        private void DisplayMRU()
         {
-            listViewMRU.ShowItemToolTips = true;
-            ListViewHelper.EnableDoubleBuffer(listViewMRU);
-            Win32imports.SendMessage(listViewMRU.Handle, Win32imports.LVM_SETICONSPACING, (uint)410, (uint)410);
-
+            listViewMRU.Items.Clear();
             foreach (MRUitem item in mru.GetItems())
             {
                 if (!File.Exists(item.file))
@@ -1610,7 +1621,14 @@ reask:
                 lvItem.ToolTipText = item.file;
                 lvItem.Group = listViewMRU.Groups["recentlyEditedGroup"];
             }
+        }
 
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            listViewMRU.ShowItemToolTips = true;
+            ListViewHelper.EnableDoubleBuffer(listViewMRU);
+            Win32imports.SendMessage(listViewMRU.Handle, Win32imports.LVM_SETICONSPACING, (uint)410, (uint)410);
+            DisplayMRU();
             /*foreach (DeployedApp deployedApp in VirtPackage.DeployedApps())
             {
                 if (!File.Exists(deployedApp.CarrierExeName))
@@ -1835,6 +1853,11 @@ reask:
         {
             if (propertyProtPassword.Text == "[UNCHANGED]" && propertyProt.Checked)
                 propertyProtPassword.Text = "";
+        }
+
+        private void lnkUpgrade_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Cameyo.OpenSrc.Common.Utils.ShellExec("http://www.cameyo.com/upgrade");
         }
     }
 

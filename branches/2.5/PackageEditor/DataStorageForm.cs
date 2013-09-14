@@ -119,5 +119,16 @@ retry:
         {
             propertyLocalStorageCustomDir.Enabled = propertyLocalStorageCustom.Checked;
         }
+
+        private void DataStorageForm_Load(object sender, EventArgs e)
+        {
+            int licenseType = VirtPackage.LicDataLoadFromFile(null);
+            if (licenseType < VirtPackage.LICENSETYPE_PRO)
+            {
+                propertyDataDir.Visible = false;
+                propertyDataDirName.Visible = false;
+                Height -= 50;
+            }
+        }
     }
 }

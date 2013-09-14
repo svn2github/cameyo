@@ -196,7 +196,7 @@
     <value>Bottom</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 176</value>
+    <value>0, 163</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>447, 35</value>
@@ -220,7 +220,7 @@
     <value>True</value>
   </data>
   <data name="propertyDataDir.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 123</value>
+    <value>12, 114</value>
   </data>
   <data name="propertyDataDir.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 17</value>
@@ -244,7 +244,7 @@
     <value>0</value>
   </data>
   <data name="propertyDataDirName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 146</value>
+    <value>39, 137</value>
   </data>
   <data name="propertyDataDirName.Size" type="System.Drawing.Size, System.Drawing">
     <value>396, 20</value>
@@ -379,7 +379,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 176</value>
+    <value>447, 163</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -406,7 +406,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>447, 176</value>
+    <value>447, 163</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -430,7 +430,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>447, 211</value>
+    <value>447, 198</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
