@@ -129,9 +129,9 @@ namespace PackageEditor
             //resetCredLink.Hide();
 #endif
             // Display logo
-            string branding = "";
+            /*string branding = "";
             try { Environment.GetEnvironmentVariable("CAMEYO_RO_PROPERTY_BRANDING"); } catch { }
-            propertyDisplayLogo.Visible = !string.IsNullOrEmpty(branding);   // Freeware Cameyo does not have this feature
+            propertyDisplayLogo.Visible = !string.IsNullOrEmpty(branding);   // Freeware Cameyo does not have this feature*/
 
             // Culture
             langToolStripMenuItem.DropDownItems.Clear();
@@ -219,6 +219,7 @@ namespace PackageEditor
             {
                 groupConstraints.Visible = false;
                 lnkAutoUpdate.Visible = false;
+                propertyDisplayLogo.Visible = false;
             }
             if (licenseType < VirtPackage.LICENSETYPE_PRO)
                 lnkCustomEvents.Visible = false;
@@ -962,7 +963,7 @@ reask:
                 propertyProtPassword.Text = "[UNCHANGED]";
 
             // DisplayLogo
-            propertyDisplayLogo.Checked = !virtPackage.GetProperty("Branding").Equals("None");
+            propertyDisplayLogo.Checked = string.IsNullOrEmpty(virtPackage.GetProperty("Branding"));
 
             // Open
             if (!String.IsNullOrEmpty(virtPackage.openedFile))
