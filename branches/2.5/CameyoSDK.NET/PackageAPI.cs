@@ -26,12 +26,13 @@ namespace VirtPackageAPI
     public enum VIRT_FILE_FLAGS
     {
         NO_FLAGS = 0x0,
-        ISFILE = 0x0001,        // File or directory?
-        DELETED = 0x0002,       // Deleted by virtual app (NOT_FOUND)
-        DEPLOY_UPON_PRELOAD = 0x0008,   // Deploy file upon preload (in execute-from-disk mode)
-        DISCONNECTED = 0x0010,  // Set when on-disk file is modified from DB
-        PKG_FILE = 0x0020,      // File/dir is part of the original package (as opposed to files newly-added to sandbox during package use)
-        ALL_FLAGS = ISFILE | DELETED | DEPLOY_UPON_PRELOAD | DISCONNECTED | PKG_FILE
+        ISFILE = 0x0001,                  // File or directory?
+        DELETED = 0x0002,                 // Deleted by virtual app (NOT_FOUND)
+        DEPLOY_UPON_PRELOAD = 0x0008,     // Force file deploy (Disk mode)
+        DISCONNECTED = 0x0010,            // Set when on-disk file is modified from DB
+        PKG_FILE = 0x0020,                // File/dir is part of the original package (as opposed to files newly-added to sandbox during package use)
+        DEPLOY_RAM_MODE = 0x0200,         // Force file deploy (RAM mode)
+        ALL_FLAGS = ISFILE | DELETED | DEPLOY_UPON_PRELOAD | DISCONNECTED | PKG_FILE | DEPLOY_RAM_MODE
     }
 
     [Flags]

@@ -117,87 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANf7bzMYAQAAACBjSFJNAABs
-        mwAAcm8AAPauAACFgwAAbvcAAOhBAAAxdAAAF2yhti2bAAAACXBIWXMAAAsPAAALDwGS+QOlAAADPklE
-        QVQ4T2VTa0uTYRge0Ycggr7WF/sJ+qEsc+bUjFh4SBM7GGVO23RuTtx04vYq2szDmvOYTVRmai7tg7k5
-        NYan1BQlTxthTZ2kpgmxDELh6n7fSKxuuHmel+e5rue+r/t6eTyKmJiYqPArV55ci4x8q1KpvjP5DEZG
-        huFyubDq8UCcmoqo69G4/yDRG3iJ7wgLD38SRRgWy8vJzXXzg4Jw9tw56A0GzM/NYXR0BHZ7L9Y/r2Nn
-        ZwfTU1MYHh6Cx7OKkrIyEAH8L5wHi+VJpWnosfbAoNejuFiHykojZRXK6GJbezs6LBZutbx8id7eXtQ/
-        fcrdsdqsECWLwAu7fHlGo9VgYmIcKyvLcLvdWKZ1cvId7T9hdvY9pmemMUO59HEJGxvr2NzchMlkQpAg
-        eIYnFAoDUpKTMTQ0iJ97e9jb34eTeu981YWCokJkKDOhUuegqbkRs/Nz3PmP3V2UlpZCGBkZwOlwkX/R
-        fSM2FrnZ2VArlShgGBipzLR0KZJESUgRP0SGXAYpiVmg0SBDJsNVodDNgTmCwECHUqVEPgE7qWdrdzeX
-        dTU1YLRaZGZlgqEzy4sXeNPfh2fP6hEdE+04IIiIiGBEIhGMFRX4ur2NLhIsKysLXq8XjkEHpPRidk4O
-        tqj3zo4ONDY2Il0uZw4IfH19o8RiMV6/7sZjnQ6f19bAhrm5GTqajK6kGNU11ZBRS2w0NJjADw7+7QM2
-        4uPjz0gkYuTl5eGDy0nzX4Opvp6IPOjq6oSCWtBXGLgKKqlKi6UDarXa94CA3dxNSEBbWyv67XaMkZEG
-        +vvhXFzkCDSMFmXkk+dmM1eBmqbyF5j9YDWoq6vDQF8fFmhcLqcT1p4ebhqFuiJUUQt2mw3mpiZOq38J
-        jghCQiCXywm4yGnAiri6vEyWtiFFIoGBQM6FeZjIiaGhISzB0cMkx/l8vq2EzNHS3ITa6ipOQBtZvPBR
-        Ee4lJSGR/NDaYqYfzIm4+DgbgU9SHvlDcszf319Ar37b+rKJ3e9ejI2PoZZek2UqIE6TwFhl5BxII/4m
-        EAhCCXjivzZ8fHxOkZi6Ai2zoi8vh0KhwJ2EO7h5+xbEkodzMqm02M/P7/Th8n8BYhxIH6BtB3gAAAAA
-        SUVORK5CYII=
-</value>
-  </data>
-  <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 55</value>
-  </data>
-  <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
-    <value>pictureBox2</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
-    <value>groupBox</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANf7bzMYAQAAACBjSFJNAABs
-        mwAAcm8AAPauAACFgwAAbvcAAOhBAAAxdAAAF2yhti2bAAAACXBIWXMAAAsPAAALDwGS+QOlAAAB4ElE
-        QVQ4T2NgQAMd60P+48LoarHyW1YF/r/29Mj/2y9Ow/Gt5yf+d6wJ/U+UAQ1Lff4vP9bwf+2pDjhedbz5
-        P0icKAOq57v9n3eg9P+Sw7VwvOhQ1X+QOFEGlMxw/D9tR+b/WXvz4XjGrpz/IHGiDMibZPW/Z1PM/wlb
-        Ev9P3JIEpvs3x/8HiRNlQHq3yf+8uaYYGCSO1YDEZr0P6Z2G/5NbDf4D2f/Teg3+Z88wwsAgcZB8cpvB
-        /7QOQxD7W1KLvg1DXK2GZVy95sfu9eH/O9dE/K9f5vM/faouBq5b6v2/c13Ef5C6uAbNb5HVajZwF4WW
-        yFtGVqp+rFhg+T99is7/5ImaGDh9qs7/igVW/yMqVb+FlishNMNM8SmQtgwulv9YudDif8okjf8JfWpw
-        nDpZ83/lIsv/wcVy33xzJexxBqZHupilf67Ux+olVv8T+9X+x3Yr/U+aoPa/Bsj3y5X67pkqglszzFTn
-        JCFLrwyxj7XLrP6nAW0G0R7pot9cEwUIa4YZYh/Ha+maKgQ0xPK/c5Lgd8dIHoKaGYGamYGYFYg5gJjb
-        0IPD2Sac84WRJ7svkM8LEoPKgdSA1IL0wAFIgAuIBYBYEogVgFidU5jBDEjrALEaVEwCqoYTaggDAPrB
-        G8IyJqFyAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 38</value>
-  </data>
-  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>groupBox</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="chkFileFlagDEPLOYED_RAM.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkFileFlagDEPLOYED_RAM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkFileFlagDEPLOYED_RAM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 57</value>
+  </data>
+  <data name="chkFileFlagDEPLOYED_RAM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 17</value>
+  </data>
+  <data name="chkFileFlagDEPLOYED_RAM.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="chkFileFlagDEPLOYED_RAM.Text" xml:space="preserve">
+    <value>Force extraction (RAM virtualization mode)</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED_RAM.Name" xml:space="preserve">
+    <value>chkFileFlagDEPLOYED_RAM</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED_RAM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED_RAM.Parent" xml:space="preserve">
+    <value>groupBox</value>
+  </data>
+  <data name="&gt;&gt;chkFileFlagDEPLOYED_RAM.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="tbFullPath.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -220,22 +172,22 @@
     <value>groupBox</value>
   </data>
   <data name="&gt;&gt;tbFullPath.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="chkFileFlagDEPLOYED.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="chkFileFlagDEPLOYED.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 38</value>
+    <value>9, 39</value>
   </data>
   <data name="chkFileFlagDEPLOYED.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 17</value>
+    <value>222, 17</value>
   </data>
   <data name="chkFileFlagDEPLOYED.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="chkFileFlagDEPLOYED.Text" xml:space="preserve">
-    <value>Deployed: extracts immediately upon first execution</value>
+    <value>Force extraction (Disk virtualization mode)</value>
   </data>
   <data name="&gt;&gt;chkFileFlagDEPLOYED.Name" xml:space="preserve">
     <value>chkFileFlagDEPLOYED</value>
@@ -247,13 +199,13 @@
     <value>groupBox</value>
   </data>
   <data name="&gt;&gt;chkFileFlagDEPLOYED.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="chkFileFlagDELETED.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="chkFileFlagDELETED.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 55</value>
+    <value>9, 75</value>
   </data>
   <data name="chkFileFlagDELETED.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 17</value>
@@ -274,7 +226,7 @@
     <value>groupBox</value>
   </data>
   <data name="&gt;&gt;chkFileFlagDELETED.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="groupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -283,7 +235,7 @@
     <value>10, 10</value>
   </data>
   <data name="groupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>438, 78</value>
+    <value>438, 97</value>
   </data>
   <data name="groupBox.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -307,7 +259,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 97</value>
+    <value>264, 113</value>
   </data>
   <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 26</value>
@@ -334,7 +286,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 97</value>
+    <value>358, 113</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 26</value>
@@ -364,7 +316,7 @@
     <value>False</value>
   </data>
   <data name="chkFileFlagISFILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 113</value>
+    <value>10, 122</value>
   </data>
   <data name="chkFileFlagISFILE.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 17</value>
@@ -394,7 +346,7 @@
     <value>True</value>
   </data>
   <data name="chkFileFlagPKG_FILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 108</value>
+    <value>16, 117</value>
   </data>
   <data name="chkFileFlagPKG_FILE.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 17</value>
@@ -427,7 +379,7 @@
     <value>False</value>
   </data>
   <data name="chkFileFlagDISCONNECTED.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 104</value>
+    <value>27, 113</value>
   </data>
   <data name="chkFileFlagDISCONNECTED.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 17</value>
@@ -460,7 +412,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>458, 130</value>
+    <value>458, 146</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 10, 10, 10</value>
