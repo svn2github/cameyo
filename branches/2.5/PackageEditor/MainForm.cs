@@ -217,12 +217,14 @@ namespace PackageEditor
             int licenseType = VirtPackage.LicDataLoadFromFile(null);
             if (licenseType < VirtPackage.LICENSETYPE_DEV)
             {
-                groupConstraints.Visible = false;
                 lnkAutoUpdate.Visible = false;
                 propertyDisplayLogo.Visible = false;
             }
             if (licenseType < VirtPackage.LICENSETYPE_PRO)
+            {
+                groupConstraints.Visible = false;
                 lnkCustomEvents.Visible = false;
+            }
             lblNotCommercial.Visible = (licenseType < VirtPackage.LICENSETYPE_DEV);   // "Not for commercial use"
             lnkUpgrade.Visible = (licenseType < VirtPackage.LICENSETYPE_PRO);         // "Upgrade"
         }
