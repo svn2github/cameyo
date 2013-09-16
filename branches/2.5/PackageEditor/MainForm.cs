@@ -1262,7 +1262,7 @@ reask:
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "Executable files (*.exe)|*.exe;All file types|(*.*)";
+            openFileDialog.Filter = "Executable files (*.exe)|*.exe|All file types|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 if (openFileDialog.FileName.EndsWith(".ico", StringComparison.InvariantCultureIgnoreCase))
