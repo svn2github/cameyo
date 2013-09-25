@@ -2601,7 +2601,7 @@
     <value>31</value>
   </data>
   <data name="propertyDisplayLogo.Text" xml:space="preserve">
-    <value>Display Cameyo's popup</value>
+    <value>Display Cameyo's logo</value>
   </data>
   <data name="&gt;&gt;propertyDisplayLogo.Name" xml:space="preserve">
     <value>propertyDisplayLogo</value>
