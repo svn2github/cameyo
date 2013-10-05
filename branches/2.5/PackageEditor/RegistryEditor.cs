@@ -40,9 +40,9 @@ namespace PackageEditor
         {
             get { return currentkey; }
             set { currentkey = value; }
-        }   
+        }
 
-        public RegistryEditor(VirtPackage virtPackage, TreeView fsFolderTree, ListView fsFilesList, 
+        public RegistryEditor(VirtPackage virtPackage, TreeView fsFolderTree, ListView fsFilesList,
             Label fsFolderInfoFullName, ComboBox fsFolderInfoIsolationCombo,
             ToolStripButton regRemoveBtn, ToolStripButton regEditBtn)
         {
@@ -73,23 +73,23 @@ namespace PackageEditor
         // function to add files and folders recursively
         private bool AddFileOrFolder(String path)
         {
-          if (Path.GetExtension(path).Equals(".reg", StringComparison.CurrentCultureIgnoreCase))
-          {
-            importRegFile(path);
-          }
-          else
-            MessageBox.Show("Only .reg files are supported for imporing into the Registry tab");
-          return true;
+            if (Path.GetExtension(path).Equals(".reg", StringComparison.CurrentCultureIgnoreCase))
+            {
+                importRegFile(path);
+            }
+            else
+                MessageBox.Show("Only .reg files are supported for imporing into the Registry tab");
+            return true;
         }
 
         public void OnPackageOpenBeforeUI()     // Slow operation, for threading. Must NOT perform any UI.
         {
             try
             {
-              regLoadAutoResetEvent = new AutoResetEvent(false);
-              workKey = virtPackage.GetRegWorkKeyEx(regLoadAutoResetEvent);
-              if (workKey == null)    // No virtual registry?
-                return;
+                regLoadAutoResetEvent = new AutoResetEvent(false);
+                workKey = virtPackage.GetRegWorkKeyEx(regLoadAutoResetEvent);
+                if (workKey == null)    // No virtual registry?
+                    return;
             }
             catch
             {
@@ -203,7 +203,7 @@ namespace PackageEditor
             if (workKey == null)
                 return;
             RegistryKey regKey = workKey.OpenSubKey(fullName);
-            if (regKey == null) 
+            if (regKey == null)
                 return;
             String[] values = regKey.GetValueNames();
             currentkey = new ArrayList();
@@ -239,13 +239,25 @@ namespace PackageEditor
             TreeNode node = fsFolderTree.SelectedNode;
             if (node == null)
                 return;
+
+            // Require elevation
+            if (!Cameyo.OpenSrc.Common.Utils.IsElevatedProcess())
+            {
+                MessageBox.Show(Messages.Messages.reqElevation, Messages.Messages.reqElevationTitle);
+                return;
+            }
+
+            // Confirm
             if (MessageBox.Show("Delete key?", "Confirm", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
+
+            // Delete key
             String fullName = treeHelper.GetFullNodeName(node);
             try
             {
                 workKey.DeleteSubKeyTree(fullName);
                 node.Remove();
+                virtPackage.SaveRegWorkKey();
             }
             catch
             {
@@ -255,11 +267,18 @@ namespace PackageEditor
 
         private void OnEditClick(object sender, EventArgs e)
         {
+            // Require elevation
+            if (!Cameyo.OpenSrc.Common.Utils.IsElevatedProcess())
+            {
+                MessageBox.Show(Messages.Messages.reqElevation, Messages.Messages.reqElevationTitle);
+                return;
+            }
+
             // Notification window
             PackageBuiltNotify packageBuiltNotify = new PackageBuiltNotify();
             String friendlyKeyName = System.IO.Path.GetFileName(System.IO.Path.GetDirectoryName(workKey.Name));
             packageBuiltNotify.Do("Registry editor will now open. Please edit entries under the key '" +
-                friendlyKeyName + "'. Once you close the registry editor, your changes will be applied.", 
+                friendlyKeyName + "'. Once you close the registry editor, your changes will be applied.",
                 "", "", "RegeditExplain");
 
             // Set LastKey to the work key
@@ -286,13 +305,14 @@ namespace PackageEditor
                 proc.Start();
                 proc.WaitForExit();
                 OnPackageOpenUI();
+                virtPackage.SaveRegWorkKey();
                 dirty = true;
             }
             catch
             {
                 // Exception will occur if user refuses UAC elevation for example..
             }
-            
+
         }
 
         private void RefreshFolderNodeRecursively(TreeNode curNode, int iteration)
@@ -319,52 +339,59 @@ namespace PackageEditor
 
         public void toolStripMenuItemExport_Click(object sender, EventArgs e)
         {
-          RegFileExport();
+            RegFileExport();
         }
 
         private void importRegFile(string path)
         {
-          String RegFileName = path;
-          RegistryKey key = workKey;
-          RegistryFunctions registryFunctions = new RegistryFunctions();
-          registryFunctions.ImportVirtualRegistryFromFile(RegFileName, key);
+            String RegFileName = path;
+            RegistryKey key = workKey;
+            RegistryFunctions registryFunctions = new RegistryFunctions();
+            registryFunctions.ImportVirtualRegistryFromFile(RegFileName, key);
 
-          // Refresh the local registry tree
-          OnPackageOpenUI();
-          dirty = true;     
+            // Refresh the local registry tree
+            OnPackageOpenUI();
+            dirty = true;
         }
 
         internal void threadedRegLoadStop()
         {
-          if (regLoadAutoResetEvent != null)
-            regLoadAutoResetEvent.Set();
+            if (regLoadAutoResetEvent != null)
+                regLoadAutoResetEvent.Set();
         }
 
         internal void RegFileExport()
         {
-          SaveFileDialog sfd = new SaveFileDialog();
-          sfd.AddExtension = true;
-          sfd.Filter = "Registry file (*.reg)|*.reg";
-          if (sfd.ShowDialog() == DialogResult.OK)
-          {
-            String RegFileName = sfd.FileName;
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.AddExtension = true;
+            sfd.Filter = "Registry file (*.reg)|*.reg";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                String RegFileName = sfd.FileName;
 
-            // Read Registry Keys in the package
-            RegistryKey key = workKey;
-            String virtKey = treeHelper.GetFullNodeName(fsFolderTree.SelectedNode);
-            RegistryFunctions registryFunctions = new RegistryFunctions();
-            registryFunctions.ExportVirtualRegistryToFile(RegFileName, key, virtKey);
-          }
+                // Read Registry Keys in the package
+                RegistryKey key = workKey;
+                String virtKey = treeHelper.GetFullNodeName(fsFolderTree.SelectedNode);
+                RegistryFunctions registryFunctions = new RegistryFunctions();
+                registryFunctions.ExportVirtualRegistryToFile(RegFileName, key, virtKey);
+            }
         }
 
         internal void RegFileImport()
         {
-          OpenFileDialog ofd = new OpenFileDialog();
-          ofd.Filter = "Registry file (*.reg)|*.reg";
-          if (ofd.ShowDialog() == DialogResult.OK)
-          {
-            AddFileOrFolder(ofd.FileName);
-          }
+            // Require elevation
+            if (!Cameyo.OpenSrc.Common.Utils.IsElevatedProcess())
+            {
+                MessageBox.Show(Messages.Messages.reqElevation, Messages.Messages.reqElevationTitle);
+                return;
+            }
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Registry file (*.reg)|*.reg";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                AddFileOrFolder(ofd.FileName);
+            }
         }
     }
 }

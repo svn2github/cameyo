@@ -214,6 +214,24 @@ namespace PackageEditor.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please re-run the Package Editor elevated for this operation (right-click + Run as administrator)..
+        /// </summary>
+        internal static string reqElevation {
+            get {
+                return ResourceManager.GetString("reqElevation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation requires elevation.
+        /// </summary>
+        internal static string reqElevationTitle {
+            get {
+                return ResourceManager.GetString("reqElevationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save changes?.
         /// </summary>
         internal static string saveChanges {

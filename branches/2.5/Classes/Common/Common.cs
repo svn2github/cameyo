@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using System.IO;
+using Microsoft.Win32;
 
 namespace Cameyo.OpenSrc.Common
 {
@@ -100,6 +101,20 @@ namespace Cameyo.OpenSrc.Common
                 hexString += bytes[i].ToString("X2");
             }
             return hexString;
+        }
+
+        static public bool IsElevatedProcess()
+        {
+            try
+            {
+                var softwareKey = Registry.LocalMachine.OpenSubKey("Software", true);
+                softwareKey.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
