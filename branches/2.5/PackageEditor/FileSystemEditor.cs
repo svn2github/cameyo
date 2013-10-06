@@ -401,6 +401,7 @@ namespace PackageEditor
             }
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "All file types|*.*";
             openFileDialog.Multiselect = true;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
