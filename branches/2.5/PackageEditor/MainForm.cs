@@ -22,7 +22,7 @@ namespace PackageEditor
 {
     public partial class MainForm : Form
     {
-        private VirtPackage virtPackage;
+        private VirtPackage virtPackage = null;
         private FileSystemEditor fsEditor;
         private RegistryEditor regEditor;
         private bool regLoaded;
@@ -34,6 +34,7 @@ namespace PackageEditor
         private string memorizedPassword;
         string helpVirtModeDisk, helpVirtModeRam;
         string helpIsolationModeData, helpIsolationModeIsolated, helpIsolationModeFull;
+        private bool isElevatedProcess = Cameyo.OpenSrc.Common.Utils.IsElevatedProcess();
 
         // creation of delegate for PackageOpen
         private delegate bool DelegatePackageOpen(String path);
@@ -78,6 +79,7 @@ namespace PackageEditor
             panelWelcome.Dock = DockStyle.None;
             panelWelcome.Dock = DockStyle.Fill;
             tabControl.TabPages.Remove(tabWelcome);
+            this.Text = CaptionText();
 
             // delegate for PackageOpen init
             Del_Open = new DelegatePackageOpen(this.PackageOpen);
@@ -91,8 +93,8 @@ namespace PackageEditor
 
             fsEditor = new FileSystemEditor(virtPackage, fsFolderTree, fsFilesList,
                 fsFolderInfoFullName, fsFolderInfoIsolationCombo, fsAddBtn, fsRemoveBtn, fsAddEmptyDirBtn, fsSaveFileAsBtn, fsAddDirBtn);
-            regEditor = new RegistryEditor(virtPackage, regFolderTree, regFilesList,
-                regFolderInfoFullName, regFolderInfoIsolationCombo, regRemoveBtn, regEditBtn);
+            regEditor = new RegistryEditor(virtPackage, new RegistryEditor.DelegateRequireElevation(RequireElevation),
+                regFolderTree, regFilesList, regFolderInfoFullName, regFolderInfoIsolationCombo, regRemoveBtn, regEditBtn);
 
             regFilesList.DoubleClickActivation = true;
             Editors = new Control[] { tbFile, tbValue, tbType, tbSize };
@@ -391,6 +393,7 @@ namespace PackageEditor
             fsEditor.OnPackageClose();
             regEditor.OnPackageClose();
             virtPackage.Close();
+            this.Text = CaptionText();
             if (disableControls)
                 EnableDisablePackageControls(false);
             return true;
@@ -445,10 +448,20 @@ namespace PackageEditor
             }
         }
 
-        private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
+        private string CaptionText()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             string packageEditor = resources.GetString("$this.Text");
+            if (isElevatedProcess)
+                packageEditor += " (Admin)";
+            if (virtPackage != null && virtPackage.opened && !string.IsNullOrEmpty(virtPackage.openedFile))
+                packageEditor += " - " + virtPackage.openedFile;
+            return packageEditor;
+        }
+
+        private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
             String message;
             if (!PackageCanSave(out message))
@@ -514,7 +527,7 @@ reask:
                     }
 
                     virtPackage.openedFile = saveFileDialog.FileName;
-                    this.Text = packageEditor + " - " + saveFileDialog.FileName;
+                    this.Text = CaptionText();
                     MessageBox.Show(PackageEditor.Messages.Messages.packageSaved);
                 }
             }
@@ -851,7 +864,6 @@ reask:
         private void OnPackageOpen()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            string packageEditor = resources.GetString("$this.Text");
             String command;
 
             // AppID
@@ -968,10 +980,7 @@ reask:
             propertyDisplayLogo.Checked = string.IsNullOrEmpty(virtPackage.GetProperty("Branding"));
 
             // Open
-            if (!String.IsNullOrEmpty(virtPackage.openedFile))
-                this.Text = packageEditor + " - " + virtPackage.openedFile;
-            else
-                this.Text = packageEditor;
+            this.Text = CaptionText();
             dirty = dirtyIcon = false;
         }
 
@@ -1154,10 +1163,32 @@ reask:
             return (Ret);
         }
 
+        private void RefreshExplorer()
+        {
+            // Refresh Explorer (otherwise it fails to show the EXE's icon sometimes)
+            Guid CLSID_ShellApplication = new Guid("13709620-C279-11CE-A49E-444553540000");
+            Type shellApplicationType = Type.GetTypeFromCLSID(CLSID_ShellApplication, true);
+
+            object shellApplication = Activator.CreateInstance(shellApplicationType);
+            object windows = shellApplicationType.InvokeMember("Windows", System.Reflection.BindingFlags.InvokeMethod, null, shellApplication, new object[] { });
+
+            Type windowsType = windows.GetType();
+            object count = windowsType.InvokeMember("Count", System.Reflection.BindingFlags.GetProperty, null, windows, null);
+            for (int i = 0; i < (int)count; i++)
+            {
+                object item = windowsType.InvokeMember("Item", System.Reflection.BindingFlags.InvokeMethod, null, windows, new object[] { i });
+                Type itemType = item.GetType();
+
+                // Only refresh Windows Explorer windows
+                string itemName = (string)itemType.InvokeMember("Name", System.Reflection.BindingFlags.GetProperty, null, item, null);
+                if (itemName == "Windows Explorer")
+                    itemType.InvokeMember("Refresh", System.Reflection.BindingFlags.InvokeMethod, null, item, null);
+            }
+        }
+
         private void OnPackageClose()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            string packageEditor = resources.GetString("$this.Text");
+            //System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
             propertyAppID.Text = "";
             propertyFriendlyName.Text = "";
@@ -1167,7 +1198,8 @@ reask:
             //propertyDataDirName.Text = "";
             propertyStopInheritance.Text = "";
             //propertyCleanupOnExit.Checked = false;
-            this.Text = packageEditor;
+
+            RefreshExplorer();   // Refresh Explorer (otherwise it fails to show the EXE's icon sometimes)
         }
 
         private bool TryDeleteFile(String FileName)
@@ -1216,6 +1248,7 @@ reask:
         {
             memorizedPassword = "";
             PackageClose();
+            mru = new MRU("Software\\Cameyo\\Packager\\MRU");
             DisplayMRU();
         }
 
@@ -1862,8 +1895,35 @@ reask:
         {
             Cameyo.OpenSrc.Common.Utils.ShellExec("http://www.cameyo.com/upgrade");
         }
+
+        public bool RequireElevation()
+        {
+            if (isElevatedProcess)
+                return true;
+            else
+            {
+                if (this.dirty)
+                    MessageBox.Show(Messages.Messages.reqElevationSaveWorkFirst, Messages.Messages.reqElevationTitle);
+                else
+                {
+                    if (MessageBox.Show(Messages.Messages.reqElevation, Messages.Messages.reqElevationTitle,
+                        MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+                    {
+                        int exitCode = -1;
+                        string fileName = virtPackage.openedFile;   // Must be before closing the package
+                        closeToolStripMenuItem_Click(null, null);   // Must be done before execution, otherwise the new Package Editor will fail (sharing violation)
+                        string myExeName = System.IO.Path.Combine(Utils.MyPath(), "PackageEditor.exe");
+                        if (Cameyo.OpenSrc.Common.Utils.ShellExec(myExeName, "\"" + fileName + "\"", "runas", ref exitCode, false))
+                            exitToolStripMenuItem_Click(null, null);
+                    }
+                }
+                return false;
+            }
+        }
     }
 
+    //
+    // RegListViewSorter class
     class RegListViewSorter : ListViewSorter
     {
         protected override int CompareItems(ListViewItem x, ListViewItem y)
@@ -1897,6 +1957,8 @@ reask:
         }
     }
 
+    //
+    // ListViewSorter class
     abstract class ListViewSorter : IComparer
     {
         protected int currentcolumn = -1;
@@ -1923,6 +1985,8 @@ reask:
         abstract protected int CompareItems(ListViewItem x, ListViewItem y);
     }
 
+    //
+    // MRUitem, class
     public class MRUitem
     {
         public MRUitem(String name, String file)
@@ -1934,6 +1998,8 @@ reask:
         public String file;
     }
 
+    //
+    // MRU class
     public class MRU
     {
         public int maxItems;

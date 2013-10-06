@@ -27,6 +27,9 @@ namespace PackageEditor
         private ArrayList currentkey;
         private AutoResetEvent regLoadAutoResetEvent;
 
+        public delegate bool DelegateRequireElevation();
+        private DelegateRequireElevation requireElevation;
+
         public delegate bool DelegateAddFileOrFolder(String path);
         public DelegateAddFileOrFolder Del_AddFOrF;
 
@@ -42,11 +45,12 @@ namespace PackageEditor
             set { currentkey = value; }
         }
 
-        public RegistryEditor(VirtPackage virtPackage, TreeView fsFolderTree, ListView fsFilesList,
-            Label fsFolderInfoFullName, ComboBox fsFolderInfoIsolationCombo,
-            ToolStripButton regRemoveBtn, ToolStripButton regEditBtn)
+        public RegistryEditor(VirtPackage virtPackage, DelegateRequireElevation requireElevation,
+            TreeView fsFolderTree, ListView fsFilesList, Label fsFolderInfoFullName, 
+            ComboBox fsFolderInfoIsolationCombo, ToolStripButton regRemoveBtn, ToolStripButton regEditBtn)
         {
             this.virtPackage = virtPackage;
+            this.requireElevation = requireElevation;
             this.fsFolderTree = fsFolderTree;
             this.fsFilesList = fsFilesList;
             this.fsFolderInfoFullName = fsFolderInfoFullName;
@@ -241,11 +245,8 @@ namespace PackageEditor
                 return;
 
             // Require elevation
-            if (!Cameyo.OpenSrc.Common.Utils.IsElevatedProcess())
-            {
-                MessageBox.Show(Messages.Messages.reqElevation, Messages.Messages.reqElevationTitle);
+            if (!requireElevation())
                 return;
-            }
 
             // Confirm
             if (MessageBox.Show("Delete key?", "Confirm", MessageBoxButtons.YesNo) != DialogResult.Yes)
@@ -268,11 +269,8 @@ namespace PackageEditor
         private void OnEditClick(object sender, EventArgs e)
         {
             // Require elevation
-            if (!Cameyo.OpenSrc.Common.Utils.IsElevatedProcess())
-            {
-                MessageBox.Show(Messages.Messages.reqElevation, Messages.Messages.reqElevationTitle);
+            if (!requireElevation())
                 return;
-            }
 
             // Notification window
             PackageBuiltNotify packageBuiltNotify = new PackageBuiltNotify();
@@ -380,11 +378,8 @@ namespace PackageEditor
         internal void RegFileImport()
         {
             // Require elevation
-            if (!Cameyo.OpenSrc.Common.Utils.IsElevatedProcess())
-            {
-                MessageBox.Show(Messages.Messages.reqElevation, Messages.Messages.reqElevationTitle);
+            if (!requireElevation())
                 return;
-            }
 
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Registry file (*.reg)|*.reg";

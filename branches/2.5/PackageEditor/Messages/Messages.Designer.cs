@@ -214,7 +214,7 @@ namespace PackageEditor.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please re-run the Package Editor elevated for this operation (right-click + Run as administrator)..
+        ///   Looks up a localized string similar to The program will not close and run elevated (Admin mode)..
         /// </summary>
         internal static string reqElevation {
             get {
@@ -223,7 +223,16 @@ namespace PackageEditor.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operation requires elevation.
+        ///   Looks up a localized string similar to Please save your work first..
+        /// </summary>
+        internal static string reqElevationSaveWorkFirst {
+            get {
+                return ResourceManager.GetString("reqElevationSaveWorkFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Elevation required.
         /// </summary>
         internal static string reqElevationTitle {
             get {

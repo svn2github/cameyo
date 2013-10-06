@@ -43,16 +43,17 @@ namespace Cameyo.OpenSrc.Common
             return false;
         }
 
-        static public bool ShellExec(string cmd, string args, ref int exitCode, bool wait)
+        static public bool ShellExec(string cmd, string args, string verb, ref int exitCode, bool wait)
         {
             try
             {
                 System.Diagnostics.ProcessStartInfo procStartInfo =
                     new System.Diagnostics.ProcessStartInfo(cmd, args);
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                procStartInfo.CreateNoWindow = true;
+                procStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+                procStartInfo.CreateNoWindow = false;
                 procStartInfo.UseShellExecute = true;
+                procStartInfo.Verb = verb;
                 proc.StartInfo = procStartInfo;
                 if (!proc.Start())
                     return false;
@@ -72,7 +73,7 @@ namespace Cameyo.OpenSrc.Common
         static public bool ShellExec(string cmd, string args)
         {
             int exitCode = 0;
-            return ShellExec(cmd, args, ref exitCode, false);
+            return ShellExec(cmd, args, "open", ref exitCode, false);
         }
 
         static public bool ShellExec(string cmd)
