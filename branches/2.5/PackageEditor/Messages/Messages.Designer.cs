@@ -214,7 +214,7 @@ namespace PackageEditor.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The program will not close and run elevated (Admin mode)..
+        ///   Looks up a localized string similar to The Package Editor will now close and run elevated (Admin mode)..
         /// </summary>
         internal static string reqElevation {
             get {

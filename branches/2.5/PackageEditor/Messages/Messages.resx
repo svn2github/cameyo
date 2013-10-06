@@ -169,7 +169,7 @@
     <value>Package saved</value>
   </data>
   <data name="reqElevation" xml:space="preserve">
-    <value>The program will not close and run elevated (Admin mode).</value>
+    <value>The Package Editor will now close and run elevated (Admin mode).</value>
   </data>
   <data name="reqElevationSaveWorkFirst" xml:space="preserve">
     <value>Please save your work first.</value>
