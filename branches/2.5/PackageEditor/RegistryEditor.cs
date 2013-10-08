@@ -241,7 +241,7 @@ namespace PackageEditor
         private void OnRemoveBtnClick(object sender, EventArgs e)
         {
             TreeNode node = fsFolderTree.SelectedNode;
-            if (node == null)
+            if (node == null || workKey == null)
                 return;
 
             // Require elevation
@@ -268,7 +268,14 @@ namespace PackageEditor
 
         private void OnEditClick(object sender, EventArgs e)
         {
-            // Require elevation
+            // Valid registry?
+            if (workKey == null)
+            {
+                MessageBox.Show("No registry in this package");
+                return;
+            }
+
+                // Require elevation
             if (!requireElevation())
                 return;
 
@@ -386,6 +393,7 @@ namespace PackageEditor
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 AddFileOrFolder(ofd.FileName);
+                virtPackage.SaveRegWorkKey();
             }
         }
     }
