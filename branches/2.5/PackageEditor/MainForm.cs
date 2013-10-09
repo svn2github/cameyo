@@ -976,6 +976,11 @@ reask:
             else
                 propertyProtPassword.Text = "[UNCHANGED]";
 
+            // ScmDirect (direct-registration services support)
+            propertyScmDirect.Visible = virtPackage.GetProperty("NewServices") == "1";
+            propertyScmDirect.Checked = virtPackage.GetProperty("Services").Equals("Direct", StringComparison.InvariantCultureIgnoreCase) &&
+                virtPackage.GetProperty("RegMode").Equals("Disk", StringComparison.InvariantCultureIgnoreCase);
+
             // DisplayLogo
             propertyDisplayLogo.Checked = string.IsNullOrEmpty(virtPackage.GetProperty("Branding"));
 
@@ -1068,6 +1073,12 @@ reask:
             Ret &= virtPackage.SetProtection(propertyProtPassword.Text, (propertyProt.Checked ? 3 : 0), null);
             if (!string.IsNullOrEmpty(propertyProtPassword.Text) && propertyProtPassword.Text != "[UNCHANGED]")
                 memorizedPassword = propertyProtPassword.Text;
+
+            // ScmDirect (direct-registration services support)
+            if (propertyScmDirect.Checked)
+                Ret &= virtPackage.SetProperty("Services", "Direct") && virtPackage.SetProperty("RegMode", "Disk");
+            else
+                Ret &= virtPackage.SetProperty("Services", "") && virtPackage.SetProperty("RegMode", "");
 
             // DisplayLogo
             Ret &= propertyDisplayLogo.Checked ? virtPackage.SetProperty("Branding", "") : virtPackage.SetProperty("Branding", "None");

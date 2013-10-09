@@ -140,6 +140,7 @@
             this.regExportBtn = new System.Windows.Forms.ToolStripButton();
             this.tabAdvanced = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.propertyScmDirect = new System.Windows.Forms.CheckBox();
             this.propertyDisplayLogo = new System.Windows.Forms.CheckBox();
             this.cbDatFile = new System.Windows.Forms.CheckBox();
             this.lnkAutoUpdate = new System.Windows.Forms.LinkLabel();
@@ -1047,6 +1048,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.propertyScmDirect);
             this.groupBox5.Controls.Add(this.propertyDisplayLogo);
             this.groupBox5.Controls.Add(this.cbDatFile);
             this.groupBox5.Controls.Add(this.lnkAutoUpdate);
@@ -1057,6 +1059,12 @@
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            // 
+            // propertyScmDirect
+            // 
+            resources.ApplyResources(this.propertyScmDirect, "propertyScmDirect");
+            this.propertyScmDirect.Name = "propertyScmDirect";
+            this.propertyScmDirect.UseVisualStyleBackColor = true;
             // 
             // propertyDisplayLogo
             // 
@@ -1647,6 +1655,7 @@
         private System.Windows.Forms.Panel panelLicense;
         private System.Windows.Forms.Label lblNotCommercial;
         private System.Windows.Forms.LinkLabel lnkUpgrade;
+        private System.Windows.Forms.CheckBox propertyScmDirect;
 
     }
 }
