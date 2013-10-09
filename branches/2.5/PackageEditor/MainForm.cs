@@ -1170,13 +1170,17 @@ reask:
             Type shellApplicationType = Type.GetTypeFromCLSID(CLSID_ShellApplication, true);
 
             object shellApplication = Activator.CreateInstance(shellApplicationType);
-            object windows = shellApplicationType.InvokeMember("Windows", System.Reflection.BindingFlags.InvokeMethod, null, shellApplication, new object[] { });
+            object windows = shellApplicationType.InvokeMember("Windows", System.Reflection.BindingFlags.InvokeMethod, null, shellApplication, new object[] {});
+            if (windows == null)
+                return;
 
             Type windowsType = windows.GetType();
             object count = windowsType.InvokeMember("Count", System.Reflection.BindingFlags.GetProperty, null, windows, null);
             for (int i = 0; i < (int)count; i++)
             {
                 object item = windowsType.InvokeMember("Item", System.Reflection.BindingFlags.InvokeMethod, null, windows, new object[] { i });
+                if (item == null)
+                    continue;
                 Type itemType = item.GetType();
 
                 // Only refresh Windows Explorer windows
