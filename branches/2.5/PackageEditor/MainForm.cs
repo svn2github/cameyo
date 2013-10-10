@@ -1097,7 +1097,7 @@ reask:
 
                 newCommand = "%MyExe%" + '>' + newCommand.Trim();
             }
-            if (oldCommand == "")
+            if (string.IsNullOrEmpty(oldCommand) && !string.IsNullOrEmpty(newCommand))
                 str += ";" + newCommand;
             else
             {
@@ -1126,7 +1126,7 @@ reask:
 
                 newCommand = "%MyExe%" + '>' + newCommand.Trim();
             }
-            if (oldCommand == "")
+            if (string.IsNullOrEmpty(oldCommand) && !string.IsNullOrEmpty(newCommand))
                 str += ";" + newCommand;
             else
             {
