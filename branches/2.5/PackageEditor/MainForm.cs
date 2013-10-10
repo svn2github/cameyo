@@ -979,7 +979,7 @@ reask:
             // ScmDirect (direct-registration services support)
             propertyScmDirect.Visible = virtPackage.GetProperty("NewServices") == "1";
             propertyScmDirect.Checked = virtPackage.GetProperty("Services").Equals("Direct", StringComparison.InvariantCultureIgnoreCase) &&
-                virtPackage.GetProperty("RegMode").Equals("Disk", StringComparison.InvariantCultureIgnoreCase);
+                virtPackage.GetProperty("RegMode").Equals("Extract", StringComparison.InvariantCultureIgnoreCase);
 
             // DisplayLogo
             propertyDisplayLogo.Checked = string.IsNullOrEmpty(virtPackage.GetProperty("Branding"));
@@ -1076,7 +1076,7 @@ reask:
 
             // ScmDirect (direct-registration services support)
             if (propertyScmDirect.Checked)
-                Ret &= virtPackage.SetProperty("Services", "Direct") && virtPackage.SetProperty("RegMode", "Disk");
+                Ret &= virtPackage.SetProperty("Services", "Direct") && virtPackage.SetProperty("RegMode", "Extract");
             else
                 Ret &= virtPackage.SetProperty("Services", "") && virtPackage.SetProperty("RegMode", "");
 
