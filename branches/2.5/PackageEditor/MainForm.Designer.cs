@@ -792,6 +792,7 @@
             this.propertyVirtModeDisk.Name = "propertyVirtModeDisk";
             this.propertyVirtModeDisk.TabStop = true;
             this.propertyVirtModeDisk.UseVisualStyleBackColor = true;
+            this.propertyVirtModeDisk.CheckedChanged += new System.EventHandler(this.propertyVirtMode_CheckedChanged);
             this.propertyVirtModeDisk.Click += new System.EventHandler(this.PropertyChange);
             // 
             // label9
