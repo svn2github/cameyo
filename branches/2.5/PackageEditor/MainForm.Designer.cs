@@ -187,6 +187,7 @@
             this.panelLicense = new System.Windows.Forms.Panel();
             this.lnkUpgrade = new System.Windows.Forms.LinkLabel();
             this.lblNotCommercial = new System.Windows.Forms.Label();
+            this.cbVolatileRegistry = new System.Windows.Forms.CheckBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -1049,6 +1050,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.cbVolatileRegistry);
             this.groupBox5.Controls.Add(this.propertyScmDirect);
             this.groupBox5.Controls.Add(this.propertyDisplayLogo);
             this.groupBox5.Controls.Add(this.cbDatFile);
@@ -1272,6 +1274,8 @@
             // 
             resources.ApplyResources(this.pictureBox2, "pictureBox2");
             this.pictureBox2.Image = global::PackageEditor.Properties.Resources._071;
+            this.pictureBox2.MaximumSize = new System.Drawing.Size(383, 344);
+            this.pictureBox2.MinimumSize = new System.Drawing.Size(383, 344);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
@@ -1399,6 +1403,12 @@
             // 
             resources.ApplyResources(this.lblNotCommercial, "lblNotCommercial");
             this.lblNotCommercial.Name = "lblNotCommercial";
+            // 
+            // cbVolatileRegistry
+            // 
+            resources.ApplyResources(this.cbVolatileRegistry, "cbVolatileRegistry");
+            this.cbVolatileRegistry.Name = "cbVolatileRegistry";
+            this.cbVolatileRegistry.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -1657,6 +1667,7 @@
         private System.Windows.Forms.Label lblNotCommercial;
         private System.Windows.Forms.LinkLabel lnkUpgrade;
         private System.Windows.Forms.CheckBox propertyScmDirect;
+        private System.Windows.Forms.CheckBox cbVolatileRegistry;
 
     }
 }
