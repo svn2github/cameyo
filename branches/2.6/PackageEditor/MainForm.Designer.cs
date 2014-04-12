@@ -54,10 +54,6 @@
             this.tbValue = new System.Windows.Forms.TextBox();
             this.tbSize = new System.Windows.Forms.TextBox();
             this.tbFile = new System.Windows.Forms.TextBox();
-            this.regFilesList = new PackageEditor.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -150,6 +146,8 @@
             this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
             this.propertyStopInheritance = new System.Windows.Forms.TextBox();
             this.groupConstraints = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbPasswordConfirm = new System.Windows.Forms.TextBox();
             this.lnkActiveDirectory = new System.Windows.Forms.LinkLabel();
             this.propertyTtlResistRemove = new System.Windows.Forms.CheckBox();
             this.propertyProtPassword = new System.Windows.Forms.TextBox();
@@ -189,6 +187,10 @@
             this.panelLicense = new System.Windows.Forms.Panel();
             this.lnkUpgrade = new System.Windows.Forms.LinkLabel();
             this.lblNotCommercial = new System.Windows.Forms.Label();
+            this.regFilesList = new PackageEditor.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -441,38 +443,6 @@
             this.tbFile.Name = "tbFile";
             this.tbFile.ReadOnly = true;
             // 
-            // regFilesList
-            // 
-            this.regFilesList.AllowColumnReorder = true;
-            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            resources.ApplyResources(this.regFilesList, "regFilesList");
-            this.regFilesList.DoubleClickActivation = false;
-            this.regFilesList.FullRowSelect = true;
-            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
-            this.regFilesList.Name = "regFilesList";
-            this.regFilesList.UseCompatibleStateImageBehavior = false;
-            this.regFilesList.View = System.Windows.Forms.View.Details;
-            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-            // 
-            // columnHeader3
-            // 
-            resources.ApplyResources(this.columnHeader3, "columnHeader3");
-            // 
-            // columnHeader4
-            // 
-            resources.ApplyResources(this.columnHeader4, "columnHeader4");
-            // 
-            // columnHeader5
-            // 
-            resources.ApplyResources(this.columnHeader5, "columnHeader5");
-            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.panel6);
@@ -629,13 +599,13 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.BackColor = System.Drawing.Color.White;
             this.tabGeneral.Controls.Add(this.dropboxLabel);
             this.tabGeneral.Controls.Add(this.groupBox3);
             this.tabGeneral.Controls.Add(this.groupBox1);
             this.tabGeneral.Controls.Add(this.dropboxButton);
             resources.ApplyResources(this.tabGeneral, "tabGeneral");
             this.tabGeneral.Name = "tabGeneral";
-            this.tabGeneral.UseVisualStyleBackColor = true;
             // 
             // dropboxLabel
             // 
@@ -892,11 +862,11 @@
             // 
             // tabFileSystem
             // 
+            this.tabFileSystem.BackColor = System.Drawing.Color.White;
             this.tabFileSystem.Controls.Add(this.panel5);
             this.tabFileSystem.Controls.Add(this.fileToolStrip);
             resources.ApplyResources(this.tabFileSystem, "tabFileSystem");
             this.tabFileSystem.Name = "tabFileSystem";
-            this.tabFileSystem.UseVisualStyleBackColor = true;
             // 
             // panel5
             // 
@@ -974,6 +944,7 @@
             // 
             // panel8
             // 
+            this.panel8.BackColor = System.Drawing.Color.White;
             this.panel8.Controls.Add(this.panel1);
             this.panel8.Controls.Add(this.panel7);
             resources.ApplyResources(this.panel8, "panel8");
@@ -1041,13 +1012,13 @@
             // 
             // tabAdvanced
             // 
+            this.tabAdvanced.BackColor = System.Drawing.Color.White;
             this.tabAdvanced.Controls.Add(this.groupBox5);
             this.tabAdvanced.Controls.Add(this.groupConstraints);
             this.tabAdvanced.Controls.Add(this.groupBox7);
             this.tabAdvanced.Controls.Add(this.groupBox4);
             resources.ApplyResources(this.tabAdvanced, "tabAdvanced");
             this.tabAdvanced.Name = "tabAdvanced";
-            this.tabAdvanced.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -1119,6 +1090,8 @@
             // 
             // groupConstraints
             // 
+            this.groupConstraints.Controls.Add(this.label6);
+            this.groupConstraints.Controls.Add(this.tbPasswordConfirm);
             this.groupConstraints.Controls.Add(this.lnkActiveDirectory);
             this.groupConstraints.Controls.Add(this.propertyTtlResistRemove);
             this.groupConstraints.Controls.Add(this.propertyProtPassword);
@@ -1130,6 +1103,16 @@
             resources.ApplyResources(this.groupConstraints, "groupConstraints");
             this.groupConstraints.Name = "groupConstraints";
             this.groupConstraints.TabStop = false;
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // tbPasswordConfirm
+            // 
+            resources.ApplyResources(this.tbPasswordConfirm, "tbPasswordConfirm");
+            this.tbPasswordConfirm.Name = "tbPasswordConfirm";
             // 
             // lnkActiveDirectory
             // 
@@ -1417,6 +1400,38 @@
             resources.ApplyResources(this.lblNotCommercial, "lblNotCommercial");
             this.lblNotCommercial.Name = "lblNotCommercial";
             // 
+            // regFilesList
+            // 
+            this.regFilesList.AllowColumnReorder = true;
+            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            resources.ApplyResources(this.regFilesList, "regFilesList");
+            this.regFilesList.DoubleClickActivation = false;
+            this.regFilesList.FullRowSelect = true;
+            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
+            this.regFilesList.Name = "regFilesList";
+            this.regFilesList.UseCompatibleStateImageBehavior = false;
+            this.regFilesList.View = System.Windows.Forms.View.Details;
+            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+            // 
+            // columnHeader3
+            // 
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
+            // 
+            // columnHeader4
+            // 
+            resources.ApplyResources(this.columnHeader4, "columnHeader4");
+            // 
+            // columnHeader5
+            // 
+            resources.ApplyResources(this.columnHeader5, "columnHeader5");
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1676,6 +1691,8 @@
         private System.Windows.Forms.CheckBox propertyScmDirect;
         private System.Windows.Forms.LinkLabel lnkActiveDirectory;
         private System.Windows.Forms.CheckBox cbVolatileRegistry;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbPasswordConfirm;
 
     }
 }

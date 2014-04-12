@@ -406,8 +406,15 @@ namespace PackageEditor
                 message += "- AppID is a required field to save a package.\r\n";
             if (String.IsNullOrEmpty(virtPackage.GetProperty("AutoLaunch")))
                 message += "- The package does not have any program(s) selected to launch.\r\nPlease select a program to launch on the tab:General > Panel:Basics > Item:Startup.";
-            if (propertyProt.Checked && string.IsNullOrEmpty(propertyProtPassword.Text))
-                message += "- No password specified.";
+            if (propertyProt.Checked)
+            {
+                if (string.IsNullOrEmpty(propertyProtPassword.Text))
+                    message += "- No password specified.";
+                else if (propertyProtPassword.Text != "[UNCHANGED]" && string.IsNullOrEmpty(tbPasswordConfirm.Text))
+                    message += "- Please confirm password.";
+                else if (propertyProtPassword.Text != "[UNCHANGED]" && propertyProtPassword.Text != tbPasswordConfirm.Text)
+                    message += "- Password confirmation mismatch. Please confirm password.";
+            }
             return message == "";
         }
 
@@ -610,7 +617,7 @@ reask:
             OpenFileDialog openFileDialog = new OpenFileDialog();
             //openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Cameyo apps";
             openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "Virtual app (*.cameyo.exe;*.cameyo.dat)|*.cameyo.exe;*.cameyo.dat|All files (*.*)|*.*";
+            openFileDialog.Filter = "Executable files (*.exe)|*.exe|Virtual app (*.cameyo.exe;*.cameyo.dat)|*.cameyo.exe;*.cameyo.dat|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 memorizedPassword = "";
