@@ -1265,8 +1265,8 @@ reask:
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            memorizedPassword = "";
             PackageClose();
+            memorizedPassword = "";   // Must be after PackageClose; otherwise PackageClose may call PackageSave, which may memorize password
             mru = new MRU("Software\\Cameyo\\Packager\\MRU");
             DisplayMRU();
         }
