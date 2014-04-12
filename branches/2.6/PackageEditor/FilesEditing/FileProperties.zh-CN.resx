@@ -135,4 +135,13 @@
   <data name="groupBox.Text" xml:space="preserve">
     <value>属性</value>
   </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="chkFileFlagDEPLOYED_RAM.Text" xml:space="preserve">
+    <value>强制解压(内存模式)</value>
+  </data>
 </root>

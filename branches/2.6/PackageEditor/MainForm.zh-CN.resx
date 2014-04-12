@@ -360,4 +360,40 @@
   <data name="propertyVirtModeRam.Text" xml:space="preserve">
     <value>内存模式: 直接从内存运行,不释放文件到硬盘上.</value>
   </data>
+  <data name="cbDatFile.Text" xml:space="preserve">
+    <value>将数据包保存为.DAT，和启动程序分开（超过2 GB的应用建议启用）</value>
+  </data>
+  <data name="cbVolatileRegistry.Text" xml:space="preserve">
+    <value>Volatile virtual registry</value>
+  </data>
+  <data name="exportXmlToolStripMenuItem.Text" xml:space="preserve">
+    <value>导出为XML(&amp;E)</value>
+  </data>
+  <data name="groupConstraints.Text" xml:space="preserve">
+    <value>安全和有效期设置</value>
+  </data>
+  <data name="lnkActiveDirectory.Text" xml:space="preserve">
+    <value>Active Directory权限</value>
+  </data>
+  <data name="lnkAutoUpdate.Text" xml:space="preserve">
+    <value>自动更新</value>
+  </data>
+  <data name="lnkUpgrade.Text" xml:space="preserve">
+    <value>升级到企业版/开发版（解锁高级功能）</value>
+  </data>
+  <data name="propertyDisplayLogo.Text" xml:space="preserve">
+    <value>显示 Cameyo 标志</value>
+  </data>
+  <data name="propertyProt.Text" xml:space="preserve">
+    <value>启密码保护，防止编辑：</value>
+  </data>
+  <data name="propertyScmDirect.Text" xml:space="preserve">
+    <value>允许在系统中注册服务</value>
+  </data>
+  <data name="propertyTtlDays.Text" xml:space="preserve">
+    <value>有效期(天)</value>
+  </data>
+  <data name="propertyTtlResistRemove.Text" xml:space="preserve">
+    <value>删除应用时不重置应用有效期</value>
+  </data>
 </root>

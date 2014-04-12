@@ -138,4 +138,7 @@
   <data name="propertyLocalStorageExeDir.Text" xml:space="preserve">
     <value>可执行应用程序同一目录下</value>
   </data>
+  <data name="propertyDataDir.Text" xml:space="preserve">
+    <value>保存用户数据到其它目录:</value>
+  </data>
 </root>

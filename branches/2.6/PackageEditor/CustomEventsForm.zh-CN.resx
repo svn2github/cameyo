@@ -153,4 +153,16 @@
   <data name="label4.Text" xml:space="preserve">
     <value>参数(可选):</value>
   </data>
+  <data name="comboBox.Items4" xml:space="preserve">
+    <value>虚拟化进程启动时(内)</value>
+  </data>
+  <data name="comboBox.Items5" xml:space="preserve">
+    <value>虚拟化进程启动时(外)</value>
+  </data>
+  <data name="comboBox.Items6" xml:space="preserve">
+    <value>虚拟化进程结束(内)</value>
+  </data>
+  <data name="comboBox.Items7" xml:space="preserve">
+    <value>虚拟化进程结束(外)</value>
+  </data>
 </root>
