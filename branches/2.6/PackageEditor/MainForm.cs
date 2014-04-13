@@ -1005,6 +1005,7 @@ reask:
                 propertyProtPassword.Text = "";
             else
                 propertyProtPassword.Text = "[UNCHANGED]";
+            tbPasswordConfirm.Text = propertyProtPassword.Text;
 
             // ScmDirect (direct-registration services support)
             propertyScmDirect.Visible = virtPackage.GetProperty("NewServices") == "1";
@@ -1923,13 +1924,19 @@ reask:
         private void propertyProtPassword_Enter(object sender, EventArgs e)
         {
             if (propertyProtPassword.Text == "[UNCHANGED]")
+            {
                 propertyProtPassword.Text = "";
+                tbPasswordConfirm.Text = "";
+            }
         }
 
         private void propertyProt_CheckedChanged(object sender, EventArgs e)
         {
             if (propertyProtPassword.Text == "[UNCHANGED]" && propertyProt.Checked)
+            {
                 propertyProtPassword.Text = "";
+                tbPasswordConfirm.Text = "";
+            }
         }
 
         private void lnkUpgrade_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
