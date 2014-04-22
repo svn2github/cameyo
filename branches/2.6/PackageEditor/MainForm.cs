@@ -206,6 +206,14 @@ namespace PackageEditor
             }
         }
 
+        static public void DisableControl(Control control)
+        {
+            control.Enabled = false;
+            control.ForeColor = System.Drawing.SystemColors.GrayText;
+            if (!control.Text.Contains("(Pro version)"))
+                control.Text += " (Pro version)";
+        }
+
         private void EnableDisablePackageControls(bool enable)
         {
             tabControl.Visible = enable;
@@ -219,13 +227,13 @@ namespace PackageEditor
             int licenseType = VirtPackage.LicDataLoadFromFile(null);
             if (licenseType < VirtPackage.LICENSETYPE_DEV)
             {
-                lnkAutoUpdate.Visible = false;
-                propertyDisplayLogo.Visible = false;
+                DisableControl(lnkAutoUpdate);
+                DisableControl(propertyDisplayLogo);
             }
             if (licenseType < VirtPackage.LICENSETYPE_PRO)
             {
-                groupConstraints.Visible = false;
-                lnkCustomEvents.Visible = false;
+                DisableControl(groupConstraints);
+                DisableControl(lnkCustomEvents);
             }
             lblNotCommercial.Visible = (licenseType < VirtPackage.LICENSETYPE_DEV);   // "Not for commercial use"
             lnkUpgrade.Visible = (licenseType < VirtPackage.LICENSETYPE_PRO);         // "Upgrade"
