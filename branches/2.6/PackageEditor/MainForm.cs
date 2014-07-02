@@ -35,10 +35,17 @@ namespace PackageEditor
         string helpVirtModeDisk, helpVirtModeRam;
         string helpIsolationModeData, helpIsolationModeIsolated, helpIsolationModeFull;
         private bool isElevatedProcess = Cameyo.OpenSrc.Common.Utils.IsElevatedProcess();
+        private bool generateEncKeyAlreadyWarned = false, changePwdKeyAlreadyWarned = false;
 
-        // creation of delegate for PackageOpen
+        // Creation of delegate for PackageOpen
         private delegate bool DelegatePackageOpen(String path);
         DelegatePackageOpen Del_Open;
+
+        // Encryption constants
+        const int SaltSize = 20;
+        const int Pbkdf2Iterations = 1000;
+        const int KeySizeBytes = 128 / 8;
+        const int KeySizeBits = 128;
 
         void SplitTextHelp(RadioButton radio, out string helpText)
         {
@@ -232,7 +239,10 @@ namespace PackageEditor
             }
             if (licenseType < VirtPackage.LICENSETYPE_PRO)
             {
-                DisableControl(groupConstraints);
+                DisableControl(groupEditProtect);
+                DisableControl(groupDataEncrypt);
+                DisableControl(groupExpiration);
+                DisableControl(groupUsageRights);
                 DisableControl(lnkCustomEvents);
             }
             lblNotCommercial.Visible = (licenseType < VirtPackage.LICENSETYPE_DEV);   // "Not for commercial use"
@@ -418,10 +428,29 @@ namespace PackageEditor
             {
                 if (string.IsNullOrEmpty(propertyProtPassword.Text))
                     message += "- No password specified.";
+                else if (propertyProtPassword.Text.Length < 4)
+                    message += "- Password too short.";
                 else if (propertyProtPassword.Text != "[UNCHANGED]" && string.IsNullOrEmpty(tbPasswordConfirm.Text))
                     message += "- Please confirm password.";
                 else if (propertyProtPassword.Text != "[UNCHANGED]" && propertyProtPassword.Text != tbPasswordConfirm.Text)
                     message += "- Password confirmation mismatch. Please confirm password.";
+            }
+            if (propertyEncryption.Checked)
+            {
+                if (propertyEncryptUsingPassword.Checked)
+                {
+                    if (string.IsNullOrEmpty(tbEncryptionPwd.Text))
+                        message += "- No encryption password specified.";
+                    else if (tbEncryptionPwd.Text.Length < 4)
+                        message += "- Encryption password too short.";
+                    else if (tbEncryptionPwd.Text != tbEncryptionPwdConfirm.Text)
+                        message += "- Encryption passwords mismatch. Please confirm password.";
+                }
+                else if (propertyEncryptUsingKey.Checked)
+                {
+                    if (string.IsNullOrEmpty(tbEncryptionKey.Text) || tbEncryptionKey.Text.Length != 16 * 2)
+                        message += "- Please generate an encryption key.";
+                }
             }
             return message == "";
         }
@@ -703,7 +732,7 @@ reask:
                         xmlOut.WriteAttributeString("string", (string)regKey.GetValue(value));
                         break;
                     case RegistryValueKind.DWord:
-                        xmlOut.WriteAttributeString("dword", ((Int32)regKey.GetValue(value)).ToString());
+                        xmlOut.WriteAttributeString("dword", ((Int32)regKey.GetValue(value)).ToString("X"));
                         break;
                     case RegistryValueKind.Binary:
                         byte[] bin = (byte[])regKey.GetValue(value);
@@ -735,7 +764,7 @@ reask:
             saveFileDialog.DefaultExt = "xml";*/
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string appID = virtPackage.GetProperty("AppID");
+                string appID = virtPackage.GetProperty("AppID").Trim();
                 string outDir = Path.Combine(saveFileDialog.SelectedPath, appID + ".Blueprint");
                 if (Directory.Exists(outDir))
                 {
@@ -756,7 +785,20 @@ reask:
                     }
                 }
 
-                XmlWriterSettings writerSettings = new XmlWriterSettings();
+                // Start by exporting package's properties using -ExportAllProperties
+                string packageExeFile = virtPackage.openedFile;
+                string propsFile = Path.Combine(outDir, "PropsTmp.xml");
+                int exitCode = -1;
+                bool packagerOk = (ExecProg(PackagerExe(), String.Format("-Quiet \"-ExportAllProperties:{0}\" \"{1}\"",
+                    propsFile, packageExeFile), true, ref exitCode) && exitCode == 0);
+                if (!packagerOk)
+                {
+                    MessageBox.Show("ExportAllProperties failed: " + exitCode.ToString());
+                    return;
+                }
+
+                // Complete XML with Files and Registry
+                var writerSettings = new XmlWriterSettings();
                 writerSettings.OmitXmlDeclaration = true;
                 writerSettings.Indent = true;
                 using (XmlWriter xmlOut = XmlWriter.Create(Path.Combine(outDir, appID + ".xml"), writerSettings))
@@ -764,6 +806,41 @@ reask:
                     string outFilesDir = outDir;
                     xmlOut.WriteStartDocument();
                     xmlOut.WriteStartElement("CameyoPkg");
+
+                    // Read existing XML Properties/Property nodes
+                    xmlOut.WriteStartElement("Properties");
+                    {
+                        var xd = new System.Xml.XPath.XPathDocument(propsFile);
+                        var navigator = xd.CreateNavigator();
+                        var iterator = navigator.Select("//Properties/Property");
+                        foreach (System.Xml.XPath.XPathNavigator n in iterator)
+                        {
+                            n.MoveToFirstAttribute();
+                            var name = n.Name;
+                            var val = n.Value;
+                            xmlOut.WriteStartElement("Property");
+                            xmlOut.WriteAttributeString(name, val);
+                            xmlOut.WriteEndElement();
+                        }
+                    }
+                    xmlOut.WriteEndElement();
+                    /*var xmlReader = XmlReader.Create(propsFile);
+                    try
+                    {
+                        if (xmlReader.ReadToDescendant("Properties"))
+                        {
+                            while (xmlReader.Read())
+                            {
+                                var str = xmlReader.Name;
+                                xmlOut.WriteNode(xmlReader, true);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error parsing exported properties' XML: " + ex.ToString());
+                        return;
+                    }
 
                     // Properties
                     string autoLaunch = virtPackage.GetProperty("AutoLaunch");
@@ -795,7 +872,7 @@ reask:
                             xmlOut.WriteEndElement();
                         }
                     }
-                    xmlOut.WriteEndElement();
+                    xmlOut.WriteEndElement();*/
 
                     // AutoLaunch property -> autoLaunchFiles list
                     var autoLaunchFiles = new List<string>();
@@ -824,7 +901,7 @@ reask:
                     xmlOut.WriteEndElement();
 
                     // Sandbox
-                    xmlOut.WriteStartElement("Sandbox");
+                    /*xmlOut.WriteStartElement("Sandbox");
                     {
                         xmlOut.WriteStartElement("FileSystem");
                         xmlOut.WriteAttributeString("access", "Full");
@@ -834,7 +911,7 @@ reask:
                         xmlOut.WriteAttributeString("access", "Full");
                         xmlOut.WriteEndElement();
                     }
-                    xmlOut.WriteEndElement();
+                    xmlOut.WriteEndElement();*/
 
                     xmlOut.WriteEndElement();
                     xmlOut.WriteEndDocument();
@@ -843,6 +920,7 @@ reask:
 
                     xmlOut.Close();
 
+                    try { File.Delete(propsFile); } catch { }
                     MessageBox.Show("Created in:\n" + outDir);
                 }
             }
@@ -898,6 +976,7 @@ reask:
             //    virtPackage.SetProperty("DataMode", "TRUE");   // Important to be able to switch to Isolated mode (to unisolate %Personal% etc)
 
             propertyIsolationMode_CheckedChanged(null, null);
+            propertyEncryption_CheckedChanged(null, null);
         }
 
         private void OnPackageOpen()
@@ -1023,6 +1102,29 @@ reask:
             // DisplayLogo
             propertyDisplayLogo.Checked = string.IsNullOrEmpty(virtPackage.GetProperty("Branding"));
 
+            // Encryption
+            propertyEncryption.Checked = (!string.IsNullOrEmpty(virtPackage.GetProperty("EncryptionExts")));
+            if (virtPackage.GetProperty("EncryptionMethod").Equals("Pwd", StringComparison.InvariantCultureIgnoreCase))
+                propertyEncryptUsingPassword.Checked = true;
+            else if (virtPackage.GetProperty("EncryptionMethod").Equals("Key", StringComparison.InvariantCultureIgnoreCase))
+                propertyEncryptUsingKey.Checked = true;
+            else if (virtPackage.GetProperty("EncryptionMethod").Equals("CreatePwd", StringComparison.InvariantCultureIgnoreCase))
+                propertyEncryptUserCreatedPassword.Checked = true;
+            tbEncryptionKey.Text = "";
+            tbEncryptionPwd.Text = "";
+            tbEncryptionPwdConfirm.Text = "";
+            
+            // EncryptionPwdHash: SHA2 hash of the real password
+            if (virtPackage.GetProperty("EncryptionPwdHash").Length == (KeySizeBytes) * 2)   // SHA2 hash (32 bytes) encoded in HEX form
+            {
+                tbEncryptionPwd.Text = "[UNCHANGED]"; //virtPackage.GetProperty("EncryptionPwdHash");
+                tbEncryptionPwdConfirm.Text = tbEncryptionPwd.Text;
+            }
+
+            // EncryptionKey: directly the key (in HEX format)
+            if (virtPackage.GetProperty("EncryptionKey").Length == KeySizeBytes * 2)
+                tbEncryptionKey.Text = virtPackage.GetProperty("EncryptionKey");
+
             // Open
             this.Text = CaptionText();
             dirty = dirtyIcon = false;
@@ -1124,6 +1226,82 @@ reask:
 
             // DisplayLogo
             Ret &= propertyDisplayLogo.Checked ? virtPackage.SetProperty("Branding", "") : virtPackage.SetProperty("Branding", "None");
+
+            // Encryption
+            Ret &= virtPackage.SetProperty("EncryptionExts", propertyEncryption.Checked ? "*" : "");
+
+            // EncryptionMethod
+            if (propertyEncryptUsingKey.Checked)
+                Ret &= virtPackage.SetProperty("EncryptionMethod", "Key");
+            else if (propertyEncryptUsingPassword.Checked)
+                Ret &= virtPackage.SetProperty("EncryptionMethod", "Pwd");
+            else if (propertyEncryptUserCreatedPassword.Checked)
+                Ret &= virtPackage.SetProperty("EncryptionMethod", "CreatePwd");
+            else
+                Ret &= virtPackage.SetProperty("EncryptionMethod", "");
+
+            // EncryptionKey
+            if (tbEncryptionKey.Text.Length == 16 * 2)
+                Ret &= virtPackage.SetProperty("EncryptionKey", tbEncryptionKey.Text);
+
+            // EncryptionPwdHash
+            if (tbEncryptionPwd.Text.Length == 0)
+                Ret &= virtPackage.SetProperty("EncryptionPwdHash", "");
+            else 
+            {
+                // Only if password was changed from when the package was loaded
+                if (tbEncryptionPwd.Text != "[UNCHANGED]")   // Password has changed from when the package was loaded
+                {
+                    var rngCsp = new System.Security.Cryptography.RNGCryptoServiceProvider();
+
+                    // Steps for password-based key:
+                    // 1. Generate a long key (this is just a randomly generated amount of bytes in hex, you can use 128 bytes).
+                    //    Use this key to encrypt your file with AES (meaning you use it as a password)
+                    byte[] randomKey = new byte[KeySizeBytes];   // Our AES algorithm uses a 128-bit key (16 bytes)
+                    rngCsp.GetBytes(randomKey);   // <-- The key with which files will be encrypted / decrypted
+
+                    // 2. Encrypt the key itself with AES using your password (which is a bit shorter but easier to remember. 
+                    //    Now AES requires this again to be either 128, 192 or 256 bits of length so you need to make your 
+                    //    password of that length. Hence you can just use PBKDF2 (or scrypt or bcrypt) to create a fixed key 
+                    //    length from your password. DO NOT STORE THIS.
+                    byte[] salt = new byte[SaltSize];
+                    rngCsp.GetBytes(salt);
+
+                    // Transform user password into a key that we can encrypt randomKey with
+                    var pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(Encoding.ASCII.GetBytes(tbEncryptionPwd.Text), salt, Pbkdf2Iterations);
+                    var keyEncryptionKey = pbkdf2.GetBytes(KeySizeBytes);   // tbEncryptionPwd.Text -> Key. This key will be used for encrypting randomKey.
+                    var keyEncryptor = new System.Security.Cryptography.RijndaelManaged();
+                    keyEncryptor.BlockSize = 128;
+                    keyEncryptor.Mode = System.Security.Cryptography.CipherMode.CFB;
+                    keyEncryptor.Padding = System.Security.Cryptography.PaddingMode.None;
+                    keyEncryptor.Key = keyEncryptionKey;
+                    keyEncryptor.GenerateIV();
+                    var encryptor = keyEncryptor.CreateEncryptor(keyEncryptor.Key, keyEncryptor.IV);
+                    var msEncrypt = new MemoryStream();
+                    using (var csEncrypt = new System.Security.Cryptography.CryptoStream(msEncrypt, encryptor, System.Security.Cryptography.CryptoStreamMode.Write))
+                    {
+                        using (var swEncrypt = new BinaryWriter(csEncrypt))
+                        {
+                            byte[] toWrite = randomKey;//Encoding.ASCII.GetBytes("1234567890123456");
+                            swEncrypt.Write(toWrite);
+                        }
+                    }
+                    var encryptedKey = msEncrypt.ToArray();   // <-- randomKey encrypted with AES, whose key = PBKDF2(tbEncryptionPwd.Text)
+
+                    // 3. Keep a hash of your hashed password using PBKDF2 (or bcrypt or scrypt). This will allow you to check 
+                    //    if the password is correct before trying to decrypt your encrypted key:
+                    //       hash(hash(password)) --> can be stored
+                    //       hash(password) --> should not be stored
+                    pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(keyEncryptionKey, salt, Pbkdf2Iterations);   // Iterations slow down hashing (which helps against brute-force)
+                    var keyEncryptionKeyHashed = pbkdf2.GetBytes(KeySizeBytes);                                       // Second PBKDF2 hash
+
+                    // Store
+                    Ret &= virtPackage.SetProperty("EncryptionPwdKey", Utils.HexDump(encryptedKey));             // Encryption key, in encrypted form
+                    Ret &= virtPackage.SetProperty("EncryptionPwdHash", Utils.HexDump(keyEncryptionKeyHashed));  // Password hash, for user password validation
+                    Ret &= virtPackage.SetProperty("EncryptionPwdSalt", Utils.HexDump(salt));                    // Salt used for both PBKDF2 password hashes (first and second)
+                    Ret &= virtPackage.SetProperty("EncryptionPwdIV", Utils.HexDump(keyEncryptor.IV));           // IV used for encrypting the key with AES
+                }
+            }
 
             // propertyIntegrate, propertyVintegrate
             str = virtPackage.GetProperty("OnStartUnvirtualized");
@@ -1975,6 +2153,54 @@ reask:
                 }
                 return false;
             }
+        }
+
+        private void propertyEncryption_CheckedChanged(object sender, EventArgs e)
+        {
+            bool b = propertyEncryption.Checked;
+
+            propertyEncryptUsingKey.Enabled = b;
+            propertyEncryptUsingPassword.Enabled = b;
+            propertyEncryptUserCreatedPassword.Enabled = b;
+
+            // EncKey
+            lnkGenerateEncKey.Enabled = b && propertyEncryptUsingKey.Checked;
+            tbEncryptionKey.Enabled = b && propertyEncryptUsingKey.Checked;
+
+            // Pwd
+            tbEncryptionPwd.Enabled = b && propertyEncryptUsingPassword.Checked;
+            tbEncryptionPwdConfirm.Enabled = b && propertyEncryptUsingPassword.Checked;
+        }
+
+        private void lnkGenerateEncKey_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(virtPackage.GetProperty("EncryptionKey")) && !generateEncKeyAlreadyWarned)
+            {
+                if (MessageBox.Show("You are changing the encryption key. Data previously encrypted by this application " + 
+                    "will no longer be accessible. Continue?", "Warning", MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes)
+                    return;
+                generateEncKeyAlreadyWarned = true;
+            }
+            var rngCsp = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            byte[] randomBytes = new byte[16];   // Our AES algorithm uses a 128-bit key (16 bytes)
+            rngCsp.GetBytes(randomBytes);
+            tbEncryptionKey.Text = Utils.HexDump(randomBytes);
+        }
+
+        private void tbEncryptionPwd_Enter(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(virtPackage.GetProperty("EncryptionPwdKey")) && !changePwdKeyAlreadyWarned)
+            {
+                MessageBox.Show("You are changing the encryption password. Data previously encrypted by this application " +
+                    "will no longer be accessible (even if you re-type the same password).");
+                    return;
+                changePwdKeyAlreadyWarned = true;
+            }
+        }
+
+        private void lnkEncryptionLearnMore_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Utils.ShellExec("http://www.cameyo.com/virtualapp-encryption");
         }
     }
 

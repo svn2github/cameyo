@@ -1,4 +1,4 @@
-﻿namespace PackageEditor
+namespace PackageEditor
 {
     partial class MainForm
     {
@@ -54,6 +54,10 @@
             this.tbValue = new System.Windows.Forms.TextBox();
             this.tbSize = new System.Windows.Forms.TextBox();
             this.tbFile = new System.Windows.Forms.TextBox();
+            this.regFilesList = new PackageEditor.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -145,17 +149,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lnkCustomEvents = new System.Windows.Forms.LinkLabel();
             this.propertyStopInheritance = new System.Windows.Forms.TextBox();
-            this.groupConstraints = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbPasswordConfirm = new System.Windows.Forms.TextBox();
-            this.lnkActiveDirectory = new System.Windows.Forms.LinkLabel();
-            this.propertyTtlResistRemove = new System.Windows.Forms.CheckBox();
-            this.propertyProtPassword = new System.Windows.Forms.TextBox();
-            this.propertyTtlDaysValue = new System.Windows.Forms.NumericUpDown();
-            this.propertyProt = new System.Windows.Forms.CheckBox();
-            this.propertyTtlDays = new System.Windows.Forms.CheckBox();
-            this.propertyExpiration = new System.Windows.Forms.CheckBox();
-            this.propertyExpirationDatePicker = new System.Windows.Forms.DateTimePicker();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.chkCleanDoneDialog = new System.Windows.Forms.CheckBox();
             this.rdbCleanNone = new System.Windows.Forms.RadioButton();
@@ -166,6 +159,32 @@
             this.rdbIntegrateVirtual = new System.Windows.Forms.RadioButton();
             this.rdbIntegrateStandard = new System.Windows.Forms.RadioButton();
             this.rdbIntegrateNone = new System.Windows.Forms.RadioButton();
+            this.tabSecurity = new System.Windows.Forms.TabPage();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.groupDataEncrypt = new System.Windows.Forms.GroupBox();
+            this.propertyEncryptUserCreatedPassword = new System.Windows.Forms.RadioButton();
+            this.lnkEncryptionLearnMore = new System.Windows.Forms.LinkLabel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbEncryptionPwdConfirm = new System.Windows.Forms.TextBox();
+            this.tbEncryptionPwd = new System.Windows.Forms.TextBox();
+            this.lnkGenerateEncKey = new System.Windows.Forms.LinkLabel();
+            this.tbEncryptionKey = new System.Windows.Forms.TextBox();
+            this.propertyEncryptUsingPassword = new System.Windows.Forms.RadioButton();
+            this.propertyEncryptUsingKey = new System.Windows.Forms.RadioButton();
+            this.propertyEncryption = new System.Windows.Forms.CheckBox();
+            this.groupUsageRights = new System.Windows.Forms.GroupBox();
+            this.lnkActiveDirectory = new System.Windows.Forms.LinkLabel();
+            this.groupExpiration = new System.Windows.Forms.GroupBox();
+            this.propertyExpirationDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.propertyExpiration = new System.Windows.Forms.CheckBox();
+            this.propertyTtlDays = new System.Windows.Forms.CheckBox();
+            this.propertyTtlResistRemove = new System.Windows.Forms.CheckBox();
+            this.propertyTtlDaysValue = new System.Windows.Forms.NumericUpDown();
+            this.groupEditProtect = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbPasswordConfirm = new System.Windows.Forms.TextBox();
+            this.propertyProtPassword = new System.Windows.Forms.TextBox();
+            this.propertyProt = new System.Windows.Forms.CheckBox();
             this.tabWelcome = new System.Windows.Forms.TabPage();
             this.panelWelcome = new System.Windows.Forms.Panel();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -187,10 +206,6 @@
             this.panelLicense = new System.Windows.Forms.Panel();
             this.lnkUpgrade = new System.Windows.Forms.LinkLabel();
             this.lblNotCommercial = new System.Windows.Forms.Label();
-            this.regFilesList = new PackageEditor.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -227,10 +242,14 @@
             this.regToolStrip.SuspendLayout();
             this.tabAdvanced.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupConstraints.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.propertyTtlDaysValue)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.tabSecurity.SuspendLayout();
+            this.groupDataEncrypt.SuspendLayout();
+            this.groupUsageRights.SuspendLayout();
+            this.groupExpiration.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.propertyTtlDaysValue)).BeginInit();
+            this.groupEditProtect.SuspendLayout();
             this.tabWelcome.SuspendLayout();
             this.panelWelcome.SuspendLayout();
             this.panel15.SuspendLayout();
@@ -443,6 +462,38 @@
             this.tbFile.Name = "tbFile";
             this.tbFile.ReadOnly = true;
             // 
+            // regFilesList
+            // 
+            this.regFilesList.AllowColumnReorder = true;
+            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            resources.ApplyResources(this.regFilesList, "regFilesList");
+            this.regFilesList.DoubleClickActivation = false;
+            this.regFilesList.FullRowSelect = true;
+            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
+            this.regFilesList.Name = "regFilesList";
+            this.regFilesList.UseCompatibleStateImageBehavior = false;
+            this.regFilesList.View = System.Windows.Forms.View.Details;
+            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+            // 
+            // columnHeader3
+            // 
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
+            // 
+            // columnHeader4
+            // 
+            resources.ApplyResources(this.columnHeader4, "columnHeader4");
+            // 
+            // columnHeader5
+            // 
+            resources.ApplyResources(this.columnHeader5, "columnHeader5");
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.panel6);
@@ -592,6 +643,7 @@
             this.tabControl.Controls.Add(this.tabFileSystem);
             this.tabControl.Controls.Add(this.tabRegistry);
             this.tabControl.Controls.Add(this.tabAdvanced);
+            this.tabControl.Controls.Add(this.tabSecurity);
             this.tabControl.Controls.Add(this.tabWelcome);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -1014,7 +1066,6 @@
             // 
             this.tabAdvanced.BackColor = System.Drawing.Color.White;
             this.tabAdvanced.Controls.Add(this.groupBox5);
-            this.tabAdvanced.Controls.Add(this.groupConstraints);
             this.tabAdvanced.Controls.Add(this.groupBox7);
             this.tabAdvanced.Controls.Add(this.groupBox4);
             resources.ApplyResources(this.tabAdvanced, "tabAdvanced");
@@ -1040,24 +1091,28 @@
             resources.ApplyResources(this.cbVolatileRegistry, "cbVolatileRegistry");
             this.cbVolatileRegistry.Name = "cbVolatileRegistry";
             this.cbVolatileRegistry.UseVisualStyleBackColor = true;
+            this.cbVolatileRegistry.CheckedChanged += new System.EventHandler(this.PropertyChange);
             // 
             // propertyScmDirect
             // 
             resources.ApplyResources(this.propertyScmDirect, "propertyScmDirect");
             this.propertyScmDirect.Name = "propertyScmDirect";
             this.propertyScmDirect.UseVisualStyleBackColor = true;
+            this.propertyScmDirect.CheckedChanged += new System.EventHandler(this.PropertyChange);
             // 
             // propertyDisplayLogo
             // 
             resources.ApplyResources(this.propertyDisplayLogo, "propertyDisplayLogo");
             this.propertyDisplayLogo.Name = "propertyDisplayLogo";
             this.propertyDisplayLogo.UseVisualStyleBackColor = true;
+            this.propertyDisplayLogo.CheckedChanged += new System.EventHandler(this.PropertyChange);
             // 
             // cbDatFile
             // 
             resources.ApplyResources(this.cbDatFile, "cbDatFile");
             this.cbDatFile.Name = "cbDatFile";
             this.cbDatFile.UseVisualStyleBackColor = true;
+            this.cbDatFile.CheckedChanged += new System.EventHandler(this.PropertyChange);
             // 
             // lnkAutoUpdate
             // 
@@ -1090,80 +1145,6 @@
             resources.ApplyResources(this.propertyStopInheritance, "propertyStopInheritance");
             this.propertyStopInheritance.Name = "propertyStopInheritance";
             // 
-            // groupConstraints
-            // 
-            this.groupConstraints.Controls.Add(this.label6);
-            this.groupConstraints.Controls.Add(this.tbPasswordConfirm);
-            this.groupConstraints.Controls.Add(this.lnkActiveDirectory);
-            this.groupConstraints.Controls.Add(this.propertyTtlResistRemove);
-            this.groupConstraints.Controls.Add(this.propertyProtPassword);
-            this.groupConstraints.Controls.Add(this.propertyTtlDaysValue);
-            this.groupConstraints.Controls.Add(this.propertyProt);
-            this.groupConstraints.Controls.Add(this.propertyTtlDays);
-            this.groupConstraints.Controls.Add(this.propertyExpiration);
-            this.groupConstraints.Controls.Add(this.propertyExpirationDatePicker);
-            resources.ApplyResources(this.groupConstraints, "groupConstraints");
-            this.groupConstraints.Name = "groupConstraints";
-            this.groupConstraints.TabStop = false;
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // tbPasswordConfirm
-            // 
-            resources.ApplyResources(this.tbPasswordConfirm, "tbPasswordConfirm");
-            this.tbPasswordConfirm.Name = "tbPasswordConfirm";
-            // 
-            // lnkActiveDirectory
-            // 
-            resources.ApplyResources(this.lnkActiveDirectory, "lnkActiveDirectory");
-            this.lnkActiveDirectory.Name = "lnkActiveDirectory";
-            this.lnkActiveDirectory.TabStop = true;
-            this.lnkActiveDirectory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkActiveDirectory_LinkClicked);
-            // 
-            // propertyTtlResistRemove
-            // 
-            resources.ApplyResources(this.propertyTtlResistRemove, "propertyTtlResistRemove");
-            this.propertyTtlResistRemove.Name = "propertyTtlResistRemove";
-            this.propertyTtlResistRemove.UseVisualStyleBackColor = true;
-            // 
-            // propertyProtPassword
-            // 
-            resources.ApplyResources(this.propertyProtPassword, "propertyProtPassword");
-            this.propertyProtPassword.Name = "propertyProtPassword";
-            this.propertyProtPassword.Enter += new System.EventHandler(this.propertyProtPassword_Enter);
-            // 
-            // propertyTtlDaysValue
-            // 
-            resources.ApplyResources(this.propertyTtlDaysValue, "propertyTtlDaysValue");
-            this.propertyTtlDaysValue.Name = "propertyTtlDaysValue";
-            // 
-            // propertyProt
-            // 
-            resources.ApplyResources(this.propertyProt, "propertyProt");
-            this.propertyProt.Name = "propertyProt";
-            this.propertyProt.UseVisualStyleBackColor = true;
-            this.propertyProt.CheckedChanged += new System.EventHandler(this.propertyProt_CheckedChanged);
-            // 
-            // propertyTtlDays
-            // 
-            resources.ApplyResources(this.propertyTtlDays, "propertyTtlDays");
-            this.propertyTtlDays.Name = "propertyTtlDays";
-            this.propertyTtlDays.UseVisualStyleBackColor = true;
-            // 
-            // propertyExpiration
-            // 
-            resources.ApplyResources(this.propertyExpiration, "propertyExpiration");
-            this.propertyExpiration.Name = "propertyExpiration";
-            this.propertyExpiration.UseVisualStyleBackColor = true;
-            // 
-            // propertyExpirationDatePicker
-            // 
-            resources.ApplyResources(this.propertyExpirationDatePicker, "propertyExpirationDatePicker");
-            this.propertyExpirationDatePicker.Name = "propertyExpirationDatePicker";
-            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.chkCleanDoneDialog);
@@ -1180,6 +1161,7 @@
             resources.ApplyResources(this.chkCleanDoneDialog, "chkCleanDoneDialog");
             this.chkCleanDoneDialog.Name = "chkCleanDoneDialog";
             this.chkCleanDoneDialog.UseVisualStyleBackColor = true;
+            this.chkCleanDoneDialog.CheckedChanged += new System.EventHandler(this.PropertyChange);
             // 
             // rdbCleanNone
             // 
@@ -1194,6 +1176,7 @@
             resources.ApplyResources(this.chkCleanAsk, "chkCleanAsk");
             this.chkCleanAsk.Name = "chkCleanAsk";
             this.chkCleanAsk.UseVisualStyleBackColor = true;
+            this.chkCleanAsk.CheckedChanged += new System.EventHandler(this.PropertyChange);
             // 
             // rdbCleanAll
             // 
@@ -1226,6 +1209,7 @@
             this.rdbIntegrateVirtual.Name = "rdbIntegrateVirtual";
             this.rdbIntegrateVirtual.TabStop = true;
             this.rdbIntegrateVirtual.UseVisualStyleBackColor = true;
+            this.rdbIntegrateVirtual.CheckedChanged += new System.EventHandler(this.PropertyChange);
             // 
             // rdbIntegrateStandard
             // 
@@ -1233,6 +1217,7 @@
             this.rdbIntegrateStandard.Name = "rdbIntegrateStandard";
             this.rdbIntegrateStandard.TabStop = true;
             this.rdbIntegrateStandard.UseVisualStyleBackColor = true;
+            this.rdbIntegrateStandard.CheckedChanged += new System.EventHandler(this.PropertyChange);
             // 
             // rdbIntegrateNone
             // 
@@ -1240,6 +1225,194 @@
             this.rdbIntegrateNone.Name = "rdbIntegrateNone";
             this.rdbIntegrateNone.TabStop = true;
             this.rdbIntegrateNone.UseVisualStyleBackColor = true;
+            this.rdbIntegrateNone.CheckedChanged += new System.EventHandler(this.PropertyChange);
+            // 
+            // tabSecurity
+            // 
+            this.tabSecurity.Controls.Add(this.panel10);
+            this.tabSecurity.Controls.Add(this.groupDataEncrypt);
+            this.tabSecurity.Controls.Add(this.groupUsageRights);
+            this.tabSecurity.Controls.Add(this.groupExpiration);
+            this.tabSecurity.Controls.Add(this.groupEditProtect);
+            resources.ApplyResources(this.tabSecurity, "tabSecurity");
+            this.tabSecurity.Name = "tabSecurity";
+            this.tabSecurity.UseVisualStyleBackColor = true;
+            // 
+            // panel10
+            // 
+            resources.ApplyResources(this.panel10, "panel10");
+            this.panel10.Name = "panel10";
+            // 
+            // groupDataEncrypt
+            // 
+            this.groupDataEncrypt.Controls.Add(this.propertyEncryptUserCreatedPassword);
+            this.groupDataEncrypt.Controls.Add(this.lnkEncryptionLearnMore);
+            this.groupDataEncrypt.Controls.Add(this.label12);
+            this.groupDataEncrypt.Controls.Add(this.tbEncryptionPwdConfirm);
+            this.groupDataEncrypt.Controls.Add(this.tbEncryptionPwd);
+            this.groupDataEncrypt.Controls.Add(this.lnkGenerateEncKey);
+            this.groupDataEncrypt.Controls.Add(this.tbEncryptionKey);
+            this.groupDataEncrypt.Controls.Add(this.propertyEncryptUsingPassword);
+            this.groupDataEncrypt.Controls.Add(this.propertyEncryptUsingKey);
+            this.groupDataEncrypt.Controls.Add(this.propertyEncryption);
+            resources.ApplyResources(this.groupDataEncrypt, "groupDataEncrypt");
+            this.groupDataEncrypt.Name = "groupDataEncrypt";
+            this.groupDataEncrypt.TabStop = false;
+            // 
+            // propertyEncryptUserCreatedPassword
+            // 
+            resources.ApplyResources(this.propertyEncryptUserCreatedPassword, "propertyEncryptUserCreatedPassword");
+            this.propertyEncryptUserCreatedPassword.Name = "propertyEncryptUserCreatedPassword";
+            this.propertyEncryptUserCreatedPassword.TabStop = true;
+            this.propertyEncryptUserCreatedPassword.UseVisualStyleBackColor = true;
+            // 
+            // lnkEncryptionLearnMore
+            // 
+            resources.ApplyResources(this.lnkEncryptionLearnMore, "lnkEncryptionLearnMore");
+            this.lnkEncryptionLearnMore.Name = "lnkEncryptionLearnMore";
+            this.lnkEncryptionLearnMore.TabStop = true;
+            this.lnkEncryptionLearnMore.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkEncryptionLearnMore_LinkClicked);
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            // 
+            // tbEncryptionPwdConfirm
+            // 
+            resources.ApplyResources(this.tbEncryptionPwdConfirm, "tbEncryptionPwdConfirm");
+            this.tbEncryptionPwdConfirm.Name = "tbEncryptionPwdConfirm";
+            // 
+            // tbEncryptionPwd
+            // 
+            resources.ApplyResources(this.tbEncryptionPwd, "tbEncryptionPwd");
+            this.tbEncryptionPwd.Name = "tbEncryptionPwd";
+            this.tbEncryptionPwd.Enter += new System.EventHandler(this.tbEncryptionPwd_Enter);
+            // 
+            // lnkGenerateEncKey
+            // 
+            resources.ApplyResources(this.lnkGenerateEncKey, "lnkGenerateEncKey");
+            this.lnkGenerateEncKey.Name = "lnkGenerateEncKey";
+            this.lnkGenerateEncKey.TabStop = true;
+            this.lnkGenerateEncKey.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkGenerateEncKey_LinkClicked);
+            // 
+            // tbEncryptionKey
+            // 
+            resources.ApplyResources(this.tbEncryptionKey, "tbEncryptionKey");
+            this.tbEncryptionKey.Name = "tbEncryptionKey";
+            this.tbEncryptionKey.ReadOnly = true;
+            // 
+            // propertyEncryptUsingPassword
+            // 
+            resources.ApplyResources(this.propertyEncryptUsingPassword, "propertyEncryptUsingPassword");
+            this.propertyEncryptUsingPassword.Name = "propertyEncryptUsingPassword";
+            this.propertyEncryptUsingPassword.TabStop = true;
+            this.propertyEncryptUsingPassword.UseVisualStyleBackColor = true;
+            this.propertyEncryptUsingPassword.CheckedChanged += new System.EventHandler(this.propertyEncryption_CheckedChanged);
+            // 
+            // propertyEncryptUsingKey
+            // 
+            resources.ApplyResources(this.propertyEncryptUsingKey, "propertyEncryptUsingKey");
+            this.propertyEncryptUsingKey.Name = "propertyEncryptUsingKey";
+            this.propertyEncryptUsingKey.TabStop = true;
+            this.propertyEncryptUsingKey.UseVisualStyleBackColor = true;
+            this.propertyEncryptUsingKey.CheckedChanged += new System.EventHandler(this.propertyEncryption_CheckedChanged);
+            // 
+            // propertyEncryption
+            // 
+            resources.ApplyResources(this.propertyEncryption, "propertyEncryption");
+            this.propertyEncryption.Name = "propertyEncryption";
+            this.propertyEncryption.UseVisualStyleBackColor = true;
+            this.propertyEncryption.CheckedChanged += new System.EventHandler(this.propertyEncryption_CheckedChanged);
+            // 
+            // groupUsageRights
+            // 
+            this.groupUsageRights.Controls.Add(this.lnkActiveDirectory);
+            resources.ApplyResources(this.groupUsageRights, "groupUsageRights");
+            this.groupUsageRights.Name = "groupUsageRights";
+            this.groupUsageRights.TabStop = false;
+            // 
+            // lnkActiveDirectory
+            // 
+            resources.ApplyResources(this.lnkActiveDirectory, "lnkActiveDirectory");
+            this.lnkActiveDirectory.Name = "lnkActiveDirectory";
+            this.lnkActiveDirectory.TabStop = true;
+            this.lnkActiveDirectory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkActiveDirectory_LinkClicked);
+            // 
+            // groupExpiration
+            // 
+            this.groupExpiration.Controls.Add(this.propertyExpirationDatePicker);
+            this.groupExpiration.Controls.Add(this.propertyExpiration);
+            this.groupExpiration.Controls.Add(this.propertyTtlDays);
+            this.groupExpiration.Controls.Add(this.propertyTtlResistRemove);
+            this.groupExpiration.Controls.Add(this.propertyTtlDaysValue);
+            resources.ApplyResources(this.groupExpiration, "groupExpiration");
+            this.groupExpiration.Name = "groupExpiration";
+            this.groupExpiration.TabStop = false;
+            // 
+            // propertyExpirationDatePicker
+            // 
+            resources.ApplyResources(this.propertyExpirationDatePicker, "propertyExpirationDatePicker");
+            this.propertyExpirationDatePicker.Name = "propertyExpirationDatePicker";
+            // 
+            // propertyExpiration
+            // 
+            resources.ApplyResources(this.propertyExpiration, "propertyExpiration");
+            this.propertyExpiration.Name = "propertyExpiration";
+            this.propertyExpiration.UseVisualStyleBackColor = true;
+            this.propertyExpiration.CheckedChanged += new System.EventHandler(this.PropertyChange);
+            // 
+            // propertyTtlDays
+            // 
+            resources.ApplyResources(this.propertyTtlDays, "propertyTtlDays");
+            this.propertyTtlDays.Name = "propertyTtlDays";
+            this.propertyTtlDays.UseVisualStyleBackColor = true;
+            this.propertyTtlDays.CheckedChanged += new System.EventHandler(this.PropertyChange);
+            // 
+            // propertyTtlResistRemove
+            // 
+            resources.ApplyResources(this.propertyTtlResistRemove, "propertyTtlResistRemove");
+            this.propertyTtlResistRemove.Name = "propertyTtlResistRemove";
+            this.propertyTtlResistRemove.UseVisualStyleBackColor = true;
+            this.propertyTtlResistRemove.CheckedChanged += new System.EventHandler(this.PropertyChange);
+            // 
+            // propertyTtlDaysValue
+            // 
+            resources.ApplyResources(this.propertyTtlDaysValue, "propertyTtlDaysValue");
+            this.propertyTtlDaysValue.Name = "propertyTtlDaysValue";
+            // 
+            // groupEditProtect
+            // 
+            this.groupEditProtect.Controls.Add(this.label6);
+            this.groupEditProtect.Controls.Add(this.tbPasswordConfirm);
+            this.groupEditProtect.Controls.Add(this.propertyProtPassword);
+            this.groupEditProtect.Controls.Add(this.propertyProt);
+            resources.ApplyResources(this.groupEditProtect, "groupEditProtect");
+            this.groupEditProtect.Name = "groupEditProtect";
+            this.groupEditProtect.TabStop = false;
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // tbPasswordConfirm
+            // 
+            resources.ApplyResources(this.tbPasswordConfirm, "tbPasswordConfirm");
+            this.tbPasswordConfirm.Name = "tbPasswordConfirm";
+            // 
+            // propertyProtPassword
+            // 
+            resources.ApplyResources(this.propertyProtPassword, "propertyProtPassword");
+            this.propertyProtPassword.Name = "propertyProtPassword";
+            this.propertyProtPassword.Enter += new System.EventHandler(this.propertyProtPassword_Enter);
+            // 
+            // propertyProt
+            // 
+            resources.ApplyResources(this.propertyProt, "propertyProt");
+            this.propertyProt.Name = "propertyProt";
+            this.propertyProt.UseVisualStyleBackColor = true;
+            this.propertyProt.CheckedChanged += new System.EventHandler(this.propertyProt_CheckedChanged);
             // 
             // tabWelcome
             // 
@@ -1402,38 +1575,6 @@
             resources.ApplyResources(this.lblNotCommercial, "lblNotCommercial");
             this.lblNotCommercial.Name = "lblNotCommercial";
             // 
-            // regFilesList
-            // 
-            this.regFilesList.AllowColumnReorder = true;
-            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            resources.ApplyResources(this.regFilesList, "regFilesList");
-            this.regFilesList.DoubleClickActivation = false;
-            this.regFilesList.FullRowSelect = true;
-            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
-            this.regFilesList.Name = "regFilesList";
-            this.regFilesList.UseCompatibleStateImageBehavior = false;
-            this.regFilesList.View = System.Windows.Forms.View.Details;
-            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-            // 
-            // columnHeader3
-            // 
-            resources.ApplyResources(this.columnHeader3, "columnHeader3");
-            // 
-            // columnHeader4
-            // 
-            resources.ApplyResources(this.columnHeader4, "columnHeader4");
-            // 
-            // columnHeader5
-            // 
-            resources.ApplyResources(this.columnHeader5, "columnHeader5");
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -1504,13 +1645,20 @@
             this.tabAdvanced.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupConstraints.ResumeLayout(false);
-            this.groupConstraints.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.propertyTtlDaysValue)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.tabSecurity.ResumeLayout(false);
+            this.groupDataEncrypt.ResumeLayout(false);
+            this.groupDataEncrypt.PerformLayout();
+            this.groupUsageRights.ResumeLayout(false);
+            this.groupUsageRights.PerformLayout();
+            this.groupExpiration.ResumeLayout(false);
+            this.groupExpiration.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.propertyTtlDaysValue)).EndInit();
+            this.groupEditProtect.ResumeLayout(false);
+            this.groupEditProtect.PerformLayout();
             this.tabWelcome.ResumeLayout(false);
             this.panelWelcome.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
@@ -1618,9 +1766,6 @@
         private System.Windows.Forms.PictureBox panel11;
         private System.Windows.Forms.PictureBox panel12;
         private System.Windows.Forms.Panel bottomPanel;
-        private System.Windows.Forms.GroupBox groupConstraints;
-        private System.Windows.Forms.CheckBox propertyExpiration;
-        private System.Windows.Forms.DateTimePicker propertyExpirationDatePicker;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.CheckBox chkCleanAsk;
         private System.Windows.Forms.RadioButton rdbCleanAll;
@@ -1678,12 +1823,7 @@
         private System.Windows.Forms.PictureBox picFullAccess;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.CheckBox cbDatFile;
-        private System.Windows.Forms.TextBox propertyProtPassword;
-        private System.Windows.Forms.CheckBox propertyProt;
         private System.Windows.Forms.GroupBox line;
-        private System.Windows.Forms.CheckBox propertyTtlResistRemove;
-        private System.Windows.Forms.NumericUpDown propertyTtlDaysValue;
-        private System.Windows.Forms.CheckBox propertyTtlDays;
         private System.Windows.Forms.CheckBox propertyDisplayLogo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -1691,10 +1831,33 @@
         private System.Windows.Forms.Label lblNotCommercial;
         private System.Windows.Forms.LinkLabel lnkUpgrade;
         private System.Windows.Forms.CheckBox propertyScmDirect;
-        private System.Windows.Forms.LinkLabel lnkActiveDirectory;
         private System.Windows.Forms.CheckBox cbVolatileRegistry;
+        private System.Windows.Forms.TabPage tabSecurity;
+        private System.Windows.Forms.GroupBox groupUsageRights;
+        private System.Windows.Forms.LinkLabel lnkActiveDirectory;
+        private System.Windows.Forms.GroupBox groupExpiration;
+        private System.Windows.Forms.DateTimePicker propertyExpirationDatePicker;
+        private System.Windows.Forms.CheckBox propertyExpiration;
+        private System.Windows.Forms.CheckBox propertyTtlDays;
+        private System.Windows.Forms.CheckBox propertyTtlResistRemove;
+        private System.Windows.Forms.NumericUpDown propertyTtlDaysValue;
+        private System.Windows.Forms.GroupBox groupEditProtect;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbPasswordConfirm;
+        private System.Windows.Forms.TextBox propertyProtPassword;
+        private System.Windows.Forms.CheckBox propertyProt;
+        private System.Windows.Forms.GroupBox groupDataEncrypt;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbEncryptionPwdConfirm;
+        private System.Windows.Forms.TextBox tbEncryptionPwd;
+        private System.Windows.Forms.LinkLabel lnkGenerateEncKey;
+        private System.Windows.Forms.TextBox tbEncryptionKey;
+        private System.Windows.Forms.RadioButton propertyEncryptUsingPassword;
+        private System.Windows.Forms.RadioButton propertyEncryptUsingKey;
+        private System.Windows.Forms.CheckBox propertyEncryption;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.LinkLabel lnkEncryptionLearnMore;
+        private System.Windows.Forms.RadioButton propertyEncryptUserCreatedPassword;
 
     }
 }
