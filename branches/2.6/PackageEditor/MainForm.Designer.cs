@@ -162,6 +162,9 @@ namespace PackageEditor
             this.tabSecurity = new System.Windows.Forms.TabPage();
             this.panel10 = new System.Windows.Forms.Panel();
             this.groupDataEncrypt = new System.Windows.Forms.GroupBox();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.lnkExportPwdKey = new System.Windows.Forms.LinkLabel();
+            this.lnkImportPwdKey = new System.Windows.Forms.LinkLabel();
             this.propertyEncryptUserCreatedPassword = new System.Windows.Forms.RadioButton();
             this.lnkEncryptionLearnMore = new System.Windows.Forms.LinkLabel();
             this.label12 = new System.Windows.Forms.Label();
@@ -246,6 +249,7 @@ namespace PackageEditor
             this.groupBox4.SuspendLayout();
             this.tabSecurity.SuspendLayout();
             this.groupDataEncrypt.SuspendLayout();
+            this.panel16.SuspendLayout();
             this.groupUsageRights.SuspendLayout();
             this.groupExpiration.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.propertyTtlDaysValue)).BeginInit();
@@ -1245,6 +1249,7 @@ namespace PackageEditor
             // 
             // groupDataEncrypt
             // 
+            this.groupDataEncrypt.Controls.Add(this.panel16);
             this.groupDataEncrypt.Controls.Add(this.propertyEncryptUserCreatedPassword);
             this.groupDataEncrypt.Controls.Add(this.lnkEncryptionLearnMore);
             this.groupDataEncrypt.Controls.Add(this.label12);
@@ -1258,6 +1263,27 @@ namespace PackageEditor
             resources.ApplyResources(this.groupDataEncrypt, "groupDataEncrypt");
             this.groupDataEncrypt.Name = "groupDataEncrypt";
             this.groupDataEncrypt.TabStop = false;
+            // 
+            // panel16
+            // 
+            this.panel16.Controls.Add(this.lnkExportPwdKey);
+            this.panel16.Controls.Add(this.lnkImportPwdKey);
+            resources.ApplyResources(this.panel16, "panel16");
+            this.panel16.Name = "panel16";
+            // 
+            // lnkExportPwdKey
+            // 
+            resources.ApplyResources(this.lnkExportPwdKey, "lnkExportPwdKey");
+            this.lnkExportPwdKey.Name = "lnkExportPwdKey";
+            this.lnkExportPwdKey.TabStop = true;
+            this.lnkExportPwdKey.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkExportPwdKey_LinkClicked);
+            // 
+            // lnkImportPwdKey
+            // 
+            resources.ApplyResources(this.lnkImportPwdKey, "lnkImportPwdKey");
+            this.lnkImportPwdKey.Name = "lnkImportPwdKey";
+            this.lnkImportPwdKey.TabStop = true;
+            this.lnkImportPwdKey.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkImportPwdKey_LinkClicked);
             // 
             // propertyEncryptUserCreatedPassword
             // 
@@ -1300,7 +1326,6 @@ namespace PackageEditor
             // 
             resources.ApplyResources(this.tbEncryptionKey, "tbEncryptionKey");
             this.tbEncryptionKey.Name = "tbEncryptionKey";
-            this.tbEncryptionKey.ReadOnly = true;
             // 
             // propertyEncryptUsingPassword
             // 
@@ -1652,6 +1677,8 @@ namespace PackageEditor
             this.tabSecurity.ResumeLayout(false);
             this.groupDataEncrypt.ResumeLayout(false);
             this.groupDataEncrypt.PerformLayout();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
             this.groupUsageRights.ResumeLayout(false);
             this.groupUsageRights.PerformLayout();
             this.groupExpiration.ResumeLayout(false);
@@ -1858,6 +1885,9 @@ namespace PackageEditor
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.LinkLabel lnkEncryptionLearnMore;
         private System.Windows.Forms.RadioButton propertyEncryptUserCreatedPassword;
+        private System.Windows.Forms.LinkLabel lnkExportPwdKey;
+        private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.LinkLabel lnkImportPwdKey;
 
     }
 }

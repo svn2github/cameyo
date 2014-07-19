@@ -1117,8 +1117,7 @@ reask:
             // EncryptionPwdHash: SHA2 hash of the real password
             if (virtPackage.GetProperty("EncryptionPwdHash").Length == (KeySizeBytes) * 2)   // SHA2 hash (32 bytes) encoded in HEX form
             {
-                tbEncryptionPwd.Text = "[UNCHANGED]"; //virtPackage.GetProperty("EncryptionPwdHash");
-                tbEncryptionPwdConfirm.Text = tbEncryptionPwd.Text;
+                tbEncryptionPwd.Text = tbEncryptionPwdConfirm.Text = "[UNCHANGED]"; //virtPackage.GetProperty("EncryptionPwdHash");
             }
 
             // EncryptionKey: directly the key (in HEX format)
@@ -1183,6 +1182,94 @@ reask:
         public void OnTabActivate()
         {
             DisplayIsolationMode();
+        }
+
+        bool ProcessEncryptionPwd()
+        {
+            System.Security.Cryptography.Rfc2898DeriveBytes pbkdf2 = null;
+            if (tbEncryptionPwd.Text == "[UNCHANGED]")   // Password hasn't changed from when the package was loaded
+                return true;
+            if (string.IsNullOrEmpty(tbEncryptionPwd.Text))
+                return true;   // Nothing to do really
+            if (!string.IsNullOrEmpty(virtPackage.GetProperty("EncryptionPwdKey")) &&
+                !string.IsNullOrEmpty(virtPackage.GetProperty("EncryptionPwdHash")) &&
+                !string.IsNullOrEmpty(virtPackage.GetProperty("EncryptionPwdSalt")) &&
+                !string.IsNullOrEmpty(virtPackage.GetProperty("EncryptionPwdIV")))
+            {
+                // EncryptionPwd* properties are already set. Only need to re-generate them if password has changed (different from EncryptionPwdHash)
+                string pwdSaltStr = virtPackage.GetProperty("EncryptionPwdSalt");
+                var pwdSalt = Utils.HexUndump(pwdSaltStr);
+
+                // Check if password is unchanged
+                // PBKDF2 first time on entered password
+                pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(tbEncryptionPwd.Text, pwdSalt, Pbkdf2Iterations);
+                var enteredPwdHash = pbkdf2.GetBytes(KeySizeBytes);
+                // PBKDF2 second time on entered password
+                pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(enteredPwdHash, pwdSalt, Pbkdf2Iterations);
+                enteredPwdHash = pbkdf2.GetBytes(KeySizeBytes);
+
+                var savedPwdHash = Utils.HexUndump(virtPackage.GetProperty("EncryptionPwdHash"));
+                bool equals = true;
+                for (int i = 0; i < enteredPwdHash.Length; i++)
+                {
+                    if (enteredPwdHash[i] != savedPwdHash[i])
+                        equals = false;
+                }
+                if (equals)
+                    return true;   // Password hasn't changed
+            }
+
+            bool Ret = true;
+            var rngCsp = new System.Security.Cryptography.RNGCryptoServiceProvider();
+
+            // Steps for password-based key:
+            // 1. Generate a long key (this is just a randomly generated amount of bytes in hex, you can use 128 bytes).
+            //    Use this key to encrypt your file with AES (meaning you use it as a password)
+            byte[] randomKey = new byte[KeySizeBytes];   // Our AES algorithm uses a 128-bit key (16 bytes)
+            rngCsp.GetBytes(randomKey);   // <-- The key with which files will be encrypted / decrypted
+
+            // 2. Encrypt the key itself with AES using your password (which is a bit shorter but easier to remember. 
+            //    Now AES requires this again to be either 128, 192 or 256 bits of length so you need to make your 
+            //    password of that length. Hence you can just use PBKDF2 (or scrypt or bcrypt) to create a fixed key 
+            //    length from your password. DO NOT STORE THIS.
+            byte[] salt = new byte[SaltSize];
+            rngCsp.GetBytes(salt);
+
+            // Transform user password into a key that we can encrypt randomKey with
+            pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(Encoding.ASCII.GetBytes(tbEncryptionPwd.Text), salt, Pbkdf2Iterations);
+            var keyEncryptionKey = pbkdf2.GetBytes(KeySizeBytes);   // tbEncryptionPwd.Text -> Key. This key will be used for encrypting randomKey.
+            var keyEncryptor = new System.Security.Cryptography.RijndaelManaged();
+            keyEncryptor.BlockSize = 128;
+            keyEncryptor.Mode = System.Security.Cryptography.CipherMode.CFB;
+            keyEncryptor.Padding = System.Security.Cryptography.PaddingMode.None;
+            keyEncryptor.Key = keyEncryptionKey;
+            keyEncryptor.GenerateIV();
+            var encryptor = keyEncryptor.CreateEncryptor(keyEncryptor.Key, keyEncryptor.IV);
+            var msEncrypt = new MemoryStream();
+            using (var csEncrypt = new System.Security.Cryptography.CryptoStream(msEncrypt, encryptor, System.Security.Cryptography.CryptoStreamMode.Write))
+            {
+                using (var swEncrypt = new BinaryWriter(csEncrypt))
+                {
+                    byte[] toWrite = randomKey;//Encoding.ASCII.GetBytes("1234567890123456");
+                    swEncrypt.Write(toWrite);
+                }
+            }
+            var encryptedKey = msEncrypt.ToArray();   // <-- randomKey encrypted with AES, whose key = PBKDF2(tbEncryptionPwd.Text)
+
+            // 3. Keep a hash of your hashed password using PBKDF2 (or bcrypt or scrypt). This will allow you to check 
+            //    if the password is correct before trying to decrypt your encrypted key:
+            //       hash(hash(password)) --> can be stored
+            //       hash(password) --> should not be stored
+            pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(keyEncryptionKey, salt, Pbkdf2Iterations);   // Iterations slow down hashing (which helps against brute-force)
+            var keyEncryptionKeyHashed = pbkdf2.GetBytes(KeySizeBytes);                                       // Second PBKDF2 hash
+
+            // Store
+            Ret &= virtPackage.SetProperty("EncryptionPwdKey", Utils.HexDump(encryptedKey));             // Encryption key, in encrypted form
+            Ret &= virtPackage.SetProperty("EncryptionPwdHash", Utils.HexDump(keyEncryptionKeyHashed));  // Password hash, for user password validation
+            Ret &= virtPackage.SetProperty("EncryptionPwdSalt", Utils.HexDump(salt));                    // Salt used for both PBKDF2 password hashes (first and second)
+            Ret &= virtPackage.SetProperty("EncryptionPwdIV", Utils.HexDump(keyEncryptor.IV));           // IV used for encrypting the key with AES
+
+            return Ret;
         }
 
         public bool OnPackageSave()
@@ -1250,57 +1337,7 @@ reask:
             else 
             {
                 // Only if password was changed from when the package was loaded
-                if (tbEncryptionPwd.Text != "[UNCHANGED]")   // Password has changed from when the package was loaded
-                {
-                    var rngCsp = new System.Security.Cryptography.RNGCryptoServiceProvider();
-
-                    // Steps for password-based key:
-                    // 1. Generate a long key (this is just a randomly generated amount of bytes in hex, you can use 128 bytes).
-                    //    Use this key to encrypt your file with AES (meaning you use it as a password)
-                    byte[] randomKey = new byte[KeySizeBytes];   // Our AES algorithm uses a 128-bit key (16 bytes)
-                    rngCsp.GetBytes(randomKey);   // <-- The key with which files will be encrypted / decrypted
-
-                    // 2. Encrypt the key itself with AES using your password (which is a bit shorter but easier to remember. 
-                    //    Now AES requires this again to be either 128, 192 or 256 bits of length so you need to make your 
-                    //    password of that length. Hence you can just use PBKDF2 (or scrypt or bcrypt) to create a fixed key 
-                    //    length from your password. DO NOT STORE THIS.
-                    byte[] salt = new byte[SaltSize];
-                    rngCsp.GetBytes(salt);
-
-                    // Transform user password into a key that we can encrypt randomKey with
-                    var pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(Encoding.ASCII.GetBytes(tbEncryptionPwd.Text), salt, Pbkdf2Iterations);
-                    var keyEncryptionKey = pbkdf2.GetBytes(KeySizeBytes);   // tbEncryptionPwd.Text -> Key. This key will be used for encrypting randomKey.
-                    var keyEncryptor = new System.Security.Cryptography.RijndaelManaged();
-                    keyEncryptor.BlockSize = 128;
-                    keyEncryptor.Mode = System.Security.Cryptography.CipherMode.CFB;
-                    keyEncryptor.Padding = System.Security.Cryptography.PaddingMode.None;
-                    keyEncryptor.Key = keyEncryptionKey;
-                    keyEncryptor.GenerateIV();
-                    var encryptor = keyEncryptor.CreateEncryptor(keyEncryptor.Key, keyEncryptor.IV);
-                    var msEncrypt = new MemoryStream();
-                    using (var csEncrypt = new System.Security.Cryptography.CryptoStream(msEncrypt, encryptor, System.Security.Cryptography.CryptoStreamMode.Write))
-                    {
-                        using (var swEncrypt = new BinaryWriter(csEncrypt))
-                        {
-                            byte[] toWrite = randomKey;//Encoding.ASCII.GetBytes("1234567890123456");
-                            swEncrypt.Write(toWrite);
-                        }
-                    }
-                    var encryptedKey = msEncrypt.ToArray();   // <-- randomKey encrypted with AES, whose key = PBKDF2(tbEncryptionPwd.Text)
-
-                    // 3. Keep a hash of your hashed password using PBKDF2 (or bcrypt or scrypt). This will allow you to check 
-                    //    if the password is correct before trying to decrypt your encrypted key:
-                    //       hash(hash(password)) --> can be stored
-                    //       hash(password) --> should not be stored
-                    pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(keyEncryptionKey, salt, Pbkdf2Iterations);   // Iterations slow down hashing (which helps against brute-force)
-                    var keyEncryptionKeyHashed = pbkdf2.GetBytes(KeySizeBytes);                                       // Second PBKDF2 hash
-
-                    // Store
-                    Ret &= virtPackage.SetProperty("EncryptionPwdKey", Utils.HexDump(encryptedKey));             // Encryption key, in encrypted form
-                    Ret &= virtPackage.SetProperty("EncryptionPwdHash", Utils.HexDump(keyEncryptionKeyHashed));  // Password hash, for user password validation
-                    Ret &= virtPackage.SetProperty("EncryptionPwdSalt", Utils.HexDump(salt));                    // Salt used for both PBKDF2 password hashes (first and second)
-                    Ret &= virtPackage.SetProperty("EncryptionPwdIV", Utils.HexDump(keyEncryptor.IV));           // IV used for encrypting the key with AES
-                }
+                Ret &= ProcessEncryptionPwd();
             }
 
             // propertyIntegrate, propertyVintegrate
@@ -2170,6 +2207,7 @@ reask:
             // Pwd
             tbEncryptionPwd.Enabled = b && propertyEncryptUsingPassword.Checked;
             tbEncryptionPwdConfirm.Enabled = b && propertyEncryptUsingPassword.Checked;
+            lnkImportPwdKey.Enabled = lnkExportPwdKey.Enabled = b && propertyEncryptUsingPassword.Checked;
         }
 
         private void lnkGenerateEncKey_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -2193,7 +2231,6 @@ reask:
             {
                 MessageBox.Show("You are changing the encryption password. Data previously encrypted by this application " +
                     "will no longer be accessible (even if you re-type the same password).");
-                    return;
                 changePwdKeyAlreadyWarned = true;
             }
         }
@@ -2201,6 +2238,95 @@ reask:
         private void lnkEncryptionLearnMore_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Utils.ShellExec("http://www.cameyo.com/virtualapp-encryption");
+        }
+
+        private void XmlWritePropAttr(XmlWriter xmlOut, string nodeName, string attrName, string attrValue)
+        {
+            xmlOut.WriteStartElement(nodeName);
+            xmlOut.WriteAttributeString(attrName, attrValue);
+            xmlOut.WriteEndElement();
+        }
+
+        private void lnkExportPwdKey_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ProcessEncryptionPwd();
+
+            // TODO: require password?
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Path.GetDirectoryName(virtPackage.openedFile);
+            saveFileDialog.FileName = Path.ChangeExtension(Path.GetFileName(virtPackage.openedFile), ".PasswordKey.xml");
+            saveFileDialog.AddExtension = true;
+            saveFileDialog.Filter = "Password key (*.PasswordKey.xml)|*.PasswordKey.xml";
+            saveFileDialog.DefaultExt = "PasswordKey.xml";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string xmlFileName = saveFileDialog.FileName;
+
+                // Complete XML with Files and Registry
+                var writerSettings = new XmlWriterSettings();
+                writerSettings.OmitXmlDeclaration = true;
+                writerSettings.Indent = true;
+                using (XmlWriter xmlOut = XmlWriter.Create(xmlFileName, writerSettings))
+                {
+                    xmlOut.WriteStartDocument();
+                    xmlOut.WriteStartElement("CameyoPkg");
+                    {
+                        // Read existing XML Properties/Property nodes
+                        xmlOut.WriteStartElement("Properties");
+                        {
+                            XmlWritePropAttr(xmlOut, "Property", "EncryptionPwdKey", virtPackage.GetProperty("EncryptionPwdKey"));
+                            XmlWritePropAttr(xmlOut, "Property", "EncryptionPwdHash", virtPackage.GetProperty("EncryptionPwdHash"));
+                            XmlWritePropAttr(xmlOut, "Property", "EncryptionPwdSalt", virtPackage.GetProperty("EncryptionPwdSalt"));
+                            XmlWritePropAttr(xmlOut, "Property", "EncryptionPwdIV", virtPackage.GetProperty("EncryptionPwdIV"));
+                        }
+                        xmlOut.WriteEndElement();
+                    }
+                    xmlOut.WriteEndElement();
+                    xmlOut.WriteEndDocument();
+                    xmlOut.Flush();
+                    xmlOut.Close();
+
+                    xmlOut.Close();
+
+                    MessageBox.Show("Created in:\n" + xmlFileName);
+                }
+            }
+        }
+
+        private void lnkImportPwdKey_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Path.GetDirectoryName(virtPackage.openedFile);
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Password key (*.PasswordKey.xml)|*.PasswordKey.xml|All files (*.*)|*.*";
+            openFileDialog.DefaultExt = "PasswordKey.xml";
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            var xd = new System.Xml.XPath.XPathDocument(openFileDialog.FileName);
+            var navigator = xd.CreateNavigator();
+            var iterator = navigator.Select("//Properties/Property");
+            int foundProps = 0;
+            foreach (System.Xml.XPath.XPathNavigator n in iterator)
+            {
+                n.MoveToFirstAttribute();
+                var name = n.Name;
+                var val = n.Value;
+                if (name == "EncryptionPwdKey" || name == "EncryptionPwdHash" || name == "EncryptionPwdSalt" || name == "EncryptionPwdIV")
+                {
+                    virtPackage.SetProperty(name, val);
+                    foundProps++;
+                }
+            }
+            if (foundProps == 4)   // All expected properties were found
+            {
+                tbEncryptionPwd.Text = tbEncryptionPwdConfirm.Text = "[UNCHANGED]";
+                MessageBox.Show("Password key imported.");
+            }
+            else
+            {
+                MessageBox.Show("No password key found in this file.");
+            }
         }
     }
 
