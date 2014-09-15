@@ -240,7 +240,7 @@ namespace PackageEditor
             if (licenseType < VirtPackage.LICENSETYPE_PRO)
             {
                 DisableControl(groupEditProtect);
-                DisableControl(groupDataEncrypt);
+                //DisableControl(groupDataEncrypt);
                 DisableControl(groupExpiration);
                 DisableControl(groupUsageRights);
                 DisableControl(lnkCustomEvents);
