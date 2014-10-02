@@ -2249,6 +2249,12 @@ reask:
 
         private void lnkExportPwdKey_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (!virtPackage.opened || string.IsNullOrEmpty(virtPackage.openedFile))
+            {
+                MessageBox.Show("No file is currently open");
+                return;
+            }
+
             ProcessEncryptionPwd();
 
             // TODO: require password?
