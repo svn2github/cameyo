@@ -28,8 +28,8 @@ namespace PackageEditor
         public CustomEventsForm(VirtPackage virtPackage)
         {
             this.virtPackage = virtPackage;
-            onStartVirtualized = new List<CustomEvent>();
             onStartUnvirtualized = new List<CustomEvent>();
+            onStartVirtualized = new List<CustomEvent>();
             onStopVirtualized = new List<CustomEvent>();
             onStopUnvirtualized = new List<CustomEvent>();
             onProcessStartVirtualized = new List<CustomEvent>();
@@ -44,8 +44,8 @@ namespace PackageEditor
             dirty = false;
             ActiveControl = comboBox;
             oldPropertiesChecksum = GetPropertiesChecksum();
-            PropertyToCustomEvents("OnStartVirtualized", onStartVirtualized);
             PropertyToCustomEvents("OnStartUnVirtualized", onStartUnvirtualized);
+            PropertyToCustomEvents("OnStartVirtualized", onStartVirtualized);
             PropertyToCustomEvents("OnStopVirtualized", onStopVirtualized);
             PropertyToCustomEvents("OnStopUnvirtualized", onStopUnvirtualized);
             PropertyToCustomEvents("OnProcessStartVirtualized", onProcessStartVirtualized);
@@ -62,9 +62,9 @@ namespace PackageEditor
         {
             String checksum = "";
             String value;
-            value = ""; virtPackage.GetProperty("OnStartVirtualized", ref value);
-            checksum += value + ";";
             value = ""; virtPackage.GetProperty("OnStartUnvirtualized", ref value);
+            checksum += value + ";";
+            value = ""; virtPackage.GetProperty("OnStartVirtualized", ref value);
             checksum += value + ";";
             value = ""; virtPackage.GetProperty("OnStopVirtualized", ref value);
             checksum += value + ";";
@@ -83,8 +83,8 @@ namespace PackageEditor
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            CustomEventsToProperty(onStartVirtualized, "OnStartVirtualized");
             CustomEventsToProperty(onStartUnvirtualized, "OnStartUnvirtualized");
+            CustomEventsToProperty(onStartVirtualized, "OnStartVirtualized");
             CustomEventsToProperty(onStopVirtualized, "OnStopVirtualized");
             CustomEventsToProperty(onStopUnvirtualized, "OnStopUnvirtualized");
             CustomEventsToProperty(onProcessStartVirtualized, "OnProcessStartVirtualized");
@@ -255,8 +255,8 @@ namespace PackageEditor
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // On app start (virtualized)
             // On app start (unvirtualized)
+            // On app start (virtualized)
             // On app stop (virtualized)
             // On app stop (unvirtualized)
             // On process execution (virtualized)
@@ -264,10 +264,10 @@ namespace PackageEditor
             switch (comboBox.SelectedIndex)
             {
                 case 0:
-                    curCustomEvents = onStartVirtualized;
+                    curCustomEvents = onStartUnvirtualized;
                     break;
                 case 1:
-                    curCustomEvents = onStartUnvirtualized;
+                    curCustomEvents = onStartVirtualized;
                     break;
                 case 2:
                     curCustomEvents = onStopVirtualized;
