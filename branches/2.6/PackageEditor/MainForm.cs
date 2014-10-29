@@ -311,19 +311,25 @@ namespace PackageEditor
                     int exitCode = 0;
                     if (displayWaitMsg)   // Restore progress window
                         PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.openingPackage, "Converting " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
-                    bool convertedOk = (ExecProg(PackagerExe(), "-Quiet -ConvertOldPkg \"" + packageExeFile + "\"", true, ref exitCode) && exitCode == 0);
-                    if (displayWaitMsg)   // Hide progress window
-                        PleaseWait.PleaseWaitEnd();   // Otherwise it'll hide our below MessageBox
-                    if (convertedOk)
+
+                    // Init file names: old, new
+                    string newPkgFile = packageExeFile, oldPkgFile = packageExeFile;
+                    int pos = newPkgFile.LastIndexOf('.');
+                    newPkgFile = newPkgFile.Insert(pos, ".new");
+                    oldPkgFile = oldPkgFile.Insert(pos, ".old");
+
+                    // Check whether target file already exists
+                    bool proceed = true;
+                    if (File.Exists(newPkgFile) && MessageBox.Show("Warning: output file will be overwritten:\n" + newPkgFile + 
+                        "\n" + "Proceed?", "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                        proceed = false;
+
+                    if (proceed)
                     {
-                        string newPkgFile = packageExeFile, oldPkgFile = packageExeFile;
-                        int pos = newPkgFile.LastIndexOf('.');
-                        newPkgFile = newPkgFile.Insert(pos, ".new");
-                        oldPkgFile = oldPkgFile.Insert(pos, ".old");
-                        bool proceed = true;
-                        if (File.Exists(newPkgFile) && MessageBox.Show("Warning: output file will be overwritten:\n" + newPkgFile + "\n" + "Proceed?", "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
-                            proceed = false;
-                        if (proceed)
+                        bool convertedOk = (ExecProg(PackagerExe(), "-Quiet -ConvertOldPkg \"" + packageExeFile + "\"", true, ref exitCode) && exitCode == 0);
+                        if (displayWaitMsg)   // Hide progress window
+                            PleaseWait.PleaseWaitEnd();   // Otherwise it'll hide our below MessageBox
+                        if (convertedOk)
                         {
                             bool trouble = false;
                             try { File.Delete(oldPkgFile); }
@@ -353,9 +359,9 @@ namespace PackageEditor
                                 goto retry;   // Takes care of password etc
                             }
                         }
+                        else
+                            MessageBox.Show("Error converting package! " + exitCode);
                     }
-                    else
-                        MessageBox.Show("Error converting package! " + exitCode);
                 }
             }
 
