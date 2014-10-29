@@ -768,6 +768,13 @@ reask:
 
         private void exportXmlToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int licenseType = VirtPackage.LicDataLoadFromFile(null);
+            if (licenseType < VirtPackage.LICENSETYPE_PRO)
+            {
+                MessageBox.Show("Insufficient license");
+                return;
+            }
+
             // TODO: require password
             FolderBrowserDialog saveFileDialog = new FolderBrowserDialog();
             saveFileDialog.ShowNewFolderButton = true;
