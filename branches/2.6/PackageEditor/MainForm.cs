@@ -320,31 +320,38 @@ namespace PackageEditor
                         int pos = newPkgFile.LastIndexOf('.');
                         newPkgFile = newPkgFile.Insert(pos, ".new");
                         oldPkgFile = oldPkgFile.Insert(pos, ".old");
-                        bool trouble = false;
-                        try { File.Delete(oldPkgFile); } catch { }
-                        try 
-                        { 
-                            File.Move(packageExeFile, oldPkgFile);
-                        } 
-                        catch 
-                        { 
-                            MessageBox.Show("Package could not be renamed to:\n" + oldPkgFile);
-                            trouble = true;
-                        }
-                        try
+                        bool proceed = true;
+                        if (File.Exists(newPkgFile) && MessageBox.Show("Warning: output file will be overwritten:\n" + newPkgFile + "\n" + "Proceed?", "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                            proceed = false;
+                        if (proceed)
                         {
-                            File.Move(newPkgFile, packageExeFile);
-                        }
-                        catch 
-                        { 
-                            MessageBox.Show("New package could not be renamed to:\n" + packageExeFile);
-                            trouble = true;
-                        }
-                        if (!trouble)
-                        {
-                            //ret = virtPackage.Open(packageExeFile, out apiRet);
-                            MessageBox.Show("Package was successfully converted. Your old package was saved in:\n" + oldPkgFile);
-                            goto retry;   // Takes care of password etc
+                            bool trouble = false;
+                            try { File.Delete(oldPkgFile); }
+                            catch { }
+                            try
+                            {
+                                File.Move(packageExeFile, oldPkgFile);
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Package could not be renamed to:\n" + oldPkgFile);
+                                trouble = true;
+                            }
+                            try
+                            {
+                                File.Move(newPkgFile, packageExeFile);
+                            }
+                            catch
+                            {
+                                MessageBox.Show("New package could not be renamed to:\n" + packageExeFile);
+                                trouble = true;
+                            }
+                            if (!trouble)
+                            {
+                                //ret = virtPackage.Open(packageExeFile, out apiRet);
+                                MessageBox.Show("Package was successfully converted. Your old package was saved in:\n" + oldPkgFile);
+                                goto retry;   // Takes care of password etc
+                            }
                         }
                     }
                     else
@@ -981,7 +988,7 @@ reask:
 
         private void OnPackageOpen()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             String command;
 
             // AppID
