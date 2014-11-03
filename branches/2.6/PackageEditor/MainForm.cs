@@ -742,7 +742,18 @@ reask:
                 switch (type)
                 {
                     case RegistryValueKind.String:
-                        xmlOut.WriteAttributeString("string", (string)regKey.GetValue(value));
+                        string str = (string)regKey.GetValue(value);
+                        try
+                        {
+                            if (!string.IsNullOrEmpty(str))
+                                XmlConvert.VerifyName(str);
+                            xmlOut.WriteAttributeString("string", str);
+                        }
+                        catch (XmlException)
+                        {
+                            byte[] bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(str);
+                            xmlOut.WriteAttributeString("str-base64", Utils.HexDump(bytes));
+                        }
                         break;
                     case RegistryValueKind.DWord:
                         xmlOut.WriteAttributeString("dword", ((Int32)regKey.GetValue(value)).ToString("X"));
@@ -821,6 +832,7 @@ reask:
                 var writerSettings = new XmlWriterSettings();
                 writerSettings.OmitXmlDeclaration = true;
                 writerSettings.Indent = true;
+                writerSettings.Encoding = Encoding.Unicode;
                 using (XmlWriter xmlOut = XmlWriter.Create(Path.Combine(outDir, appID + ".xml"), writerSettings))
                 {
                     string outFilesDir = outDir;
@@ -936,8 +948,6 @@ reask:
                     xmlOut.WriteEndElement();
                     xmlOut.WriteEndDocument();
                     xmlOut.Flush();
-                    xmlOut.Close();
-
                     xmlOut.Close();
 
                     try { File.Delete(propsFile); } catch { }
@@ -2292,6 +2302,7 @@ reask:
                 var writerSettings = new XmlWriterSettings();
                 writerSettings.OmitXmlDeclaration = true;
                 writerSettings.Indent = true;
+                writerSettings.Encoding = Encoding.Unicode;
                 using (XmlWriter xmlOut = XmlWriter.Create(xmlFileName, writerSettings))
                 {
                     xmlOut.WriteStartDocument();
