@@ -270,10 +270,12 @@ namespace PackageEditor
             if (displayWaitMsg)
                 PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.openingPackage, PackageEditor.Messages.Messages.opening + " " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
 
+            var exeIcon = Win32Function.getIconFromFile(packageExeFile);   // Must be done before PackageOpen is called
+
             // virtPackage.Open
             if (!string.IsNullOrEmpty(memorizedPassword))
                 ret = virtPackage.Open(packageExeFile + "|" + memorizedPassword, out apiRet);
-            else
+            else   // 
                 ret = virtPackage.Open(packageExeFile, out apiRet);
             if (apiRet == VirtPackage.APIRET.PASSWORD_REQUIRED || apiRet == VirtPackage.APIRET.PASSWORD_MISMATCH)
             {
@@ -369,7 +371,7 @@ namespace PackageEditor
             {
                 regLoaded = false;
                 dirty = dirtyIcon = false;
-                this.OnPackageOpen();
+                this.OnPackageOpen(exeIcon);
                 fsEditor.OnPackageOpen();
 
                 // regEditor (threaded)
@@ -500,7 +502,7 @@ namespace PackageEditor
             }
             else
             {
-                MessageBox.Show(PackageEditor.Messages.Messages.cannotSave + " ApiRet:" + apiRet + " (step " + ret + ")");
+                MessageBox.Show(PackageEditor.Messages.Messages.cannotSave + ": " + apiRet + " (step " + ret + ")");
                 return false;
             }
         }
@@ -1009,7 +1011,7 @@ reask:
             propertyEncryption_CheckedChanged(null, null);
         }
 
-        private void OnPackageOpen()
+        private void OnPackageOpen(Icon exeIcon)
         {
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             String command;
@@ -1041,14 +1043,10 @@ reask:
             DisplayIsolationMode();
 
             // Icon
-            if (!String.IsNullOrEmpty(virtPackage.openedFile))
-            {
-                Icon icon = Win32Function.getIconFromFile(virtPackage.openedFile);
-                if (icon != null)
-                {
-                    propertyIcon.Image = icon.ToBitmap();
-                }
-            }
+            if (exeIcon != null)
+                propertyIcon.Image = exeIcon.ToBitmap();
+            else
+                propertyIcon.Image = null;
 
             // DataDirName
             //propertyDataDirName.Text = virtPackage.GetProperty("DataDirName");
@@ -1982,7 +1980,7 @@ reask:
                 return;
             }
             dirty = false;
-            this.OnPackageOpen();
+            this.OnPackageOpen(null);
             fsEditor.OnPackageOpen();
             regEditor.OnPackageOpenBeforeUI();
             tabControl.SelectedIndex = 0;
