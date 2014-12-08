@@ -270,7 +270,12 @@ namespace PackageEditor
             if (displayWaitMsg)
                 PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.openingPackage, PackageEditor.Messages.Messages.opening + " " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
 
-            var exeIcon = Win32Function.getIconFromFile(packageExeFile);   // Must be done before PackageOpen is called
+            System.Drawing.Icon exeIcon = null;
+            try
+            {
+                exeIcon = Win32Function.getIconFromFile(packageExeFile);   // Must be done before PackageOpen is called
+            }
+            catch { }
 
             // virtPackage.Open
             if (!string.IsNullOrEmpty(memorizedPassword))
@@ -299,6 +304,9 @@ namespace PackageEditor
                     if (displayWaitMsg)   // Restore progress window
                         PleaseWait.PleaseWaitBegin(PackageEditor.Messages.Messages.openingPackage, PackageEditor.Messages.Messages.opening + " " + System.IO.Path.GetFileName(packageExeFile) + "...", packageExeFile);
                 }
+            }
+            else if (apiRet != VirtPackage.APIRET.SUCCESS)
+            {
 
             }
 
@@ -645,7 +653,7 @@ reask:
                 VirtPackage.APIRET apiRet;
                 if (!PackageOpen(packageExeFile, false, out apiRet))
                 {
-                    MessageBox.Show(apiRet.ToString());
+                    MessageBox.Show(String.Format("Failed to open package. API error: {0}", apiRet));
                     closeToolStripMenuItem_Click(sender, e);
                     virtPackage.opened = false;
                     return;
@@ -681,9 +689,7 @@ reask:
                 }
                 VirtPackage.APIRET apiRet;
                 if (!PackageOpen(openFileDialog.FileName, true, out apiRet))
-                {
                     MessageBox.Show(String.Format("Failed to open package. API error: {0}", apiRet));
-                }
             }
         }
 
@@ -2054,7 +2060,9 @@ reask:
         {
             if (listViewMRU.SelectedItems.Count != 1)
                 return;
-            PackageOpen((String)listViewMRU.SelectedItems[0].Tag);
+            VirtPackage.APIRET apiRet;
+            if (!PackageOpen((String)listViewMRU.SelectedItems[0].Tag, true, out apiRet))
+                MessageBox.Show(String.Format("Failed to open package. API error: {0}", apiRet));
         }
 
         private void regImportBtn_Click(object sender, EventArgs e)
