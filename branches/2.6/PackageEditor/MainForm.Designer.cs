@@ -54,10 +54,6 @@ namespace PackageEditor
             this.tbValue = new System.Windows.Forms.TextBox();
             this.tbSize = new System.Windows.Forms.TextBox();
             this.tbFile = new System.Windows.Forms.TextBox();
-            this.regFilesList = new PackageEditor.ListViewEx();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.regFolderInfoIsolationCombo = new System.Windows.Forms.ComboBox();
@@ -194,7 +190,6 @@ namespace PackageEditor
             this.panel14 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.listViewMRU = new System.Windows.Forms.ListView();
             this.columnFileN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageListMRU = new System.Windows.Forms.ImageList(this.components);
@@ -209,6 +204,10 @@ namespace PackageEditor
             this.panelLicense = new System.Windows.Forms.Panel();
             this.lnkUpgrade = new System.Windows.Forms.LinkLabel();
             this.lblNotCommercial = new System.Windows.Forms.Label();
+            this.regFilesList = new PackageEditor.ListViewEx();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -260,7 +259,6 @@ namespace PackageEditor
             this.panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel9.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel12)).BeginInit();
@@ -465,38 +463,6 @@ namespace PackageEditor
             resources.ApplyResources(this.tbFile, "tbFile");
             this.tbFile.Name = "tbFile";
             this.tbFile.ReadOnly = true;
-            // 
-            // regFilesList
-            // 
-            this.regFilesList.AllowColumnReorder = true;
-            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            resources.ApplyResources(this.regFilesList, "regFilesList");
-            this.regFilesList.DoubleClickActivation = false;
-            this.regFilesList.FullRowSelect = true;
-            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
-            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
-            this.regFilesList.Name = "regFilesList";
-            this.regFilesList.UseCompatibleStateImageBehavior = false;
-            this.regFilesList.View = System.Windows.Forms.View.Details;
-            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
-            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
-            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
-            // 
-            // columnHeader3
-            // 
-            resources.ApplyResources(this.columnHeader3, "columnHeader3");
-            // 
-            // columnHeader4
-            // 
-            resources.ApplyResources(this.columnHeader4, "columnHeader4");
-            // 
-            // columnHeader5
-            // 
-            resources.ApplyResources(this.columnHeader5, "columnHeader5");
             // 
             // panel4
             // 
@@ -793,14 +759,12 @@ namespace PackageEditor
             // 
             // picRAM
             // 
-            this.picRAM.Image = global::PackageEditor.Properties.Resources.RAM;
             resources.ApplyResources(this.picRAM, "picRAM");
             this.picRAM.Name = "picRAM";
             this.picRAM.TabStop = false;
             // 
             // picDisk
             // 
-            this.picDisk.Image = global::PackageEditor.Properties.Resources.HardDisk;
             resources.ApplyResources(this.picDisk, "picDisk");
             this.picDisk.Name = "picDisk";
             this.picDisk.TabStop = false;
@@ -859,14 +823,12 @@ namespace PackageEditor
             // picFullAccess
             // 
             resources.ApplyResources(this.picFullAccess, "picFullAccess");
-            this.picFullAccess.Image = global::PackageEditor.Properties.Resources._033;
             this.picFullAccess.Name = "picFullAccess";
             this.picFullAccess.TabStop = false;
             // 
             // picIsolatedMode
             // 
             resources.ApplyResources(this.picIsolatedMode, "picIsolatedMode");
-            this.picIsolatedMode.Image = global::PackageEditor.Properties.Resources._032;
             this.picIsolatedMode.Name = "picIsolatedMode";
             this.picIsolatedMode.TabStop = false;
             // 
@@ -878,7 +840,6 @@ namespace PackageEditor
             // picDataMode
             // 
             resources.ApplyResources(this.picDataMode, "picDataMode");
-            this.picDataMode.Image = global::PackageEditor.Properties.Resources.DataMode;
             this.picDataMode.Name = "picDataMode";
             this.picDataMode.TabStop = false;
             // 
@@ -946,14 +907,12 @@ namespace PackageEditor
             // fsAddBtn
             // 
             this.fsAddBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddBtn.Image = global::PackageEditor.Properties.Resources._078;
             resources.ApplyResources(this.fsAddBtn, "fsAddBtn");
             this.fsAddBtn.Name = "fsAddBtn";
             // 
             // fsAddEmptyDirBtn
             // 
             this.fsAddEmptyDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddEmptyDirBtn.Image = global::PackageEditor.Properties.Resources._115;
             resources.ApplyResources(this.fsAddEmptyDirBtn, "fsAddEmptyDirBtn");
             this.fsAddEmptyDirBtn.Name = "fsAddEmptyDirBtn";
             // 
@@ -965,7 +924,6 @@ namespace PackageEditor
             // fsRemoveBtn
             // 
             this.fsRemoveBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsRemoveBtn.Image = global::PackageEditor.Properties.Resources._058;
             resources.ApplyResources(this.fsRemoveBtn, "fsRemoveBtn");
             this.fsRemoveBtn.Name = "fsRemoveBtn";
             // 
@@ -977,7 +935,6 @@ namespace PackageEditor
             // fsAddDirBtn
             // 
             this.fsAddDirBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.fsAddDirBtn.Image = global::PackageEditor.Properties.Resources._019;
             resources.ApplyResources(this.fsAddDirBtn, "fsAddDirBtn");
             this.fsAddDirBtn.Name = "fsAddDirBtn";
             // 
@@ -1471,7 +1428,6 @@ namespace PackageEditor
             // pictureBox2
             // 
             resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Image = global::PackageEditor.Properties.Resources._071;
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
@@ -1479,19 +1435,10 @@ namespace PackageEditor
             // 
             resources.ApplyResources(this.panel13, "panel13");
             this.panel13.BackColor = System.Drawing.Color.White;
-            this.panel13.Controls.Add(this.pictureBox5);
             this.panel13.Controls.Add(this.listViewMRU);
             this.panel13.Controls.Add(this.lnkPackageEdit);
             this.panel13.Controls.Add(this.panel9);
             this.panel13.Name = "panel13";
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.pictureBox5, "pictureBox5");
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.btnEditPackage_Click);
             // 
             // listViewMRU
             // 
@@ -1560,21 +1507,18 @@ namespace PackageEditor
             // 
             // panel12
             // 
-            this.panel12.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomClient;
             resources.ApplyResources(this.panel12, "panel12");
             this.panel12.Name = "panel12";
             this.panel12.TabStop = false;
             // 
             // panel11
             // 
-            this.panel11.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_BottomRight;
             resources.ApplyResources(this.panel11, "panel11");
             this.panel11.Name = "panel11";
             this.panel11.TabStop = false;
             // 
             // bkPanel
             // 
-            this.bkPanel.BackgroundImage = global::PackageEditor.Properties.Resources.PackedgeEditorBG_Client;
             resources.ApplyResources(this.bkPanel, "bkPanel");
             this.bkPanel.Controls.Add(this.panelLicense);
             this.bkPanel.Name = "bkPanel";
@@ -1599,6 +1543,38 @@ namespace PackageEditor
             // 
             resources.ApplyResources(this.lblNotCommercial, "lblNotCommercial");
             this.lblNotCommercial.Name = "lblNotCommercial";
+            // 
+            // regFilesList
+            // 
+            this.regFilesList.AllowColumnReorder = true;
+            this.regFilesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            resources.ApplyResources(this.regFilesList, "regFilesList");
+            this.regFilesList.DoubleClickActivation = false;
+            this.regFilesList.FullRowSelect = true;
+            this.regFilesList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items"))),
+            ((System.Windows.Forms.ListViewItem)(resources.GetObject("regFilesList.Items1")))});
+            this.regFilesList.Name = "regFilesList";
+            this.regFilesList.UseCompatibleStateImageBehavior = false;
+            this.regFilesList.View = System.Windows.Forms.View.Details;
+            this.regFilesList.SubItemClicked += new PackageEditor.SubItemEventHandler(this.regFilesList_SubItemClicked);
+            this.regFilesList.SubItemEndEditing += new PackageEditor.SubItemEndEditingEventHandler(this.regFilesList_SubItemEndEditing);
+            this.regFilesList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.regFilesList_ColumnClick);
+            // 
+            // columnHeader3
+            // 
+            resources.ApplyResources(this.columnHeader3, "columnHeader3");
+            // 
+            // columnHeader4
+            // 
+            resources.ApplyResources(this.columnHeader4, "columnHeader4");
+            // 
+            // columnHeader5
+            // 
+            resources.ApplyResources(this.columnHeader5, "columnHeader5");
             // 
             // MainForm
             // 
@@ -1690,10 +1666,10 @@ namespace PackageEditor
             this.panelWelcome.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel13.ResumeLayout(false);
             this.panel13.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.bottomPanel.ResumeLayout(false);
@@ -1817,7 +1793,6 @@ namespace PackageEditor
         private System.Windows.Forms.TextBox propertyFileVersion;
         private System.Windows.Forms.ColumnHeader columnFileType;
         private System.Windows.Forms.LinkLabel lnkPackageEdit;
-        private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListView listViewMRU;
